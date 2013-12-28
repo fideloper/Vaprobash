@@ -22,6 +22,14 @@ curl -L http://path-to-repo-master-branch/Vagrantfile > ./Vagrantfile
 wget http://path-to-repo-master-branch/Vagrantfile
 ```
 
+Then edit the `Vagrantfile` and uncomment which scripts you'd like to run.
+
+Finally, run:
+
+```cli
+$ vagrant up
+```
+
 ### LAMP
 
 This will install:
