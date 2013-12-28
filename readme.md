@@ -1,6 +1,6 @@
 # Vaprobash
 
-**Va**grant **P**rovisioning **Bash** Scripts
+**Va**grant **Pro**visioning **Bash** Scripts
 
 ## Goal
 
@@ -15,3 +15,4 @@
 ### Composer
 
 ### Laravel
+
