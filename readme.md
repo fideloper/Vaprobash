@@ -17,19 +17,21 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 ## Instructions
 
-Copy the Vagrantfile from this repo. You may wish to use curl or wget to do this (instead of cloning the repository).
+**First**, Copy the Vagrantfile from this repo. You may wish to use curl or wget to do this instead of cloning the repository.
 
 ```cli
 # curl
-curl -L http://path-to-repo-master-branch/Vagrantfile > ./Vagrantfile
+curl -L http://bit.ly/vaprobash > Vagrantfile
 
 # wget
-wget http://path-to-repo-master-branch/Vagrantfile
+wget -O Vagrantfile http://bit.ly/vaprobash
 ```
 
-Then edit the `Vagrantfile` and uncomment which scripts you'd like to run.
+> The `bit.ly` link will always point to the master branch version of the Vagrantfile.
 
-Finally, run:
+**Second**, edit the `Vagrantfile` and uncomment which scripts you'd like to run.
+
+**Third** and finally, run:
 
 ```cli
 $ vagrant up
@@ -78,4 +80,10 @@ This will install composer and make it globally accessible.
 This will install a base Laravel (latest stable) project within `/laravel/project`. It depends on Composer being installed.
 
 
+### To Do
 
+[ ] Apache script friendly to xip.io address
+[ ] Vagrantfile updated with correct scripts and commented
+[ ] Test variations
+[ ] Laravel install bash script
+[ ] Community additions? Memcached, redis, postgresql, other
