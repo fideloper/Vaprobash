@@ -23,7 +23,7 @@ sudo add-apt-repository -y ppa:ondrej/php5
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y git-core php5-fpm php5-cli php5-mysql php5-curl php5-gd php5-mcrypt php5-xdebug mysql-server
+sudo apt-get install -y git-core nginx php5-fpm php5-cli php5-mysql php5-curl php5-gd php5-mcrypt php5-xdebug mysql-server
 
 echo ">>> Configuring Server"
 
@@ -45,7 +45,7 @@ server {
     root /vagrant;
     index index.html index.htm index.php;
 
-    # Make site accessible from http://localhost/
+    # Make site accessible from http://192.168.33.10.xip.io/
     server_name 192.168.33.10.xip.io;
 
     access_log /var/log/nginx/vagrant.com-access.log;
@@ -54,7 +54,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files $uri $uri/ /index.php?q=$uri&$args;
+        try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -78,6 +78,8 @@ server {
     }
 }
 EOF
+
+ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/vagrant
 
 # PHP Config
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
