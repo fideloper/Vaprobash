@@ -60,7 +60,7 @@ wget -O Vagrantfile http://bit.ly/vaprobash
 $ vagrant up
 ```
 
-![Provision the Vagrant Server](Instal://f.cloud.github.com/assets/467411/1820038/62204842-70ca-11e3-9954-36260bf692d6.png)
+![Provision the Vagrant Server](https://f.cloud.github.com/assets/467411/1820038/62204842-70ca-11e3-9954-36260bf692d6.png)
 
 ## Install Scripts
 
