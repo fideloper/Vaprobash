@@ -69,7 +69,7 @@ This will install:
 * PHP 5.5
 * [This vhost](https://gist.github.com/fideloper/2710970) bash script is installed to get you started with setting up a virtual host. This will make use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
-By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf'). The Laravel installation script will change the document root.
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel installation script will change the document root.
 
 ### LEMP (Linux, Nginx, MySQL, PHP)
 
@@ -81,7 +81,7 @@ This will install:
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
-By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant'). The Laravel installation script will change the document root.
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel installation script will change the document root.
 
 ### Vim
 
