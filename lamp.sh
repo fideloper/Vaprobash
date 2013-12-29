@@ -49,9 +49,3 @@ sudo service apache2 restart
 # Git Config and set Owner
 curl https://gist.github.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
 sudo chown vagrant:vagrant /home/vagrant/.gitconfig
-
-echo ">>> Installing Composer"
-
-# Composer
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
