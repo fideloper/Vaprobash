@@ -15,18 +15,18 @@ Vagrant.configure("2") do |config|
             :mount_options => ['nolock,vers=3,udp,noatime']
 
   # Provision LAMP
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lamp.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lamp.sh"
 
   # Provision LEMP
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lemp.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lemp.sh"
 
   # Provision Vim
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/vim.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/vim.sh"
 
   # Provision Composer
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/composer.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/composer.sh"
 
   # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/laravel.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/laravel.sh"
 
 end
