@@ -4,7 +4,7 @@ echo ">>> Setting up Vim"
 mkdir -p /home/vagrant/.vim/backup
 mkdir -p /home/vagrant/.vim/swap
  
-# Install Vundle and set finally owner of .vim files
+# Install Vundle and set owner of .vim files
 git clone https://github.com/gmarik/vundle.git /home/vagrant/.vim/bundle/vundle
 sudo chown -R vagrant:vagrant /home/vagrant/.vim
  
