@@ -77,13 +77,11 @@ This will install composer and make it globally accessible.
 
 ### Laravel
 
-This will install a base Laravel (latest stable) project within `/laravel/project`. It depends on Composer being installed.
+This will install a base Laravel (latest stable) project within `/vagrant/laravel`. It depends on Composer being installed.
 
+This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
 
 ### To Do
 
-[ ] Apache script friendly to xip.io address
-[ ] Vagrantfile updated with correct scripts and commented
-[ ] Test variations
-[ ] Laravel install bash script
-[ ] Community additions? Memcached, redis, postgresql, other
+* [ ] Test variations
+* [ ] Community additions? Memcached, redis, postgresql, other
