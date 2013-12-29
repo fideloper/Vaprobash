@@ -77,7 +77,7 @@ This will install:
 * MySQL 5
 * PHP 5.5 via php5-fpm
 
-This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io). This let's us assign a static ip to our virtual machine and alleviates the need to edit our computers hosts file to access it.
+This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant'). This may get automatically updated when installing Laravel in a future release.
 
@@ -108,8 +108,8 @@ This will also attempt to change the Apache or Nginx virtual host to point the d
 
 The vagrant file does two things you should take note of:
 
-1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel installers. This static IP allows us to use xip.io for the virtual host setups while avoiding having to edit our computers' hosts file.
-2. **Uses NFS instead of the default file syncing.** NFS is reportadly faster than the default syncing for large files. If, however, you experience issues with the files actually syncing between your host and virtual machine, you can change this to the default syncing by deleting the lines setting up NFS:
+1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel installers. This static IP allows us to use xip.io for the virtual host setups while avoiding having to edit our computers' `hosts` file.
+2. **Uses NFS instead of the default file syncing.** NFS is reportedly faster than the default syncing for large files. If, however, you experience issues with the files actually syncing between your host and virtual machine, you can change this to the default syncing by deleting the lines setting up NFS:
 
 ```cli
   config.vm.synced_folder ".", "/vagrant",
