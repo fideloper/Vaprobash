@@ -10,13 +10,13 @@ if [ $COMPOSER_IS_INSTALLED -gt 0 ]; then
 fi
 
 # Create Laravel
-composer create-project laravel/laravel /vagrant/laravel
+composer create-project --prefer-dist laravel/laravel /vagrant/laravel
 
 # Set new document root on Apache or Nginx
 nginx -v 2>&1 >/dev/null
 NGINX_IS_INSTALLED=$?
 
-apache2 --version 2>&1 >/dev/null
+apache2 -v 2>&1 >/dev/null
 APACHE_IS_INSTALLED=$?
 
 if [ NGINX_IS_INSTALLED -eq 0 ]; then
