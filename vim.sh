@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo ">>> Setting up Vim"
  
 # Create directories needed for some .vimrc settings

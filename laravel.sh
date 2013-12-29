@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo ">>> Installing Laravel"
 
 # Test if Composer is installed
