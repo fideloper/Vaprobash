@@ -40,6 +40,9 @@ curl https://gist.github.com/fideloper/2710970/raw/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
+# Create a virtualhost to start
+sudo vhost -s 192.168.33.10.xip.io -d /vagrant
+
 # PHP Config
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
