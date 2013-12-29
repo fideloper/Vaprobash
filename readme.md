@@ -84,4 +84,4 @@ This will also attempt to change the Apache or Nginx virtual host to point the d
 ### To Do
 
 * [ ] Test variations
-* [ ] Community additions? Memcached, redis, postgresql, other
+* [ ] Community additions? Memcached, redis, postgresql, node, ruby, python, sass, less
