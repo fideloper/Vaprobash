@@ -12,8 +12,8 @@ The goal of this project is to create easy to use bash scripts in order to provi
 
 Some further assumptions and self-imposed restrictions. If you find yourself needing or wanting the following, then other provisioning tool would better suited ([Chef](http://www.getchef.com), [Puppet](http://puppetlabs.com), [Ansible](http://www.ansibleworks.com)).
 
-* If other OSes need to be accounted for
-* If dependency management becomes complex (for example, installing Laravel may depend on Composer. Setting a document root for a project may change depending on Nginx or Apache).
+* If other OSes need to be used (CentOS, Redhat, Arch, etc).
+* If dependency management becomes complex. For example, installing Laravel depends on Composer. Setting a document root for a project will change depending on Nginx or Apache. Currently, these dependencies are accounted for, but more advanced dependencies will likely not be.
 
 ## Instructions
 
@@ -69,6 +69,8 @@ This will install:
 * PHP 5.5
 * [This vhost](https://gist.github.com/fideloper/2710970) bash script is installed to get you started with setting up a virtual host. This will make use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf'). The Laravel installation script will change the document root.
+
 ### LEMP (Linux, Nginx, MySQL, PHP)
 
 This will install:
@@ -79,7 +81,7 @@ This will install:
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
-By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant'). This may get automatically updated when installing Laravel in a future release.
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant'). The Laravel installation script will change the document root.
 
 ### Vim
 
