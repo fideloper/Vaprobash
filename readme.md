@@ -29,6 +29,8 @@ wget -O Vagrantfile http://bit.ly/vaprobash
 
 > The `bit.ly` link will always point to the master branch version of the Vagrantfile.
 
+![Download the Vagranfile](https://f.cloud.github.com/assets/467411/1820040/62253bd6-70ca-11e3-8b4b-d11d5b425d10.png)
+
 **Second**, edit the `Vagrantfile` and uncomment which scripts you'd like to run. You can uncomment them by removing the `#` character before the `config.vm.provision` line.
 
 > You can indeed have [multiple provisioning](http://docs.vagrantup.com/v2/provisioning/basic_usage.html) scripts when provisioning Vagrant.
@@ -50,11 +52,15 @@ wget -O Vagrantfile http://bit.ly/vaprobash
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/laravel.sh"
 ```
 
+![Edit the Vagranfile](https://f.cloud.github.com/assets/467411/1820039/62225f1a-70ca-11e3-8977-d82e1bac3931.png)
+
 **Third** and finally, run:
 
 ```cli
 $ vagrant up
 ```
+
+![Provision the Vagrant Server](Instal://f.cloud.github.com/assets/467411/1820038/62204842-70ca-11e3-9954-36260bf692d6.png)
 
 ## Install Scripts
 
