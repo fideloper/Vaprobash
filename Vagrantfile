@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lamp.sh"
 
   # Provision LEMP
-  # config.vm.provision "shell", path: "lemp.s://raw.github.com/fideloper/Vaprobash/master/lemp.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lemp.sh"
 
   # Provision Vim
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/vim.sh"
