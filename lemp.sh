@@ -35,11 +35,6 @@ xdebug.show_local_vars=1
 EOF
 
 # Configure Nginx
-#sed -i "s/#location \~ \\.php/location \~ \\.php" /etc/nginx/sites-available/default
-#sed -i "s/#[^\s]*fastcgi_split_path_info/    fastcgi_split_path_info" /etc/nginx/sites-available/default
-#sed -i "s/#[^\s]*fastcgi_pass unix/    fastcgi_pass unix" /etc/nginx/sites-available/default
-#sed -i "s/#[^\s]*fastcgi_pass unix/    fastcgi_pass unix" /etc/nginx/sites-available/default
-
 cat << EOF | sudo tee -a /etc/nginx/sites-available/vagrant
 server {
     root /vagrant;
