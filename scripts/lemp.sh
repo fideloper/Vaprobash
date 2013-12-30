@@ -74,7 +74,7 @@ server {
 }
 EOF
 
-ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/vagrant
+sudo ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/vagrant
 
 # PHP Config
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
