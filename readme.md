@@ -86,7 +86,7 @@ By default, the web root will the `/vagrant`, which I suggest you change as need
 
 This will install:
 
-* Nginx 1.1.*
+* Nginx 1.4.* (latest stable)
 * PHP 5.5 via php5-fpm
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
