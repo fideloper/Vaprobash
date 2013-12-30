@@ -5,10 +5,6 @@ echo ">>> Starting Install Script"
 # Update
 sudo apt-get update
 
-# Install MySQL without prompt
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-
 echo ">>> Installing Base Items"
 
 # Install base items
@@ -23,7 +19,7 @@ sudo add-apt-repository -y ppa:ondrej/php5
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y git-core nginx php5-fpm php5-cli php5-mysql php5-curl php5-gd php5-mcrypt php5-xdebug mysql-server
+sudo apt-get install -y git-core nginx php5-fpm php5-cli php5-mysql php5-curl php5-gd php5-mcrypt php5-xdebug
 
 echo ">>> Configuring Server"
 

@@ -14,11 +14,14 @@ Vagrant.configure("2") do |config|
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
 
-  # Provision LAMP
+  # Provision Apache Base
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lamp.sh"
 
-  # Provision LEMP
+  # Provision Nginx Base
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lemp.sh"
+
+  # Provision MySQL
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/mysql.sh"
 
   # Provision Vim
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/vim.sh"

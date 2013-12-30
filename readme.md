@@ -36,20 +36,26 @@ wget -O Vagrantfile http://bit.ly/vaprobash
 > You can indeed have [multiple provisioning](http://docs.vagrantup.com/v2/provisioning/basic_usage.html) scripts when provisioning Vagrant.
 
 ```cli
-  # Provision LAMP
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lamp.sh"
+  # Provision Apache Base
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lamp.sh"
 
-  # Provision LEMP
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lemp.sh"
+  # Provision Nginx Base
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lemp.sh"
+
+  # Provision MySQL
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/mysql.sh"
 
   # Provision Vim
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/vim.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/vim.sh"
 
   # Provision Composer
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/composer.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/composer.sh"
 
   # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/laravel.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/laravel.sh"
+
+  # Install Memcached
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/memcached.sh"
 ```
 
 ![Edit the Vagranfile](https://f.cloud.github.com/assets/467411/1820039/62225f1a-70ca-11e3-8977-d82e1bac3931.png)
@@ -66,28 +72,34 @@ $ vagrant up
 
 The following setups are installable via the separate bash scripts of this repository.
 
-### LAMP (Linux, Apache, MySQL, PHP)
+### Apache Base
 
 This will install:
 
 * Apache 2.4.*
-* MySQL 5
-* PHP 5.5
+* PHP 5.5 mod_php5
 * [This vhost](https://gist.github.com/fideloper/2710970) bash script is installed to get you started with setting up a virtual host. This will make use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel installation script will change the document root.
 
-### LEMP (Linux, Nginx, MySQL, PHP)
+### Nginx Base
 
 This will install:
 
 * Nginx 1.1.*
-* MySQL 5
 * PHP 5.5 via php5-fpm
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel installation script will change the document root.
+
+### MySQL
+
+This will install the MySQL 5 database.
+
+* Host: `localhost` or `192.168.33.10`
+* Username: `root`
+* Password: `root`
 
 ### Vim
 
