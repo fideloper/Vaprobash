@@ -36,20 +36,26 @@ wget -O Vagrantfile http://bit.ly/vaprobash
 > You can indeed have [multiple provisioning](http://docs.vagrantup.com/v2/provisioning/basic_usage.html) scripts when provisioning Vagrant.
 
 ```cli
-  # Provision LAMP
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lamp.sh"
+  # Provision Apache Base
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lamp.sh"
 
-  # Provision LEMP
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/lemp.sh"
+  # Provision Nginx Base
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lemp.sh"
+
+  # Provision MySQL
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/mysql.sh"
 
   # Provision Vim
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/vim.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/vim.sh"
 
   # Provision Composer
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/composer.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/composer.sh"
 
   # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/laravel.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/laravel.sh"
+
+  # Install Memcached
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/memcached.sh"
 ```
 
 ![Edit the Vagranfile](https://f.cloud.github.com/assets/467411/1820039/62225f1a-70ca-11e3-8977-d82e1bac3931.png)
