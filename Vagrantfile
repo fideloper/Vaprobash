@@ -29,4 +29,7 @@ Vagrant.configure("2") do |config|
   # Provision Laravel
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/laravel.sh"
 
+  # Install Memcached
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/memcached.sh"
+
 end
