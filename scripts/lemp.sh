@@ -15,6 +15,9 @@ echo ">>> Adding PPA's and Installing Server Items"
 # Add repo for latest PHP
 sudo add-apt-repository -y ppa:ondrej/php5
 
+# Add repo for latest stable nginx
+sudo add-apt-repository -y ppa:nginx/stable
+
 # Update Again
 sudo apt-get update
 
