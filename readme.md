@@ -45,6 +45,9 @@ wget -O Vagrantfile http://bit.ly/vaprobash
   # Provision MySQL
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/mysql.sh"
 
+  # Provision PostgreSQL
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/postgresql.sh"
+
   # Provision Vim
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/vim.sh"
 
@@ -100,6 +103,14 @@ This will install the MySQL 5 database.
 * Host: `localhost` or `192.168.33.10`
 * Username: `root`
 * Password: `root`
+
+### PostgreSQL
+
+This will install the PostgreSQL 9.3 database.
+
+* Hosts allowed: *
+* Username: `vagrant`
+* Password: `vagrant`
 
 ### Vim
 
