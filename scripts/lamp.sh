@@ -19,7 +19,7 @@ sudo add-apt-repository -y ppa:ondrej/php5
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y git-core php5 apache2 libapache2-mod-php5 php5-mysql php5-curl php5-gd php5-mcrypt php5-xdebug
+sudo apt-get install -y git-core php5 apache2 libapache2-mod-php5 php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-xdebug
 
 echo ">>> Configuring Server"
 
