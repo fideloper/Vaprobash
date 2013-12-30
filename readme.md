@@ -87,6 +87,14 @@ This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel installation script will change the document root.
 
+### MySQL
+
+This will install the MySQL 5 database.
+
+* Host: `localhost` or `192.168.33.10`
+* Username: `root`
+* Password: `root`
+
 ### Vim
 
 This will install [a Vim setup](https://gist.github.com/fideloper/a335872f476635b582ee), including:
