@@ -66,23 +66,21 @@ $ vagrant up
 
 The following setups are installable via the separate bash scripts of this repository.
 
-### LAMP (Linux, Apache, MySQL, PHP)
+### Apache Base
 
 This will install:
 
 * Apache 2.4.*
-* MySQL 5
-* PHP 5.5
+* PHP 5.5 mod_php5
 * [This vhost](https://gist.github.com/fideloper/2710970) bash script is installed to get you started with setting up a virtual host. This will make use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel installation script will change the document root.
 
-### LEMP (Linux, Nginx, MySQL, PHP)
+### Nginx Base
 
 This will install:
 
 * Nginx 1.1.*
-* MySQL 5
 * PHP 5.5 via php5-fpm
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
