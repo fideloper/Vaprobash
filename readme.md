@@ -21,10 +21,10 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 ```cli
 # curl
-curl -L http://bit.ly/vaprobash > Vagrantfile
+$ curl -L http://bit.ly/vaprobash > Vagrantfile
 
 # wget
-wget -O Vagrantfile http://bit.ly/vaprobash
+$ wget -O Vagrantfile http://bit.ly/vaprobash
 ```
 
 > The `bit.ly` link will always point to the master branch version of the Vagrantfile.
@@ -44,6 +44,9 @@ wget -O Vagrantfile http://bit.ly/vaprobash
 
   # Provision MySQL
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/mysql.sh"
+
+  # Provision PostgreSQL
+  # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/pgsql.sh"
 
   # Provision Vim
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/vim.sh"
@@ -100,6 +103,36 @@ This will install the MySQL 5 database.
 * Host: `localhost` or `192.168.33.10`
 * Username: `root`
 * Password: `root`
+
+In order to create a new database to use:
+
+```cli
+# SSH into Vagrant box
+$ vagrant ssh
+
+# Create Database
+# This will ask you to enter your password
+$ mysql -u root -p -e "CREATE DATABASE your_database_name"
+```
+
+### PostgreSQL
+
+This will install the PostgreSQL 9.3 database.
+
+* Host: `localhost`
+* Username: `root`
+* Password: `root`
+
+In order to create a new database to use:
+
+```cli
+# SSH into vagrant box
+$ vagrant ssh
+
+# Create new database via user user "postgres"
+# and assign it to user "root"
+$ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
+```
 
 ### Vim
 
