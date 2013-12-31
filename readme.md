@@ -21,10 +21,10 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 ```cli
 # curl
-curl -L http://bit.ly/vaprobash > Vagrantfile
+$ curl -L http://bit.ly/vaprobash > Vagrantfile
 
 # wget
-wget -O Vagrantfile http://bit.ly/vaprobash
+$ wget -O Vagrantfile http://bit.ly/vaprobash
 ```
 
 > The `bit.ly` link will always point to the master branch version of the Vagrantfile.
@@ -112,7 +112,7 @@ $ vagrant ssh
 
 # Create Database
 # This will ask you to enter your password
-mysql -u root -p -e "CREATE DATABASE your_database_name"
+$ mysql -u root -p -e "CREATE DATABASE your_database_name"
 ```
 
 ### PostgreSQL
@@ -131,7 +131,7 @@ $ vagrant ssh
 
 # Create new database via user user "postgres"
 # and assign it to user "root"
-sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
+$ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 ```
 
 ### Vim
