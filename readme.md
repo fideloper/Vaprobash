@@ -120,7 +120,6 @@ mysql -u root -p -e "CREATE DATABASE your_database_name"
 This will install the PostgreSQL 9.3 database.
 
 * Host: `localhost`
-* Database: `vagrant`
 * Username: `root`
 * Password: `root`
 
@@ -131,7 +130,7 @@ In order to create a new database to use:
 $ vagrant ssh
 
 # Create new database via user user "postgres"
-* and assign it to user "root"
+# and assign it to user "root"
 sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 ```
 
