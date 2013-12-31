@@ -38,9 +38,5 @@ sudo service postgresql start
 # Not a superuser, just tied to new db "vagrant"
 sudo -u postgres psql -c "CREATE ROLE $POSTGRE_USER LOGIN UNENCRYPTED PASSWORD '$POSTGRE_PASS' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
 
-# Create new database "vagrant"
-# and assign user "$POSTGRE_USER"
-sudo -u postgres /usr/bin/createdb --echo --owner=$POSTGRE_USER vagrant
-
 # Make sure changes are reflected by restarting
 sudo service postgresql restart
