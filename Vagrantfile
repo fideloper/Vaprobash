@@ -22,6 +22,8 @@ Vagrant.configure("2") do |config|
 
   # Provision MySQL
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/mysql.sh"
+  #   config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/phpmyadmin.sh"
+
 
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/pgsql.sh"
