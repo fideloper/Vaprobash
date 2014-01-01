@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
 
-echo ">>> Starting Install Script"
-
-# Update
-sudo apt-get update
-
-echo ">>> Installing Base Items"
-
-# Install base items
-sudo apt-get install -y vim tmux curl wget build-essential python-software-properties
-
-echo ">>> Adding PPA's and Installing Server Items"
+echo ">>> Adding PPA's and Installing LAMP Server"
 
 # Add repo for latest PHP
 sudo add-apt-repository -y ppa:ondrej/php5
