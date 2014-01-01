@@ -3,7 +3,7 @@
 echo ">>> Installing Laravel"
 
 # Test if Composer is installed
-composer --version 2>&1 >/dev/null
+composer --version > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?
 
 if [ $COMPOSER_IS_INSTALLED -gt 0 ]; then
@@ -15,10 +15,10 @@ fi
 composer create-project --prefer-dist laravel/laravel /vagrant/laravel
 
 # Set new document root on Apache or Nginx
-nginx -v 2>&1 >/dev/null
+nginx -v > /dev/null 2>&1
 NGINX_IS_INSTALLED=$?
 
-apache2 -v 2>&1 >/dev/null
+apache2 -v > /dev/null 2>&1
 APACHE_IS_INSTALLED=$?
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
@@ -28,7 +28,7 @@ fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
     # Remove apache vhost from default and create a new one
-    rm /etc/apache2/sites-enabled/192.168.33.10.xip.io.conf 2>&1 >/dev/null
-    rm /etc/apache2/sites-available/192.168.33.10.xip.io.conf 2>&1 >/dev/null
+    rm /etc/apache2/sites-enabled/192.168.33.10.xip.io.conf > /dev/null 2>&1
+    rm /etc/apache2/sites-available/192.168.33.10.xip.io.conf > /dev/null 2>&1
     vhost -s 192.168.33.10.xip.io -d /vagrant/laravel/public
 fi

@@ -4,10 +4,10 @@
 sudo apt-get install -y memcached php5-memcached
 
 # Test if php5-fpm or Apache-based PHP
-php5-fpm -v 2>&1 >/dev/null
+php5-fpm -v > /dev/null 2>&1
 PHPFPM_IS_INSTALLED=$?
 
-apache2 -v 2>&1 >/dev/null
+apache2 -v > /dev/null 2>&1
 APACHE_IS_INSTALLED=$?
 
 # Restart necessary service
