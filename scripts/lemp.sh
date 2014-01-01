@@ -35,6 +35,10 @@ EOF
 
 # Configure Nginx
 cat << EOF | sudo tee -a /etc/nginx/sites-available/vagrant
+http {
+    sendfile off;
+}
+
 server {
     root /vagrant;
     index index.html index.htm index.php;
