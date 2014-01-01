@@ -9,10 +9,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :private_network, ip: "192.168.33.10"
 
-  config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['nolock,vers=3,udp,noatime']
+  # config.vm.synced_folder "v-root", "/vagrant",
+  #           id: "core",
+  #           :nfs => true,
+  #           :mount_options => ['nolock,vers=3,udp,noatime']
 
   # Provision Apache Base
   # config.vm.provision "shell", path: "https://raw.github.com/fideloper/Vaprobash/master/scripts/lamp.sh"
