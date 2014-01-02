@@ -17,5 +17,5 @@ npm config set prefix ~/npm
 # Add new npm global packages location to PATH
 printf "\n# Add new npm global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> ~/.bash_profile
 
-# Add new npm root to NODE_PATH and reload .bash_profile
-printf "\n# Add the new npm root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> ~/.bash_profile && . ~/.bash_profile
+# Add new npm root to NODE_PATH
+printf "\n# Add the new npm root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> ~/.bash_profile
