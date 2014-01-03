@@ -17,14 +17,14 @@ sudo apt-get install -y nginx php5-fpm php5-cli php5-mysql php5-pgsql php5-sqlit
 echo ">>> Configuring Server"
 
 # xdebug Config
-cat << EOF | sudo tee -a /etc/php5/mods-available/xdebug.ini
+cat > /etc/php5/mods-available/xdebug.ini << EOF
 xdebug.scream=1
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 EOF
 
 # Configure Nginx
-cat << EOF | sudo tee -a /etc/nginx/sites-available/vagrant
+cat > /etc/nginx/sites-available/vagrant << EOF
 http {
     sendfile off;
 }
