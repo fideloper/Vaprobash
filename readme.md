@@ -84,6 +84,15 @@ $ vagrant up
 
 The following setups are installable via the separate bash scripts of this repository.
 
+### Base Packages
+
+This will install some base items.
+
+* git-core and some .gitconfig
+* vim, tmux
+* curl, wget
+* build-essential, python-software-properties
+
 ### Apache Base
 
 This will install:
@@ -165,6 +174,14 @@ This will install composer and make it globally accessible.
 This will install a base Laravel (latest stable) project within `/vagrant/laravel`. It depends on Composer being installed.
 
 This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
+
+## NodeJS
+
+This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
+
+## Yeoman 
+
+This will install Yeoman globally for you to use in your front-end projects.
 
 ## The Vagrantfile
 
