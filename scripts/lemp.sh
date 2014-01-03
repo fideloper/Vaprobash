@@ -136,7 +136,12 @@ else
 fi
 EOF
 
+# Make sure that ngxen and ngxdis have execution permission
 sudo chmod 700 /usr/local/bin/ngxen /usr/local/bin/ngxdis
+
+# Delete 'default' Nginx server block host (vhost)
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo rm -f /etc/nginx/sites-available/default
 
 echo ">>> Restarting php5-fpm and Nginx"
 sudo service php5-fpm restart
