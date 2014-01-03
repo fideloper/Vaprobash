@@ -9,7 +9,7 @@ sudo add-apt-repository -y ppa:ondrej/php5
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y git-core php5 apache2 libapache2-mod-php5 php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-xdebug
+sudo apt-get install -y php5 apache2 libapache2-mod-php5 php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-xdebug
 
 echo ">>> Configuring Server"
 
@@ -34,7 +34,3 @@ sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.i
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
 
 sudo service apache2 restart
-
-# Git Config and set Owner
-curl https://gist.github.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
-sudo chown vagrant:vagrant /home/vagrant/.gitconfig
