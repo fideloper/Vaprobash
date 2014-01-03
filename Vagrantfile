@@ -8,9 +8,9 @@ github_branch   = "master"
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "Ubuntu12043-64"
+  config.vm.box = "precise64"
 
-  config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/ubuntu-12.04.3-amd64-vbox.box"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   config.vm.network :private_network, ip: "192.168.33.10"
 
