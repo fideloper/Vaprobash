@@ -16,8 +16,7 @@ hhvm --version 2>&1 >/dev/null
 HHVM_IS_INSTALLED=$?
 
 # Create Laravel
-if [ $HHVM_IS_INSTALLED -gt 0]; then
-    echo "installing with HHVM"
+if [ $HHVM_IS_INSTALLED -eq 0]; then
     hhvm /usr/local/bin/composer create-project --prefer-dist laravel/laravel /vagrant/laravel
 else
     composer create-project --prefer-dist laravel/laravel /vagrant/laravel
