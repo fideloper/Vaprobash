@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-echo ">>> Installing Laravel"
-
 LARAVEL_APP=/usr/local/bin/laravel
+
+echo ">>> Installing Laravel"
 
 # Check if all needed PHP 5 components are installed
 PHP5_INSTALLED=`apt-cache policy php5 | grep Installed | grep -v "(none)"`
