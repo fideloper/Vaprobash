@@ -57,6 +57,9 @@ $ wget -O Vagrantfile http://bit.ly/vaprobash
   # Provision Composer
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh"
 
+  # Provision HHVM
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
+
   # Provision Laravel
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh"
 
@@ -168,6 +171,10 @@ See [the .vimrc file](https://gist.github.com/fideloper/a335872f476635b582ee) fo
 ### Composer
 
 This will install composer and make it globally accessible.
+
+### HHVM
+
+This will install HHVM. If provisioned, composer commands will utilize HHVM instead of the installed PHP version.
 
 ### Laravel
 
