@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
             :mount_options => ['nolock,vers=3,udp,noatime']
 
   # Provision Base Packages
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision Apache Base
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/lamp.sh"
