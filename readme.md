@@ -175,11 +175,11 @@ This will install a base Laravel (latest stable) project within `/vagrant/larave
 
 This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
 
-## NodeJS
+### NodeJS
 
 This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
 
-## Yeoman 
+### Yeoman 
 
 This will install Yeoman globally for you to use in your front-end projects.
 
