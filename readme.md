@@ -103,6 +103,10 @@ $ vagrant ssh
 $ mysql -u root -p -e "CREATE DATABASE your_database_name"
 ```
 
+#### phpMyAdmin
+
+You can optionally choose to install phpMyAdmin as well.
+
 ### PostgreSQL
 
 This will install the PostgreSQL 9.3 database.
@@ -121,6 +125,10 @@ $ vagrant ssh
 # and assign it to user "root"
 $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 ```
+
+#### phpPgAdmin
+
+You can optionally choose to install phpPgAdmin as well.
 
 ### Vim
 
