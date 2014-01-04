@@ -14,7 +14,7 @@ sudo apt-get install -y nginx php5-fpm
 echo ">>> Configuring Nginx"
 
 # Configure Nginx
-cat << EOF | sudo tee -a /etc/nginx/sites-available/vagrant
+cat > /etc/nginx/sites-available/vagrant << EOF
 server {
     root /vagrant;
     index index.html index.htm index.php;
