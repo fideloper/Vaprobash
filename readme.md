@@ -157,6 +157,10 @@ This will install Node.js `0.10.*`. It will also set global NPM items to be inst
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### Memcached
+
+This will install Memcached, which can be used for things like caching and session storage.
+
 ### Redis
 
 This will install Redis (server). There are two options:
