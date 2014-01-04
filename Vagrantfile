@@ -6,6 +6,13 @@ github_username = "fideloper"
 github_repo     = "Vaprobash"
 github_branch   = "master"
 
+# List any global Node.js modules that you want to install
+global_node_modules = [
+  # "grunt-cli",
+  # "bower",
+  # "yeoman",
+]
+
 Vagrant.configure("2") do |config|
 
   config.vm.box = "precise64"
@@ -96,5 +103,8 @@ Vagrant.configure("2") do |config|
 
   # Install Yeoman
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/yeoman.sh", privileged: false
+
+  # Install Global Node Modules
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodemodules.sh", privileged: false, args: global_node_modules
 
 end
