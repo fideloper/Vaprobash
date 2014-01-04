@@ -58,4 +58,11 @@ Vagrant.configure("2") do |config|
   # Install Yeoman
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/yeoman.sh", privileged: false
 
+  # Provision Redis (without journaling and persistence)
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh"
+
+  # Provision Redis (with journaling and persistence)
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh", args: "persistent"
+  # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
+
 end
