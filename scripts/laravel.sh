@@ -12,7 +12,7 @@ if [ $COMPOSER_IS_INSTALLED -gt 0 ]; then
 fi
 
 # Test if HHVM is installed
-hhvm --version 2>&1 >/dev/null
+hhvm --version > /dev/null 2>&1
 HHVM_IS_INSTALLED=$?
 
 # Create Laravel
