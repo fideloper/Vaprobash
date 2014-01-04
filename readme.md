@@ -157,6 +157,15 @@ This will install Node.js `0.10.*`. It will also set global NPM items to be inst
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### Redis
+
+This will install Redis (server). There are two options:
+
+1. Install without journaling/persistence
+2. Install with journaling/persistence
+
+You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:
