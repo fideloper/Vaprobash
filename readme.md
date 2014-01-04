@@ -53,7 +53,7 @@ The following setups are installable via the separate bash scripts of this repos
 
 This will install some base items.
 
-* git-core and some .gitconfig
+* git-core and this [.gitconfig](https://gist.github.com/fideloper/a335872f476635b582ee)
 * ack-grep
 * vim, tmux
 * curl, wget
@@ -157,6 +157,19 @@ This will install Node.js `0.10.*`. It will also set global NPM items to be inst
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### Memcached
+
+This will install Memcached, which can be used for things like caching and session storage.
+
+### Redis
+
+This will install Redis (server). There are two options:
+
+1. Install without journaling/persistence
+2. Install with journaling/persistence
+
+You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:
@@ -173,4 +186,4 @@ The vagrant file does two things you should take note of:
 
 ## Contribute!
 
-Do it.
+Do it! Any new install or improvement on existing ones are welcome! Please see the [contributing doc](/fideloper/Vaprobash/blob/master/contributing.md), which only asks that pull requests be made to the `develop` branch.
