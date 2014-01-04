@@ -139,6 +139,10 @@ See [the .vimrc file](https://gist.github.com/fideloper/a335872f476635b582ee) fo
 
 This will install composer and make it globally accessible.
 
+### HHVM
+
+This will install HHVM. If provisioned, composer commands will utilize HHVM instead of the installed PHP version.
+
 ### Laravel
 
 This will install a base Laravel (latest stable) project within `/vagrant/laravel`. It depends on Composer being installed.
@@ -167,8 +171,6 @@ The vagrant file does two things you should take note of:
             :mount_options => ['nolock,vers=3,udp,noatime']
 ```
 
-### To Do
+## Contribute!
 
-* [ ] Test variations further
-* [ ] Make gitconfig (but not git) a separate install?
-* [ ] Community additions? Memcached, redis, postgresql, node, ruby, python, sass, less, fish/zsh
+Do it.
