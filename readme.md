@@ -53,7 +53,7 @@ The following setups are installable via the separate bash scripts of this repos
 
 This will install some base items.
 
-* git-core and some .gitconfig
+* git-core and this [.gitconfig](https://gist.github.com/fideloper/a335872f476635b582ee)
 * ack-grep
 * vim, tmux
 * curl, wget
