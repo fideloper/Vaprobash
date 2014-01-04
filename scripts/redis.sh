@@ -2,8 +2,7 @@
 
 echo ">>> Installing Redis"
 
-# Redis
-sudo apt-get update
+# Install Redis
 sudo apt-get install -y redis-server
 
 # Redis Configuration
