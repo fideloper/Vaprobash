@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
 
 
   ####
-  # Web Servers + PHP
+  # Web Servers
   ##########
 
   # Provision Apache Base

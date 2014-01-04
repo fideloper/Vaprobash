@@ -59,5 +59,9 @@ EOF
 
 sudo ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/vagrant
 
+# PHP Config for Nginx
+sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
+sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
+
 sudo service php5-fpm restart
 sudo service nginx restart
