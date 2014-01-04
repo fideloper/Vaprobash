@@ -62,29 +62,29 @@ echo ">>> Creating ngxen and ngxdis in /usr/local/bin/"
 cat > /usr/local/bin/ngxen << EOF
 #!/usr/bin/env bash
 
-if [[ $EUID -ne 0 ]]; then
+if [ \$EUID -ne 0 ]; then
     echo "You must be root: \"sudo ngxen\""
     exit 1
 fi
 
 # -z str: Returns True if the length of str is equal to zero.
-if [ -z "$1" ]; then
+if [ -z "\$1" ]; then
     echo "Please choose a site."
     exit 1
 else
-    echo "Enabling site $1..."
+    echo "Enabling site \$1..."
     # -h filename: True if file exists and is a symbolic link.
     # -f filename: Returns True if file, filename is an ordinary file.
-    if [ -h "/etc/nginx/sites-enabled/$1" || -f "/etc/nginx/sites-enabled/$1" ]; then
-        echo "$1 is already enabled."
+    if [ -h "/etc/nginx/sites-enabled/\$1" ] || [ -f "/etc/nginx/sites-enabled/\$1" ]; then
+        echo "\$1 is already enabled."
         exit 1
     else
-        if [ ! -f "/etc/nginx/sites-available/$1" ]; then
-            echo "Site $1 does not exist in /etc/nginx/sites-available."
+        if [ ! -f "/etc/nginx/sites-available/\$1" ]; then
+            echo "Site \$1 does not exist in /etc/nginx/sites-available."
             exit 1
         else
-            ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
-            echo "Enabled $1"
+            ln -s /etc/nginx/sites-available/\$1 /etc/nginx/sites-enabled/\$1
+            echo "Enabled \$1"
             exit 0
         fi
     fi
@@ -95,31 +95,31 @@ EOF
 cat > /usr/local/bin/ngxdis << EOF
 #!/usr/bin/env bash
 
-if [[ $EUID -ne 0 ]]; then
+if [ \$EUID -ne 0 ]; then
     echo "You must be root: \"sudo ngxdis\""
     exit 1
 fi
 
 # -z str: Returns True if the length of str is equal to zero.
-if [ -z "$1" ]; then
+if [ -z "\$1" ]; then
     echo "Please choose a site."
     exit 1
 else
-    echo "Disabling site $1..."
+    echo "Disabling site \$1..."
     # -h filename: True if file exists and is a symbolic link.
     # -f filename: Returns True if file, filename is an ordinary file.
-    if [ ! -h "/etc/nginx/sites-enabled/$1" || ! -f "/etc/nginx/sites-enabled/$1" ]; then
-        echo "$1 is not enabled."
+    if [ ! -h "/etc/nginx/sites-enabled/\$1" ] && [ ! -f "/etc/nginx/sites-enabled/\$1" ]; then
+        echo "\$1 is not enabled."
         exit 1
     else
-        rm /etc/nginx/sites-enabled/$1
-        echo "Disabled $1"
+        rm /etc/nginx/sites-enabled/\$1
+        echo "Disabled \$1"
     fi
 fi
 EOF
 
 # Make sure that ngxen and ngxdis have execution permission
-sudo chmod 700 /usr/local/bin/ngxen /usr/local/bin/ngxdis
+sudo chmod guo+x /usr/local/bin/ngxen /usr/local/bin/ngxdis
 
 # PHP Config for Nginx
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
