@@ -19,7 +19,7 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 **First**, Copy the Vagrantfile from this repo. You may wish to use curl or wget to do this instead of cloning the repository.
 
-```cli
+```bash
 # curl
 $ curl -L http://bit.ly/vaprobash > Vagrantfile
 
@@ -39,7 +39,7 @@ $ wget -O Vagrantfile http://bit.ly/vaprobash
 
 **Third** and finally, run:
 
-```cli
+```bash
 $ vagrant up
 ```
 
@@ -98,6 +98,17 @@ This will install:
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel installation script will change the document root.
 
+To create a new virtual host:
+
+```shell
+$ See also: `vhost -h`
+$ sudo vhost -s example.com -d /path/to/example/web/root
+
+# You can then use `a2ensite` or `a2dissite` to enable or disable this vhost.
+# `vhost` will enable it for you.
+$ sudo a2dissite example.com
+```
+
 ### HHVM
 
 This will install HHVM. If provisioned, composer commands will utilize HHVM instead of the installed PHP version.
@@ -108,11 +119,24 @@ This will install:
 
 * Nginx 1.4.* (latest stable)
 * PHP 5.5 via php5-fpm
+* [These virtual host configuration](https://gist.github.com/fideloper/8261546) enable/disable scripts, which work just like Apache2's `a2ensite` and `a2dissite`.
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel installation script will change the document root.
 
+To enable or disable a site configuration (note that `vhost` above creates a new configuration. Below only shows enabling or disabling a site configuration):
+
+```shell
+# Enable a site config:
+$ sudo ngxen example.com
+
+# Disable a site config:
+$ sudo ngxdis example.com
+
+# Reload config after any change:
+$ sudo service nginx reload
+```
 
 ### Databases
 ---
@@ -127,7 +151,7 @@ This will install the MySQL 5 database.
 
 In order to create a new database to use:
 
-```cli
+```bash
 # SSH into Vagrant box
 $ vagrant ssh
 
@@ -146,7 +170,7 @@ This will install the PostgreSQL 9.3 database.
 
 In order to create a new database to use:
 
-```cli
+```bash
 # SSH into vagrant box
 $ vagrant ssh
 
@@ -206,7 +230,7 @@ The vagrant file does two things you should take note of:
 1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel installers. This static IP allows us to use xip.io for the virtual host setups while avoiding having to edit our computers' `hosts` file.
 2. **Uses NFS instead of the default file syncing.** NFS is reportedly faster than the default syncing for large files. If, however, you experience issues with the files actually syncing between your host and virtual machine, you can change this to the default syncing by deleting the lines setting up NFS:
 
-```cli
+```bash
   config.vm.synced_folder ".", "/vagrant",
             id: "core",
             :nfs => true,
