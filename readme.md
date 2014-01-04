@@ -49,6 +49,10 @@ $ vagrant up
 
 The following setups are installable via the separate bash scripts of this repository.
 
+
+### Base Items
+---
+
 ### Base Packages
 
 This will install some base items.
@@ -63,6 +67,23 @@ This will install some base items.
 
 Installs the `zsh` shell and `oh-my-zsh`. It also makes it the default shell of the `vagrant` user.
 
+### Vim
+
+This will install [a Vim setup](https://gist.github.com/fideloper/a335872f476635b582ee), including:
+
+* Vundle
+* Bundle 'altercation/vim-colors-solarized'
+* Bundle 'plasticboy/vim-markdown'
+* Bundle 'othree/html5.vim'
+* Bundle 'scrooloose/nerdtree'
+* Bundle 'kien/ctrlp.vim'
+
+See [the .vimrc file](https://gist.github.com/fideloper/a335872f476635b582ee) for more details and configuration.
+
+
+### Web Servers + PHP
+---
+
 ### Apache Base
 
 This will install:
@@ -72,6 +93,10 @@ This will install:
 * [This vhost](https://gist.github.com/fideloper/2710970) bash script is installed to get you started with setting up a virtual host. This will make use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel installation script will change the document root.
+
+### HHVM
+
+This will install HHVM. If provisioned, composer commands will utilize HHVM instead of the installed PHP version.
 
 ### Nginx Base
 
@@ -83,6 +108,10 @@ This will install:
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
 By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel installation script will change the document root.
+
+
+### Databases
+---
 
 ### MySQL
 
@@ -122,40 +151,9 @@ $ vagrant ssh
 $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 ```
 
-### Vim
 
-This will install [a Vim setup](https://gist.github.com/fideloper/a335872f476635b582ee), including:
-
-* Vundle
-* Bundle 'altercation/vim-colors-solarized'
-* Bundle 'plasticboy/vim-markdown'
-* Bundle 'othree/html5.vim'
-* Bundle 'scrooloose/nerdtree'
-* Bundle 'kien/ctrlp.vim'
-
-See [the .vimrc file](https://gist.github.com/fideloper/a335872f476635b582ee) for more details and configuration.
-
-### Composer
-
-This will install composer and make it globally accessible.
-
-### HHVM
-
-This will install HHVM. If provisioned, composer commands will utilize HHVM instead of the installed PHP version.
-
-### Laravel
-
-This will install a base Laravel (latest stable) project within `/vagrant/laravel`. It depends on Composer being installed.
-
-This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
-
-### NodeJS
-
-This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
-
-### Yeoman 
-
-This will install Yeoman globally for you to use in your front-end projects.
+### In-Memory Stores
+---
 
 ### Memcached
 
@@ -170,6 +168,33 @@ This will install Redis (server). There are two options:
 
 You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
 
+
+### Additional Languages
+---
+
+### NodeJS
+
+This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
+
+
+### Frameworks, etc
+---
+
+### Composer
+
+This will install composer and make it globally accessible.
+
+### Laravel
+
+This will install a base Laravel (latest stable) project within `/vagrant/laravel`. It depends on Composer being installed.
+
+This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
+
+### Yeoman
+
+This will install Yeoman globally for you to use in your front-end projects.
+
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:
@@ -183,6 +208,7 @@ The vagrant file does two things you should take note of:
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
 ```
+
 
 ## Contribute!
 
