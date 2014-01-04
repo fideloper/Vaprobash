@@ -119,7 +119,7 @@ fi
 EOF
 
 # Make sure that ngxen and ngxdis have execution permission
-sudo chmod 700 /usr/local/bin/ngxen /usr/local/bin/ngxdis
+sudo chmod guo+x /usr/local/bin/ngxen /usr/local/bin/ngxdis
 
 # PHP Config for Nginx
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
