@@ -63,6 +63,10 @@ This will install some base items.
 * curl, wget
 * build-essential, python-software-properties
 
+### PHP
+
+This will install PHP 5.5.
+
 ### Oh-My-Zsh
 
 Installs the `zsh` shell and `oh-my-zsh`. It also makes it the default shell of the `vagrant` user.
@@ -81,7 +85,7 @@ This will install [a Vim setup](https://gist.github.com/fideloper/a335872f476635
 See [the .vimrc file](https://gist.github.com/fideloper/a335872f476635b582ee) for more details and configuration.
 
 
-### Web Servers + PHP
+### Web Servers
 ---
 
 ### Apache Base
@@ -212,4 +216,4 @@ The vagrant file does two things you should take note of:
 
 ## Contribute!
 
-Do it! Any new install or improvement on existing ones are welcome! Please see the [contributing doc](/fideloper/Vaprobash/blob/master/contributing.md), which only asks that pull requests be made to the `develop` branch.
+Do it! Any new install or improvement on existing ones are welcome! Please see the [contributing doc](/contributing.md), which only asks that pull requests be made to the `develop` branch.
