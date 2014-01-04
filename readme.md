@@ -54,6 +54,7 @@ The following setups are installable via the separate bash scripts of this repos
 This will install some base items.
 
 * git-core and some .gitconfig
+* ack-grep
 * vim, tmux
 * curl, wget
 * build-essential, python-software-properties
