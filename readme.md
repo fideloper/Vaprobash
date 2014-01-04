@@ -59,6 +59,10 @@ This will install some base items.
 * curl, wget
 * build-essential, python-software-properties
 
+### Oh-My-Zsh
+
+Installs the `zsh` shell and `oh-my-zsh`. It also makes it the default shell of the `vagrant` user.
+
 ### Apache Base
 
 This will install:
