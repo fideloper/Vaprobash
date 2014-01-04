@@ -100,7 +100,7 @@ By default, the web root will the `/vagrant`, which I suggest you change as need
 
 To create a new virtual host:
 
-```shell
+```bash
 $ See also: `vhost -h`
 $ sudo vhost -s example.com -d /path/to/example/web/root
 
@@ -127,7 +127,7 @@ By default, the web root will the `/vagrant`, which I suggest you change as need
 
 To enable or disable a site configuration (note that `vhost` above creates a new configuration. Below only shows enabling or disabling a site configuration):
 
-```shell
+```bash
 # Enable a site config:
 $ sudo ngxen example.com
 
