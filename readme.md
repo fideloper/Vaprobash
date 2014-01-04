@@ -100,8 +100,13 @@ By default, the web root will the `/vagrant`, which I suggest you change as need
 
 To create a new virtual host:
 
+<<<<<<< HEAD
 ```bash
+# See also: `vhost -h`
+=======
+```shell
 $ See also: `vhost -h`
+>>>>>>> dbc0804e87f1a9adadb9c0a66200e4ce658f461c
 $ sudo vhost -s example.com -d /path/to/example/web/root
 
 # You can then use `a2ensite` or `a2dissite` to enable or disable this vhost.
