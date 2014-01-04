@@ -11,8 +11,16 @@ if [ $COMPOSER_IS_INSTALLED -gt 0 ]; then
     exit 1
 fi
 
+# Test if HHVM is installed
+hhvm --version > /dev/null 2>&1
+HHVM_IS_INSTALLED=$?
+
 # Create Laravel
-composer create-project --prefer-dist laravel/laravel /vagrant/laravel
+if [ $HHVM_IS_INSTALLED -eq 0]; then
+    hhvm /usr/local/bin/composer create-project --prefer-dist laravel/laravel /vagrant/laravel
+else
+    composer create-project --prefer-dist laravel/laravel /vagrant/laravel
+fi
 
 # Set new document root on Apache or Nginx
 nginx -v > /dev/null 2>&1
