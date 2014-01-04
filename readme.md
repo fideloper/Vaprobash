@@ -173,4 +173,4 @@ The vagrant file does two things you should take note of:
 
 ## Contribute!
 
-Do it.
+Do it! Any new install or improvement on existing ones are welcome! Please see the [contributing doc](/fideloper/Vaprobash/blob/master/contributing.md), which only asks that pull requests be made to the `develop` branch.
