@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-echo ">>> Adding PPA's and Installing LEMP Server"
-
-# Add repo for latest PHP
-sudo add-apt-repository -y ppa:ondrej/php5
+echo ">>> Installing Nginx"
 
 # Add repo for latest stable nginx
 sudo add-apt-repository -y ppa:nginx/stable
@@ -12,16 +9,9 @@ sudo add-apt-repository -y ppa:nginx/stable
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y nginx php5-fpm php5-cli php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-mcrypt php5-xdebug
+sudo apt-get install -y nginx php5-fpm
 
-echo ">>> Configuring Server"
-
-# xdebug Config
-cat << EOF | sudo tee -a /etc/php5/mods-available/xdebug.ini
-xdebug.scream=1
-xdebug.cli_color=1
-xdebug.show_local_vars=1
-EOF
+echo ">>> Configuring Nginx"
 
 # Configure Nginx
 cat << EOF | sudo tee -a /etc/nginx/sites-available/vagrant
@@ -68,10 +58,6 @@ server {
 EOF
 
 sudo ln -s /etc/nginx/sites-available/vagrant /etc/nginx/sites-enabled/vagrant
-
-# PHP Config
-sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
-sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
 
 sudo service php5-fpm restart
 sudo service nginx restart
