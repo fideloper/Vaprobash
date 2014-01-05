@@ -8,7 +8,7 @@ github_branch   = "master"
 
 # Some variables
 server_ip             = "192.168.33.10"
-mysql_root_password   = "testing"
+mysql_root_password   = "root"
 pgsql_root_password   = "root"
 
 Vagrant.configure("2") do |config|
