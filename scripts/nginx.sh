@@ -9,7 +9,7 @@ sudo add-apt-repository -y ppa:nginx/stable
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y nginx php5-fpm
+sudo apt-get install -y nginx
 
 echo ">>> Configuring Nginx"
 
@@ -63,9 +63,4 @@ sudo mv ngxen ngxdis /usr/local/bin
 sudo ngxdis default
 sudo ngxen vagrant
 
-# PHP Config for Nginx
-sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
-sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
-
-sudo service php5-fpm restart
 sudo service nginx restart
