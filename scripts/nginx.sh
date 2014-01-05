@@ -2,6 +2,8 @@
 
 echo ">>> Installing Nginx"
 
+[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+
 # Add repo for latest stable nginx
 sudo add-apt-repository -y ppa:nginx/stable
 
@@ -20,7 +22,7 @@ server {
     index index.html index.htm index.php;
 
     # Make site accessible from http://192.168.33.10.xip.io/
-    server_name 192.168.33.10.xip.io;
+    server_name "$1".xip.io;
 
     access_log /var/log/nginx/vagrant.com-access.log;
     error_log  /var/log/nginx/vagrant.com-error.log error;
