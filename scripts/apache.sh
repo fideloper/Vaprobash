@@ -2,6 +2,8 @@
 
 echo ">>> Installing Apache Server"
 
+[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+
 # Install Apache
 sudo apt-get install -y apache2 php5 libapache2-mod-php5
 
@@ -14,7 +16,7 @@ sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
 # Create a virtualhost to start
-sudo vhost -s 192.168.33.10.xip.io -d /vagrant
+sudo vhost -s $1.xip.io -d /vagrant
 
 # PHP Config for Apache
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
