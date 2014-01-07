@@ -21,7 +21,7 @@ server {
     root /vagrant;
     index index.html index.htm index.php;
 
-    # Make site accessible from http://192.168.33.10.xip.io/
+    # Make site accessible from http://set-ip-address.xip.io
     server_name "$1".xip.io;
 
     access_log /var/log/nginx/vagrant.com-access.log;
