@@ -68,6 +68,24 @@ Vagrant.configure("2") do |config|
 
 
   ####
+  # Search Servers
+  ##########
+
+  # Install Elasticsearch
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elasticsearch.sh"
+
+
+  ####
+  # Search Server Administration (web-based)
+  ##########
+
+  # Install ElasticHQ
+  # Admin for: Elasticsearch
+  # Works on: Apache2, Nginx
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elastichq.sh"
+
+
+  ####
   # In-Memory Stores
   ##########
 
