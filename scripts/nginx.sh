@@ -67,5 +67,9 @@ sudo ngxen vagrant
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
 
+# Delete 'default' Nginx server block host (vhost)
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo rm -f /etc/nginx/sites-available/default
+
 sudo service php5-fpm restart
 sudo service nginx restart
