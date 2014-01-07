@@ -11,6 +11,12 @@ server_ip             = "192.168.33.10"
 mysql_root_password   = "root" # We'll assume user "root"
 pgsql_root_password   = "root" # We'll assume user "root"
 
+# List of Gems to install globally
+global_gems = [
+  "compass",
+  "bundler",
+]
+
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
@@ -114,5 +120,8 @@ Vagrant.configure("2") do |config|
 
   # Install Yeoman
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/yeoman.sh", privileged: false
+
+  # Install Gems
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/gems.sh", args: global_gems
 
 end
