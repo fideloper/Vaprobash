@@ -18,6 +18,12 @@ Vagrant.configure("2") do |config|
             id: "core",
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
+            
+  config.vm.provider :virtualbox do |vb|
+    
+    vb.customize ["modifyvm", :id, "--memory", "512"]
+
+  end
 
   ####
   # Base Items
