@@ -34,6 +34,7 @@ APACHE_IS_INSTALLED=$?
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
     sed -i "s/root \/vagrant/root \/vagrant\/laravel\/public/" /etc/nginx/sites-available/vagrant
+    sudo nginx restart
 fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
