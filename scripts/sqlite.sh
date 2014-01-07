@@ -3,4 +3,4 @@
 echo ">>> Installing SQLite Server"
 
 # Install MySQL Server
-sudo apt-get install -y sqlite php5-sqlite
+sudo apt-get install -y sqlite 
