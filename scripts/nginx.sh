@@ -16,13 +16,15 @@ sudo apt-get install -y nginx php5-fpm
 echo ">>> Configuring Nginx"
 
 # Configure Nginx
+# Note the .xip.io IP address $1 variable
+# is not escaped
 cat > /etc/nginx/sites-available/vagrant << EOF
 server {
     root /vagrant;
     index index.html index.htm index.php;
 
     # Make site accessible from http://set-ip-address.xip.io
-    server_name "$1".xip.io;
+    server_name $1.xip.io;
 
     access_log /var/log/nginx/vagrant.com-access.log;
     error_log  /var/log/nginx/vagrant.com-error.log error;
