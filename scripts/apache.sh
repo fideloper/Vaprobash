@@ -16,7 +16,7 @@ sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
 # Create a virtualhost to start
-sudo vhost -s "$1".xip.io -d /vagrant
+sudo vhost -s $1.xip.io -d /vagrant
 
 # PHP Config for Apache
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
