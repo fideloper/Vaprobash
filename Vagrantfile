@@ -26,11 +26,11 @@ Vagrant.configure("2") do |config|
             id: "core",
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
-            
+
   # Optionally customize amount of RAM
   # allocated to the VM. Default is 384MB
   config.vm.provider :virtualbox do |vb|
-    
+
     vb.customize ["modifyvm", :id, "--memory", "384"]
 
   end
@@ -76,6 +76,8 @@ Vagrant.configure("2") do |config|
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/pgsql.sh", args: pgsql_root_password
 
+  # Provision SQLite
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
 
   ####
   # In-Memory Stores
