@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 # Test if Node.js is installed
-node -v > /dev/null 2>&1
-NODE_IS_INSTALLED=$?
+gem -v > /dev/null 2>&1
+RUBY_IS_INSTALLED=$?
 
-if [ $NODE_IS_INSTALLED -eq 0 ]; then
-    echo ">>> Installing Yeoman"
-    npm install -g yo
+if [ $RUBY_IS_INSTALLED -eq 0 ]; then
+    echo ">>> Installing Gems"
+    echo ">>> Installing " $@
+    gem install $@
 else
-    echo "!!! Installing Yeoman failed."
-    echo "!!! Please make sure you have installed Node.js."
+    echo "!!! Installing Gems failed."
+    echo "!!! Please make sure you have installed Ruby and Gems."
 fi
