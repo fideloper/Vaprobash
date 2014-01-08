@@ -179,6 +179,12 @@ $ vagrant ssh
 $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 ```
 
+### SQLite
+
+This will install the SQLite server.
+
+SQLite runs either in-memory (good for unit testing) or file-based.
+
 
 ### In-Memory Stores
 ---
