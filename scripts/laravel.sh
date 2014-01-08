@@ -33,7 +33,8 @@ if [ ! -f /vagrant/composer.json ]; then
     fi
 
     # Root of Apache or Nginx
-    webdocroot=/vagrant/laravel/public
+    apacheroot=/vagrant/laravel/public
+    nginxroot=\\/vagrant\\/laravel\\/public
 else
     # Go to vagrant folder
     cd /vagrant
@@ -49,12 +50,13 @@ else
     cd -
 
     # Root of Apache or Nginx
-    webdocroot=/vagrant/public
+    apacheroot=/vagrant/public
+    nginxroot=\\/vagrant\\/public
 fi
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
-    sed -i "s/root \/vagrant/root $webdocroot" /etc/nginx/sites-available/vagrant
+    sed -i "s/root \/vagrant/root $nginxroot/" /etc/nginx/sites-available/vagrant
     sudo service nginx reload
 fi
 
@@ -62,6 +64,6 @@ if [ $APACHE_IS_INSTALLED -eq 0 ]; then
     # Remove apache vhost from default and create a new one
     rm /etc/apache2/sites-enabled/$1.xip.io.conf > /dev/null 2>&1
     rm /etc/apache2/sites-available/$1.xip.io.conf > /dev/null 2>&1
-    vhost -s $1.xip.io -d $webdocroot
+    vhost -s $1.xip.io -d $apacheroot
     sudo service apache2 reload
 fi
