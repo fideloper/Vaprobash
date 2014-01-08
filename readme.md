@@ -145,7 +145,7 @@ $ sudo service nginx reload
 
 ### MySQL
 
-This will install the MySQL 5 database.
+This will install the MySQL 5.5 or 5.6 depending on what you choose on the Vagrantfile.
 
 * Host: `localhost` or `192.168.33.10`
 * Username: `root`
