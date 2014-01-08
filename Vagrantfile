@@ -70,7 +70,7 @@ Vagrant.configure("2") do |config|
   # Databases
   ##########
 
-  # Provision MySQL
+  # Provision MySQL 5.5
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: mysql_root_password
 
   # Provision MySQL 5.6
