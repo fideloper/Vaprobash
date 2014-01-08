@@ -197,6 +197,19 @@ This will install Redis (server). There are two options:
 You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
 
 
+### Utility (queues)
+---
+
+### Beanstalkd
+
+This will install the Beanstalkd work queue.
+
+This will configure Beanstalkd to start when the server boots.
+
+* Host: `localhost` (`0.0.0.0` default)
+* Port: `11300` (default)
+
+
 ### Additional Languages
 ---
 
