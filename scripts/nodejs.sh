@@ -2,6 +2,7 @@
 
 echo ">>> Installing Node Version Manager"
 
+# NVM's install. script needs a .bash_profile.
 if [ ! -f "$HOME/.bash_profile" ]; then
     echo ">>> There is no ~/.bash_profile. Creating empty ~/.bash_profile first"
     echo > ~/.bash_profile
@@ -11,8 +12,14 @@ fi
 # TODO: Create own nvm install.sh. (add nvm execution to both .bash_profile and .zshrc)
 curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 
-# Which version of Node.js do you wish to install?
-NODEJS_VERSION=latest
+# Find out what nodejs version should be installed
+if [[ -z "$1" ]]; then
+    # Default is set to latest stable version
+    NODEJS_VERSION=latest
+else
+    # Use user's defined nodejs version
+    NODEJS_VERSION=$1
+fi
 
 # If set to latest, get the current node version from the home page
 if [ "$NODEJS_VERSION" == "latest" ]; then
