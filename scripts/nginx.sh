@@ -49,6 +49,13 @@ server {
         fastcgi_param LARA_ENV local; # Environment variable for Laravel
         include fastcgi_params;
     }
+    
+    # Caching for static files
+    location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
+        expires max;
+        add_header Pragma public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
 
     # Deny .htaccess file access
     location ~ /\.ht {
