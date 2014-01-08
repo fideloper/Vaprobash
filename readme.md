@@ -222,6 +222,9 @@ This will also attempt to change the Apache or Nginx virtual host to point the d
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### PHPUnit
+
+This will install PHPUnit and make it globally accessible.
 
 ## The Vagrantfile
 
