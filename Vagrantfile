@@ -79,6 +79,7 @@ Vagrant.configure("2") do |config|
   # Provision SQLite
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
 
+
   ####
   # In-Memory Stores
   ##########
@@ -92,6 +93,14 @@ Vagrant.configure("2") do |config|
   # Provision Redis (with journaling and persistence)
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh", args: "persistent"
   # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
+
+
+  ####
+  # Utiliy (queue)
+  ##########
+
+  # Install Beanstalkd
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/beanstalkd.sh
 
 
   ####
