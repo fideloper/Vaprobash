@@ -8,10 +8,17 @@ github_branch   = "master"
 
 # Some variables
 server_ip           = "192.168.33.10"
-mysql_root_password = "root" # We'll assume user "root"
-mysql_version       = "5.5"  # Options: 5.5 | 5.6
-pgsql_root_password = "root" # We'll assume user "root"
-nodejs_version      = "latest" # By default "latest" will equal the latest stable version
+mysql_root_password = "root"   # We'll assume user "root"
+mysql_version       = "5.5"    # Options: 5.5 | 5.6
+pgsql_root_password = "root"   # We'll assume user "root"
+node_settings       = [        # List any global Node.js modules that you want to install
+  # Nodejs version:
+  "latest",
+  # Global Node Packages:
+  #"grunt-cli",
+  #"bower",
+  #"yeoman",
+]
 
 Vagrant.configure("2") do |config|
 
@@ -113,7 +120,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Install Nodejs
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false, args: nodejs_version
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false, args: node_settings
 
 
   ####
