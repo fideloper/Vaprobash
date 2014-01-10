@@ -198,6 +198,9 @@ This will also attempt to change the Apache or Nginx virtual host to point the d
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### Global Node Modules
+
+This will globally install all node modules listed in the `global_node_modules` array.
 
 ## The Vagrantfile
 
