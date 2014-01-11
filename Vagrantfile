@@ -17,7 +17,7 @@ node_settings       = [        # List any global Node.js modules that you want t
   # Global Node Packages:
   #"grunt-cli",
   #"bower",
-  #"yeoman",
+  #"yo",
 ]
 
 Vagrant.configure("2") do |config|
