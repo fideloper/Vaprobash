@@ -2,6 +2,8 @@
 
 echo ">>> Installing Apache Server"
 
+[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+
 # Add repo for latest stable Apache
 sudo add-apt-repository -y ppa:ondrej/apache2
 
@@ -36,6 +38,6 @@ EOF
 sudo a2enconf php5-fpm
 
 # Create a virtualhost to start
-sudo vhost -s 192.168.33.10.xip.io -d /vagrant
+sudo vhost -s $1.xip.io -d /vagrant
 
 sudo service apache2 restart

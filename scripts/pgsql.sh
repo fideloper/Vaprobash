@@ -2,10 +2,10 @@
 
 echo ">>> Installing PostgreSQL"
 
+[[ -z "$1" ]] && { echo "!!! PostgreSQL root password not set. Check the Vagrant file."; exit 1; }
+
 # Set some variables
 POSTGRE_VERSION=9.3
-POSTGRE_USER=root
-POSTGRE_PASS=root
 
 # Add PostgreSQL GPG public key
 # to get latest stable
@@ -34,9 +34,9 @@ sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/po
 echo "host    all             all             0.0.0.0/0               md5" | sudo tee -a /etc/postgresql/$POSTGRE_VERSION/main/pg_hba.conf
 sudo service postgresql start
 
-# Create new user "$POSTGRE_USER" w/ password "root"
+# Create new user "root" w/ defined password
 # Not a superuser, just tied to new db "vagrant"
-sudo -u postgres psql -c "CREATE ROLE $POSTGRE_USER LOGIN UNENCRYPTED PASSWORD '$POSTGRE_PASS' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
+sudo -u postgres psql -c "CREATE ROLE root LOGIN UNENCRYPTED PASSWORD '$1' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
 
 # Make sure changes are reflected by restarting
 sudo service postgresql restart

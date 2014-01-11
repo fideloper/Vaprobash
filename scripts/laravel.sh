@@ -2,6 +2,8 @@
 
 echo ">>> Installing Laravel"
 
+[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?
@@ -32,11 +34,13 @@ APACHE_IS_INSTALLED=$?
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
     sed -i "s/root \/vagrant/root \/vagrant\/laravel\/public/" /etc/nginx/sites-available/vagrant
+    sudo service nginx reload
 fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
     # Remove apache vhost from default and create a new one
-    rm /etc/apache2/sites-enabled/192.168.33.10.xip.io.conf > /dev/null 2>&1
-    rm /etc/apache2/sites-available/192.168.33.10.xip.io.conf > /dev/null 2>&1
-    vhost -s 192.168.33.10.xip.io -d /vagrant/laravel/public
+    rm /etc/apache2/sites-enabled/$1.xip.io.conf > /dev/null 2>&1
+    rm /etc/apache2/sites-available/$1.xip.io.conf > /dev/null 2>&1
+    vhost -s $1.xip.io -d /vagrant/laravel/public
+    sudo service apache2 reload
 fi

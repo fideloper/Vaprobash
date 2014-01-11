@@ -57,7 +57,7 @@ The following setups are installable via the separate bash scripts of this repos
 
 This will install some base items.
 
-* git-core and this [.gitconfig](https://gist.github.com/fideloper/a335872f476635b582ee)
+* git-core and this [.gitconfig](https://gist.github.com/fideloper/3751524)
 * ack-grep
 * vim, tmux
 * curl, wget
@@ -179,6 +179,12 @@ $ vagrant ssh
 $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 ```
 
+### SQLite
+
+This will install the SQLite server.
+
+SQLite runs either in-memory (good for unit testing) or file-based.
+
 
 ### In-Memory Stores
 ---
@@ -195,6 +201,19 @@ This will install Redis (server). There are two options:
 2. Install with journaling/persistence
 
 You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
+
+
+### Utility (queues)
+---
+
+### Beanstalkd
+
+This will install the Beanstalkd work queue.
+
+This will configure Beanstalkd to start when the server boots.
+
+* Host: `localhost` (`0.0.0.0` default)
+* Port: `11300` (default)
 
 
 ### Additional Languages
@@ -222,6 +241,9 @@ This will also attempt to change the Apache or Nginx virtual host to point the d
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### PHPUnit
+
+This will install PHPUnit and make it globally accessible.
 
 ## The Vagrantfile
 
