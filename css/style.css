@@ -1,0 +1,13 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 170px;
+}
+
+#install-scripts h2 {
+    margin-top: 40px;
+    border-bottom: 1px solid #ccc; 
+}
+
+#quick-start pre {
+    margin-bottom: 20px;
+}
