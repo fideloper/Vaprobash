@@ -33,6 +33,11 @@ body {
   padding-bottom: 170px;
 }
 
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #4ea3d0;
+}
+
 #install-scripts h2 {
     margin-top: 40px;
     border-bottom: 1px solid #ccc;
