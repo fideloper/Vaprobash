@@ -79,6 +79,9 @@ Vagrant.configure("2") do |config|
   # Provision SQLite
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
 
+  # Provision MongoDB
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mongodb.sh"
+
 
   ####
   # In-Memory Stores
@@ -123,7 +126,7 @@ Vagrant.configure("2") do |config|
 
   # Install Yeoman
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/yeoman.sh", privileged: false
-  
+
   # Install PHPUnit
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phpunit.sh"
 
