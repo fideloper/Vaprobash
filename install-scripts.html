@@ -69,7 +69,7 @@
                 <h1>Install Scripts</h1>
                 <p>Vaprobash has many install scripts! Here's an overview of each of them.</p>
                 <h2>Base Items</h2>
-                <h3><a name="base" id="base"></a>Base</h3>
+                <h3><a href="install-scripts.html#base" name="base" id="base">#</a> Base</h3>
                 <p>This installs some basics items.</p>
                 <ul>
                     <li>Git and this <a href="https://gist.github.com/fideloper/3751524">.gitconfig</a></li>
@@ -78,15 +78,15 @@
                     <li>curl, wget</li>
                     <li>build-essential, python-software-properties</li>
                 </ul>
-                <h3><a name="php" id="php"></a>PHP</h3>
+                <h3><a href="install-scripts.html#base" name="php" id="php">#</a> PHP</h3>
                 <p>This will install PHP 5.5 and its common modules. This also install xdebug and sets the following:</p>
                 <pre>xdebug.scream=1
 xdebug.cli_color=1
 xdebug.show_local_vars=1</pre>
-                <h3><a name="oh-my-zsh" id="oh-my-zsh"></a>Oh-My-Zsh</h3>
+                <h3><a href="install-scripts.html#oh-my-zsh" name="oh-my-zsh" id="oh-my-zsh">#</a> Oh-My-Zsh</h3>
                 <p>This installs ZSH and runs the <a href="https://gist.github.com/tsabat/1498393">installer for Oh-My-Zsh</a></p>
                 <p class="alert alert-danger">This install may be deleted, as Oh-My-Zsh appears to edit the users PATH variable, causing issues with the installation of other scripts.</p>
-                <h3><a name="vim" id="vim"></a>Vim</h3>
+                <h3><a href="install-scripts.html#base" name="vim" id="vim">#</a> Vim</h3>
                 <p>This will install a Vim set, including:</p>
                 <ul>
                     <li>Vundle</li>
@@ -98,13 +98,13 @@ xdebug.show_local_vars=1</pre>
                 </ul>
                 <p>See the <a href="https://gist.github.com/fideloper/a335872f476635b582ee">.vimrc</a> file for more details and configuration.</p>
                 <h2>Web Servers</h2>
-                <h3><a name="apache" id="apache"></a>Apache</h3>
+                <h3><a href="install-scripts.html#apache" name="apache" id="apache">#</a> Apache</h3>
                 <p>This will install Apache 2.4 and mod_php5. Additionally, this script will use <a href="https://gist.github.com/fideloper/2710970">this vhost bash script</a> to create a virtualhost for 192.168.33.10.xip.io (or whichever IP address you configure).</p>
                 <p class="alert alert-warning">In future releases, Apache may be changed to work with php5-fpm rather than mod_php5. This will make switching between Nginx and Apache simpler.</p>
-                <h3><a name="hhvm" id="hhvm"></a>HHVM</h3>
+                <h3><a href="install-scripts.html#base" name="hhvm" id="hhvm">#</a> HHVM</h3>
                 <p>This installs HHVM.</p>
                 <p class="alert alert-warning">This will be modified heavily in the near future, likely to install hhvm-fastcgi rather than simply hhvm. There are also some configuration concerns which needs to be dealt with.</p>
-                <h3><a name="nginx" id="nginx"></a>Nginx Base</h3>
+                <h3><a href="install-scripts.html#nginx" name="nginx" id="nginx">#</a> Nginx Base</h3>
                 <p>This will install:</p>
                 <ul>
                     <li>Nginx 1.4.* (latest stable)</li>
@@ -123,7 +123,7 @@ $ sudo ngxdis example.com
 # Reload config after any change:
 $ sudo service nginx reload</pre>
                 <h2>Databases</h2>
-                <h3><a name="mysql" id="mysql"></a>MySQL</h3>
+                <h3><a href="install-scripts.html#mysql" name="mysql" id="mysql">#</a> MySQL</h3>
                 <p>This will install the MySQL 5 database.</p>
                 <ul>
                     <li>Host: <code>localhost</code> or <code>192.168.33.10</code></li>
@@ -137,7 +137,7 @@ $ vagrant ssh
 # Create Database
 # This will ask you to enter your password
 $ mysql -u root -p -e "CREATE DATABASE your_database_name"</pre>
-                <h3><a name="pgsql" id="pgsql"></a>PostgreSQL</h3>
+                <h3><a href="install-scripts.html#pgsql" name="pgsql" id="pgsql">#</a> PostgreSQL</h3>
                 <p>This will install the PostgreSQL 9.3 database.</p>
                 <ul>
                     <li>Host: <code>localhost</code> or <code>192.168.33.10></code></li>
@@ -151,16 +151,16 @@ $ vagrant ssh
 # Create new database via user user "postgres"
 # and assign it to user "root"
 $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name</pre>
-                <h3><a name="sqlite" id="sqlite"></a>SQLite</h3>
+                <h3><a href="install-scripts.html#sqlite" name="sqlite" id="sqlite">#</a> SQLite</h3>
                 <p>This will install the SQLite server. SQLite runs either in-memory (good for unit testing) or file-based.</p>
                 <h2>In-Memory Stores</h2>
-                <h3><a name="memcached" id="memcached"></a>Memcached</h3>
+                <h3><a href="install-scripts.html#memcached" name="memcached" id="memcached">#</a> Memcached</h3>
                 <p>This will install Memcached, which can be used for things like caching and session storage.</p>
                 <ul>
                     <li>Host: <code>localhost</code></li>
                     <li>Port <code>11211</code> (default)</li>
                 </ul>
-                <h3><a name="redis" id="redis"></a>Redis</h3>
+                <h3><a href="install-scripts.html#redis" name="redis" id="redis">#</a> Redis</h3>
                 <p>This will install Redis (server). There are two options:</p>
                 <ul>
                     <li>Install without journaling/persistence</li>
@@ -168,25 +168,25 @@ $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name</pre
                 </ul>
                 <p>You can choose between the two by uncommenting one provision script or the other in the <code>Vagrantfile</code>.</p>
                 <h2>Utility (queues)</h2>
-                <h3><a name="beanstalkd" id="beanstalkd"></a>Beanstalkd</h3>
+                <h3><a href="install-scripts.html#beanstalkd" name="beanstalkd" id="beanstalkd">#</a> Beanstalkd</h3>
                 <p>This will install the Beanstalkd work queue and configure it to start when the server boots.</p>
                 <ul>
                     <li>Host: <code>localhost</code> (<code>0.0.0.0</code> by default)</li>
                     <li>Port: <code>11300</code> (default)</li>
                 </ul>
                 <h2>Additional Languages</h2>
-                <h3><a name="nodejs" id="nodejs"></a>NodeJS</h3>
+                <h3><a href="install-scripts.html#nodejs" name="nodejs" id="nodejs">#</a> NodeJS</h3>
                 <p>This will install Node.js <code>0.10.*</code>. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).</p>
                 <p class="alert alert-warning">The installation and configuration for NodeJS items is under review for change.</p>
                 <h2>Frameworks and Tooling</h2>
-                <h3><a name="composer" id="composer"></a>Composer</h3>
+                <h3><a href="install-scripts.html#composer" name="composer" id="composer">#</a> Composer</h3>
                 <p>This will install composer and make it globally accessible.</p>
-                <h3><a name="laravel" id="laravel"></a>Laravel</h3>
+                <h3><a href="install-scripts.html#laravel" name="laravel" id="laravel">#</a> Laravel</h3>
                 <p>This will install a base Laravel (latest stable) project within <code>/vagrant/laravel</code>. It depends on Composer being installed.</p>
                 <p>This will also attempt to change the Apache or Nginx virtual host to point the document root at <code>/vagrant/laravel/public</code>.</p>
-                <h3><a name="yeoman" id="yeoman"></a>Yeoman</h3>
+                <h3><a href="install-scripts.html#yeoman" name="yeoman" id="yeoman">#</a> Yeoman</h3>
                 <p>This will install Yeoman globally for you to use in your front-end projects.</p>
-                <h3><a name="phpunit" id="phpunit"></a>PHPUnit</h3>
+                <h3><a href="install-scripts.html#phpunit" name="phpunit" id="phpunit">#</a> PHPUnit</h3>
                 <p>This will install PHPUnit and make it globally accessible.</p>
             </article>
         </div>
