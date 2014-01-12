@@ -2,6 +2,8 @@
 
 **Va**grant **Pro**visioning **Bash** Scripts
 
+[View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
+
 ## Goal
 
 The goal of this project is to create easy to use bash scripts in order to provision a Vagrant server.
