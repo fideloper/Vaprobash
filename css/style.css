@@ -28,6 +28,10 @@ i.entypo, i.entypo-social {
     content: '\F300'
 }
 
+.entypo-social.twitter:before {
+    content: '\F309'
+}
+
 body {
   padding-top: 50px;
   padding-bottom: 170px;
@@ -36,6 +40,11 @@ body {
 .navbar {
     background-color: white;
     border-bottom: 1px solid #4ea3d0;
+}
+
+.navbar-brand {
+    background: url(../logo_i_guess_sm.png) no-repeat 0px 10px;
+    padding-left: 35px;
 }
 
 #install-scripts h2 {
