@@ -188,6 +188,11 @@ This will install the SQLite server.
 SQLite runs either in-memory (good for unit testing) or file-based.
 
 
+### MongoDB
+
+This will install the latest stable version of MongoDB.
+
+
 ### In-Memory Stores
 ---
 
