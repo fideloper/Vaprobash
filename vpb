@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+init() {
+    # Detect if we are within the VM or not
+    if [ -d /vagrant ] ; then
+        VPB_IN_VM="yes"
+    fi
+
+    # Setup base path
+    # TODO: This should be capable of being more dynamic
+    if [ -d /vagrant ] ; then
+        VPB_ROOT=/vagrant/.vpb
+    else
+        VPB_ROOT=./.vpb
+    fi
+
+    # Source the libs
+    . ${VPB_ROOT}/lib/util.sh
+    . ${VPB_ROOT}/lib/usage.sh
+    . ${VPB_ROOT}/lib/lib.sh
+    . ${VPB_ROOT}/lib/main.sh
+
+    vpb.main $@
+}
+
+init $@

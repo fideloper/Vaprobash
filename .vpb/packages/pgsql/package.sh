@@ -2,7 +2,7 @@
 
 echo ">>> Installing PostgreSQL"
 
-[[ -z "$1" ]] && { echo "!!! PostgreSQL root password not set. Check the Vagrant file."; exit 1; }
+pgsql_root_password:="root"
 
 # Set some variables
 POSTGRE_VERSION=9.3
@@ -36,7 +36,7 @@ sudo service postgresql start
 
 # Create new user "root" w/ defined password
 # Not a superuser, just tied to new db "vagrant"
-sudo -u postgres psql -c "CREATE ROLE root LOGIN UNENCRYPTED PASSWORD '$1' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
+sudo -u postgres psql -c "CREATE ROLE root LOGIN UNENCRYPTED PASSWORD '$pgsql_root_password' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
 
 # Make sure changes are reflected by restarting
 sudo service postgresql restart
