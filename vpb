@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# This file acts as something of a front controller. It defines the
+# environment for the framework and loads all the libraries before
+# palming off the workload to the router (vpb.router).
+# 
+
+if [ -n "$VPB_TRACE" ] ; then
+    set -ue
+     
+    trace() {
+        typeset -i i=0
+        for func in "${FUNCNAME[@]}"
+        do
+            printf '%24s() %s:%d\n' "$func" "${BASH_SOURCE[$i]}" "${BASH_LINENO[$i]}"
+            let i++ || true
+        done
+    }
+     
+    trap 'echo "Unexpected error at: line $LINENO"; trace; exit' ERR EXIT
+     
+    exit() {
+        trap - ERR EXIT
+        command exit "$@"
+    }
+fi
+
+vpb() {
+    # Detect if we are within the VM or not
+    if [ -d /vagrant ] ; then
+        VPB_IN_VM="yes"
+    fi
+
+    # Setup base path
+    # TODO: This should be capable of being more dynamic
+    if [ -d /vagrant ] ; then
+        VPB_ROOT=/vagrant/.vpb
+    else
+        VPB_ROOT=./.vpb
+    fi
+
+    # Source the libs
+    . ${VPB_ROOT}/lib/usage.sh
+    . ${VPB_ROOT}/lib/util.sh
+    . ${VPB_ROOT}/lib/pkg.sh
+    . ${VPB_ROOT}/lib/controller.sh
+    . ${VPB_ROOT}/lib/router.sh
+
+    vpb.router $@
+}
+
+vpb $@

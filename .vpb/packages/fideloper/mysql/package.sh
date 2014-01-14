@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-echo ">>> Installing MySQL Server $2"
+echo ">>> Installing MySQL Server $mysql_version"
 
-[[ -z "$1" ]] && { echo "!!! MySQL root password not set. Check the Vagrant file."; exit 1; }
+mysql_root_password:=root
 
 mysql_package=mysql-server
 
-if [ $2 == "5.6" ]; then
+if [ "$mysql_version" == "5.6" ]; then
     # Add repo for MySQL 5.6
 	sudo add-apt-repository -y ppa:ondrej/mysql-5.6
 
@@ -19,8 +19,8 @@ fi
 
 # Install MySQL without password prompt
 # Set username and password to 'root'
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $1"
-sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $1"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $mysql_root_password:"
+sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $mysql_root_password"
 
 # Install MySQL Server
 sudo apt-get install -y $mysql_package

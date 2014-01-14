@@ -1,0 +1,5 @@
+# redis
+
+## Config
+
+persist="false"
