@@ -2,17 +2,32 @@
 
 echo ">>> Installing Node Version Manager"
 
-if [ ! -f "$HOME/.bash_profile" ]; then
-    echo ">>> There is no ~/.bash_profile. Creating empty ~/.bash_profile first"
-    echo > ~/.bash_profile
-fi
-
 # Install NVM
-# TODO: Create own nvm install.sh. (add nvm execution to both .bash_profile and .zshrc)
-curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+curl https://gist.github.com/Ilyes512/8335484/raw/nvm_install.sh | sh
 
-# Which version of Node.js do you wish to install?
-NODEJS_VERSION=latest
+# Reload .bash_profile and/or .zshrc so you don't need to restart the terminal session
+. ~/.bash_profile
+
+. ~/.zshrc
+
+# Contains all arguments that are passed
+NODE_ARG=($@)
+
+# Number of arguments that are given
+NUMBER_OF_ARG=${#NODE_ARG[@]}
+
+# Prepare the variables for installing specific Nodejs version and Global Node Packages
+if [[ $NUMBER_OF_ARG -gt 1 ]]; then
+    # Both Nodejs version and Global Node Packages are given
+    NODEJS_VERSION=${NODE_ARG[0]}
+    NODE_PACKAGES=${NODE_ARG[@]:1}
+elif [[ $NUMBER_OF_ARG -eq 1 ]]; then
+    # Only Nodejs version is given
+    NODEJS_VERSION=$NODE_ARG
+else
+    # Default Nodejs version when nothing is given
+    NODEJS_VERSION=latest
+fi
 
 # If set to latest, get the current node version from the home page
 if [ "$NODEJS_VERSION" == "latest" ]; then
@@ -21,15 +36,6 @@ fi
 
 echo ">>> Installing Node.js version $NODEJS_VERSION"
 echo "    This will also be set as the default node version"
-
-# Reload .bash_profile and/or .zshrc if they exist
-if [ -f "$HOME/.bash_profile" ]; then
-    . ~/.bash_profile
-fi
-
-if [ -f "$HOME/.zshrc" ]; then
-    . ~/.zshrc
-fi
 
 # Install Node
 nvm install $NODEJS_VERSION
@@ -41,11 +47,18 @@ nvm use default
 
 echo ">>> Starting to config Node.js"
 
-# Change where npm global packages location
+# Change where npm global packages are located
 npm config set prefix ~/npm
 
-# Add new npm global packages location to PATH
-printf "\n# Add new npm global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> ~/.bash_profile
+# Add new NPM Global Packages location to PATH
+printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> ~/.bash_profile
 
-# Add new npm root to NODE_PATH
-printf "\n# Add the new npm root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> ~/.bash_profile
+# Add new NPM root to NODE_PATH
+printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> ~/.bash_profile
+
+# Install (optional) Global Node Packages
+if [[ ! -z "$NODE_PACKAGES" ]]; then
+    echo ">>> Start installing Global Node Packages"
+
+    npm install -g ${NODE_PACKAGES[@]}
+fi
