@@ -9,6 +9,7 @@ github_branch   = "master"
 # Some variables
 server_ip             = "192.168.33.10"
 mysql_root_password   = "root" # We'll assume user "root"
+mysql_version         = "5.5"  # Options: 5.5 | 5.6
 pgsql_root_password   = "root" # We'll assume user "root"
 
 Vagrant.configure("2") do |config|
@@ -70,11 +71,8 @@ Vagrant.configure("2") do |config|
   # Databases
   ##########
 
-  # Provision MySQL 5.5
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: mysql_root_password
-
-  # Provision MySQL 5.6
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql56.sh", args: mysql_root_password
+  # Provision MySQL
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: [mysql_root_password, mysql_version]
 
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/pgsql.sh", args: pgsql_root_password
