@@ -3,7 +3,7 @@
 vpb.main() {
     case "${1}" in
         provision)
-            if vpb.is_vm ; then
+            if vpb.util.is_vm ; then
                 vpb.provision
             else
                 warn "provision should not be called from within the host system"
