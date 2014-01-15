@@ -226,7 +226,7 @@ This will configure Beanstalkd to start when the server boots.
 This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
 
 
-### Frameworks, etc
+### Frameworks and Tooling
 ---
 
 ### Composer
@@ -246,10 +246,6 @@ This will install Yeoman globally for you to use in your front-end projects.
 ### PHPUnit
 
 This will install PHPUnit and make it globally accessible.
-
-
-### Command-line Tools
----
 
 ### Screen
 

@@ -116,7 +116,7 @@ Vagrant.configure("2") do |config|
 
 
   ####
-  # Frameworks, etc
+  # Frameworks and Tooling
   ##########
 
   # Provision Composer
@@ -130,11 +130,6 @@ Vagrant.configure("2") do |config|
 
   # Install PHPUnit
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phpunit.sh"
-
-
-  ####
-  # Command-line tools
-  ##########
 
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
