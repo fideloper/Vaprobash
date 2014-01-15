@@ -74,3 +74,10 @@ vpb.util.get_vendors() {
         echo "${vendor##*/}"
     done
 }
+
+vpb.util.exec_hook() {
+    hook="$1"
+    if [ -f ${VPB_ROOT}/../hooks/${hook}.sh ] ; then
+        source ${VPB_ROOT}/../hooks/${hook}.sh
+    fi
+}

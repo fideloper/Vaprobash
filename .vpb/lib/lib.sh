@@ -2,9 +2,7 @@
 
 # Provision all enabled packages.
 vpb.provision() {
-    if [ -f ${VPB_ROOT}/pre_provision.sh ] ; then
-        source ${VPB_ROOT}/pre_provision.sh
-    fi
+    vpb.util.exec_hook pre_provision
 
     for package_path in ${VPB_ROOT}/enabled/* ; do
         package=${package_path##*/}
@@ -20,9 +18,7 @@ vpb.provision() {
         fi
     done
 
-    if [ -f ${VPB_ROOT}/post_provision.sh ] ; then
-        source ${VPB_ROOT}/post_provision.sh
-    fi
+    vpb.util.exec_hook post_provision
 }
 
 # List available packages
