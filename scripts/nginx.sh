@@ -32,7 +32,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
+        try_files \$uri \$uri/ /index.php?\$query_string;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
