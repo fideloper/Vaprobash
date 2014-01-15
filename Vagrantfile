@@ -28,11 +28,6 @@ Vagrant.configure("2") do |config|
 
   end
 
-  ####
-  # Base Items
-  ##########
-
-  # Provision Packages
+  # vpb provisioner
   config.vm.provision "shell", path: "./vpb", :args => "provision", keep_color: true
-
 end
