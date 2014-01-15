@@ -22,8 +22,7 @@ vpb.main() {
             vpb.disable "$2"
             ;;
         configure)
-            msg "Not yet implemented"
-            #vpb.configure "$2"
+            msg "configure yet implemented"
             ;;
         fetch)
             vpb.fetch "$2" "$3"

@@ -81,3 +81,7 @@ vpb.util.exec_hook() {
         source ${VPB_ROOT}/../hooks/${hook}.sh
     fi
 }
+
+vpb.util.func_exists() {
+    type -t "$1" | grep -q "function"
+}

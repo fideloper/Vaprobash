@@ -6,7 +6,7 @@ vpb.provision() {
 
     for package_path in ${VPB_ROOT}/enabled/* ; do
         package=${package_path##*/}
-        msg "Provisioning ${package} ... "
+        msg "provisioning ${package} ... "
         # If any config exists, source it.
         if [ -f "$package_path/config.sh" ] ; then
             source "$package_path/config.sh"
@@ -15,6 +15,22 @@ vpb.provision() {
         # Source the actual package.
         if [ -f "$package_path/package.sh" ] ; then
             source "$package_path/package.sh"
+
+            # If package specific functions exist, execute them
+            if vpb.util.func_exists pre_install ; then
+                pre_install
+                unset pre_install
+            fi
+
+            if vpb.util.func_exists install ; then
+                install
+                unset install
+            fi
+
+            if vpb.util.func_exists post_install ; then
+                post_install
+                unset post_install
+            fi
         fi
     done
 
@@ -53,7 +69,11 @@ vpb.enable() {
     fi
 
     if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
-        ln -sF /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
+        ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
+
+        # If this package has a configure method, execute it.
+        vpb configure "${package}"
+
         msg "${package} enabled"
     else
         warn "$1 not found"
