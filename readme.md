@@ -187,6 +187,19 @@ This will install the SQLite server.
 
 SQLite runs either in-memory (good for unit testing) or file-based.
 
+### CouchDB
+
+This will install the CouchDB database.
+
+To create a new databse:
+
+```bash
+# Execute this command inside the Vagrant box
+$ curl -X PUT localhost:5984/name_of_new_database
+```
+
+You may access the "Futon" web interface for administering CouchDB at: `http://192.168.33.10:5984/_utils/`
+
 
 ### In-Memory Stores
 ---
@@ -226,7 +239,7 @@ This will configure Beanstalkd to start when the server boots.
 This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
 
 
-### Frameworks, etc
+### Frameworks and Tooling
 ---
 
 ### Composer
@@ -246,6 +259,10 @@ This will install Yeoman globally for you to use in your front-end projects.
 ### PHPUnit
 
 This will install PHPUnit and make it globally accessible.
+
+### Screen
+
+This will install Screen on the Vagrant machine.
 
 ## The Vagrantfile
 
