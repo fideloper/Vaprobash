@@ -187,6 +187,19 @@ This will install the SQLite server.
 
 SQLite runs either in-memory (good for unit testing) or file-based.
 
+### CouchDB
+
+This will install the CouchDB database.
+
+To create a new databse:
+
+```bash
+# Execute this command inside the Vagrant box
+$ curl -X PUT localhost:5984/name_of_new_database
+```
+
+You may access the "Futon" web interface for administering CouchDB at: `http://192.168.33.10:5984/_utils/`
+
 
 ### In-Memory Stores
 ---
