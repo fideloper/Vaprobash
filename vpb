@@ -2,7 +2,7 @@
 
 set -e
 
-init() {
+vpb() {
     # Detect if we are within the VM or not
     if [ -d /vagrant ] ; then
         VPB_IN_VM="yes"
@@ -25,4 +25,4 @@ init() {
     vpb.main $@
 }
 
-init $@
+vpb $@

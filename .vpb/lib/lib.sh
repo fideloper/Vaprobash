@@ -53,7 +53,7 @@ vpb.enable() {
     fi
 
     if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
-        ln -sF /vagrant/.vpb/packages/"${package}" .vpb/enabled/
+        ln -sF /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
         msg "${package} enabled"
     else
         warn "$1 not found"
