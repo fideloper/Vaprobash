@@ -247,6 +247,14 @@ This will install Yeoman globally for you to use in your front-end projects.
 
 This will install PHPUnit and make it globally accessible.
 
+
+### Command-line Tools
+---
+
+### Screen
+
+This will install Screen on the Vagrant machine.
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:
