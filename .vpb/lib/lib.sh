@@ -26,15 +26,42 @@ vpb.provision() {
 }
 
 # List available packages
-# TODO: Filter enabled packages from this list
-vpb.list() {
-    ls ${VPB_ROOT}/packages
+vpb.available() {
+    vendors=($(vpb.util.get_vendors))
+    for vendor in ${vendors[@]} ; do
+        if [[ ${#vendors[@]} > 1 ]] ; then
+            # display the default venodr in red (just for fun).
+            if vpb.util.is_default_vendor "$vendor" ; then
+                error "${vendor}*"
+            else
+                msg "${vendor}"
+            fi
+        fi
+        col "$(vpb.util.get_available "$vendor")"
+    done
+}
+
+# List enabled packages
+vpb.enabled() {
+    col "$(vpb.util.get_enabled)"
 }
 
 # Enable a package
 vpb.enable() {
-    if [ -d ${VPB_ROOT}/packages/"$1" ] ; then
-        ln -sF /vagrant/.vpb/packages/"$1" .vpb/enabled/
+    package="$1"
+    if [[ "$package" = *:* ]] ; then
+        vendor=${package%%:*}
+        package=$vendor/${package##*:}
+        echo $package
+    else
+        package="${VPB_DEFAULT_VENDOR:=fideloper}/$package"
+    fi
+
+    if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
+        ln -sF /vagrant/.vpb/packages/"${package}" .vpb/enabled/
+        msg "${package} enabled"
+    else
+        warn "$1 not found"
     fi
 }
 
@@ -42,5 +69,19 @@ vpb.enable() {
 vpb.disable() {
     if [ -L ${VPB_ROOT}/enabled/"$1" ] ; then
         rm ${VPB_ROOT}/enabled/"$1"
+    fi
+}
+
+# Fetch a vendor repo via git
+vpb.fetch() {
+    echo $#
+    if [ $# = 2 ] ; then
+        if ! [ -d ${VPB_ROOT}/enabled/"$1" ] ; then
+            git clone "$2" ${VPB_ROOT}/packages/"$1"
+        else
+            warn "$1 already exists"
+        fi
+    else
+        vpb.usage && exit 1
     fi
 }

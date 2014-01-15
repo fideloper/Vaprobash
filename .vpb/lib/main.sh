@@ -9,8 +9,11 @@ vpb.main() {
                 warn "provision should not be called from within the host system"
             fi
             ;;
-        list)
-            vpb.list
+        available)
+            vpb.available
+            ;;
+        enabled)
+            vpb.enabled
             ;;
         enable)
             vpb.enable "$2"
@@ -21,6 +24,9 @@ vpb.main() {
         configure)
             msg "Not yet implemented"
             #vpb.configure "$2"
+            ;;
+        fetch)
+            vpb.fetch "$2" "$3"
             ;;
         *)
             vpb.usage
