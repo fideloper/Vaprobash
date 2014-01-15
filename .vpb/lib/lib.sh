@@ -52,7 +52,6 @@ vpb.enable() {
     if [[ "$package" = *:* ]] ; then
         vendor=${package%%:*}
         package=$vendor/${package##*:}
-        echo $package
     else
         package="${VPB_DEFAULT_VENDOR:=fideloper}/$package"
     fi
