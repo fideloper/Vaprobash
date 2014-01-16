@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-
-set -e
+#
+# This file acts as something of a front controller. It defines the
+# environment for the framework and loads all the libraries before
+# palming off the workload to the router (vpb.main).
+# 
 
 vpb() {
     # Detect if we are within the VM or not

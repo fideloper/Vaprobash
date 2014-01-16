@@ -1,3 +1,8 @@
+#!/usr/bin/env bash
+#
+# Just a place to keep the usage outside of the logic of the application
+#
+
 vpb.usage() {
     echo "Usage:"
     echo "  ${0} available"
@@ -12,7 +17,7 @@ vpb.usage() {
     echo "  ${0} disable <package>"
     echo "      disable a package"
     echo
-    echo "  ${0} configure [vendor]:<package>"
+    echo "  ${0} configure [vendor]:<package> [token] [value]"
     echo "      configure a package"
     echo
     echo "  ${0} fetch <vendor> <url>"

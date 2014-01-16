@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
+#
+# This file acts as something of a router. Dispatching
+# requests of to the various actions.
+#
 
 vpb.main() {
-    case "${1}" in
+    action="$1"
+
+    # Remove the action name from the arguments list.
+    shift
+    case "$action" in
         provision)
+            # Safeguard to prevent provisioning the host machine.
             if vpb.util.is_vm ; then
                 vpb.provision
             else
@@ -16,18 +25,18 @@ vpb.main() {
             vpb.enabled
             ;;
         enable)
-            vpb.enable "$2"
+            vpb.enable "$@"
             ;;
         disable)
-            vpb.disable "$2"
+            vpb.disable "$@"
             ;;
         configure)
-            msg "configure yet implemented"
+            vpb.configure "$@"
             ;;
         fetch)
-            vpb.fetch "$2" "$3"
+            vpb.fetch "$@"
             ;;
-        *)
+        help|*)
             vpb.usage
             exit 1
             ;;

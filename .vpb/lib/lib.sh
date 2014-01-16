@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
+#
+# This file defines the controllers of the application. These functions
+# are resolved by the router within main.sh, and define the bulk of the
+# business logic.
+#
 
 # Provision all enabled packages.
 vpb.provision() {
     vpb.util.exec_hook pre_provision
 
     for package_path in ${VPB_ROOT}/enabled/* ; do
-        package=${package_path##*/}
-        msg "provisioning ${package} ... "
+        echo
+        msg "provisioning ${package_path##*/} ... "
+
         # If any config exists, source it.
         if [ -f "$package_path/config.sh" ] ; then
             source "$package_path/config.sh"
@@ -16,33 +22,24 @@ vpb.provision() {
         if [ -f "$package_path/package.sh" ] ; then
             source "$package_path/package.sh"
 
-            # If package specific functions exist, execute them
-            if vpb.util.func_exists pre_install ; then
-                pre_install
-                unset pre_install
-            fi
-
-            if vpb.util.func_exists install ; then
-                install
-                unset install
-            fi
-
-            if vpb.util.func_exists post_install ; then
-                post_install
-                unset post_install
-            fi
+            # Execute package specific functions if they are defined.
+            vpb.util.exec_func pre_install
+            vpb.util.exec_func install
+            vpb.util.exec_func post_install
         fi
     done
 
     vpb.util.exec_hook post_provision
 }
 
-# List available packages
+# List available packages by looping through each vedor repo
+# and calling vpb.util.get_available. This takes into account
+# the fact that a package has already been enabled.
 vpb.available() {
     vendors=($(vpb.util.get_vendors))
     for vendor in ${vendors[@]} ; do
         if [[ ${#vendors[@]} > 1 ]] ; then
-            # display the default venodr in red (just for fun).
+            # Display the default venodr in red (just for fun).
             if vpb.util.is_default_vendor "$vendor" ; then
                 error "${vendor}*"
             else
@@ -58,32 +55,48 @@ vpb.enabled() {
     col "$(vpb.util.get_enabled)"
 }
 
-# Enable a package
+# Enable a package by linking it into the ./vpb/enabled directory
 vpb.enable() {
-    package="$1"
-    if [[ "$package" = *:* ]] ; then
-        vendor=${package%%:*}
-        package=$vendor/${package##*:}
-    else
-        package="${VPB_DEFAULT_VENDOR:=fideloper}/$package"
-    fi
-
+    package="$(vpb.util.resolve_package $1)"
     if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
         ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
 
-        # If this package has a configure method, execute it.
+        # Once enabled, prompt the user to configure
         vpb configure "${package}"
-
-        msg "${package} enabled"
     else
-        warn "$1 not found"
+        warn "${package} not found"
     fi
 }
 
-# Disable a package
+# Disable a package by removing it from .vpb/enabled
 vpb.disable() {
     if [ -L ${VPB_ROOT}/enabled/"$1" ] ; then
         rm ${VPB_ROOT}/enabled/"$1"
+    fi
+}
+
+# Configure a package interactively, or by setting individual options
+vpb.configure() {
+    if [ $# = 1 ] ; then
+        # If we are not in not interactive mode see if we can
+        # call the configure function of a package.
+        if [ -z "$VPB_NONINTERACTIVE" ] ; then
+            package="$(vpb.util.resolve_package $1)"
+            # Check to see if a configure function exists in the package file.
+            # We can't just source the file and see if it is defined because this
+            # will potentially trigger provisioning in the older legacy scripts
+            # that have all there code in the global namespace.
+            if grep -q "^configure()" "${VPB_ROOT}/packages/${package}/package.sh" ; then
+                source "${VPB_ROOT}/packages/${package}/package.sh"
+                configure
+            fi
+        fi
+    elif [ $# = 3 ] ; then
+        # If we are in here, we are trying to set a configure option
+        package="$1"; option="$2"; value="$3"
+        echo "configuring $package $option $value"
+    else
+        vpb.usage && exit 1
     fi
 }
 
