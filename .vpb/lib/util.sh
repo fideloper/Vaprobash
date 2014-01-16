@@ -113,6 +113,27 @@ vpb.util.resolve_package() {
     fi
 }
 
+# Write a config option
+vpb.util.config_option() {
+    package="$1"; option="$2"; value="$3"
+    package_dir="${VPB_ROOT}/packages/$(vpb.util.resolve_package $package)"
+    if [ -d "${package_dir}" ] ; then
+        conf_file=${package_dir}/config.sh
+        if ! [ -f "${conf_file}" ] ; then
+            touch "${conf_file}"
+        fi
+
+        # If the option exists in the file we need to update it.
+        if grep -q "^${option}" "${conf_file}" ; then
+            sed -i -e "s/${option}=\".*\"/${option}=\""${value}\""/g" $conf_file
+
+        # Otherwise, add it.
+        else
+            echo "${option}=\"${value}\"" >> $conf_file
+        fi
+    fi
+}
+
 # Does a function exist?
 vpb.util.func_exists() {
     type -t "$1" | grep -q "function"

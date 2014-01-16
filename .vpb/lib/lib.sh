@@ -94,7 +94,7 @@ vpb.configure() {
     elif [ $# = 3 ] ; then
         # If we are in here, we are trying to set a configure option
         package="$1"; option="$2"; value="$3"
-        echo "configuring $package $option $value"
+        vpb.util.config_option $package $option $value
     else
         vpb.usage && exit 1
     fi
