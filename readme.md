@@ -147,7 +147,7 @@ $ sudo service nginx reload
 
 This will install the CouchDB database.
 
-To create a new databse:
+To create a new database:
 
 ```bash
 # Execute this command inside the Vagrant box
