@@ -123,7 +123,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rvm.sh", privileged: false, args: ruby_version
 
   ####
-  # Frameworks, etc
+  # Frameworks and Tooling
   ##########
 
   # Provision Composer
@@ -137,5 +137,8 @@ Vagrant.configure("2") do |config|
 
   # Install PHPUnit
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phpunit.sh"
+
+  # Install Screen
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
 
 end
