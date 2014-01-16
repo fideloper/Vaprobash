@@ -238,6 +238,10 @@ This will configure Beanstalkd to start when the server boots.
 
 This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
 
+### RVM/Ruby
+
+This will install Ruby via RVM. You can decide which version of ruby via the configuration variable found in the `Vagrantfile`. Default is `latest`.
+
 
 ### Frameworks and Tooling
 ---
