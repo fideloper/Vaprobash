@@ -143,6 +143,19 @@ $ sudo service nginx reload
 ### Databases
 ---
 
+### CouchDB
+
+This will install the CouchDB database.
+
+To create a new databse:
+
+```bash
+# Execute this command inside the Vagrant box
+$ curl -X PUT localhost:5984/name_of_new_database
+```
+
+You may access the "Futon" web interface for administering CouchDB at: `http://192.168.33.10:5984/_utils/`
+
 ### MySQL
 
 This will install the MySQL 5.5 or 5.6 depending on what you choose on the Vagrantfile.
@@ -186,19 +199,6 @@ $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
 This will install the SQLite server.
 
 SQLite runs either in-memory (good for unit testing) or file-based.
-
-### CouchDB
-
-This will install the CouchDB database.
-
-To create a new databse:
-
-```bash
-# Execute this command inside the Vagrant box
-$ curl -X PUT localhost:5984/name_of_new_database
-```
-
-You may access the "Futon" web interface for administering CouchDB at: `http://192.168.33.10:5984/_utils/`
 
 
 ### In-Memory Stores
