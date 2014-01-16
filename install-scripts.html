@@ -54,6 +54,7 @@
                     <a href="install-scripts.html#apache" class="list-group-item">Apache</a>
                     <a href="install-scripts.html#hhvm" class="list-group-item">HHVM</a>
                     <a href="install-scripts.html#nginx" class="list-group-item">Nginx</a>
+                    <a href="install-scripts.html#couchdb" class="list-group-item">CouchDB</a>
                     <a href="install-scripts.html#mysql" class="list-group-item">MySQL</a>
                     <a href="install-scripts.html#pgsql" class="list-group-item">PostgreSQL</a>
                     <a href="install-scripts.html#sqlite" class="list-group-item">SQLite</a>
@@ -125,6 +126,12 @@ $ sudo ngxdis example.com
 # Reload config after any change:
 $ sudo service nginx reload</pre>
                 <h2>Databases</h2>
+                <h3><a href="install-scripts.html#couchdb" name="couchdb" id="couchdb">#</a> CouchDB</h3>
+                <p>This will install the CouchDB database.</p>
+                <p>To create a new database:</p>
+                <pre># Execute this command inside the Vagrant box
+$ curl -X PUT localhost:5984/name_of_new_database</pre>
+                <p>You may access the "Futon" web interface for administering CouchDB at: <code>http://192.168.33.10:5984/_utils/</code></p>
                 <h3><a href="install-scripts.html#mysql" name="mysql" id="mysql">#</a> MySQL</h3>
                 <p>This will install the MySQL 5 database.</p>
                 <ul>
