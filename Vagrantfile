@@ -8,9 +8,10 @@ github_branch   = "master"
 
 # Some variables
 server_ip             = "192.168.33.10"
-mysql_root_password   = "root" # We'll assume user "root"
-mysql_version         = "5.5"  # Options: 5.5 | 5.6
-pgsql_root_password   = "root" # We'll assume user "root"
+mysql_root_password   = "root"   # We'll assume user "root"
+mysql_version         = "5.5"    # Options: 5.5 | 5.6
+pgsql_root_password   = "root"   # We'll assume user "root"
+ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 
 Vagrant.configure("2") do |config|
 
@@ -114,6 +115,9 @@ Vagrant.configure("2") do |config|
   # Install Nodejs
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false
 
+
+  # Install Ruby Version Manager (RVM)
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rvm.sh", privileged: false, args: ruby_version
 
   ####
   # Frameworks, etc
