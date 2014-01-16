@@ -45,7 +45,15 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh"
+
+    # Update to latest repo (5.5)
+    config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php-latest.sh"
+
+    # Update to previous stable repo (5.4)
+    # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php-54.sh"
+
+    # Install PHP with specified repo
+    config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh"
 
   # Provision Oh-My-Zsh
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/zsh.sh"
@@ -80,7 +88,7 @@ Vagrant.configure("2") do |config|
 
   # Provision SQLite
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
-  
+
   # Provision CouchDB
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchdb.sh"
 
