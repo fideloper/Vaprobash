@@ -217,6 +217,12 @@ This will install Redis (server). There are two options:
 
 You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
 
+### Search
+---
+### ElasticSearch
+
+This will install the ElasticSearch search engine.
+
 
 ### Utility (queues)
 ---
