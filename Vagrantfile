@@ -12,7 +12,7 @@ mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 pgsql_root_password   = "root"   # We'll assume user "root"
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
-php_version           = "latest" # Options: latest|previous|dist   For 12.04. latest=5.5, previous=5.4, dist=5.3
+php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
 
 Vagrant.configure("2") do |config|
 
