@@ -22,11 +22,11 @@ else
     fi
 
     # Reload .bash_profile and/or .zshrc if they exist
-    if [[ -f "home/vagrant/.bash_profile" ]]; then
-        . ~/.bash_profile
+    if [[ -f "/home/vagrant/.bash_profile" ]]; then
+        . /home/vagrant/.bash_profile
     fi
 
-    if [[ -f "home/vagrant/.zshrc" ]]; then
-        . ~/.zshrc
+    if [[ -f "/home/vagrant/.zshrc" ]]; then
+        . /home/vagrant/.zshrc
     fi
 fi
