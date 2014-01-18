@@ -21,12 +21,16 @@ else
         \curl -sSL https://get.rvm.io | bash -s stable --ruby=$1
     fi
 
-    # Reload .bash_profile and/or .zshrc if they exist
+    # Re-source .bash_profile, .zshrc or .bashrc if they exist
     if [[ -f "/home/vagrant/.bash_profile" ]]; then
         . /home/vagrant/.bash_profile
     fi
 
     if [[ -f "/home/vagrant/.zshrc" ]]; then
         . /home/vagrant/.zshrc
+    fi
+
+    if [[ -f "/home/vagrant/.bashrc" ]]; then
+        . /home/vagrant/.bashrc
     fi
 fi
