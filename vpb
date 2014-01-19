@@ -23,6 +23,7 @@ vpb() {
     . ${VPB_ROOT}/lib/util.sh
     . ${VPB_ROOT}/lib/usage.sh
     . ${VPB_ROOT}/lib/lib.sh
+    . ${VPB_ROOT}/lib/pkg.sh
     . ${VPB_ROOT}/lib/main.sh
 
     vpb.main $@

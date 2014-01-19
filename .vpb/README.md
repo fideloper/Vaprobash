@@ -164,7 +164,7 @@ If we wanted to install `php5-xcache` for instance, we can build on the above
 package by extending it:
 
 ```
-source ${VPB_ROOT}/packages/example/php
+vpb.pkg.extends example/php
 
 install() {
     # Install PHP
