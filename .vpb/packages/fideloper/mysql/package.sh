@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-echo ">>> Installing MySQL Server $2"
+echo ">>> Installing MySQL Server $mysql_version"
 
 mysql_root_password:=root
 
 mysql_package=mysql-server
 
-if [ $2 == "5.6" ]; then
+if [ "$mysql_version" == "5.6" ]; then
     # Add repo for MySQL 5.6
 	sudo add-apt-repository -y ppa:ondrej/mysql-5.6
 

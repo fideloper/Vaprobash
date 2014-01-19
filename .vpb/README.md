@@ -73,7 +73,7 @@ provisioned. For instance, you can only enable a single `php` package. You could
 however potentially enable both a `php54` and `php55` package side by side.
 
 The package.sh script is what does the heavy lifting in relation to the
-installation of your package. It should br broken down into the following
+installation of your package. It should be broken down into the following
 functions:
 
 ```
@@ -93,7 +93,7 @@ configure() {}
 #### Converting a legacy package to VPB.
 
 While the package.sh file could potentially be a simple script that just
-executed __top to bottom__ breaking it down into the functions above will provide
+executed __top to bottom__, breaking it down into the functions above will provide
 greater flexibility in the future and will hopefully allow us to abstract some
 functionality away into common libraries.
 
@@ -155,9 +155,9 @@ EOF
 
 #### What has this bought us?
 
-At this early stage, it doesn't really look like there are too many benifits
+At this early stage, it doesn't really look like there are too many benefits
 to breaking the package into parts. Don't be fooled however, even without much
-a framework developed yet, just breaking our package up has made it much more
+of a framework developed yet, just breaking our package up has made it much more
 flexible.
 
 If we wanted to install `php5-xcache` for instance, we can build on the above
@@ -184,7 +184,7 @@ install() {
 
 Note that we only need to define the function we are overwriting. Already, this
 is much more convenient than what was provided in the old __top to bottom__
-style script.
+style scripts.
 
 The above is actually a pretty trivial example because things like adding new
 extensions to php will ideally be handled (in the future) by configuration, but
@@ -263,15 +263,15 @@ vpb.util.config_option <package> <option> <value>
 
 #### What about those of us not using *nix ?
 
-Your fools. No sorry.... really. See the below section on hooks.
+Your fools. No, sorry..... See the below section on hooks.
 
 #### Hooks
 
-There idea of __hooks__ exists within vpb. Presently there are two hook points
-defined. A pre_provision hooks point executed just prior to the provisioning of
-all packages and a post_provision hooks point executed shortly after.
+There concept of __hooks__ exists within vpb. Presently there are two hook points
+defined. A pre_provision hook point executed just prior to the provisioning of
+all packages and a post_provision hook point executed shortly after.
 
-An example usage case within the pre_provision hook point is to script the
+An example use case within the pre_provision hook point is to script the
 enabling and configuration of packages within the VM just prior to provisioning.
 
 If you are using Windows as your host, this may indeed be the only way you
