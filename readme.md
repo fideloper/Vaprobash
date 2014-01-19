@@ -274,6 +274,10 @@ This will install PHPUnit and make it globally accessible.
 
 This will install Screen on the Vagrant machine.
 
+### Xdebug debugging
+
+Enables connections from host machine to vagrant for step by step debugging.
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:

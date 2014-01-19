@@ -159,5 +159,8 @@ Vagrant.configure("2") do |config|
 
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
+  
+  # Enable Xdebug remote debugging
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/xdebug-debugging.sh"
 
 end
