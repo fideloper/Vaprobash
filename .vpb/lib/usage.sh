@@ -11,11 +11,11 @@ vpb.usage() {
     echo "  ${0} enabled"
     echo "      list enabled packages"
     echo
-    echo "  ${0} enable [vendor]:<package>"
-    echo "      enable a package"
+    echo "  ${0} enable [vendor]:<package> [...]"
+    echo "      enable a list of packages"
     echo
-    echo "  ${0} disable <package>"
-    echo "      disable a package"
+    echo "  ${0} disable <package> [...]"
+    echo "      disable a list of packages"
     echo
     echo "  ${0} configure [vendor]:<package> [token] [value]"
     echo "      configure a package"

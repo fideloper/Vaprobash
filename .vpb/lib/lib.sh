@@ -56,7 +56,7 @@ vpb.enabled() {
 }
 
 # Enable a package by linking it into the ./vpb/enabled directory
-vpb.enable() {
+vpb._enable() {
     package="$(vpb.util.resolve_package $1)"
     if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
         ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
@@ -68,10 +68,32 @@ vpb.enable() {
     fi
 }
 
+# API end point for vpb._enable. Allows multiple packages to be enabled at once.
+vpb.enable() {
+    if [ $# > 1 ] ; then
+        for pkg in "$@" ; do
+            vpb._enable "$pkg"
+        done
+    else
+        vpb._enable "$@"
+    fi
+}
+
 # Disable a package by removing it from .vpb/enabled
-vpb.disable() {
+vpb._disable() {
     if [ -L ${VPB_ROOT}/enabled/"$1" ] ; then
         rm ${VPB_ROOT}/enabled/"$1"
+    fi
+}
+
+# API end point for vpb._disable. Allows multiple packages to be disabled at once.
+vpb.disable() {
+    if [ $# > 1 ] ; then
+        for pkg in "$@" ; do
+            vpb._disable "$pkg"
+        done
+    else
+        vpb._disable "$@"
     fi
 }
 
