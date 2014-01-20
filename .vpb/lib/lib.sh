@@ -62,7 +62,7 @@ vpb.enable() {
         ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
 
         # Once enabled, prompt the user to configure
-        vpb configure "${package}"
+        vpb configure "${1}"
     else
         warn "${package} not found"
     fi
