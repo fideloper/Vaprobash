@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+# Provision Base Packages
+vpb enable base
+
+# Provision PHP
+vpb enable php
+
+# Provision Oh-My-Zsh
+#vpb enable zsh
+
+# Provision Vim
+#vpb enable vim
+
+####
+# Web Servers
+##########
+
+# Provision Apache Base
+#vpb configure apache ip_address 192.168.10.1
+#vpb enable apache
+
+# Provision HHVM
+#vpb enable hhvm
+
+# Provision Nginx Base
+#vpb configure nginx ip_address 192.168.10.1
+#vpb enable nginx
+
+
+####
+# Databases
+##########
+
+# Provision MySQL
+#vps configure mysql version 5.5
+#vps configure mysql mysql_root_password root
+#vpb enable mysql
+
+# Provision PostgreSQL
+#vps configure pgsql pgsql_root_password root
+#vpb enable pgsql
+
+# Provision SQLite
+#vpb enable sqlite
+
+# Provision MongoDB
+#vpb enable mongodb
+
+####
+# In-Memory Stores
+##########
+
+# Install Memcached
+#vpb enable memcached
+
+# Provision Redis
+#vpb configure redis persistent true # (with journaling and persistence)
+#vpb enable redis
+
+####
+# Utiliy (queue)
+##########
+
+# Install Beanstalkd
+#vpb enable beanstalkd
+
+####
+# Additional Languages
+##########
+
+# Install Nodejs
+#vpb enable nodejs
+
+####
+# Frameworks, etc
+##########
+
+# Provision Composer
+#vpb enable composer
+
+# Provision Laravel
+#vpb configure laravel ip_address 192.168.10.10
+#vpb enable laravel
+
+# Install Yeoman
+#vpb enable yeoman
+
+# Install PHPUnit
+#vpb enable phpunit
