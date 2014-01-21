@@ -33,6 +33,9 @@ vpb.router() {
         configure)
             vpb.controller.configure "$@"
             ;;
+        readme)
+            vpb.controller.readme "$@"
+            ;;
         fetch)
             vpb.controller.fetch "$@"
             ;;

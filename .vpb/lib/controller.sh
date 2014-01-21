@@ -29,6 +29,20 @@ vpb.controller._enable() {
     fi
 }
 
+# View a packages README
+vpb.controller.readme() {
+    if package=($(vpb.util.resolve_package "$1")) ; then
+
+        pkg_path=${package[2]}
+
+        echo
+        if [ -f "$pkg_path/README.md" ] ; then
+            cat "$pkg_path/README.md"
+        fi
+        echo
+    fi
+}
+
 # Provision all enabled packages.
 vpb.controller.provision() {
     vpb.util.exec_hook pre_provision

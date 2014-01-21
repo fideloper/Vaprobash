@@ -20,6 +20,9 @@ vpb.usage() {
     echo "  ${0} configure [vendor]:<package> [token] [value]"
     echo "      configure a package"
     echo
+    echo "  ${0} readme [vendor]:<package>"
+    echo "      view a package README"
+    echo
     echo "  ${0} fetch <vendor> <url>"
     echo "      fetch a vendor repo - accepts any valid git url"
     echo
