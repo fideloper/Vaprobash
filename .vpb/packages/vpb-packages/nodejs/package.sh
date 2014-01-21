@@ -12,7 +12,6 @@ install() {
 
 post_install() {
     if [ ! -f "$HOME/.bash_profile" ]; then
-        echo ">>> There is no ~/.bash_profile. Creating empty ~/.bash_profile first"
         echo > ~/.bash_profile
     fi
 

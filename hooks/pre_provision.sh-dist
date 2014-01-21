@@ -17,14 +17,14 @@ vpb enable php
 ##########
 
 # Provision Apache Base
-#vpb configure apache server_ip 192.168.10.10
+#vpb configure apache ip_address 192.168.10.1
 #vpb enable apache
 
 # Provision HHVM
 #vpb enable hhvm
 
 # Provision Nginx Base
-#vpb configure nginx server_ip 192.168.10.10
+#vpb configure nginx ip_address 192.168.10.1
 #vpb enable nginx
 
 
@@ -33,6 +33,7 @@ vpb enable php
 ##########
 
 # Provision MySQL
+#vps configure mysql version 5.5
 #vps configure mysql mysql_root_password root
 #vpb enable mysql
 
@@ -69,7 +70,6 @@ vpb enable php
 ##########
 
 # Install Nodejs
-#vpb configure nodejs privileged false
 #vpb enable nodejs
 
 ####
@@ -80,11 +80,10 @@ vpb enable php
 #vpb enable composer
 
 # Provision Laravel
-#vpb configure laravel server_ip 192.168.10.10
+#vpb configure laravel ip_address 192.168.10.10
 #vpb enable laravel
 
 # Install Yeoman
-#vpb configure yeoman privileged false
 #vpb enable yeoman
 
 # Install PHPUnit
