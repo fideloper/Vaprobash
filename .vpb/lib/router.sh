@@ -15,7 +15,7 @@ vpb.router() {
             if vpb.util.is_vm ; then
                 vpb.controller.provision
             else
-                warn "provision should not be called from within the host system"
+                die "provision should not be called from within the host system"
             fi
             ;;
         available)

@@ -67,7 +67,7 @@ vpb.util.get_enabled() {
     done
 }
 
-# get a list of available packages within a vendor repo
+# Get a list of available packages within a vendor repo
 vpb.util.get_available() {
     vendor="$1"
     if [ -d ${VPB_ROOT}/packages/${vendor} ] ; then
@@ -123,6 +123,9 @@ vpb.util.exec_func() {
 # will return a list containing (in this order) the vendor, package name
 # and path to the package root.
 #
+# If this function fails to resolve a package it will kill execution of the
+# entire process (there is no roll back).
+#
 vpb.util.resolve_package() {
     # Do we have a symlink ?
     if [ -L "$1" ] ; then
@@ -144,8 +147,6 @@ vpb.util.resolve_package() {
         parts="${path#*packages/*}"
         vendor=${parts%%/*}
         package="${parts##*/}"
-
-        echo "$vendor $package $path"
 
         if [ -d "$path" ] ; then
             echo "$vendor $package $path"
@@ -184,8 +185,7 @@ vpb.util.resolve_package() {
         return 0
     fi
 
-    # Could not resolve package
-    return 1
+    die "resolve_package() could not resolve $1"
 }
 
 #
@@ -193,23 +193,20 @@ vpb.util.resolve_package() {
 # Sources the package.sh by default.
 #
 vpb.util.source_package() {
-    package=($(vpb.pkg.resolve "$1"))
+    if package=($(vpb.util.resolve_package "$1")) ; then
 
-    if [ $? = 0 ] ; then
         pkg_vendor=${package[0]}
         pkg_name=${package[1]}
         pkg_path=${package[2]}
 
-        echo "$pkg_vendor $pkg_name $pkg_path"
-
         if [ $# = 2 ] ; then
             if [ -f "${pkg_path}/$2.sh" ] ; then
                 source "${pkg_path}/$2.sh"
+                return 0
             fi
         else
             source "${pkg_path}/package.sh"
+            return 0
         fi
-    else
-        echo "$1 not found"
     fi
 }

@@ -7,21 +7,25 @@
 
 # Disable a package by removing it from .vpb/enabled
 vpb.controller._disable() {
-    if [ -L ${VPB_ROOT}/enabled/"$1" ] ; then
-        rm ${VPB_ROOT}/enabled/"$1"
+    if [ -L "${VPB_ROOT}/enabled/$1" ] ; then
+        rm "${VPB_ROOT}/enabled/$1"
     fi
 }
 
 # Enable a package by linking it into the ./vpb/enabled directory
 vpb.controller._enable() {
-    package="$(vpb.util.resolve_package $1)"
-    if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
-        ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
+    if package=($(vpb.util.resolve_package "$1")) ; then
+
+        pkg_vendor=${package[0]}
+        pkg_name=${package[1]}
+        pkg_path=${package[2]}
+
+        ln -sf "/vagrant/.vpb/packages/${pkg_vendor}/${pkg_name}" "${VPB_ROOT}/enabled/"
+
+        vpb.util.source_package "$pkg_path"
 
         # Once enabled, prompt the user to configure
-        vpb configure "${1}"
-    else
-        warn "${package} not found"
+        vpb configure "${pkg_path}"
     fi
 }
 
@@ -29,23 +33,17 @@ vpb.controller._enable() {
 vpb.controller.provision() {
     vpb.util.exec_hook pre_provision
 
-    for package_path in ${VPB_ROOT}/enabled/* ; do
+    for path in ${VPB_ROOT}/enabled/* ; do
         echo
-        msg "provisioning ${package_path##*/} ... "
+        msg "Provisioning ${path##*/} ... "
 
-        # If any config exists, source it.
-        if [ -f "$package_path/config.sh" ] ; then
-            source "$package_path/config.sh"
-        fi
-
-        # Source the actual package.
-        if [ -f "$package_path/package.sh" ] ; then
-            source "$package_path/package.sh"
-
-            # Execute package specific functions if they are defined.
-            vpb.util.exec_func pre_install
-            vpb.util.exec_func install
-            vpb.util.exec_func post_install
+        if vpb.util.source "$path" config ; then
+            if vpb.util.source "$path" package ; then
+                # Execute package specific functions if they are defined.
+                vpb.util.exec_func pre_install
+                vpb.util.exec_func install
+                vpb.util.exec_func post_install
+            fi
         fi
     done
 
@@ -78,58 +76,61 @@ vpb.controller.enabled() {
 # API end point for vpb._enable. Allows multiple packages to be enabled at once.
 vpb.controller.enable() {
     if [ $# > 1 ] ; then
-        for pkg in "$@" ; do
-            vpb._enable "$pkg"
+        for package in "$@" ; do
+            vpb.controller._enable "$package"
         done
     else
-        vpb._enable "$@"
+        vpb.controller._enable "$@"
     fi
 }
 
 # API end point for vpb._disable. Allows multiple packages to be disabled at once.
 vpb.controller.disable() {
     if [ $# > 1 ] ; then
-        for pkg in "$@" ; do
-            vpb._disable "$pkg"
+        for package in "$@" ; do
+            vpb.controller._disable "$package"
         done
     else
-        vpb._disable "$@"
+        vpb.controller._disable "$@"
     fi
 }
 
 # Configure a package interactively, or by setting individual options
 vpb.controller.configure() {
-    if [ $# = 1 ] ; then
-        # If we are not in not interactive mode see if we can
-        # call the configure function of a package.
-        if [ -z "$VPB_NONINTERACTIVE" ] ; then
-            package="$(vpb.util.resolve_package $1)"
-            # Check to see if a configure function exists in the package file.
-            # We can't just source the file and see if it is defined because this
-            # will potentially trigger provisioning in the older legacy scripts
-            # that have all there code in the global namespace.
-            if grep -q "^configure()" "${VPB_ROOT}/packages/${package}/package.sh" ; then
-                source "${VPB_ROOT}/packages/${package}/package.sh"
-                configure
+    if package=($(vpb.util.resolve_package $1)) ; then
+        if [ $# = 1 ] ; then
+            # If we are not in not interactive mode see if we can
+            # call the configure function of a package.
+            if [ -z "$VPB_NONINTERACTIVE" ] ; then
+
+                pkg_vendor=${package[0]}
+                pkg_name=${package[1]}
+                pkg_path=${package[2]}
+
+                if vpb.pkg.has_configure "$pkg_path" ; then
+                    vpb.util.source_package "$pkg_path" config
+                    if vpb.util.func_exists configure ; then
+                        configure
+                        unset configure
+                    fi
+                fi
             fi
+        elif [ $# = 3 ] ; then
+            # If we are in here, we are trying to set a configure option
+            vpb.pkg.config "$pkg_path" "$2" "$3"
+        else
+            vpb.usage && exit 1
         fi
-    elif [ $# = 3 ] ; then
-        # If we are in here, we are trying to set a configure option
-        package="$1"; option="$2"; value="$3"
-        vpb.pkg.config $package $option $value
-    else
-        vpb.usage && exit 1
     fi
 }
 
 # Fetch a vendor repo via git
 vpb.controller.fetch() {
-    echo $#
     if [ $# = 2 ] ; then
-        if ! [ -d ${VPB_ROOT}/enabled/"$1" ] ; then
-            git clone "$2" ${VPB_ROOT}/packages/"$1"
+        if ! [ -d "${VPB_ROOT}/enabled/$1" ] ; then
+            git clone "$2" "${VPB_ROOT}/packages/$1"
         else
-            warn "$1 already exists"
+            warn "A vendor named $1 already exists"
         fi
     else
         vpb.usage && exit 1
