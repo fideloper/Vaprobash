@@ -22,11 +22,11 @@ vpb() {
     # Source the libs
     . ${VPB_ROOT}/lib/util.sh
     . ${VPB_ROOT}/lib/usage.sh
-    . ${VPB_ROOT}/lib/lib.sh
+    . ${VPB_ROOT}/lib/controller.sh
     . ${VPB_ROOT}/lib/pkg.sh
-    . ${VPB_ROOT}/lib/main.sh
+    . ${VPB_ROOT}/lib/router.sh
 
-    vpb.main $@
+    vpb.router $@
 }
 
 vpb $@

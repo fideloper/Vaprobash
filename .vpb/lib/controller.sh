@@ -5,8 +5,28 @@
 # business logic.
 #
 
+# Disable a package by removing it from .vpb/enabled
+vpb.controller._disable() {
+    if [ -L ${VPB_ROOT}/enabled/"$1" ] ; then
+        rm ${VPB_ROOT}/enabled/"$1"
+    fi
+}
+
+# Enable a package by linking it into the ./vpb/enabled directory
+vpb.controller._enable() {
+    package="$(vpb.util.resolve_package $1)"
+    if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
+        ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
+
+        # Once enabled, prompt the user to configure
+        vpb configure "${1}"
+    else
+        warn "${package} not found"
+    fi
+}
+
 # Provision all enabled packages.
-vpb.provision() {
+vpb.controller.provision() {
     vpb.util.exec_hook pre_provision
 
     for package_path in ${VPB_ROOT}/enabled/* ; do
@@ -35,7 +55,7 @@ vpb.provision() {
 # List available packages by looping through each vedor repo
 # and calling vpb.util.get_available. This takes into account
 # the fact that a package has already been enabled.
-vpb.available() {
+vpb.controller.available() {
     vendors=($(vpb.util.get_vendors))
     for vendor in ${vendors[@]} ; do
         if [[ ${#vendors[@]} > 1 ]] ; then
@@ -51,25 +71,12 @@ vpb.available() {
 }
 
 # List enabled packages
-vpb.enabled() {
+vpb.controller.enabled() {
     col "$(vpb.util.get_enabled)"
 }
 
-# Enable a package by linking it into the ./vpb/enabled directory
-vpb._enable() {
-    package="$(vpb.util.resolve_package $1)"
-    if [ -d ${VPB_ROOT}/packages/"${package}" ] ; then
-        ln -sf /vagrant/.vpb/packages/"${package}" ${VPB_ROOT}/enabled/
-
-        # Once enabled, prompt the user to configure
-        vpb configure "${1}"
-    else
-        warn "${package} not found"
-    fi
-}
-
 # API end point for vpb._enable. Allows multiple packages to be enabled at once.
-vpb.enable() {
+vpb.controller.enable() {
     if [ $# > 1 ] ; then
         for pkg in "$@" ; do
             vpb._enable "$pkg"
@@ -79,15 +86,8 @@ vpb.enable() {
     fi
 }
 
-# Disable a package by removing it from .vpb/enabled
-vpb._disable() {
-    if [ -L ${VPB_ROOT}/enabled/"$1" ] ; then
-        rm ${VPB_ROOT}/enabled/"$1"
-    fi
-}
-
 # API end point for vpb._disable. Allows multiple packages to be disabled at once.
-vpb.disable() {
+vpb.controller.disable() {
     if [ $# > 1 ] ; then
         for pkg in "$@" ; do
             vpb._disable "$pkg"
@@ -98,7 +98,7 @@ vpb.disable() {
 }
 
 # Configure a package interactively, or by setting individual options
-vpb.configure() {
+vpb.controller.configure() {
     if [ $# = 1 ] ; then
         # If we are not in not interactive mode see if we can
         # call the configure function of a package.
@@ -116,14 +116,14 @@ vpb.configure() {
     elif [ $# = 3 ] ; then
         # If we are in here, we are trying to set a configure option
         package="$1"; option="$2"; value="$3"
-        vpb.util.config_option $package $option $value
+        vpb.pkg.config $package $option $value
     else
         vpb.usage && exit 1
     fi
 }
 
 # Fetch a vendor repo via git
-vpb.fetch() {
+vpb.controller.fetch() {
     echo $#
     if [ $# = 2 ] ; then
         if ! [ -d ${VPB_ROOT}/enabled/"$1" ] ; then
@@ -134,4 +134,9 @@ vpb.fetch() {
     else
         vpb.usage && exit 1
     fi
+}
+
+# Display usage
+vpb.controller.usage() {
+    vpb.usage
 }

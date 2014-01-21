@@ -4,7 +4,7 @@
 # requests of to the various actions.
 #
 
-vpb.main() {
+vpb.router() {
     action="$1"
 
     # Remove the action name from the arguments list.
@@ -13,31 +13,31 @@ vpb.main() {
         provision)
             # Safeguard to prevent provisioning the host machine.
             if vpb.util.is_vm ; then
-                vpb.provision
+                vpb.controller.provision
             else
                 warn "provision should not be called from within the host system"
             fi
             ;;
         available)
-            vpb.available
+            vpb.controller.available
             ;;
         enabled)
-            vpb.enabled
+            vpb.controller.enabled
             ;;
         enable)
-            vpb.enable "$@"
+            vpb.controller.enable "$@"
             ;;
         disable)
-            vpb.disable "$@"
+            vpb.controller.disable "$@"
             ;;
         configure)
-            vpb.configure "$@"
+            vpb.controller.configure "$@"
             ;;
         fetch)
-            vpb.fetch "$@"
+            vpb.controller.fetch "$@"
             ;;
         help|*)
-            vpb.usage
+            vpb.controller.usage
             exit 1
             ;;
     esac

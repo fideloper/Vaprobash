@@ -239,7 +239,7 @@ following:
 configure() {
     echo "Please provide a mysql root password: "
     read pw
-    vpb.util.config_option mysql mysql_root_password "$pw"
+    vpb.pkg.config mysql mysql_root_password "$pw"
 }
 ```
 
@@ -248,17 +248,17 @@ command line or when you specifically call `./vpb configure package`
 
 #### The framework
 
-What is this `vpb.util.config_option` used in the above example? This is
+What is this `vpb.pkg.config` used in the above example? This is
 part of the framework provided by vpb. At this stage, there is very little
 available, but the `${VPB_ROOT}/lib/util.sh` script might be of use to those
 interested. All code within vpb is already sourced and available to use within
 your packages.
 
-Oh, but really... what does this `vpb.util.config_option` function do? It writes
+Oh, but really... what does this `vpb.pkg.config` function do? It writes
 a variable to a packages config.sh file.
 
 ```
-vpb.util.config_option <package> <option> <value>
+vpb.pkg.config <package> <option> <value>
 ```
 
 #### What about those of us not using *nix ?
