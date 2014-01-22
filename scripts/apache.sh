@@ -36,8 +36,11 @@ cat > /etc/apache2/conf-available/php5-fpm.conf << EOF
 </IfModule>
 EOF
 sudo a2enconf php5-fpm
+sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
+sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
 
 # Create a virtualhost to start
 sudo vhost -s $1.xip.io -d /vagrant
 
+sudo service php5-fpm restart
 sudo service apache2 restart
