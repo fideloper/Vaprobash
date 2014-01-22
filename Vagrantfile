@@ -13,6 +13,10 @@ mysql_version         = "5.5"    # Options: 5.5 | 5.6
 pgsql_root_password   = "root"   # We'll assume user "root"
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
+composer_packages     = [        # List any global composer packages that you want to install
+  #"phpunit/phpunit:3.7.*",
+  #"codeception/codeception=*"
+]
 
 Vagrant.configure("2") do |config|
 
@@ -146,16 +150,13 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Composer
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh"
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh", privileged: false, args: composer_packages
 
   # Provision Laravel
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: server_ip
 
   # Install Yeoman
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/yeoman.sh", privileged: false
-
-  # Install PHPUnit
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phpunit.sh"
 
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
