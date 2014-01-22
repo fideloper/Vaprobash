@@ -32,7 +32,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?q=\$uri&\$args;
+        try_files \$uri \$uri/ /index.php?\$query_string;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -62,6 +62,11 @@ curl https://gist.github.com/fideloper/8261546/raw/ngxen > ngxen
 curl https://gist.github.com/fideloper/8261546/raw/ngxdis > ngxdis
 sudo chmod guo+x ngxen ngxdis
 sudo mv ngxen ngxdis /usr/local/bin
+
+# setup the vhost generator script for nginx
+sudo cp /vagrant/scripts/nginx_vhost.sh /usr/local/bin/ngxvhost
+sudo chown root:root /usr/local/bin/ngxvhost
+sudo chmod guo+x /usr/local/bin/ngxvhost
 
 # Disable "default", enable "vagrant"
 sudo ngxdis default
