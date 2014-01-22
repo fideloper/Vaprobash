@@ -62,9 +62,9 @@
                     <a href="install-scripts.html#redis" class="list-group-item">Redis</a>
                     <a href="install-scripts.html#beanstalkd" class="list-group-item">Beanstalkd</a>
                     <a href="install-scripts.html#nodejs" class="list-group-item">NodeJS</a>
+                    <a href="install-scripts.html#node_packages" class="list-group-item">NodeJS Packages</a>
                     <a href="install-scripts.html#composer" class="list-group-item">Composer</a>
                     <a href="install-scripts.html#laravel" class="list-group-item">Laravel</a>
-                    <a href="install-scripts.html#yeoman" class="list-group-item">Yeoman</a>
                     <a href="install-scripts.html#phpunit" class="list-group-item">PHPUnit</a>
                     <a href="install-scripts.html#screen" class="list-group-item">Screen</a>
             </aside>
@@ -180,18 +180,29 @@ $ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name</pre
                     <li>Host: <code>localhost</code> (<code>0.0.0.0</code> by default)</li>
                     <li>Port: <code>11300</code> (default)</li>
                 </ul>
+
+
                 <h2>Additional Languages</h2>
                 <h3><a href="install-scripts.html#nodejs" name="nodejs" id="nodejs">#</a> NodeJS</h3>
-                <p>This will install Node.js <code>0.10.*</code>. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).</p>
-                <p class="alert alert-warning">The installation and configuration for NodeJS items is under review for change.</p>
+                <p>By default the latest stable NodeJS will be installed using <a href="https://github.com/creationix/nvm">Node Version Manager</a>. Type <code>$ nvm help</code> in the console/terminal or read <a href="https://github.com/creationix/nvm/blob/master/README.markdown">this</a> for more info on NVM.</p>
+                <p>You can configure the NodeJS version and the Global Node Packages within the Vagrantfile.</p>
+                <pre>nodejs_version = "latest" # <-- latest stable NodeJS version will be installed</pre>
+                <p>It will also set global NPM items to be installed in <code>/home/vagrant/npm/bin</code>.</p>
+
+                <h3><a href="install-scripts.html#node_packages" name="node_packages" id="node_packages">#</a> NodeJS Packages</h3>
+                <p>You can have as many packages installed or choose to not install any packages at all (just comment or delete the lines). Type <code>$ nvm ls-remote</code> to get the full list of available NodeJS versions inside your console/terminal.</p>
+                <pre>nodejs_packages = [ # List any global Node.js modules that you want to install
+  #"grunt-cli",
+  #"bower",
+  "yo",             # "yo" is uncommented and will be installed globally (yeoman.io)
+                    # ... add more packages or delete all packages if you don't want any
+]</pre>
                 <h2>Frameworks and Tooling</h2>
                 <h3><a href="install-scripts.html#composer" name="composer" id="composer">#</a> Composer</h3>
                 <p>This will install composer and make it globally accessible.</p>
                 <h3><a href="install-scripts.html#laravel" name="laravel" id="laravel">#</a> Laravel</h3>
                 <p>This will install a base Laravel (latest stable) project within <code>/vagrant/laravel</code>. It depends on Composer being installed.</p>
                 <p>This will also attempt to change the Apache or Nginx virtual host to point the document root at <code>/vagrant/laravel/public</code>.</p>
-                <h3><a href="install-scripts.html#yeoman" name="yeoman" id="yeoman">#</a> Yeoman</h3>
-                <p>This will install Yeoman globally for you to use in your front-end projects.</p>
                 <h3><a href="install-scripts.html#phpunit" name="phpunit" id="phpunit">#</a> PHPUnit</h3>
                 <p>This will install PHPUnit and make it globally accessible.</p>
                 <h3><a href="install-scripts.html#screen" name="screen" id="screen">#</a> Screen</h3>
