@@ -242,22 +242,21 @@ This will configure Beanstalkd to start when the server boots.
 
 ### NodeJS
 
-NodeJS will be installed using [Node Version Manager](https://github.com/creationix/nvm). Type `nvm help` in the console/terminal or read [this](https://github.com/creationix/nvm/blob/master/README.markdown) for more info on NVM.
+NodeJS will be installed using [Node Version Manager](https://github.com/creationix/nvm). Type `$ nvm help` in the console/terminal or read [this](https://github.com/creationix/nvm/blob/master/README.markdown) for more info on NVM.
 
 You can configure the NodeJS version and the Global Node Packages within the Vagrantfile.
 ```bash
-node_settings = [
-  "latest", # <-- latest stable NodeJS version will be installed
-  # Global Node Packages:
+nodejs_version   = "latest" # By default "latest" will equal the latest stable version
+nodejs_packages  = [        # List any global NodeJS packages that you want to install
   #"grunt-cli",
   #"bower",
-  "yeoman", # This is uncommented and shall be installed globally
+  "yo",                     # This is uncommented and shall be installed globally
   # ... add more packages or delete all packages if you don't want any
 ]
 ```
-You can have as many packages installed or choose to not install any packages at all (just comment or delete the lines). Type `nvm ls-remote` to get the full list of available NodeJS versions inside your console/terminal.
+You can have as many packages installed or choose to not install any packages at all (just comment or delete the lines). Type `$ nvm ls-remote` in the console/terminal to display the full list of available NodeJS versions.
 
-It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
+The script will also set global NPM packages to be installed in `home/vagrant/npm/bin`.
 
 ### RVM/Ruby
 
