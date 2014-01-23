@@ -11,7 +11,7 @@ sudo add-apt-repository -y ppa:nginx/stable
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y nginx php5-fpm
+sudo apt-get install -y nginx
 
 echo ">>> Configuring Nginx"
 
