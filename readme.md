@@ -274,6 +274,14 @@ This will install PHPUnit and make it globally accessible.
 
 This will install Screen on the Vagrant machine.
 
+### Magento
+
+This will install a base Magento project within `/vagrant/magento`.  It depends on Composer and Mysql being installed.
+
+This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/magento/src`.
+
+For Nginx, this will replace the default site configuration with one tailored for Magento.
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:

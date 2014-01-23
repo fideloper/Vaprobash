@@ -104,6 +104,6 @@ if [ $APACHE_IS_INSTALLED -eq 0 ]; then
   # Remove apache vhost from default and create a new one
   rm /etc/apache2/sites-enabled/$1.xip.io.conf > /dev/null 2>&1
   rm /etc/apache2/sites-available/$1.xip.io.conf > /dev/null 2>&1
-  vhost -s $1.xip.io -d /vagrant/magento
+  vhost -s $1.xip.io -d /vagrant/magento/src
   sudo service apache2 reload
 fi
