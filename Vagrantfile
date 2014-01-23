@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "jleplomet"
+github_username = "fideloper"
 github_repo     = "Vaprobash"
 github_branch   = "master"
 
