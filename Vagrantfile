@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
 
   # Provision SQLite
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
-  
+
   # Provision CouchDB
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchdb.sh"
 
@@ -158,5 +158,8 @@ Vagrant.configure("2") do |config|
 
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
+
+  # Install Magento
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/magento.sh"
 
 end
