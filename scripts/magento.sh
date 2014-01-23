@@ -28,9 +28,9 @@ HHVM_IS_INSTALLED=$?
 
 # Create Magento
 if [ $HHVM_IS_INSTALLED -eq 0 ]; then
-  hhvm /usr/local/bin/composer create-project --prefer-dist magetest/magento /vagrant/magento
+  hhvm /usr/local/bin/composer create-project --stability="dev" --keep-vcs --prefer-dist magetest/magento /vagrant/magento
 else
-  composer create-project --prefer-dist magetest/magento /vagrant/magento
+  composer create-project --stability="dev" --keep-vcs --prefer-dist magetest/magento /vagrant/magento
 fi
 
 # Set new document root on Apache or Nginx
@@ -47,7 +47,7 @@ if [ $NGINX_IS_INSTALLED -eq 0 ]; then
 
   cat > /etc/nginx/sites-available/magento << EOF
 server {
-  root /vagrant/magento;
+  root /vagrant/magento/src;
   index index.html index.htm index.php;
 
   # Make site accessible from http://set-ip-address.xip.io

@@ -159,7 +159,7 @@ Vagrant.configure("2") do |config|
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
 
-  # Install Magento
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/magento.sh"
+  # Install Magento - Requires Mysql and Composer
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/magento.sh", args: server_ip
 
 end
