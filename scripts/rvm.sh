@@ -9,16 +9,16 @@ if [[ $RVM_IS_INSTALLED -eq 0 ]]; then
     rvm get stable --ignore-dotfiles
 else
     # Install RVM and install Ruby
-    if [[ -z $1 || $1 -eq "latest" ]]; then
+    if [[ -z $ruby_version || $ruby_version -eq "latest" ]]; then
         echo ">>> Installing Ruby Version Manager and installing latest stable Ruby version"
 
         # Install RVM and install latest stable Ruby version
         \curl -sSL https://get.rvm.io | bash -s stable --ruby
     else
-        echo ">>> Installing Ruby Version Manager and installing Ruby version: $1"
+        echo ">>> Installing Ruby Version Manager and installing Ruby version: $ruby_version"
 
         # Install RVM and install selected Ruby version
-        \curl -sSL https://get.rvm.io | bash -s stable --ruby=$1
+        \curl -sSL https://get.rvm.io | bash -s stable --ruby=$ruby_version
     fi
 
     # Re-source .bash_profile, .zshrc or .bashrc if they exist

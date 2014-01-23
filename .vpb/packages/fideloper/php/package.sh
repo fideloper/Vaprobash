@@ -1,20 +1,14 @@
 #!/usr/bin/env bash
 #
 #
-if [ -z "$1" ]
-  then
-    php_version="distributed"
-else
-    php_version="$1"
-fi
 
 echo ">>> Installing PHP $1 version"
 
-if [ $php_version == "latest" ]; then
+if [ "$php_version" == "latest" ]; then
     sudo add-apt-repository -y ppa:ondrej/php5
 fi
 
-if [ $php_version == "previous" ]; then
+if [ "$php_version" == "previous" ]; then
     sudo add-apt-repository -y ppa:ondrej/php5-oldstable
 fi
 

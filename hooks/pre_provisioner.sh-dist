@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Disable all packages so that they are not provisioned automatically.
+vpb disable all
