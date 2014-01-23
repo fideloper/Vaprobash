@@ -13,9 +13,15 @@ mysql_version         = "5.5"    # Options: 5.5 | 5.6
 pgsql_root_password   = "root"   # We'll assume user "root"
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
-composer_packages     = [        # List any global composer packages that you want to install
+composer_packages     = [        # List any global Composer packages that you want to install
   #"phpunit/phpunit:3.7.*",
-  #"codeception/codeception=*"
+  #"codeception/codeception=*",
+]
+nodejs_version        = "latest" # By default "latest" will equal the latest stable version
+nodejs_packages       = [        # List any global NodeJS packages that you want to install
+  #"grunt-cli",
+  #"bower",
+  #"yo",
 ]
 
 Vagrant.configure("2") do |config|
@@ -139,8 +145,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Install Nodejs
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false
-
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version)
 
   # Install Ruby Version Manager (RVM)
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rvm.sh", privileged: false, args: ruby_version
@@ -154,9 +159,6 @@ Vagrant.configure("2") do |config|
 
   # Provision Laravel
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: server_ip
-
-  # Install Yeoman
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/yeoman.sh", privileged: false
 
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
