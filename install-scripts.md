@@ -1,0 +1,221 @@
+---
+layout: default
+title: Install Scripts
+---
+
+Vaprobash has many install scripts! Here's an overview of each of them.
+
+## Base Items
+
+### <a href="install-scripts.html#base" name="base" id="base">#</a> Base
+
+This installs some basics items.
+
+- Git and this [.gitconfig](https://gist.github.com/fideloper/3751524)
+- ack-grep
+- vim, tmux
+- curl, wget
+- build-essential, python-software-properties
+
+### <a href="install-scripts.html#base" name="php" id="php">#</a> PHP
+
+This will install PHP 5.5 and its common modules. This also install xdebug and sets the following:
+
+```
+xdebug.scream=1
+xdebug.cli_color=1
+xdebug.show_local_vars=1
+```
+
+### <a href="install-scripts.html#ruby" name="ruby" id="ruby">#</a> Ruby
+
+This will install Ruby via RVM. You can decide which version of ruby via the configuration variable found in the Vagrantfile. Default is `latest`.
+
+### <a href="install-scripts.html#oh-my-zsh" name="oh-my-zsh" id="oh-my-zsh">#</a> Oh-My-Zsh
+
+This installs ZSH and runs the [installer for Oh-My-Zsh](https://gist.github.com/tsabat/1498393).
+
+<p class="alert alert-danger">This install may be deleted, as Oh-My-Zsh appears to edit the users PATH variable, causing issues with the installation of other scripts.</p>
+
+### <a href="install-scripts.html#base" name="vim" id="vim">#</a> Vim
+
+This will install a Vim set, including:
+
+- Vundle
+- Bundle 'altercation/vim-colors-solarized'
+- Bundle 'plasticboy/vim-markdown'
+- Bundle 'othree/html5.vim'
+- Bundle 'scrooloose/nerdtree'
+- Bundle 'kien/ctrlp.vim'
+
+See the [.vimrc](https://gist.github.com/fideloper/a335872f476635b582ee) file for more details and configuration.
+
+## Web Servers
+
+### <a href="install-scripts.html#apache" name="apache" id="apache">#</a> Apache
+
+This will install Apache 2.4 and mod_php5. Additionally, this script will use [this vhost bash script](https://gist.github.com/fideloper/2710970) to create a virtualhost for 192.168.33.10.xip.io (or whichever IP address you configure).
+
+<p class="alert alert-warning">In future releases, Apache may be changed to work with php5-fpm rather than mod_php5. This will make switching between Nginx and Apache simpler.</p>
+
+### <a href="install-scripts.html#base" name="hhvm" id="hhvm">#</a> HHVM
+
+This installs HHVM.
+
+<p class="alert alert-warning">This will be modified heavily in the near future, likely to install hhvm-fastcgi rather than simply hhvm. There are also some configuration concerns which needs to be dealt with.</p>
+
+### <a href="install-scripts.html#nginx" name="nginx" id="nginx">#</a> Nginx Base
+
+This will install:
+
+- Nginx 1.4.* (latest stable)
+- PHP 5.5 via php5-fpm
+- [These virtualhost configuration](https://gist.github.com/fideloper/8261546) enable/disable scripts, which works similarly to Apache's `a2ensite` and `a2dissite`.
+
+Similar to the Apache setup, this makes use of [xip.io](http://xip.io), creating a virtual host for the address 192.168.33.10.xip.io (or whatever IP address is configured).
+
+By default, the web root will be in the `/vagrant` directory. You can change this as needed within the `/etc/nginx/sites-available/vagrant` file. Note that the Laravel installation script will change the document root.
+
+To enable or disable an existing site configuration:
+
+```bash
+# Enable a site config:
+$ sudo ngxen example.com
+
+# Disable a site config:
+$ sudo ngxdis example.com
+
+# Reload config after any change:
+$ sudo service nginx reload
+```
+
+## Databases
+
+### <a href="install-scripts.html#couchdb" name="couchdb" id="couchdb">#</a> CouchDB
+
+This will install the CouchDB database.
+
+To create a new database:
+
+```bash
+# Execute this command inside the Vagrant box
+$ curl -X PUT localhost:5984/name_of_new_database
+```
+
+You may access the "Futon" web interface for administering CouchDB at: `http://192.168.33.10:5984/_utils/`
+
+### <a href="install-scripts.html#mysql" name="mysql" id="mysql">#</a> MySQL
+
+This will install the MySQL 5 database.
+
+- Host: `localhost` or `192.168.33.10`
+- Username: `root`
+- Password: `root`
+
+In order to create a new database:
+
+```bash
+# SSH into Vagrant box
+$ vagrant ssh
+
+# Create Database
+# This will ask you to enter your password
+$ mysql -u root -p -e "CREATE DATABASE your_database_name"
+```
+
+### <a href="install-scripts.html#pgsql" name="pgsql" id="pgsql">#</a> PostgreSQL
+
+This will install the PostgreSQL 9.3 database.
+
+- Host: `localhost` or `192.168.33.10`
+- Username: `root`
+- Password: `root`
+
+In order to creat a new database:
+
+```bash
+# SSH into vagrant box
+$ vagrant ssh
+
+# Create new database via user user "postgres"
+# and assign it to user "root"
+$ sudo -u postgres /usr/bin/createdb --echo --owner=root your_database_name
+```
+
+### <a href="install-scripts.html#sqlite" name="sqlite" id="sqlite">#</a> SQLite
+
+This will install the SQLite server. SQLite runs either in-memory (good for unit testing) or file-based.
+
+## In-Memory Stores
+
+### <a href="install-scripts.html#memcached" name="memcached" id="memcached">#</a> Memcached
+
+This will install Memcached, which can be used for things like caching and session storage.
+
+- Host: `localhost`
+- Port `11211` (default)
+
+### <a href="install-scripts.html#redis" name="redis" id="redis">#</a> Redis
+
+This will install Redis (server). There are two options:
+
+- Install without journaling/persistence
+- Install with journaling/persistence
+
+You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
+
+## Utility (queues)
+
+### <a href="install-scripts.html#beanstalkd" name="beanstalkd" id="beanstalkd">#</a> Beanstalkd
+
+This will install the Beanstalkd work queue and configure it to start when the server boots.
+
+- Host: `localhost` (`0.0.0.0` by default)
+- Port: `11300` (default)
+
+## Additional Languages
+
+### <a href="install-scripts.html#nodejs" name="nodejs" id="nodejs">#</a> NodeJS
+
+By default the latest stable NodeJS will be installed using [Node Version Manager](https://github.com/creationix/nvm). Type `$ nvm help` in the console/terminal or read [this](https://github.com/creationix/nvm/blob/master/README.markdown) for more info on NVM.
+
+You can configure the NodeJS version and the Global Node Packages within the Vagrantfile.
+
+```ruby
+nodejs_version = "latest" # <-- latest stable NodeJS version will be installed
+```
+
+It will also set global NPM items to be installed in `/home/vagrant/npm/bin`.
+
+### <a href="install-scripts.html#node_packages" name="node_packages" id="node_packages">#</a> NodeJS Packages
+
+You can have as many packages installed or choose to not install any packages at all (just comment or delete the lines). Type `$ nvm ls-remote` to get the full list of available NodeJS versions inside your console/terminal.
+
+```bash
+nodejs_packages = [ # List any global Node.js modules that you want to install
+    #"grunt-cli",
+    #"bower",
+    "yo",             # "yo" is uncommented and will be installed globally (yeoman.io)
+                      # ... add more packages or delete all packages if you don't want any
+]
+```
+
+## Frameworks and Tooling
+
+### <a href="install-scripts.html#composer" name="composer" id="composer">#</a> Composer
+
+This will install composer and make it globally accessible.
+
+### <a href="install-scripts.html#laravel" name="laravel" id="laravel">#</a> Laravel
+
+This will install a base Laravel (latest stable) project within `/vagrant/laravel`. It depends on Composer being installed.
+
+This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
+
+### <a href="install-scripts.html#phpunit" name="phpunit" id="phpunit">#</a> PHPUnit
+
+This will install PHPUnit and make it globally accessible.
+
+### <a href="install-scripts.html#screen" name="screen" id="screen">#</a> Screen
+
+This will install the Screen terminal multiplexer on the Vagrant VM. A few sensible defaults will be added to the `.screenrc` file.
