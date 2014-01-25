@@ -288,6 +288,10 @@ This will install PHPUnit and make it globally accessible.
 
 This will install Screen on the Vagrant machine.
 
+### MailCatcher
+
+This will install mailcatcher and set the php.ini path to catchmail.
+
 ## The Vagrantfile
 
 The vagrant file does two things you should take note of:
