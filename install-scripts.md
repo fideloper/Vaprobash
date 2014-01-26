@@ -219,3 +219,10 @@ This will install PHPUnit and make it globally accessible.
 ### <a href="install-scripts.html#screen" name="screen" id="screen">#</a> Screen
 
 This will install the Screen terminal multiplexer on the Vagrant VM. A few sensible defaults will be added to the `.screenrc` file.
+
+### <a href="install-scripts.html#mailcatcher" name="mailcatcher" id="mailcatcher">#</a> MailCatcher
+
+This will install [MailCatcher](http://mailcatcher.me) to catch outgoing mail. Sets `php.ini` sendmail path to catchmail.
+
+- MailCatcher frontend at 192.168.33.10.xip.io:1080
+- MailCatcher SMTP at 192.168.33.10.xip.io:1025
