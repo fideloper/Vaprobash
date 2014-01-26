@@ -7,7 +7,6 @@ github_repo     = "Vaprobash"
 github_branch   = "master"
 
 # Some variables
-server_name           = "vaprobash.dev"
 server_ip             = "192.168.33.10"
 mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
@@ -22,7 +21,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Create a hostname, don't forget to put it to the `hosts` file
-  config.vm.hostname :server_name
+  config.vm.hostname = "vaprobash.dev"
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
