@@ -64,9 +64,10 @@ sudo chmod guo+x ngxen ngxdis
 sudo mv ngxen ngxdis /usr/local/bin
 
 # setup the vhost generator script for nginx
-sudo cp /vagrant/scripts/nginx_vhost.sh /usr/local/bin/ngxvhost
-sudo chown root:root /usr/local/bin/ngxvhost
-sudo chmod guo+x /usr/local/bin/ngxvhost
+curl https://raw.github.com/fideloper/Vaprobash/master/scripts/nginx_vhost.sh > ngxvhost
+sudo chown root:root ngxvhost
+sudo chmod guo+x ngxvhost
+sudo mv ngxen ngxvhost /usr/local/bin
 
 # Disable "default", enable "vagrant"
 sudo ngxdis default
