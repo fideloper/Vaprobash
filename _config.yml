@@ -1,3 +1,5 @@
 name: Vaprobash
 markdown: redcarpet
 pygments: true
+destination: _site
+exclude: ['Vagrantfile']
