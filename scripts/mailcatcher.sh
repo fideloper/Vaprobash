@@ -25,6 +25,7 @@ sudo update-rc.d cron defaults
 
 #make php use it to send mail
 sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/cli/php.ini
+sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/fpm/php.ini
 
 #start it now
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
