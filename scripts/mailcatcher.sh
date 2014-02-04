@@ -2,7 +2,7 @@
 
 echo ">>> Installing Mailcatcher"
 
-#dependancy
+#dependency
 sudo apt-get install -y libsqlite3-dev
 
 
@@ -24,7 +24,10 @@ sudo echo "@reboot $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
 sudo update-rc.d cron defaults
 
 #make php use it to send mail
-sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/cli/php.ini
+sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/mods-available/mailcatcher.ini
+sudo php5enmod mailcatcher
+sudo service php5-fpm restart
+sudo service apache2 restart
 
 #start it now
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
