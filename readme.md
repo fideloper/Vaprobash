@@ -47,6 +47,10 @@ Here's a quickstart screencast!
 
 [<img src="https://secure-b.vimeocdn.com/ts/463/341/463341369_960.jpg" alt="Vaprobash Quickstart" style="max-width:100%"/>](http://vimeo.com/fideloper/vaprobash-quickstart)
 
+## Windows Users
+
+You will likely not be able to use NFS for sharing files. If you delete the 4 lines for `config.vm.synced_folder`, Vagrant will default back to its usual Windows-friendly file sharing.
+
 ## Install Scripts
 
 The following setups are installable via the separate bash scripts of this repository.
