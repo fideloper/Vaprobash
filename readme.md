@@ -280,6 +280,10 @@ This will also attempt to change the Apache or Nginx virtual host to point the d
 
 This will install Yeoman globally for you to use in your front-end projects.
 
+### Gems
+
+This will install all gems that you have listed in the `global_gems` array at the top of the Vagrantfile.
+
 ### PHPUnit
 
 This will install PHPUnit and make it globally accessible.

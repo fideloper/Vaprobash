@@ -24,6 +24,12 @@ nodejs_packages       = [        # List any global NodeJS packages that you want
   #"yo",
 ]
 
+# List of Gems to install globally
+global_gems = [
+  "compass",
+  "bundler",
+]
+
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
@@ -171,5 +177,8 @@ Vagrant.configure("2") do |config|
 
   # Install Mailcatcher (configures php.ini to use catchmail)
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mailcatcher.sh"
+
+  # Install Gems
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/gems.sh", args: global_gems
 
 end
