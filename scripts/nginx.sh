@@ -57,6 +57,9 @@ server {
 }
 EOF
 
+# Turn off sendfile to be more compatible with Windows, which can't use NFS
+sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
+
 # Nginx enabling and disabling virtual hosts
 curl https://gist.github.com/fideloper/8261546/raw/ngxen > ngxen
 curl https://gist.github.com/fideloper/8261546/raw/ngxdis > ngxdis
