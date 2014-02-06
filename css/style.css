@@ -47,6 +47,14 @@ body {
     padding-left: 35px;
 }
 
+.navbar-toggle .icon-bar {
+    background-color: #2a6496;
+}
+
+.navbar-toggle:hover {
+    background-color: #f5f5f5;
+}
+
 #install-scripts h2 {
     margin-top: 40px;
     border-bottom: 1px solid #ccc;

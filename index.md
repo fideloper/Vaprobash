@@ -31,4 +31,4 @@ config.vm.provision "shell", path: "...", args: server_ip
 
 ```bash
 $ vagrant up
-```        
+```
