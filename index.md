@@ -32,3 +32,14 @@ config.vm.provision "shell", path: "...", args: server_ip
 ```bash
 $ vagrant up
 ```
+
+## Screencasts
+
+### Quickstart
+<iframe src="//player.vimeo.com/video/85876881" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/85876881">Vaprobash Quickstart</a> from <a href="http://vimeo.com/fideloper">Chris Fidao</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+### Apache Virtual Hosts Configuration
+<iframe src="//player.vimeo.com/video/85983902" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/85983902">Apache Virtual Hosts with Vaprobash</a> from <a href="http://vimeo.com/fideloper">Chris Fidao</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+### Laravel with Vaprobash
+<iframe src="//player.vimeo.com/video/85984418" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/85984418">Laravel with Vaprobash</a> from <a href="http://vimeo.com/fideloper">Chris Fidao</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
