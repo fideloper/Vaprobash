@@ -11,7 +11,7 @@ sudo add-apt-repository -y ppa:nginx/stable
 sudo apt-get update
 
 # Install the Rest
-sudo apt-get install -y nginx php5-fpm
+sudo apt-get install -y nginx
 
 echo ">>> Configuring Nginx"
 
@@ -57,19 +57,26 @@ server {
 }
 EOF
 
+# Turn off sendfile to be more compatible with Windows, which can't use NFS
+sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
+
 # Nginx enabling and disabling virtual hosts
 curl https://gist.github.com/fideloper/8261546/raw/ngxen > ngxen
 curl https://gist.github.com/fideloper/8261546/raw/ngxdis > ngxdis
 sudo chmod guo+x ngxen ngxdis
 sudo mv ngxen ngxdis /usr/local/bin
 
+# setup the vhost generator script for nginx
+curl https://raw.github.com/fideloper/Vaprobash/master/scripts/nginx_vhost.sh > ngxvhost
+sudo chown root:root ngxvhost
+sudo chmod guo+x ngxvhost
+sudo mv ngxen ngxvhost /usr/local/bin
+
 # Disable "default", enable "vagrant"
 sudo ngxdis default
 sudo ngxen vagrant
 
 # PHP Config for Nginx
-sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
-sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
 sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
 sudo service php5-fpm restart

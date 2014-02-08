@@ -31,13 +31,9 @@ $ wget -O Vagrantfile http://bit.ly/vaprobash
 
 > The `bit.ly` link will always point to the master branch version of the Vagrantfile.
 
-![Download the Vagranfile](https://f.cloud.github.com/assets/467411/1820040/62253bd6-70ca-11e3-8b4b-d11d5b425d10.png)
-
 **Second**, edit the `Vagrantfile` and uncomment which scripts you'd like to run. You can uncomment them by removing the `#` character before the `config.vm.provision` line.
 
 > You can indeed have [multiple provisioning](http://docs.vagrantup.com/v2/provisioning/basic_usage.html) scripts when provisioning Vagrant.
-
-![Edit the Vagranfile](https://f.cloud.github.com/assets/467411/1820039/62225f1a-70ca-11e3-8977-d82e1bac3931.png)
 
 **Third** and finally, run:
 
@@ -45,7 +41,15 @@ $ wget -O Vagrantfile http://bit.ly/vaprobash
 $ vagrant up
 ```
 
-![Provision the Vagrant Server](https://f.cloud.github.com/assets/467411/1820038/62204842-70ca-11e3-9954-36260bf692d6.png)
+**Screencast**
+
+Here's a quickstart screencast!
+
+[<img src="https://secure-b.vimeocdn.com/ts/463/341/463341369_960.jpg" alt="Vaprobash Quickstart" style="max-width:100%"/>](http://vimeo.com/fideloper/vaprobash-quickstart)
+
+> <strong>Windows Users:</strong>
+>
+>You will likely not be able to use NFS for sharing files. If you delete the 4 lines for `config.vm.synced_folder`, Vagrant will default back to its usual Windows-friendly file sharing.
 
 ## Install Scripts
 
@@ -242,7 +246,21 @@ This will configure Beanstalkd to start when the server boots.
 
 ### NodeJS
 
-This will install Node.js `0.10.*`. It will also set global NPM items to be installed in ~/npm/bin (/home/vagrant/npm/bin).
+NodeJS will be installed using [Node Version Manager](https://github.com/creationix/nvm). Type `$ nvm help` in the console/terminal or read [this](https://github.com/creationix/nvm/blob/master/README.markdown) for more info on NVM.
+
+You can configure the NodeJS version and the Global Node Packages within the Vagrantfile.
+```bash
+nodejs_version   = "latest" # By default "latest" will equal the latest stable version
+nodejs_packages  = [        # List any global NodeJS packages that you want to install
+  #"grunt-cli",
+  #"bower",
+  "yo",                     # This is uncommented and shall be installed globally
+  # ... add more packages or delete all packages if you don't want any
+]
+```
+You can have as many packages installed or choose to not install any packages at all (just comment or delete the lines). Type `$ nvm ls-remote` in the console/terminal to display the full list of available NodeJS versions.
+
+The script will also set global NPM packages to be installed in `home/vagrant/npm/bin`.
 
 ### RVM/Ruby
 
@@ -273,6 +291,10 @@ This will install PHPUnit and make it globally accessible.
 ### Screen
 
 This will install Screen on the Vagrant machine.
+
+### MailCatcher
+
+This will install mailcatcher and set the php.ini path to catchmail.
 
 ### Xdebug debugging
 
