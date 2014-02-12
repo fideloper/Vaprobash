@@ -56,10 +56,10 @@ Vagrant.configure("2") do |config|
 
     vb.customize ["modifyvm", :id, "--memory", "384"]
 
-		# Set the timesync threshold to 10 seconds, instead of the default 20 minutes.
-		# If the clock gets more than 15 minutes out of sync (due to your laptop going
-		# to sleep for instance, then some 3rd party services will reject requests.
-		vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
+    # Set the timesync threshold to 10 seconds, instead of the default 20 minutes.
+    # If the clock gets more than 15 minutes out of sync (due to your laptop going
+    # to sleep for instance, then some 3rd party services will reject requests.
+    vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
 
   end
 
