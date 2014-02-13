@@ -24,8 +24,9 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"phpunit/phpunit:3.7.*",
   #"codeception/codeception=*",
 ]
-nodejs_version        = "latest" # By default "latest" will equal the latest stable version
-nodejs_packages       = [        # List any global NodeJS packages that you want to install
+laravel_root_folder   = "/laravel" # If you want to install on root folder, leave it blank: ""
+nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
+nodejs_packages       = [          # List any global NodeJS packages that you want to install
   #"grunt-cli",
   #"bower",
   #"yo",
@@ -170,7 +171,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh", privileged: false, args: composer_packages
 
   # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: server_ip
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: [server_ip, laravel_root_folder]
 
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
