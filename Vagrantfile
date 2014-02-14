@@ -37,6 +37,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "precise64"
 
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # If using VMWare Fusion Provider:
+  # config.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
 
   # Create a hostname, don't forget to put it to the `hosts` file
   config.vm.hostname = "vaprobash.dev"
