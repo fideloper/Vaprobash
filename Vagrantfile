@@ -64,6 +64,13 @@ Vagrant.configure("2") do |config|
     vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
 
   end
+  
+  # If using VMWare Fusion
+  config.vm.provider :vmware_fusion do |vb|
+
+    v.vmx["memsize"] = "384"
+
+  end
 
   ####
   # Base Items
