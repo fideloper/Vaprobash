@@ -68,7 +68,7 @@ Vagrant.configure("2") do |config|
   # If using VMWare Fusion
   config.vm.provider :vmware_fusion do |vb|
 
-    v.vmx["memsize"] = "384"
+    vb.vmx["memsize"] = "384"
 
   end
 
