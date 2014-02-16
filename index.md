@@ -33,6 +33,12 @@ config.vm.provision "shell", path: "...", args: server_ip
 $ vagrant up
 ```
 
+## Requirements
+
+* Vagrant `1.4.3`
+	* You can check your vagrant version by running `vagrant -v` in your terminal
+* VirtualBox or VMWare Fusion
+
 ## Screencasts
 
 ### Quickstart
