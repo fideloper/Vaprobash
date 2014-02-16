@@ -4,6 +4,8 @@
 
 [View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
 
+[![Build Status](https://travis-ci.org/fideloper/Vaprobash.png?branch=master)](https://travis-ci.org/fideloper/Vaprobash)
+
 ## Goal
 
 The goal of this project is to create easy to use bash scripts in order to provision a Vagrant server.
