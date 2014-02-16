@@ -4,7 +4,7 @@ echo ">>> Installing Laravel"
 
 [[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
 
-if [ -z "$2" ] then
+if [ -z "$2" ]; then
     laravel_root_folder="/vagrant/laravel"
 else
     laravel_root_folder="$2"
