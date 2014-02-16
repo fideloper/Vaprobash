@@ -17,6 +17,12 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 * If other OSes need to be used (CentOS, Redhat, Arch, etc).
 * If dependency management becomes complex. For example, installing Laravel depends on Composer. Setting a document root for a project will change depending on Nginx or Apache. Currently, these dependencies are accounted for, but more advanced dependencies will likely not be.
 
+## Dependencies
+
+* Vagrant `1.4.3`+
+    * Use `vagrant -v` to check your version
+* Vitualbox or VMWare Fusion
+
 ## Instructions
 
 **First**, Copy the Vagrantfile from this repo. You may wish to use curl or wget to do this instead of cloning the repository.
