@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 #
 #
-if [ -z "$1" ]
-  then
+if [ -z "$1" ] then
     php_version="distributed"
 else
     php_version="$1"
