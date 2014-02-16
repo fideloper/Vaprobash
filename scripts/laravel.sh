@@ -7,7 +7,7 @@ echo ">>> Installing Laravel"
 if [ -z "$2" ] then
     laravel_root_folder="/vagrant/laravel"
 else
-    laravel_root_folder="/vagrant$2"
+    laravel_root_folder="$2"
 fi
 
 # Test if Composer is installed
@@ -35,7 +35,7 @@ if [ ! -d $laravel_root_folder ]; then
     mkdir -p $laravel_root_folder
 fi
 
-if [ ! -f $laravel_root_folder/composer.json ]; then
+if [ ! -f "$laravel_root_folder/composer.json" ]; then
     # Create Laravel
     if [ $HHVM_IS_INSTALLED -eq 0 ]; then
         hhvm /usr/local/bin/composer create-project --prefer-dist laravel/laravel $laravel_root_folder

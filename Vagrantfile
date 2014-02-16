@@ -6,13 +6,17 @@ github_username = "fideloper"
 github_repo     = "Vaprobash"
 github_branch   = "master"
 
-# Some variables
+# Server Configuration
 server_ip             = "192.168.33.10"
+
+# Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 pgsql_root_password   = "root"   # We'll assume user "root"
 mariadb_version       = "10.0"   # Options: 5.5 | 10.0
 mariadb_root_password = "root"   # We'll assume user "root"
+
+# Languages and Packages
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
   #"jekyll",
@@ -24,7 +28,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"phpunit/phpunit:3.7.*",
   #"codeception/codeception=*",
 ]
-laravel_root_folder   = "/laravel" # If you want to install on root folder, leave it blank: ""
+laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
   #"grunt-cli",
