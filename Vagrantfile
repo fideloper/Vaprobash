@@ -204,4 +204,6 @@ Vagrant.configure("2") do |config|
   # Install Mailcatcher
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mailcatcher.sh"
 
+  echo "Vaprobash is finished!";
+  
 end
