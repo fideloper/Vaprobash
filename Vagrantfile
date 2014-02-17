@@ -29,6 +29,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"codeception/codeception=*",
 ]
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
+symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony. 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
   #"grunt-cli",
@@ -191,6 +192,9 @@ Vagrant.configure("2") do |config|
   # Provision Laravel
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: [server_ip, laravel_root_folder]
 
+  # Provision Symfony
+  # config.vm.provision "shell", path: "scripts/symfony.sh", args: [server_ip, symfony_root_folder]
+
   # Install Screen
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
 
@@ -199,5 +203,5 @@ Vagrant.configure("2") do |config|
 
   # Install Mailcatcher
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mailcatcher.sh"
-
+  
 end
