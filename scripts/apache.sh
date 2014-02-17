@@ -22,11 +22,6 @@ curl https://gist.github.com/fideloper/2710970/raw/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
-# Create *.xip.io self-signed certificates
-curl https://gist.github.com/fideloper/9052820/raw/create_ssl.sh > create_ssh.sh
-sudo bash create_ssl.sh
-sudo rm create_ssl.sh
-
 # Create a virtualhost to start, with SSL certificate
 sudo vhost -s $1.xip.io -d /vagrant -c /etc/ssl/xip.io
 
