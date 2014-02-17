@@ -110,7 +110,7 @@ This will install:
 * PHP 5.5 mod_php5
 * [This vhost](https://gist.github.com/fideloper/2710970) bash script is installed to get you started with setting up a virtual host. This will make use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
-By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel installation script will change the document root.
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel and Symfony installation script will change the document root.
 
 To create a new virtual host:
 
@@ -137,7 +137,7 @@ This will install:
 
 This makes use of [xip.io](http://xip.io), creating a virtual host for [192.168.33.10.xip.io](192.168.33.10.xip.io).
 
-By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel installation script will change the document root.
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/nginx/sites-available/vagrant`). The Laravel and Symfony installation script will change the document root.
 
 To enable or disable a site configuration (note that `vhost` above creates a new configuration. Below only shows enabling or disabling a site configuration):
 
@@ -288,6 +288,12 @@ This will install a base Laravel (latest stable) project within `/vagrant/larave
 
 This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
 
+### Symfony
+
+This will install a base Symfony (latest stable) project within `/vagrant/symfony`. It depends on Composer being installed.
+
+This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/symfony/web`.
+
 ### Yeoman
 
 This will install Yeoman globally for you to use in your front-end projects.
@@ -308,7 +314,7 @@ This will install mailcatcher and set the php.ini path to catchmail.
 
 The vagrant file does two things you should take note of:
 
-1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel installers. This static IP allows us to use xip.io for the virtual host setups while avoiding having to edit our computers' `hosts` file.
+1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel/Symfony installers. This static IP allows us to use xip.io for the virtual host setups while avoiding having to edit our computers' `hosts` file.
 2. **Uses NFS instead of the default file syncing.** NFS is reportedly faster than the default syncing for large files. If, however, you experience issues with the files actually syncing between your host and virtual machine, you can change this to the default syncing by deleting the lines setting up NFS:
 
 ```bash
