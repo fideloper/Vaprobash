@@ -23,7 +23,7 @@ server {
     listen  80;
 
     root /vagrant;
-    index index.html index.htm index.php;
+    index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
     server_name $1.xip.io;
@@ -34,7 +34,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files \$uri \$uri/ /app.php?\$query_string /index.php?\$query_string;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -66,7 +66,7 @@ server {
     ssl_certificate_key /etc/ssl/xip.io/xip.io.key;
 
     root /vagrant;
-    index index.html index.htm index.php;
+    index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
     server_name $1.xip.io;
@@ -77,7 +77,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files \$uri \$uri/ /app.php?\$query_string /index.php?\$query_string;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
