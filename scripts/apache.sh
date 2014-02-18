@@ -23,7 +23,7 @@ sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
 # Create a virtualhost to start, with SSL certificate
-sudo vhost -s $1.xip.io -d /vagrant -c /etc/ssl/xip.io
+sudo vhost -s $1.xip.io -d /vagrant -p /etc/ssl/xip.io -c xip.io
 
 # PHP Config for Apache
 cat > /etc/apache2/conf-available/php5-fpm.conf << EOF
