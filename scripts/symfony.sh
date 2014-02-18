@@ -10,6 +10,8 @@ else
     symfony_root_folder="$2"
 fi
 
+server_ip = server_ip
+
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?
@@ -52,6 +54,12 @@ else
     else
         composer install --prefer-dist
     fi
+
+    chmod -R 775 app/cache
+    chmod -R 775 app/logs
+
+    sed -i "s/'127.0.0.1',/'127.0.0.1','$server_ip',)/" web/app_dev.php
+    sed -i "s/'127.0.0.1',/'127.0.0.1','$server_ip',)/" web/config.php
 
     # Go to the previous folder
     cd -
