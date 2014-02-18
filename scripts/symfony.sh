@@ -55,8 +55,8 @@ else
         composer install --prefer-dist
     fi
 
-    chmod -R 775 app/cache
-    chmod -R 775 app/logs
+    sudo chmod -R 775 app/cache
+    sudo chmod -R 775 app/logs
 
     sed -i "s/'127.0.0.1',/'127.0.0.1', '$server_ip',/" web/app_dev.php
     sed -i "s/'127.0.0.1',/'127.0.0.1', '$server_ip',/" web/config.php
