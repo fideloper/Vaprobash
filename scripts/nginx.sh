@@ -67,7 +67,7 @@ sudo chmod guo+x ngxen ngxdis
 sudo mv ngxen ngxdis /usr/local/bin
 
 # setup the vhost generator script for nginx
-curl https://raw.github.com/fideloper/Vaprobash/master/scripts/nginx_vhost.sh > ngxvhost
+curl https://gist.github.com/fideloper/9063376/raw > ngxvhost
 sudo chown root:root ngxvhost
 sudo chmod guo+x ngxvhost
 sudo mv ngxen ngxvhost /usr/local/bin
