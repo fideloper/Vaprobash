@@ -10,7 +10,7 @@ else
     symfony_root_folder="$2"
 fi
 
-server_ip = server_ip
+server_ip = "$1"
 
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
