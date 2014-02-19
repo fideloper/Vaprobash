@@ -34,8 +34,8 @@ sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
 
 # PHP Date Timezone
-sed -i "s/;date.timezone =.*/date.timezone = $2/" /etc/php5/fpm/php.ini
-sed -i "s/;date.timezone =.*/date.timezone = $2/" /etc/php5/cli/php.ini
+sed -i "s/;date.timezone =.*/date.timezone = ${2/\//\\/}/" /etc/php5/fpm/php.ini
+sed -i "s/;date.timezone =.*/date.timezone = ${2/\//\\/}/" /etc/php5/cli/php.ini
 
 # Make sure php5-fpm is running as a Unix socket on "distributed" version
 if [ $php_version == "distributed" ]; then
