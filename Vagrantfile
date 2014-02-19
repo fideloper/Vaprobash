@@ -8,6 +8,7 @@ github_branch   = "master"
 
 # Server Configuration
 server_ip             = "192.168.33.10"
+server_memory         = "384" # MB
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
@@ -58,11 +59,11 @@ Vagrant.configure("2") do |config|
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
 
-  # Optionally customize amount of RAM
-  # allocated to the VM. Default is 384MB
+  # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.customize ["modifyvm", :id, "--memory", "384"]
+    # Set server memory
+    vb.customize ["modifyvm", :id, "--memory", server_memory]
 
     # Set the timesync threshold to 10 seconds, instead of the default 20 minutes.
     # If the clock gets more than 15 minutes out of sync (due to your laptop going
@@ -74,7 +75,8 @@ Vagrant.configure("2") do |config|
   # If using VMWare Fusion
   config.vm.provider :vmware_fusion do |vb|
 
-    vb.vmx["memsize"] = "384"
+    # Set server memory
+    vb.vmx["memsize"] = server_memory
 
   end
 
