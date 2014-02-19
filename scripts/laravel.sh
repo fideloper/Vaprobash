@@ -48,9 +48,9 @@ else
 
     # Install Laravel
     if [ $HHVM_IS_INSTALLED -eq 0 ]; then
-        hhvm /usr/local/bin/composer install --prefer-dist
+        hhvm /usr/local/bin/composer install --prefer-dist --dev --optimize-autoloader
     else
-        composer install --prefer-dist
+        composer install --prefer-dist --dev --optimize-autoloader
     fi
 
     # Go to the previous folder
