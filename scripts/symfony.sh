@@ -10,8 +10,8 @@ else
     symfony_root_folder="$2"
 fi
 
-server_ip="$1"
-host_ip=`echo $server_ip | sed 's/\.[0-9]*$/.1/'`
+# The host ip is same as guest ip with last octet equal to 1
+host_ip=`echo $1 | sed 's/\.[0-9]*$/.1/'`
 
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
