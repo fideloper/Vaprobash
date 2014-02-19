@@ -165,7 +165,7 @@ Vagrant.configure("2") do |config|
 
 
   ####
-  # Utiliy (queue)
+  # Utility (queue)
   ##########
 
   # Install Beanstalkd
