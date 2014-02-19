@@ -8,6 +8,7 @@ github_branch   = "master"
 
 # Server Configuration
 server_ip             = "192.168.33.10"
+server_timezone       = "America/Los_Angeles"
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
@@ -86,7 +87,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: php_version
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
 
   # Provision Oh-My-Zsh
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/zsh.sh"
