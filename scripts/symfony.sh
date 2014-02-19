@@ -11,7 +11,7 @@ else
 fi
 
 server_ip = "$1"
-host_ip=echo $server_ip | sed 's/\.[0-9]*$/.1/'
+host_ip = echo $server_ip | sed 's/\.[0-9]*$/.1/'
 
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
@@ -58,6 +58,7 @@ else
 
     sudo chmod -R 775 app/cache
     sudo chmod -R 775 app/logs
+    sudo chmod -R 775 app/console
 
     sed -i "s/'127.0.0.1',/'127.0.0.1', '$host_ip',/" web/app_dev.php
     sed -i "s/'127.0.0.1',/'127.0.0.1', '$host_ip',/" web/config.php
