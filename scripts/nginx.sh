@@ -43,13 +43,17 @@ server {
     error_page 404 /index.php;
 
     # pass the PHP scripts to php5-fpm
-    location ~ \.php$ {
+    # regex protects from file upload attacks
+    location ~ ^/(index|app|app_dev|config)\.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
+        # 'include' must precede 'fastcgi_param's
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param LARA_ENV local; # Environment variable for Laravel
+        fastcgi_param HTTPS off;
     }
 
     # Deny .htaccess file access
@@ -86,13 +90,17 @@ server {
     error_page 404 /index.php;
 
     # pass the PHP scripts to php5-fpm
-    location ~ \.php$ {
+    # regex protects from file upload attacks
+    location ~ ^/(index|app|app_dev|config)\.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
+        # 'include' must precede 'fastcgi_param's
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param LARA_ENV local; # Environment variable for Laravel
+        fastcgi_param HTTPS on;
     }
 
     # Deny .htaccess file access
