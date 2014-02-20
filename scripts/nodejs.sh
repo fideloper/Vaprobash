@@ -29,16 +29,13 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Node Version Manager"
 
     # Install NVM
-    curl https://gist.github.com/Ilyes512/8335484/raw/nvm_install.sh | sh
+    curl https://gist.githubusercontent.com/Ilyes512/8335484/raw/nvm_install.sh | sh
 
-    # Re-source .bash_profile and .zshrc if they exist
-    if [[ -f "/home/vagrant/.bash_profile" ]]; then
-        . /home/vagrant/.bash_profile
-    fi
+    # Re-source .bash_profile
+    . /home/vagrant/.bash_profile
 
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
-        . /home/vagrant/.zshrc
-    fi
+    # Re-source .zshrc
+    . /home/vagrant/.zshrc
 
     echo ">>> Installing Node.js version $NODEJS_VERSION"
     echo "    This will also be set as the default node version"
@@ -61,22 +58,17 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     # Change where npm global packages are located
     npm config set prefix /home/vagrant/npm
 
-    # Re-source .bash_profile and .zshrc if they exist
-    if [[ -f "/home/vagrant/.bash_profile" ]]; then
-        # Add new NPM Global Packages location to PATH
-        printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> /home/vagrant/.bash_profile
+    # Add new NPM Global Packages location to PATH (.bash_profile)
+    printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> /home/vagrant/.bash_profile
 
-        # Add new NPM root to NODE_PATH
-        printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.bash_profile
-    fi
+    # Add new NPM root to NODE_PATH (.bash_profile)
+    printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.bash_profile
 
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
-        # Add new NPM Global Packages location to PATH
-        printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> /home/vagrant/.zshrc
+    # Add new NPM Global Packages location to PATH (.zshrc)
+    printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> /home/vagrant/.zshrc
 
-        # Add new NPM root to NODE_PATH
-        printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.zshrc
-    fi
+    # Add new NPM root to NODE_PATH (.zshrc)
+    printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.zshrc
 
 fi
 
