@@ -8,9 +8,9 @@ COUCHBASE_VERSION=2.2.0 # Check http://http://www.couchbase.com/download/ for la
 COUCHBASE_ARCH=x86_64
 
 
-wget http://packages.couchbase.com/releases/$COUCHBASE_VERSION/couchbase-server-$COUCHBASE_EDITION_$COUCHBASE_VERSION_$COUCHBASE_ARCH.deb
-sudo dpkg -i couchbase-server-$COUCHBASE_EDITION_$COUCHBASE_VERSION_$COUCHBASE_ARCH.deb
-rm couchbase-server-$COUCHBASE_EDITION_$COUCHBASE_VERSION_$COUCHBASE_ARCH.deb
+wget http://packages.couchbase.com/releases/${COUCHBASE_VERSION}/couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
+sudo dpkg -i couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
+rm couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
 
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
@@ -18,10 +18,17 @@ PHP_IS_INSTALLED=$?
 dpkg -s php-pear
 PEAR_IS_INSTALLED=$?
 
-if [ $PHP_IS_INSTALLED -eq 0 ]; then
+dpkg -s php5-dev
+PHPDEV_IS_INSTALLED=$?
 
-    if [ $PEAR_IS_INSTALLED -eq 1 ]; then
+if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
+
+    if [ ${PEAR_IS_INSTALLED} -eq 1 ]; then
         sudo apt-get install php-pear
+    fi
+
+    if [ ${PHPDEV_IS_INSTALLED} -eq 1 ]; then
+        sudo apt-get install php5-dev
     fi
 
     sudo wget -O/etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1204.list
@@ -34,3 +41,4 @@ if [ $PHP_IS_INSTALLED -eq 0 ]; then
     sudo service php5-fpm restart
 fi
 
+# todo - optionally install elasticsearch plugin
