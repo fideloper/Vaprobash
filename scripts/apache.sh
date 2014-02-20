@@ -18,7 +18,7 @@ echo ">>> Configuring Apache"
 
 # Apache Config
 sudo a2enmod rewrite actions ssl
-curl https://gist.githubusercontent.com/fideloper/2710970/raw/vhost.sh > vhost
+curl -L https://gist.githubusercontent.com/fideloper/2710970/raw/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
