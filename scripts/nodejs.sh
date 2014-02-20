@@ -29,7 +29,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Node Version Manager"
 
     # Install NVM
-    curl https://gist.githubusercontent.com/Ilyes512/8335484/raw/nvm_install.sh | sh
+    curl -L https://gist.githubusercontent.com/Ilyes512/8335484/raw/nvm_install.sh | sh
 
     # Re-source .bash_profile
     . /home/vagrant/.bash_profile
