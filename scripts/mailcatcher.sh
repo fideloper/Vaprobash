@@ -31,19 +31,4 @@ sudo service apache2 restart
 
 #start it now
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
-
-#add aliases
-if [[ -f "/home/vagrant/.bash_profile" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.bash_profile
-	. /home/vagrant/.bash_profile
-fi
-
-if [[ -f "/home/vagrant/.zshrc" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.zshrc
-	. /home/vagrant/.zshrc
-fi
-
-if [[ -f "/home/vagrant/.bashrc" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.bashrc
-	. /home/vagrant/.bashrc
-fi
+echo ">>>> Mailcatcher is running, use mailcatcher --ip=0.0.0.0 to start it in the future"
