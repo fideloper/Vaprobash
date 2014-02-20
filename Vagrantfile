@@ -30,7 +30,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"codeception/codeception=*",
 ]
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
-symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony. 
+symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
   #"grunt-cli",
@@ -71,7 +71,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
 
   end
-  
+
   # If using VMWare Fusion
   config.vm.provider :vmware_fusion do |vb|
 
@@ -205,5 +205,5 @@ Vagrant.configure("2") do |config|
 
   # Install Mailcatcher
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mailcatcher.sh"
-  
+
 end
