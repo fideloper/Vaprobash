@@ -24,21 +24,20 @@ PHPDEV_IS_INSTALLED=$?
 if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
 
     if [ ${PEAR_IS_INSTALLED} -eq 1 ]; then
-        sudo apt-get install php-pear
+        sudo apt-get -y install php-pear
     fi
 
     if [ ${PHPDEV_IS_INSTALLED} -eq 1 ]; then
-        sudo apt-get install php5-dev
+        sudo apt-get -y install php5-dev
     fi
 
     sudo wget -O/etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1204.list
     wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
     sudo apt-get update
-    sudo apt-get install libcouchbase2-libevent libcouchbase-dev
+    sudo apt-get -y install libcouchbase2-libevent libcouchbase-dev
 
     sudo pecl install couchbase
-    echo "extension=couchbase.so" >> /etc/php5/fpm/php.ini
+    sudo echo "extension=couchbase.so" >> /etc/php5/fpm/php.ini
+    sudo echo "extension=couchbase.so" >> /etc/php5/cli/php.ini
     sudo service php5-fpm restart
 fi
-
-# todo - optionally install elasticsearch plugin
