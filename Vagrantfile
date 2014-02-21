@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
     # If the clock gets more than 15 minutes out of sync (due to your laptop going
     # to sleep for instance, then some 3rd party services will reject requests.
     vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
-    
+
     # Prevent VMs running on Ubuntu to lose internet connection
     # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
@@ -112,10 +112,8 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: server_ip
 
   # Provision HHVM
-  #Install HHVM
+  #Install HHVM & HHVM-FastCGI
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
-  #Install HHVM fast-cgi
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvmfastcgi.sh"
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: server_ip
