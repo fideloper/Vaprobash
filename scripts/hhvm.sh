@@ -13,4 +13,5 @@ sudo apt-get update
 #sudo apt-get -y install hhvm
 
 #install HHVM Fastcgi
-$ sudo apt-get install -y --force-yes hhvm-fastcgi
+sudo apt-get install -y --force-yes hhvm-fastcgi
+
