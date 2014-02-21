@@ -16,4 +16,3 @@ sudo sed -i 's=:/bin:=:/bin:/sbin:=' /home/vagrant/.zshrc
 
 # Change vagrant user's default shell
 chsh vagrant -s $(which zsh);
-
