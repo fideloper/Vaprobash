@@ -12,11 +12,11 @@ sudo apt-get install -y php5-mssql
 echo ">>> Installing freeTDS for MSSQL"
 
 # Install freetds
-sudo apt-get install freetds-dev freetds-bin tdsodbc
+sudo apt-get install -y freetds-dev freetds-bin tdsodbc
 
 echo ">>> Installing UnixODBC for MSSQL"
 
 # Install unixodbc
-sudo apt-get install unixodbc unixodbc-dev
+sudo apt-get install -y unixodbc unixodbc-dev
 
 sudo service php5-fpm restart
