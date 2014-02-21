@@ -257,7 +257,7 @@ This will configure Beanstalkd to start when the server boots.
 NodeJS will be installed using [Node Version Manager](https://github.com/creationix/nvm). Type `$ nvm help` in the console/terminal or read [this](https://github.com/creationix/nvm/blob/master/README.markdown) for more info on NVM.
 
 You can configure the NodeJS version and the Global Node Packages within the Vagrantfile.
-```bash
+```ruby
 nodejs_version   = "latest" # By default "latest" will equal the latest stable version
 nodejs_packages  = [        # List any global NodeJS packages that you want to install
   #"grunt-cli",
@@ -312,17 +312,25 @@ This will install mailcatcher and set the php.ini path to catchmail.
 
 ## The Vagrantfile
 
-The vagrant file does two things you should take note of:
+The vagrant file does three things you should take note of:
 
 1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel/Symfony installers. This static IP allows us to use xip.io for the virtual host setups while avoiding having to edit our computers' `hosts` file.
 2. **Uses NFS instead of the default file syncing.** NFS is reportedly faster than the default syncing for large files. If, however, you experience issues with the files actually syncing between your host and virtual machine, you can change this to the default syncing by deleting the lines setting up NFS:
 
-```bash
+  ```ruby
   config.vm.synced_folder ".", "/vagrant",
             id: "core",
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
-```
+  ```
+3. **Offers an option to prevent the virtual machine from losing internet connection when running on Ubuntu.** If your virtual machine can't access the internet, you can solve this problem by uncommenting the two lines below:
+
+  ```ruby
+    #vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    #vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  ```
+
+  Don't forget to reload your Vagrantfile running `vagrant reload --no-provision`, in case your virtual machine already exists.
 
 
 ## Contribute!

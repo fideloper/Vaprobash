@@ -106,15 +106,15 @@ EOF
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 
 # Nginx enabling and disabling virtual hosts
-curl https://gist.github.com/fideloper/8261546/raw/ngxen > ngxen
-curl https://gist.github.com/fideloper/8261546/raw/ngxdis > ngxdis
+curl -L https://gist.githubusercontent.com/fideloper/8261546/raw/ngxen > ngxen
+curl -L https://gist.githubusercontent.com/fideloper/8261546/raw/ngxdis > ngxdis
 sudo chmod guo+x ngxen ngxdis
 sudo mv ngxen ngxdis /usr/local/bin
 
 # Setup the vhost generator script for nginx
 # This sould be used for the above setup eventually, rather
 # than the hard-coded config above!
-curl https://gist.github.com/fideloper/9063376/raw > ngxvhost
+curl -L https://gist.githubusercontent.com/fideloper/9063376/raw > ngxvhost
 sudo chown root:root ngxvhost
 sudo chmod guo+x ngxvhost
 sudo mv ngxen ngxvhost /usr/local/bin
