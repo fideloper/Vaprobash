@@ -19,10 +19,6 @@ else
 fi
 
 
-#make it start on boot
-sudo echo "@reboot $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
-sudo update-rc.d cron defaults
-
 #make php use it to send mail
 sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/mods-available/mailcatcher.ini
 sudo php5enmod mailcatcher
@@ -31,4 +27,6 @@ sudo service apache2 restart
 
 #start it now
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
-echo ">>>> Mailcatcher is running, use mailcatcher --ip=0.0.0.0 to start it in the future"
+#add alias
+sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.bashrc
+echo ">>>> Mailcatcher is running, run mailcatcher to start it in the future"
