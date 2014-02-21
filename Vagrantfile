@@ -112,7 +112,10 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: server_ip
 
   # Provision HHVM
+  #Install HHVM
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
+  #Install HHVM fast-cgi
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvmfastcgi.sh"
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: server_ip
@@ -174,7 +177,7 @@ Vagrant.configure("2") do |config|
 
 
   ####
-  # Utiliy (queue)
+  # Utility (queue)
   ##########
 
   # Install Beanstalkd
