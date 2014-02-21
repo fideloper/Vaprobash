@@ -10,4 +10,7 @@ echo deb http://dl.hhvm.com/ubuntu precise main | sudo tee /etc/apt/sources.list
 sudo apt-get update
 
 # Install HHVM
-sudo apt-get -y install hhvm
+#sudo apt-get -y install hhvm
+
+#install HHVM Fastcgi
+$ sudo apt-get install -y --force-yes hhvm-fastcgi
