@@ -67,7 +67,7 @@ Here's a quickstart screencast!
 
 [View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
 
-## What's Included
+## What You Can Install
 
 * Base Packages
 	* Base Items (Git and more!)
