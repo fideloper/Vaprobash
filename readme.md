@@ -67,6 +67,45 @@ Here's a quickstart screencast!
 
 [View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
 
+## What's Included
+
+* Base Packages
+	* Base Items (Git and more!)
+	* PHP (php-fpm)
+	* Oh-My-ZSH
+	* Vim
+	* PHP MsSQL (ability to connect to SQL Server)
+	* Screen
+* Web Servers
+	* Apache
+	* HHVM
+	* Nginx
+* Databases
+	* Couchbase
+	* CouchDB
+	* MariaDB
+	* MongoDB
+	* MySQL
+	* PostgreSQL
+	* SQLite
+* In-Memory Stores
+	* Memcached
+	* Redis
+* Search
+	* ElasticSearch and ElasticHQ
+* Utility
+	* Beanstalkd
+	* Supervisord
+* Additional Languages
+	* NodeJS via NVM
+	* Ruby via RVM
+* Frameworks / Tooling
+	* Composer
+	* Laravel
+	* Symfony
+	* PHPUnit
+	* MailCatcher
+
 ## The Vagrantfile
 
 The vagrant file does three things you should take note of:
