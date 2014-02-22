@@ -110,7 +110,17 @@ $ sudo service nginx reload
 
 ### <a href="install-scripts.html#couchbase" name="couchbase" id="couchbase">#</a> Couchbase
 
-See more information about [Couchbase](http://www.couchbase.com/).
+This will install Couchbase Server Community Edition 2.2.0 and its PHP Client Library.
+
+To configure:
+
+- Run the setup wizard on the web interface at http://192.168.33.10:8091
+- Use the CLI in /opt/couchbase/bin/couchbase-cli
+
+More info:
+
+- [Couchbase](http://www.couchbase.com/)
+- [PHP Client Library](http://www.couchbase.com/communities/php/getting-started)
 
 ### <a href="install-scripts.html#couchdb" name="couchdb" id="couchdb">#</a> CouchDB
 
