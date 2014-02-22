@@ -16,6 +16,13 @@ This installs some basics items.
 - vim, tmux
 - curl, wget
 - build-essential, python-software-properties
+- SSL certificate (self-signed) for [#](https://*.xip.io) addresses
+
+### <a href="install-scripts.html#oh-my-zsh" name="oh-my-zsh" id="oh-my-zsh">#</a> Oh-My-Zsh
+
+This installs ZSH and runs the [installer for Oh-My-Zsh](https://gist.github.com/tsabat/1498393).
+
+<p class="alert alert-danger">This install may be deleted, as Oh-My-Zsh appears to edit the users PATH variable, causing issues with the installation of other scripts.</p>
 
 ### <a href="install-scripts.html#base" name="php" id="php">#</a> PHP
 
@@ -27,15 +34,9 @@ xdebug.cli_color=1
 xdebug.show_local_vars=1
 ```
 
-### <a href="install-scripts.html#ruby" name="ruby" id="ruby">#</a> Ruby
+### <a href="install-scripts.html#screen" name="screen" id="screen">#</a> Screen
 
-This will install Ruby via RVM. You can decide which version of ruby via the configuration variable found in the Vagrantfile. Default is `latest`.
-
-### <a href="install-scripts.html#oh-my-zsh" name="oh-my-zsh" id="oh-my-zsh">#</a> Oh-My-Zsh
-
-This installs ZSH and runs the [installer for Oh-My-Zsh](https://gist.github.com/tsabat/1498393).
-
-<p class="alert alert-danger">This install may be deleted, as Oh-My-Zsh appears to edit the users PATH variable, causing issues with the installation of other scripts.</p>
+This will install the Screen terminal multiplexer on the Vagrant VM. A few sensible defaults will be added to the `.screenrc` file.
 
 ### <a href="install-scripts.html#base" name="vim" id="vim">#</a> Vim
 
@@ -47,6 +48,9 @@ This will install a Vim set, including:
 - Bundle 'othree/html5.vim'
 - Bundle 'scrooloose/nerdtree'
 - Bundle 'kien/ctrlp.vim'
+- Bundle 'bling/vim-airline'
+- Bundle 'airblade/vim-gitgutter'
+- Bundle 'tpope/vim-fugitive'
 
 See the [.vimrc](https://gist.github.com/fideloper/a335872f476635b582ee) file for more details and configuration.
 
@@ -57,6 +61,19 @@ See the [.vimrc](https://gist.github.com/fideloper/a335872f476635b582ee) file fo
 This will install Apache 2.4 and mod_php5. Additionally, this script will use [this vhost bash script](https://gist.github.com/fideloper/2710970) to create a virtualhost for 192.168.33.10.xip.io (or whichever IP address you configure).
 
 <p class="alert alert-warning">In future releases, Apache may be changed to work with php5-fpm rather than mod_php5. This will make switching between Nginx and Apache simpler.</p>
+
+By default, the web root will the `/vagrant`, which I suggest you change as needed (within `/etc/apache2/sites-available/192.168.33.10.xip.io.conf`). The Laravel and Symfony installation script will change the document root.
+
+To create a new virtual host:
+
+```bash
+# See also: `vhost -h`
+$ sudo vhost -s example.com -d /path/to/example/web/root
+
+# You can then use `a2ensite` or `a2dissite` to enable or disable this vhost.
+# `vhost` will enable it for you.
+$ sudo a2dissite example.com
+```
 
 ### <a href="install-scripts.html#base" name="hhvm" id="hhvm">#</a> HHVM
 
@@ -91,6 +108,10 @@ $ sudo service nginx reload
 
 ## Databases
 
+### <a href="install-scripts.html#couchbase" name="couchbase" id="couchbase">#</a> Couchbase
+
+See more information about [Couchbase](http://www.couchbase.com/).
+
 ### <a href="install-scripts.html#couchdb" name="couchdb" id="couchdb">#</a> CouchDB
 
 This will install the CouchDB database.
@@ -103,6 +124,10 @@ $ curl -X PUT localhost:5984/name_of_new_database
 ```
 
 You may access the "Futon" web interface for administering CouchDB at: `http://192.168.33.10:5984/_utils/`
+
+### <a href="install-scripts.html#mariadb" name="mariadb" id="mariadb">#</a> MariaDB
+
+This is a drop-in replacement for MySQL. See MySQL docs below for usage information.
 
 ### <a href="install-scripts.html#mysql" name="mysql" id="mysql">#</a> MySQL
 
@@ -122,6 +147,10 @@ $ vagrant ssh
 # This will ask you to enter your password
 $ mysql -u root -p -e "CREATE DATABASE your_database_name"
 ```
+
+### <a href="install-scripts.html#mongodb" name="mongodb" id="mongodb">#</a> MongoDB
+
+This installs MongoDB. See some [basic usage here](http://docs.mongodb.org/manual/tutorial/getting-started/).
 
 ### <a href="install-scripts.html#pgsql" name="pgsql" id="pgsql">#</a> PostgreSQL
 
@@ -164,6 +193,12 @@ This will install Redis (server). There are two options:
 
 You can choose between the two by uncommenting one provision script or the other in the `Vagrantfile`.
 
+## Search
+
+### <a href="install-scripts.html#elasticsearch" name="elasticsearch" id="elasticsearch">#</a> ElasticSearch
+
+This install ElasticSearch latest version. See a [getting started](http://joelabrahamsson.com/elasticsearch-101/) article.
+
 ## Utility (queues)
 
 ### <a href="install-scripts.html#beanstalkd" name="beanstalkd" id="beanstalkd">#</a> Beanstalkd
@@ -172,6 +207,10 @@ This will install the Beanstalkd work queue and configure it to start when the s
 
 - Host: `localhost` (`0.0.0.0` by default)
 - Port: `11300` (default)
+
+### <a href="install-scripts.html#supervisord" name="supervisord" id="supervisord">#</a> Supervisord
+
+This install Supervisord, a process watcher which can restart processes if they fail and boot them on system start. More information [here](http://supervisord.org/) and a getting started guide with PHP/Laravel [here](http://fideloper.com/ubuntu-beanstalkd-and-laravel4).
 
 ## Additional Languages
 
@@ -191,12 +230,26 @@ It will also set global NPM items to be installed in `/home/vagrant/npm/bin`.
 
 You can have as many packages installed or choose to not install any packages at all (just comment or delete the lines). Type `$ nvm ls-remote` to get the full list of available NodeJS versions inside your console/terminal.
 
-```bash
+```ruby
 nodejs_packages = [ # List any global Node.js modules that you want to install
     #"grunt-cli",
     #"bower",
     "yo",             # "yo" is uncommented and will be installed globally (yeoman.io)
                       # ... add more packages or delete all packages if you don't want any
+]
+```
+
+### <a href="install-scripts.html#ruby" name="ruby" id="ruby">#</a> Ruby
+
+This will install Ruby via RVM. You can decide which version of ruby via the configuration variable found in the Vagrantfile. Default is `latest`.
+
+Similar to Node, you can select which Ruby Gems to install (globally!) on your system.
+
+```ruby
+ruby_gems = [ # List any Ruby Gems that you want to install
+  #"jekyll",
+  #"sass",
+  "compass",  # Will install Compass as its un-commented
 ]
 ```
 
@@ -212,13 +265,15 @@ This will install a base Laravel (latest stable) project within `/vagrant/larave
 
 This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/laravel/public`.
 
+### <a href="install-scripts.html#symfony" name="symfony" id="symfony">#</a> Symfony
+
+This will install a base Symfony (latest stable) project within `/vagrant/symfony`. It depends on Composer being installed.
+
+This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/symfony/web`.
+
 ### <a href="install-scripts.html#phpunit" name="phpunit" id="phpunit">#</a> PHPUnit
 
 This will install PHPUnit and make it globally accessible.
-
-### <a href="install-scripts.html#screen" name="screen" id="screen">#</a> Screen
-
-This will install the Screen terminal multiplexer on the Vagrant VM. A few sensible defaults will be added to the `.screenrc` file.
 
 ### <a href="install-scripts.html#mailcatcher" name="mailcatcher" id="mailcatcher">#</a> MailCatcher
 
