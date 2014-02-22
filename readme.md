@@ -71,8 +71,8 @@ Here's a quickstart screencast!
 
 * Base Packages
 	* Base Items (Git and more!)
-	* PHP (php-fpm)
 	* Oh-My-ZSH
+	* PHP (php-fpm)
 	* Vim
 	* PHP MsSQL (ability to connect to SQL Server)
 	* Screen
