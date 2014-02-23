@@ -113,7 +113,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: server_ip
 
   # Provision HHVM
-  #Install HHVM & HHVM-FastCGI
+  # Install HHVM & HHVM-FastCGI
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
 
   # Provision Nginx Base
