@@ -43,13 +43,12 @@ server {
     error_page 404 /index.php;
 
     # pass the PHP scripts to php5-fpm
-    # regex protects from file upload attacks
+    # Note: \.php$ is susceptible to file upload attacks
     location ~ ^/(index|app|app_dev|config)\.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        # 'include' must precede 'fastcgi_param's
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         fastcgi_param LARA_ENV local; # Environment variable for Laravel
@@ -90,13 +89,12 @@ server {
     error_page 404 /index.php;
 
     # pass the PHP scripts to php5-fpm
-    # regex protects from file upload attacks
+    # Note: \.php$ is susceptible to file upload attacks
     location ~ ^/(index|app|app_dev|config)\.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        # 'include' must precede 'fastcgi_param's
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
         fastcgi_param LARA_ENV local; # Environment variable for Laravel
@@ -114,15 +112,15 @@ EOF
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 
 # Nginx enabling and disabling virtual hosts
-curl https://gist.github.com/fideloper/8261546/raw/ngxen > ngxen
-curl https://gist.github.com/fideloper/8261546/raw/ngxdis > ngxdis
+curl -L https://gist.githubusercontent.com/fideloper/8261546/raw/ngxen > ngxen
+curl -L https://gist.githubusercontent.com/fideloper/8261546/raw/ngxdis > ngxdis
 sudo chmod guo+x ngxen ngxdis
 sudo mv ngxen ngxdis /usr/local/bin
 
 # Setup the vhost generator script for nginx
 # This sould be used for the above setup eventually, rather
 # than the hard-coded config above!
-curl https://gist.github.com/fideloper/9063376/raw > ngxvhost
+curl -L https://gist.githubusercontent.com/fideloper/9063376/raw > ngxvhost
 sudo chown root:root ngxvhost
 sudo chmod guo+x ngxvhost
 sudo mv ngxen ngxvhost /usr/local/bin
