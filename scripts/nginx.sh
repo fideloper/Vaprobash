@@ -23,7 +23,7 @@ server {
     listen  80;
 
     root /vagrant;
-    index index.html index.htm index.php;
+    index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
     server_name $1.xip.io;
@@ -34,7 +34,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files \$uri \$uri/ /app.php?\$query_string /index.php?\$query_string;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -43,13 +43,16 @@ server {
     error_page 404 /index.php;
 
     # pass the PHP scripts to php5-fpm
-    location ~ \.php$ {
+    # Note: \.php$ is susceptible to file upload attacks
+    location ~ ^/(index|app|app_dev|config)\.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_param LARA_ENV local; # Environment variable for Laravel
+        fastcgi_param HTTPS off;
     }
 
     # Deny .htaccess file access
@@ -66,7 +69,7 @@ server {
     ssl_certificate_key /etc/ssl/xip.io/xip.io.key;
 
     root /vagrant;
-    index index.html index.htm index.php;
+    index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
     server_name $1.xip.io;
@@ -77,7 +80,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files \$uri \$uri/ /app.php?\$query_string /index.php?\$query_string;
     }
 
     location = /favicon.ico { log_not_found off; access_log off; }
@@ -86,13 +89,16 @@ server {
     error_page 404 /index.php;
 
     # pass the PHP scripts to php5-fpm
-    location ~ \.php$ {
+    # Note: \.php$ is susceptible to file upload attacks
+    location ~ ^/(index|app|app_dev|config)\.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_param LARA_ENV local; # Environment variable for Laravel
+        fastcgi_param HTTPS on;
     }
 
     # Deny .htaccess file access
