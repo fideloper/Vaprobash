@@ -40,9 +40,9 @@ else
         \curl -sSL https://get.rvm.io | bash -s stable --ruby=$RUBY_VERSION
     fi
 
-    # Re-source .bash_profile, .zshrc or .bashrc if they exist
-    if [[ -f "/home/vagrant/.bash_profile" ]]; then
-        . /home/vagrant/.bash_profile
+    # Re-source .profile, .zshrc or .bashrc if they exist
+    if [[ -f "/home/vagrant/.profile" ]]; then
+        . /home/vagrant/.profile
     fi
 
     if [[ -f "/home/vagrant/.zshrc" ]]; then

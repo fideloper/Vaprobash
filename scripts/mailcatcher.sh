@@ -33,9 +33,9 @@ sudo service apache2 restart
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
 
 #add aliases
-if [[ -f "/home/vagrant/.bash_profile" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.bash_profile
-	. /home/vagrant/.bash_profile
+if [[ -f "/home/vagrant/.profile" ]]; then
+	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.profile
+	. /home/vagrant/.profile
 fi
 
 if [[ -f "/home/vagrant/.zshrc" ]]; then
