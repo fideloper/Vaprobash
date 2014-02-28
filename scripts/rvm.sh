@@ -48,10 +48,6 @@ else
     if [[ -f "/home/vagrant/.zshrc" ]]; then
         . /home/vagrant/.zshrc
     fi
-
-    if [[ -f "/home/vagrant/.bashrc" ]]; then
-        . /home/vagrant/.bashrc
-    fi
 fi
 
 # Install (optional) Ruby Gems
