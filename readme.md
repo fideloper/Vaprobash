@@ -106,6 +106,10 @@ Here's a quickstart screencast!
 	* PHPUnit
 	* MailCatcher
 
+### Xdebug debugging
+
+Enables connections from host machine to vagrant for step by step debugging.
+
 ## The Vagrantfile
 
 The vagrant file does three things you should take note of:
