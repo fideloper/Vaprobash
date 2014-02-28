@@ -10,6 +10,9 @@ else
     symfony_root_folder="$2"
 fi
 
+# The host ip is same as guest ip with last octet equal to 1
+host_ip=`echo $1 | sed 's/\.[0-9]*$/.1/'`
+
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?
@@ -56,6 +59,13 @@ else
     # Go to the previous folder
     cd -
 fi
+
+sudo chmod -R 775 $symfony_root_folder/app/cache
+sudo chmod -R 775 $symfony_root_folder/app/logs
+sudo chmod -R 775 $symfony_root_folder/app/console
+
+sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '$host_ip', 'fe80::1'/" $symfony_root_folder/web/app_dev.php
+sed -i "s/'127.0.0.1',$/'127.0.0.1', '$host_ip',/" $symfony_root_folder/web/config.php
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     nginx_root=$(echo "$symfony_root_folder/web" | sed 's/\//\\\//g')

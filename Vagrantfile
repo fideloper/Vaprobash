@@ -9,6 +9,7 @@ github_branch   = "master"
 # Server Configuration
 server_ip             = "192.168.33.10"
 server_memory         = "384" # MB
+server_timezone       = "America/Los_Angeles"
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
@@ -92,7 +93,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: php_version
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
@@ -112,7 +113,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: server_ip
 
   # Provision HHVM
-  #Install HHVM & HHVM-FastCGI
+  # Install HHVM & HHVM-FastCGI
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
 
   # Provision Nginx Base
