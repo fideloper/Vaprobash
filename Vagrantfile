@@ -9,7 +9,7 @@ github_branch   = "master"
 # Server Configuration
 server_ip             = "192.168.33.10"
 server_memory         = "384" # MB
-server_timezone       = "America/Los_Angeles"
+server_timezone       = "UTC"
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
