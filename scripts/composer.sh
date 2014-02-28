@@ -37,14 +37,14 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
     echo "    " $@
     sudo composer global require $@
 
-    # Add Composer's Global Bin to ~/.bash_profile path
-    if ! grep -qsc 'composer/vendor/bin' '/home/vagrant/.bash_profile'; then
-      echo ">>> Adding Composer Global bin to ~/.bash_profile path"
-      printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:~/.composer/vendor/bin' >> /home/vagrant/.bash_profile
-      # Re-source ~/.bash_profile
-      . /home/vagrant/.bash_profile
+    # Add Composer's Global Bin to ~/.profile path
+    if ! grep -qsc 'composer/vendor/bin' '/home/vagrant/.profile'; then
+      echo ">>> Adding Composer Global bin to ~/.profile path"
+      printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:~/.composer/vendor/bin' >> /home/vagrant/.profile
+      # Re-source ~/.profile
+      . /home/vagrant/.profile
     else
-      echo ">>> Composer's bin path already added to /home/vagrant/.bash_profile"
+      echo ">>> Composer's bin path already added to /home/vagrant/.profile"
     fi
 
     # Add Composer's Global Bin to ~/.zshrc path
