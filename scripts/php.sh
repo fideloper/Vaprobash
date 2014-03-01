@@ -48,3 +48,4 @@ if [ $php_version == "distributed" ]; then
 fi
 
 sudo service php5-fpm restart
+
