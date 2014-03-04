@@ -10,7 +10,7 @@ if [[ $GIT_IS_INSTALLED -gt 0 ]]; then
 fi
 
 # Test if cURL is installed
-cURL --version > /dev/null 2>&1
+curl --version > /dev/null 2>&1
 CURL_IS_INSTALLED=$?
 
 if [ $CURL_IS_INSTALLED -gt 0 ]; then
