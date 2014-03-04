@@ -25,7 +25,6 @@ sudo apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5
 # xdebug Config
 cat >> /etc/php5/mods-available/xdebug.ini << EOF
 xdebug.remote_enable = 1
-xdebug.remote_autostart = 1
 xdebug.remote_connect_back = 1
 xdebug.remote_port = 9000
 xdebug.scream=1
