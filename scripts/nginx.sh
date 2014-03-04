@@ -44,7 +44,8 @@ server {
 
     # pass the PHP scripts to php5-fpm
     # Note: \.php$ is susceptible to file upload attacks
-    location ~ ^/(index|app|app_dev|config)\.php(/|$) {
+    # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
+    location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
@@ -90,7 +91,8 @@ server {
 
     # pass the PHP scripts to php5-fpm
     # Note: \.php$ is susceptible to file upload attacks
-    location ~ ^/(index|app|app_dev|config)\.php(/|$) {
+    # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
+    location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         # With php5-fpm:
         fastcgi_pass unix:/var/run/php5-fpm.sock;
