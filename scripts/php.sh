@@ -24,7 +24,7 @@ sudo apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5
 
 # xdebug Config
 cat > $(find /etc/php5 -name xdebug.ini) << EOF
-$(cat $(find / -name xdebug.ini-dist))
+zend_extension=$(find /usr/lib/php5 -name xdebug.so)
 xdebug.kdekey = "PHPStorm"
 xdebug.remote_enable = 1
 xdebug.remote_autostart = 1
