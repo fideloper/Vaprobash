@@ -105,14 +105,7 @@ Here's a quickstart screencast!
 	* Symfony
 	* PHPUnit
 	* MailCatcher
-
-### Magento
-
-This will install a base Magento project within `/vagrant/magento`.  It depends on Composer and Mysql being installed.
-
-This will also attempt to change the Apache or Nginx virtual host to point the document root at `/vagrant/magento/src`.
-
-For Nginx, this will replace the default site configuration with one tailored for Magento.
+  * Magento
 
 ## The Vagrantfile
 
