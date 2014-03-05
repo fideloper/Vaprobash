@@ -23,7 +23,14 @@ sudo apt-get update
 sudo apt-get install -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-gmp php5-mcrypt php5-xdebug php5-memcached php5-imagick php5-intl
 
 # xdebug Config
+if [ -z "$3" ]; then
+    xdebug_idekey=""
+else
+    xdebug_idekey="xdebug.idekey = $3"
+fi
+
 cat >> /etc/php5/mods-available/xdebug.ini << EOF
+$xdebug_idekey
 xdebug.remote_enable = 1
 xdebug.remote_connect_back = 1
 xdebug.remote_port = 9000
