@@ -31,6 +31,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"codeception/codeception=*",
   #"phpspec/phpspec:2.0.*@dev",
 ]
+xdebug_key            = "PHPSTORM"
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
@@ -95,7 +96,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone, xdebug_key]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
