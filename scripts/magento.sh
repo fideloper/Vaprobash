@@ -44,6 +44,7 @@ if [ $NGINX_IS_INSTALLED -eq 0 ]; then
   # Remove the default vhost created
   # Magento requires specific stuff for Nginx
   rm -f /etc/nginx/sites-available/vagrant
+  rm -f /etc/nginx/sites-enabled/vagrant
 
   cat > /etc/nginx/sites-available/magento << EOF
 server {
@@ -57,7 +58,7 @@ server {
   error_log /var/log/nginx/magento.com-error.log;
 
   location / {
-    try_files $uri $uri/ @handler;
+    try_files \$uri \$uri/ @handler;
     expires 30d;
   }
 
@@ -81,7 +82,7 @@ server {
 
   ## Forward paths like /js/index.php/x.js to relevant handler
   location ~ .php/ {
-    rewrite ^(.*.php)/ $1 last;
+    rewrite ^(.*.php)/ \$1 last;
   }
 
   #pass the php scripts to php5-fpm
@@ -90,13 +91,14 @@ server {
     # With php5-fpm:
     expires off;
     fastcgi_pass unix:/var/run/php5-fpm.sock;
-    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
     fastcgi_param  MAGE_RUN_CODE default; ## Store code is defined in administration > Configuration > Manage Stores
     fastcgi_param  MAGE_RUN_TYPE store;
     include fastcgi_params;
   }
 }
 EOF
+  sudo ln -s /etc/nginx/sites-available/magento /etc/nginx/sites-enabled
   sudo service nginx reload
 fi
 
