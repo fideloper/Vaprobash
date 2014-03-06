@@ -105,6 +105,7 @@ Here's a quickstart screencast!
 	* Symfony
 	* PHPUnit
 	* MailCatcher
+  * Magento
 
 ## The Vagrantfile
 

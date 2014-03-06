@@ -7,6 +7,7 @@ github_repo     = "Vaprobash"
 github_branch   = "master"
 
 # Server Configuration
+# Some variables
 server_ip             = "192.168.33.10"
 server_memory         = "384" # MB
 server_timezone       = "UTC"
@@ -222,5 +223,8 @@ Vagrant.configure("2") do |config|
 
   # Install git-ftp
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
+
+  # Install Magento - Requires Mysql and Composer
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/magento.sh", args: server_ip
 
 end
