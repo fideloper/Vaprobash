@@ -41,6 +41,39 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   #"yo",
 ]
 
+# simply uncomment the packages you wish to install
+provisioners = [
+  "base",
+  "php",
+  "apache",
+  "mysql",
+  "vim",
+  "redis",
+  "beanstalkd",
+  "composer",
+  "laravel",
+  "nodejs",
+  "supervisord",
+  # "mssql",
+  # "zsh",
+  # "hhvm",
+  # "nginx",
+  # "pgsql",
+  # "sqlite",
+  # "couchbase",
+  # "couchdb",
+  # "mongodb",
+  # "mariadb",
+  # "elasticsearch",
+  # "elastichq",
+  # "memcached",
+  # "rvm",
+  # "symfony",
+  # "screen",
+  # "mailcatcher",
+  # "git-ftp",
+]
+
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
@@ -87,140 +120,8 @@ Vagrant.configure("2") do |config|
 
   end
 
-  ####
-  # Base Items
-  ##########
-
-  # Provision Base Packages
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
-
-  # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
-
-  # Enable MSSQL for PHP
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
-
-  # Provision Oh-My-Zsh
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/zsh.sh"
-
-  # Provision Vim
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/vim.sh"
-
-
-  ####
-  # Web Servers
-  ##########
-
-  # Provision Apache Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: server_ip
-
-  # Provision HHVM
-  # Install HHVM & HHVM-FastCGI
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
-
-  # Provision Nginx Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: server_ip
-
-
-  ####
-  # Databases
-  ##########
-
-  # Provision MySQL
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: [mysql_root_password, mysql_version]
-
-  # Provision PostgreSQL
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/pgsql.sh", args: pgsql_root_password
-
-  # Provision SQLite
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
-
-  # Provision Couchbase
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchbase.sh"
-
-  # Provision CouchDB
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchdb.sh"
-
-  # Provision MongoDB
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mongodb.sh"
-
-  # Provision MariaDB
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mariadb.sh", args: [mariadb_root_password, mariadb_version]
-
-  ####
-  # Search Servers
-  ##########
-
-  # Install Elasticsearch
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elasticsearch.sh"
-
-
-  ####
-  # Search Server Administration (web-based)
-  ##########
-
-  # Install ElasticHQ
-  # Admin for: Elasticsearch
-  # Works on: Apache2, Nginx
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elastichq.sh"
-
-
-  ####
-  # In-Memory Stores
-  ##########
-
-  # Install Memcached
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/memcached.sh"
-
-  # Provision Redis (without journaling and persistence)
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh"
-
-  # Provision Redis (with journaling and persistence)
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh", args: "persistent"
-  # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
-
-
-  ####
-  # Utility (queue)
-  ##########
-
-  # Install Beanstalkd
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/beanstalkd.sh"
-
-
-  ####
-  # Additional Languages
-  ##########
-
-  # Install Nodejs
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version)
-
-  # Install Ruby Version Manager (RVM)
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
-
-  ####
-  # Frameworks and Tooling
-  ##########
-
-  # Provision Composer
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
-
-  # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: [server_ip, laravel_root_folder]
-
-  # Provision Symfony
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/symfony.sh", args: [server_ip, symfony_root_folder]
-
-  # Install Screen
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
-
-  # Install Supervisord
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/supervisord.sh"
-
-  # Install Mailcatcher
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mailcatcher.sh"
-
-  # Install git-ftp
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
-
+  # Provision Required Packages
+  provisioners.each do |package|
+    config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/#{package}.sh"
+  end
 end
