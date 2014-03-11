@@ -28,7 +28,7 @@ if [[ $RVM_IS_INSTALLED -eq 0 ]]; then
     rvm get stable --ignore-dotfiles
 else
     # Install RVM and install Ruby
-    if [[ $RUBY_VERSION =~ "latest" ]]; then # experimental =~. This should pass "latest", " latest" and "latest "
+    if [[ $RUBY_VERSION =~ "latest" ]]; then
         echo ">>> Installing Ruby Version Manager and installing latest stable Ruby version"
 
         # Install RVM and install latest stable Ruby version
@@ -40,7 +40,10 @@ else
         \curl -sSL https://get.rvm.io | bash -s stable --ruby=$RUBY_VERSION
     fi
 
-    # Re-source .profile, .zshrc or .bashrc if they exist
+    # Re-source RVM
+    . /home/vagrant/.rvm/scripts/rvm
+
+    # Re-source .profile or .zshrc if they exist
     if [[ -f "/home/vagrant/.profile" ]]; then
         . /home/vagrant/.profile
     fi
