@@ -27,7 +27,7 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
 ]
 php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
 composer_packages     = [        # List any global Composer packages that you want to install
-  #"phpunit/phpunit:3.7.*",
+  #"phpunit/phpunit:4.0.*",
   #"codeception/codeception=*",
   #"phpspec/phpspec:2.0.*@dev",
 ]
