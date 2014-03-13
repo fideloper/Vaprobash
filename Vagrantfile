@@ -31,7 +31,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"codeception/codeception=*",
   #"phpspec/phpspec:2.0.*@dev",
 ]
-public_folder         = "/vagrant"
+public_folder         = "/vagrant" # If installing Symfony or Laravel, leave this blank to default to the framework public directory
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
