@@ -12,7 +12,7 @@ sudo apt-get install -y git-core ack-grep vim tmux curl wget build-essential pyt
 curl -L https://gist.githubusercontent.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
 sudo chown vagrant:vagrant /home/vagrant/.gitconfig
 
-echo ">>> Installing *.xio.io self-signed SSL"
+echo ">>> Installing *.xip.io self-signed SSL"
 
 SSL_DIR="/etc/ssl/xip.io"
 DOMAIN="*.xip.io"
