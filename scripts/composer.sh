@@ -21,6 +21,7 @@ else
     sudo composer self-update
 fi
 
+
 # Install Global Composer Packages if any are given
 if [[ ! -z $COMPOSER_PACKAGES ]]; then
 
@@ -30,14 +31,24 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
 
     # Add Composer's Global Bin to ~/.profile path
     if [[ -f "/home/vagrant/.profile" ]]; then
-      printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.profile
-      . /home/vagrant/.profile
+        # Ensure COMPOSER_HOME variable is set. This isn't set by Composer automatically
+        echo "COMPOSER_HOME=\"/home/vagrant/.composer\"" >> /home/vagrant/.profile
+        # Add composer home vendor bin dir to PATH to run globally installed executables
+        printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.profile
+
+        # Source the .profile to pick up changes
+        . /home/vagrant/.profile
     fi
 
     # Add Composer's Global Bin to ~/.zshrc path
     if [[ -f "/home/vagrant/.zshrc" ]]; then
-      printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.zshrc
-      . /home/vagrant/.zshrc
+        # Ensure COMPOSER_HOME variable is set. This isn't set by Composer automatically
+        echo "COMPOSER_HOME=\"/home/vagrant/.composer\"" >> /home/vagrant/.zshrc
+        # Add composer home vendor bin dir to PATH to run globally installed executables
+        printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.zshrc
+
+        # Source the .zshrc to pick up changes
+        . /home/vagrant/.zshrc
     fi
 
 fi
