@@ -51,6 +51,8 @@ Vagrant.configure("2") do |config|
   # config.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
 
   # Create a hostname, don't forget to put it to the `hosts` file
+  # This will point to the server's default virtual host
+  # TO DO: Make this work with virtualhost along-side xip.io URL
   config.vm.hostname = "vaprobash.dev"
 
   # Create a static IP
@@ -222,5 +224,12 @@ Vagrant.configure("2") do |config|
 
   # Install git-ftp
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
+
+  ####
+  # Local Scripts
+  # Any local scripts you may want to run post-provisioning.
+  # Add these to the same directory as the Vagrantfile.
+  ##########
+  # config.vm.provision "shell", path: "./local-script.sh" 
 
 end
