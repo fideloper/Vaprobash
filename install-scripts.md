@@ -218,6 +218,10 @@ This will install the Beanstalkd work queue and configure it to start when the s
 - Host: `localhost` (`0.0.0.0` by default)
 - Port: `11300` (default)
 
+### <a href="install-scripts.html#heroku" name="heroku" id="heroku">#</a> Heroku
+
+Install the [Heroku Toolbelt](https://toolbelt.heroku.com/). This is not a Vaprobash script but Heroku's. The install script is just added for convenience.
+
 ### <a href="install-scripts.html#supervisord" name="supervisord" id="supervisord">#</a> Supervisord
 
 This install Supervisord, a process watcher which can restart processes if they fail and boot them on system start. More information [here](http://supervisord.org/) and a getting started guide with PHP/Laravel [here](http://fideloper.com/ubuntu-beanstalkd-and-laravel4).
