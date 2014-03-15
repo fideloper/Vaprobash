@@ -196,6 +196,8 @@ Vagrant.configure("2") do |config|
   # Install Beanstalkd
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/beanstalkd.sh"
 
+  # Install Heroku Toolbelt
+  # config.vm.provision "shell", path: "https://toolbelt.heroku.com/install-ubuntu.sh"
 
   ####
   # Additional Languages
