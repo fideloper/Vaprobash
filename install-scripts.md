@@ -295,3 +295,11 @@ This will install [MailCatcher](http://mailcatcher.me) to catch outgoing mail. S
 
 - MailCatcher frontend at 192.168.33.10.xip.io:1080
 - MailCatcher SMTP at 192.168.33.10.xip.io:1025
+
+### <a href="install-scripts.html#gitftp" name="gitftp" id="gitftp">#</a> git-ftp
+
+This will install [git-ftp](http://git-ftp.github.io/git-ftp/) and will allow you to deploy your git repository trough FTP.
+
+Installing git-ftp is especcially handy when your hosting provider (ie shared hosting) doesn't support git and doesn't allow SSH access. git-ftp supports the fallowing protocol's: `FTP`, `SFTP`, `FTPS` and `FTPES` (SSL).
+
+You can find more info on how to configure and use git-ftp [here](https://github.com/git-ftp/git-ftp/blob/develop/man/git-ftp.1.md) (manual).
