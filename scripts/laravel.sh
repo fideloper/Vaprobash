@@ -10,6 +10,12 @@ else
     laravel_root_folder="$2"
 fi
 
+if [ -z "$3" ]; then
+    laravel_public_folder="/vagrant/laravel/public"
+else
+    laravel_public_folder="$3"
+fi
+
 # Test if Composer is installed
 composer --version > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?
@@ -58,7 +64,7 @@ else
 fi
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
-    nginx_root=$(echo "$laravel_root_folder/public" | sed 's/\//\\\//g')
+    nginx_root=$(echo "$laravel_public_folder" | sed 's/\//\\\//g')
 
     # Change default vhost created
     sed -i "s/root \/vagrant/root $nginx_root/" /etc/nginx/sites-available/vagrant
@@ -69,6 +75,6 @@ if [ $APACHE_IS_INSTALLED -eq 0 ]; then
     # Remove apache vhost from default and create a new one
     rm /etc/apache2/sites-enabled/$1.xip.io.conf > /dev/null 2>&1
     rm /etc/apache2/sites-available/$1.xip.io.conf > /dev/null 2>&1
-    vhost -s $1.xip.io -d "$laravel_root_folder/public"
+    vhost -s $1.xip.io -d "$laravel_public_folder"
     sudo service apache2 reload
 fi

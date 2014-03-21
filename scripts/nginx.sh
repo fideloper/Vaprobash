@@ -4,6 +4,12 @@ echo ">>> Installing Nginx"
 
 [[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
 
+if [ -z "$2" ]; then
+    public_folder="/vagrant"
+else
+    public_folder="$3"
+fi
+
 # Add repo for latest stable nginx
 sudo add-apt-repository -y ppa:nginx/stable
 
@@ -20,9 +26,9 @@ echo ">>> Configuring Nginx"
 # is not escaped
 cat > /etc/nginx/sites-available/vagrant << EOF
 server {
-    listen  80;
+    listen 80;
 
-    root /vagrant;
+    root $public_folder;
     index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
@@ -69,7 +75,7 @@ server {
     ssl_certificate     /etc/ssl/xip.io/xip.io.crt;
     ssl_certificate_key /etc/ssl/xip.io/xip.io.key;
 
-    root /vagrant;
+    root $public_folder;
     index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
