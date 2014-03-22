@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Test if PHP is installed
+php -v > /dev/null 2>&1 || { printf "!!! PHP is not installed.\n    Installing Composer aborted!\n"; exit 0; }
+
 # Test if Composer is installed
 composer -v > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?

@@ -2,8 +2,16 @@
 
 echo ">>> Installing Laravel"
 
-[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+# Test if PHP is installed
+php -v > /dev/null 2>&1 || { printf "!!! PHP is not installed.\n    Installing Laravel aborted!\n"; exit 0; }
 
+# Test if Composer is installed
+composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    Installing Laravel aborted!\n"; exit 0; }
+
+# Test if Server IP is set in Vagrantfile
+[[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Laravel aborted!\n"; exit 0; }
+
+# Check if Laravel root is set. If not set use default
 if [ -z "$2" ]; then
     laravel_root_folder="/vagrant/laravel"
 else
@@ -14,15 +22,6 @@ if [ -z "$3" ]; then
     laravel_public_folder="/vagrant/laravel/public"
 else
     laravel_public_folder="$3"
-fi
-
-# Test if Composer is installed
-composer --version > /dev/null 2>&1
-COMPOSER_IS_INSTALLED=$?
-
-if [ $COMPOSER_IS_INSTALLED -gt 0 ]; then
-    echo "ERROR: Laravel install requires composer"
-    exit 1
 fi
 
 # Test if HHVM is installed

@@ -2,8 +2,16 @@
 
 echo ">>> Installing Symfony"
 
-[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+# Test if PHP is installed
+php -v > /dev/null 2>&1 || { printf "!!! PHP is not installed.\n    Installing Symfony aborted!\n"; exit 0; }
 
+# Test if Composer is installed
+composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    Installing Symfony aborted!\n"; exit 0; }
+
+# Test if Server IP is set in Vagrantfile
+[[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Symfony aborted!\n"; exit 0; }
+
+# Check if Symfony root is set. If not set use default
 if [ -z "$2" ]; then
     symfony_root_folder="/vagrant/symfony"
 else
@@ -18,15 +26,6 @@ fi
 
 # The host ip is same as guest ip with last octet equal to 1
 host_ip=`echo $1 | sed 's/\.[0-9]*$/.1/'`
-
-# Test if Composer is installed
-composer --version > /dev/null 2>&1
-COMPOSER_IS_INSTALLED=$?
-
-if [ $COMPOSER_IS_INSTALLED -gt 0 ]; then
-    echo "ERROR: Symfony install requires composer"
-    exit 1
-fi
 
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
