@@ -7,7 +7,7 @@ echo ">>> Installing Nginx"
 if [ -z "$2" ]; then
     public_folder="/vagrant"
 else
-    public_folder="$3"
+    public_folder="$2"
 fi
 
 # Add repo for latest stable nginx
