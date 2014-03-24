@@ -18,7 +18,7 @@ sudo add-apt-repository -y ppa:ondrej/apache2
 sudo apt-get update
 
 # Install Apache
-sudo apt-get install -y apache2-mpm-event libapache2-mod-fastcgi
+sudo apt-get install -y apache2-mpm-event libapache2-mod-fastcgi libapache2-mod-php5
 
 echo ">>> Configuring Apache"
 
