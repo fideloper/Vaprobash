@@ -8,6 +8,9 @@ php -v > /dev/null 2>&1 || { printf "!!! PHP is not installed.\n    Installing S
 # Test if Composer is installed
 composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    Installing Symfony aborted!\n"; exit 0; }
 
+# Test if Composer is installed
+composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    Installing Symfony aborted!"; exit 0; }
+
 # Test if Server IP is set in Vagrantfile
 [[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Symfony aborted!\n"; exit 0; }
 
