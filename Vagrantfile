@@ -164,6 +164,8 @@ Vagrant.configure("2") do |config|
   # Install Elasticsearch
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elasticsearch.sh"
 
+  # Install SphinxSearch
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sphinxsearch.sh"
 
   ####
   # Search Server Administration (web-based)
