@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Test if PHP is installed
+php -v > /dev/null 2>&1
+PHP_IS_INSTALLED=$?
+
 echo ">>> Installing Nginx"
 
 [[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
@@ -20,6 +24,44 @@ sudo apt-get update
 sudo apt-get install -y nginx
 
 echo ">>> Configuring Nginx"
+
+if [[ $PHP_IS_INSTALLED ]]; then
+
+    read -d '' PHP_NO_SSL <<EOF
+        # pass the PHP scripts to php5-fpm
+        # Note: \.php$ is susceptible to file upload attacks
+        # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
+        location ~ \.php$ {
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            # With php5-fpm:
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            fastcgi_param LARA_ENV local; # Environment variable for Laravel
+            fastcgi_param HTTPS off;
+        }
+EOF
+
+    read -d '' PHP_WITH_SSL <<EOF
+        # pass the PHP scripts to php5-fpm
+        # Note: \.php$ is susceptible to file upload attacks
+        # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
+        location ~ \.php$ {
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            # With php5-fpm:
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            fastcgi_param LARA_ENV local; # Environment variable for Laravel
+            fastcgi_param HTTPS off;
+        }
+EOF
+else
+    PHP_NO_SSL = ""
+    PHP_WITH_SSL = ""
+fi
 
 # Configure Nginx
 # Note the .xip.io IP address $1 variable
@@ -48,20 +90,7 @@ server {
 
     error_page 404 /index.php;
 
-    # pass the PHP scripts to php5-fpm
-    # Note: \.php$ is susceptible to file upload attacks
-    # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
-    location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # With php5-fpm:
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
-        fastcgi_param HTTPS off;
-    }
+    $PHP_NO_SSL
 
     # Deny .htaccess file access
     location ~ /\.ht {
@@ -96,20 +125,7 @@ server {
 
     error_page 404 /index.php;
 
-    # pass the PHP scripts to php5-fpm
-    # Note: \.php$ is susceptible to file upload attacks
-    # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
-    location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # With php5-fpm:
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
-        fastcgi_param HTTPS on;
-    }
+    $PHP_WITH_SSL
 
     # Deny .htaccess file access
     location ~ /\.ht {
@@ -139,8 +155,11 @@ sudo mv ngxen ngxvhost /usr/local/bin
 sudo ngxdis default
 sudo ngxen vagrant
 
-# PHP Config for Nginx
-sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+if [[ $PHP_IS_INSTALLED ]]; then
+    # PHP Config for Nginx
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
-sudo service php5-fpm restart
+    sudo service php5-fpm restart
+fi
+
 sudo service nginx restart

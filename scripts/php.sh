@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-#
-#
+
 if [ -z "$1" ]; then
     php_version="distributed"
 else
@@ -35,7 +34,7 @@ xdebug.show_local_vars=1
 ; var_dump display
 xdebug.var_display_max_depth = 5
 xdebug.var_display_max_children = 256
-xdebug.var_display_max_data = 1024 
+xdebug.var_display_max_data = 1024
 EOF
 
 # PHP Error Reporting Config
