@@ -53,9 +53,9 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
-  config.vm.box = "precise64"
+  config.vm.box = "trusty64"
 
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
   # If using VMWare Fusion Provider:
   # config.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
 
