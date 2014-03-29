@@ -23,7 +23,6 @@ mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
-mariadb_version       = "10.0"   # Options: 5.5 | 10.0
 mariadb_root_password = "root"   # We'll assume user "root"
 
 # Languages and Packages
@@ -33,7 +32,6 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"sass",
   #"compass",
 ]
-php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
 composer_packages     = [        # List any global Composer packages that you want to install
   #"phpunit/phpunit:4.0.*",
   #"codeception/codeception=*",
