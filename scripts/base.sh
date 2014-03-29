@@ -12,6 +12,13 @@ sudo apt-get install -y git-core ack-grep vim tmux curl wget build-essential pyt
 curl -L https://gist.githubusercontent.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
 sudo chown vagrant:vagrant /home/vagrant/.gitconfig
 
+# Common fixes for git
+git config --global http.postBuffer 65536000
+
+# Cache http credentials for one day while pull/push
+git config --global credential.helper 'cache --timeout=86400'
+
+
 echo ">>> Installing *.xip.io self-signed SSL"
 
 SSL_DIR="/etc/ssl/xip.io"

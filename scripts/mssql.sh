@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-#
-#
+
 echo ">>> Installing PHP MSSQL"
 
-sudo apt-get update
+# Test if PHP is installed
+php -v > /dev/null 2>&1 || { printf "!!! PHP is not installed.\n    Installing PHP MSSQL aborted!\n"; exit 0; }
 
+sudo apt-get update
 
 # Install PHP MSSQL
 sudo apt-get install -y php5-mssql
