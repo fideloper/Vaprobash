@@ -18,6 +18,10 @@ fi
 # (Required to remove conflicts with PHP PPA due to partial Apache upgrade within it)
 sudo add-apt-repository -y ppa:ondrej/apache2
 
+# Add deb for libapache2-mod-fastcgi
+# Likely won't always be needed?
+echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main multiverse" | sudo tee /etc/apt/sources.list
+
 # Update Again
 sudo apt-get update
 
