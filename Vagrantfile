@@ -104,6 +104,11 @@ Vagrant.configure("2") do |config|
     # Configure cached packages to be shared between instances of the same base box.
     # Usage docs: http://fgrehm.viewdocs.io/vagrant-cachier/usage
     config.cache.scope = :box
+
+    config.cache.synced_folder_opts = {
+        type: :nfs,
+        mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+    }
   end
 
   ####
