@@ -98,6 +98,14 @@ Vagrant.configure("2") do |config|
 
   end
 
+  # If using Vagrant-Cachier
+  # http://fgrehm.viewdocs.io/vagrant-cachier
+  if Vagrant.has_plugin?("vagrant-cachier")
+    # Configure cached packages to be shared between instances of the same base box.
+    # Usage docs: http://fgrehm.viewdocs.io/vagrant-cachier/usage
+    config.cache.scope = :box
+  end
+
   ####
   # Base Items
   ##########
