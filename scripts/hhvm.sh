@@ -18,7 +18,7 @@ if [ "$1" == "true" ]; then
     sudo /usr/share/hhvm/install_fastcgi.sh
     sudo service hhvm restart
 
-    # This needs extra work to add to laravel nginx config or 192.168.33.10.xip.io apache config
+    # This needs extra work to add to "vagrant" nginx config or 192.168.33.10.xip.io.conf apache config
 fi
 
 # Replace PHP with HHVM via symlinking
