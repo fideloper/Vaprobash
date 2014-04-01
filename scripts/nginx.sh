@@ -146,10 +146,10 @@ sudo mv ngxen ngxdis /usr/local/bin
 # Setup the vhost generator script for nginx
 # This sould be used for the above setup eventually, rather
 # than the hard-coded config above!
-curl -L https://gist.githubusercontent.com/fideloper/9063376/raw > ngxvhost
+curl -L https://gist.githubusercontent.com/fideloper/9063376/raw/ngxhost.sh > ngxvhost
 sudo chown root:root ngxvhost
 sudo chmod guo+x ngxvhost
-sudo mv ngxen ngxvhost /usr/local/bin
+sudo mv ngxvhost /usr/local/bin
 
 # Disable "default", enable "vagrant"
 sudo ngxdis default
