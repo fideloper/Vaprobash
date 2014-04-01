@@ -11,4 +11,17 @@ echo deb http://dl.hhvm.com/ubuntu precise main | sudo tee /etc/apt/sources.list
 sudo apt-get update
 
 # Install HHVM
-sudo apt-get install -y --force-yes hhvm-fastcgi
+sudo apt-get install -y hhvm
+
+# Use as FastCGI?
+if [ "$1" == "true" ]; then
+    sudo /usr/share/hhvm/install_fastcgi.sh
+    sudo service hhvm restart
+
+    # This needs extra work to add to "vagrant" nginx config or 192.168.33.10.xip.io.conf apache config
+fi
+
+# Replace PHP with HHVM via symlinking
+if [ "$2" == "true" ]; then
+    sudo /usr/bin/update-alternatives --install /usr/bin/php php /usr/bin/hhvm 60
+fi

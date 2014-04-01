@@ -25,7 +25,7 @@ sudo apt-get install -y nginx
 
 echo ">>> Configuring Nginx"
 
-if [[ $PHP_IS_INSTALLED ]]; then
+if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 
     read -d '' PHP_NO_SSL <<EOF
         # pass the PHP scripts to php5-fpm
@@ -146,16 +146,16 @@ sudo mv ngxen ngxdis /usr/local/bin
 # Setup the vhost generator script for nginx
 # This sould be used for the above setup eventually, rather
 # than the hard-coded config above!
-curl -L https://gist.githubusercontent.com/fideloper/9063376/raw > ngxvhost
+curl -L https://gist.githubusercontent.com/fideloper/9063376/raw/ngxhost.sh > ngxvhost
 sudo chown root:root ngxvhost
 sudo chmod guo+x ngxvhost
-sudo mv ngxen ngxvhost /usr/local/bin
+sudo mv ngxvhost /usr/local/bin
 
 # Disable "default", enable "vagrant"
 sudo ngxdis default
 sudo ngxen vagrant
 
-if [[ $PHP_IS_INSTALLED ]]; then
+if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
     # PHP Config for Nginx
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 

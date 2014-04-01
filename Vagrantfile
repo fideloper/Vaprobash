@@ -33,6 +33,12 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"sass",
   #"compass",
 ]
+
+# HHVM pptions
+hhvm_use_fastcgi      = "false"  # Use HHVM as FastCGI (over php-fpm)
+hhvm_over_php         = "false"  # Symlink HHVM to PHP, so calls to PHP run via HHVM
+
+# PHP Options
 php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
 composer_packages     = [        # List any global Composer packages that you want to install
   #"phpunit/phpunit:4.0.*",
@@ -98,6 +104,19 @@ Vagrant.configure("2") do |config|
 
   end
 
+  # If using Vagrant-Cachier
+  # http://fgrehm.viewdocs.io/vagrant-cachier
+  if Vagrant.has_plugin?("vagrant-cachier")
+    # Configure cached packages to be shared between instances of the same base box.
+    # Usage docs: http://fgrehm.viewdocs.io/vagrant-cachier/usage
+    config.cache.scope = :box
+
+    config.cache.synced_folder_opts = {
+        type: :nfs,
+        mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+    }
+  end
+
   ####
   # Base Items
   ##########
@@ -125,12 +144,14 @@ Vagrant.configure("2") do |config|
   # Provision Apache Base
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, public_folder]
 
-  # Provision HHVM
-  # Install HHVM & HHVM-FastCGI
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
-
   # Provision Nginx Base
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder]
+
+  # Provision HHVM & HHVM-FastCGI
+  # Note: Should be installed after either Apache or Nginx, incase one of these are installed.
+  #       It's suggested that you do NOT install php if you are using HHVM. HHVM is meant to be used as a replacement.
+  #       Installing HHVM and PHP will install PHP-FPM ~AND~ HHVM, both of which may vie for Nginx's Apache's attention
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh", args: [hhvm_use_fastcgi, hhvm_over_php]
 
 
   ####
