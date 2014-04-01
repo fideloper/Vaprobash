@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "tscheckenbach"
 github_repo     = "Vaprobash"
-github_branch   = "master"
+github_branch   = "develop"
 
 # Server Configuration
 
@@ -62,8 +62,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = "precise64"
 
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  # If using VMWare Fusion Provider:
-  # config.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
@@ -74,10 +72,10 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: server_ip
 
   # Use NFS for the shared folder
-  config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['nolock,vers=3,udp,noatime']
+  #config.vm.synced_folder ".", "/vagrant",
+  #          id: "core",
+  #          :nfs => true,
+  #          :mount_options => ['nolock,vers=3,udp,noatime']
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
@@ -97,8 +95,9 @@ Vagrant.configure("2") do |config|
   end
 
   # If using VMWare Fusion
-  config.vm.provider :vmware_fusion do |vb|
-
+  config.vm.provider "vmware_fusion" do |vb, override|
+    override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
+    
     # Set server memory
     vb.vmx["memsize"] = server_memory
 
@@ -258,6 +257,9 @@ Vagrant.configure("2") do |config|
 
   # Install git-ftp
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
+
+  # Install phalcon
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phalcon.sh", privileged: false
 
   ####
   # Local Scripts
