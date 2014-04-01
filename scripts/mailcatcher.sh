@@ -29,14 +29,14 @@ fi
 sudo echo "@reboot $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
 sudo update-rc.d cron defaults
 
-if [[ $PHP_IS_INSTALLED ]]; then
+if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 	# Make php use it to send mail
 	sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/mods-available/mailcatcher.ini
 	sudo php5enmod mailcatcher
 	sudo service php5-fpm restart
 fi
 
-if [[ $APACHE_IS_INSTALLED ]]; then
+if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
 	sudo service apache2 restart
 fi
 

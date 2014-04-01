@@ -35,7 +35,7 @@ sudo mv vhost /usr/local/bin
 # Create a virtualhost to start, with SSL certificate
 sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io
 
-if [[ $PHP_IS_INSTALLED ]]; then
+if [[ $PHP_IS_INSTALLED -ne 0 ]]; then
     # PHP Config for Apache
     cat > /etc/apache2/conf-available/php5-fpm.conf << EOF
     <IfModule mod_fastcgi.c>
