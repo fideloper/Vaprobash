@@ -25,7 +25,7 @@ sudo apt-get install -y nginx
 
 echo ">>> Configuring Nginx"
 
-if [[ $PHP_IS_INSTALLED -ne 0 ]]; then
+if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 
     read -d '' PHP_NO_SSL <<EOF
         # pass the PHP scripts to php5-fpm
@@ -155,7 +155,7 @@ sudo mv ngxen ngxvhost /usr/local/bin
 sudo ngxdis default
 sudo ngxen vagrant
 
-if [[ $PHP_IS_INSTALLED -ne 0 ]]; then
+if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
     # PHP Config for Nginx
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
