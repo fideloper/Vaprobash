@@ -14,7 +14,7 @@ github_branch   = "master"
 #   10.0.0.1    - 10.255.255.254
 #   172.16.0.1  - 172.31.255.254
 #   192.168.0.1 - 192.168.255.254
-server_ip             = "192.168.33.10"
+server_ip             = "192.168.22.10"
 server_memory         = "384" # MB
 server_timezone       = "UTC"
 
