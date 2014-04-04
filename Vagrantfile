@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "fideloper"
 github_repo     = "Vaprobash"
-github_branch   = "develop"
+github_branch   = "master"
 
 # Server Configuration
 
@@ -34,7 +34,7 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"compass",
 ]
 
-# HHVM pptions
+# HHVM Options
 hhvm_use_fastcgi      = "false"  # Use HHVM as FastCGI (over php-fpm)
 hhvm_over_php         = "false"  # Symlink HHVM to PHP, so calls to PHP run via HHVM
 
@@ -72,10 +72,10 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: server_ip
 
   # Use NFS for the shared folder
-  #config.vm.synced_folder ".", "/vagrant",
-  #          id: "core",
-  #          :nfs => true,
-  #          :mount_options => ['nolock,vers=3,udp,noatime']
+  config.vm.synced_folder ".", "/vagrant",
+            id: "core",
+            :nfs => true,
+            :mount_options => ['nolock,vers=3,udp,noatime']
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
