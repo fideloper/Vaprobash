@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "fideloper"
 github_repo     = "Vaprobash"
-github_branch   = "develop"
+github_branch   = "master"
 
 # Server Configuration
 
@@ -34,7 +34,7 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"compass",
 ]
 
-# HHVM pptions
+# HHVM Options
 hhvm_use_fastcgi      = "false"  # Use HHVM as FastCGI (over php-fpm)
 hhvm_over_php         = "false"  # Symlink HHVM to PHP, so calls to PHP run via HHVM
 
@@ -72,10 +72,10 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: server_ip
 
   # Use NFS for the shared folder
-  #config.vm.synced_folder ".", "/vagrant",
-  #          id: "core",
-  #          :nfs => true,
-  #          :mount_options => ['nolock,vers=3,udp,noatime']
+  config.vm.synced_folder ".", "/vagrant",
+           id: "core",
+           :nfs => true,
+           :mount_options => ['nolock,vers=3,udp,noatime']
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
@@ -97,7 +97,7 @@ Vagrant.configure("2") do |config|
   # If using VMWare Fusion
   config.vm.provider "vmware_fusion" do |vb, override|
     override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
-    
+
     # Set server memory
     vb.vmx["memsize"] = server_memory
 
@@ -124,7 +124,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
@@ -259,7 +259,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
 
   # Install phalcon
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phalcon.sh", privileged: false
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phalcon.sh", privileged: false
 
   ####
   # Local Scripts
