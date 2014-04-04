@@ -258,9 +258,6 @@ Vagrant.configure("2") do |config|
   # Install git-ftp
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
 
-  # Install phalcon
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/phalcon.sh", privileged: false
-
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
