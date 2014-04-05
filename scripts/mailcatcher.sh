@@ -45,11 +45,11 @@ fi
 
 # Add aliases
 if [[ -f "/home/vagrant/.profile" ]]; then
-	sudo echo "\nalias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.profile
+	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.profile
 	. /home/vagrant/.profile
 fi
 
 if [[ -f "/home/vagrant/.zshrc" ]]; then
-	sudo echo "\nalias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.zshrc
+	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.zshrc
 	. /home/vagrant/.zshrc
 fi
