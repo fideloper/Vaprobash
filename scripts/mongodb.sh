@@ -28,13 +28,11 @@ if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 
     if ps ax | grep -v grep | grep apache2 > /dev/null; then
         ln -s /etc/php5/mods-available/mongo.ini /etc/php5/apache2/conf.d/mongo.ini
-        # echo 'extension=mongo.so' | sudo tee /etc/php5/mods-available/mongo.ini
         sudo service apache2 restart
     fi
 
     if ps ax | grep -v grep | grep php-fpm > /dev/null; then
         ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
-        # echo 'extension=mongo.so' | sudo tee /etc/php5/fpm/conf.d/mongo.ini
         sudo service php5-fpm restart
     fi
 fi
