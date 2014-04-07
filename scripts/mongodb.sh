@@ -16,22 +16,30 @@ sudo apt-get -y install mongodb-10gen
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
 
-if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
+if [ $PHP_IS_INSTALLED -eq 0 ]; then
     # install dependencies
     sudo apt-get -y install php-pear php5-dev
 
     # install php extencion
     sudo pecl install mongo
 
+    # Test if apache is installed
+    which apache2 > /dev/null 2>&1
+    APACHE_IS_INSTALLED=$?
+
+    # Test if nginx is installed
+    which nginx > /dev/null 2>&1
+    NGINX_IS_INSTALLED=$?
+
     # add extencion file and restart service
     echo 'extension=mongo.so' | sudo tee /etc/php5/mods-available/mongo.ini
 
-    if ps ax | grep -v grep | grep apache2 > /dev/null; then
+    if [ $APACHE_IS_INSTALLED -eq 0 ]; then
         ln -s /etc/php5/mods-available/mongo.ini /etc/php5/apache2/conf.d/mongo.ini
         sudo service apache2 restart
     fi
 
-    if ps ax | grep -v grep | grep php-fpm > /dev/null; then
+    if [ $NGINX_IS_INSTALLED -eq 0 ]; then
         ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
         sudo service php5-fpm restart
     fi
