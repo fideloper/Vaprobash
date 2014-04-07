@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "ChrisRM"
 github_repo     = "Vaprobash"
 github_branch   = "master"
 
@@ -226,6 +226,9 @@ Vagrant.configure("2") do |config|
 
   # Install Supervisord
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/supervisord.sh"
+
+  # Install Gearman
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/gearman.sh"
 
   ####
   # Additional Languages
