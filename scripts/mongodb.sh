@@ -21,26 +21,13 @@ if [ $PHP_IS_INSTALLED -eq 0 ]; then
     sudo apt-get -y install php-pear php5-dev
 
     # install php extencion
-    sudo pecl install mongo
-
-    # Test if apache is installed
-    which apache2 > /dev/null 2>&1
-    APACHE_IS_INSTALLED=$?
-
-    # Test if nginx is installed
-    which nginx > /dev/null 2>&1
-    NGINX_IS_INSTALLED=$?
+    echo "no" > answers.txt
+    sudo pecl install mongo < answers.txt
+    rm answers.txt
 
     # add extencion file and restart service
     echo 'extension=mongo.so' | sudo tee /etc/php5/mods-available/mongo.ini
 
-    if [ $APACHE_IS_INSTALLED -eq 0 ]; then
-        ln -s /etc/php5/mods-available/mongo.ini /etc/php5/apache2/conf.d/mongo.ini
-        sudo service apache2 restart
-    fi
-
-    if [ $NGINX_IS_INSTALLED -eq 0 ]; then
-        ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
-        sudo service php5-fpm restart
-    fi
+    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
+    sudo service php5-fpm restart
 fi
