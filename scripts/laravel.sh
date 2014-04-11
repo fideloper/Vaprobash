@@ -22,7 +22,7 @@ else
 fi
 
 if [ -z "$3" ]; then
-    laravel_public_folder="/vagrant/laravel/public"
+    laravel_public_folder="$laravel_root_folder/public"
 else
     laravel_public_folder="$3"
 fi
