@@ -44,6 +44,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"phpunit/phpunit:4.0.*",
   #"codeception/codeception=*",
   #"phpspec/phpspec:2.0.*@dev",
+  #"squizlabs/php_codesniffer:1.5.*",
 ]
 public_folder         = "/vagrant" # If installing Symfony or Laravel, leave this blank to default to the framework public directory
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
