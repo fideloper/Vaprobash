@@ -6,7 +6,7 @@ echo ">>> Installing Oh-My-Zsh"
 sudo apt-get install -y zsh
 
 # Install oh-my-zsh
-sudo su - vagrant -c 'wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh'
+sudo su - vagrant -c 'wget http://install.ohmyz.sh -O - | zsh'
 
 # Set to "blinks" theme which
 # uses Solarized and shows user/host
