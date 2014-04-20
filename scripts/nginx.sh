@@ -137,7 +137,7 @@ EOF
 # Turn off sendfile to be more compatible with Windows, which can't use NFS
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 
-# set client body size to 5M #
+# set client body size to 5M 
 echo 'client_max_body_size 5M;' >> /etc/nginx/nginx.conf
 
 # Nginx enabling and disabling virtual hosts
