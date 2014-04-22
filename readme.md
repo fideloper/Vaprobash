@@ -130,7 +130,7 @@ The vagrant file does three things you should take note of:
 
 ## Connecting to MySQL from Sequel Pro:
 
-![sequel pro vaprobash]()
+![sequel pro vaprobash](http://fideloper.github.io/Vaprobash/img/sequel_pro.png)
 
 ## Contribute!
 
