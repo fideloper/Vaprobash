@@ -128,6 +128,9 @@ The vagrant file does three things you should take note of:
 
   Don't forget to reload your Vagrantfile running `vagrant reload --no-provision`, in case your virtual machine already exists.
 
+## Connecting to MySQL from Sequel Pro:
+
+![sequel pro vaprobash]()
 
 ## Contribute!
 
