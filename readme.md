@@ -130,6 +130,8 @@ The vagrant file does three things you should take note of:
 
 ## Connecting to MySQL from Sequel Pro:
 
+Change your IP address as needed. The default IP address is now `192.168.22.10`
+
 ![sequel pro vaprobash](http://fideloper.github.io/Vaprobash/img/sequel_pro.png)
 
 ## Contribute!
