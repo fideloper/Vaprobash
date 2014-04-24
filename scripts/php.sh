@@ -27,7 +27,7 @@ zend_extension=$(find /usr/lib/php5 -name xdebug.so)
 xdebug.remote_enable = 1
 xdebug.remote_connect_back = 1
 xdebug.remote_port = 9000
-xdebug.scream=1
+xdebug.scream=0
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 
