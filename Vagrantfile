@@ -14,7 +14,7 @@ github_branch   = "master"
 #   10.0.0.1    - 10.255.255.254
 #   172.16.0.1  - 172.31.255.254
 #   192.168.0.1 - 192.168.255.254
-server_ip             = "192.168.33.10"
+server_ip             = "192.168.22.10"
 server_memory         = "384" # MB
 server_timezone       = "UTC"
 
@@ -43,6 +43,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"phpunit/phpunit:4.0.*",
   #"codeception/codeception=*",
   #"phpspec/phpspec:2.0.*@dev",
+  #"squizlabs/php_codesniffer:1.5.*",
 ]
 public_folder         = "/vagrant" # If installing Symfony or Laravel, leave this blank to default to the framework public directory
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
@@ -164,6 +165,9 @@ Vagrant.configure("2") do |config|
 
   # Provision SQLite
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
+
+  # Provision RethinkDB
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rethinkdb.sh", args: pgsql_root_password
 
   # Provision Couchbase
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchbase.sh"

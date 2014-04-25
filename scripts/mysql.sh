@@ -34,7 +34,7 @@ if [ $3 == "true" ]; then
     # thx to http://stackoverflow.com/questions/7528967/how-to-grant-mysql-privileges-in-a-bash-script for this
     MYSQL=`which mysql`
 
-    Q1="GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$1';"
+    Q1="GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$1' WITH GRANT OPTION;"
     Q2="FLUSH PRIVILEGES;"
     SQL="${Q1}${Q2}"
 
