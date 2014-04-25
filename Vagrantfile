@@ -8,6 +8,8 @@ github_branch   = "master"
 
 # Server Configuration
 
+hostname        = "vaprobash.dev"
+
 # Set a local private network IP address.
 # See http://en.wikipedia.org/wiki/Private_network for explanation
 # You can use the following IP ranges:
@@ -23,7 +25,6 @@ mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
-mariadb_version       = "10.0"   # Options: 5.5 | 10.0
 mariadb_root_password = "root"   # We'll assume user "root"
 
 # Languages and Packages
@@ -39,7 +40,6 @@ hhvm_use_fastcgi      = "false"  # Use HHVM as FastCGI (over php-fpm)
 hhvm_over_php         = "false"  # Symlink HHVM to PHP, so calls to PHP run via HHVM
 
 # PHP Options
-php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
 composer_packages     = [        # List any global Composer packages that you want to install
   #"phpunit/phpunit:4.0.*",
   #"codeception/codeception=*",
@@ -60,14 +60,12 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
-  config.vm.box = "precise64"
-
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.box = "ubuntu/trusty64"
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
   # TO DO: Make this work with virtualhost along-side xip.io URL
-  config.vm.hostname = "vaprobash.dev"
+  config.vm.hostname = hostname
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
@@ -125,13 +123,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, server_timezone]
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [server_timezone]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
-
-  # Provision Oh-My-Zsh
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/zsh.sh"
 
   # Provision Vim
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/vim.sh"
@@ -142,10 +137,10 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Apache Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, public_folder]
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, public_folder, hostname]
 
   # Provision Nginx Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder]
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder, hostname]
 
   # Provision HHVM & HHVM-FastCGI
   # Note: Should be installed after either Apache or Nginx, incase one of these are installed.
