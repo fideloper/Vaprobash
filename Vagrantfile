@@ -59,9 +59,7 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
-  config.vm.box = "trusty64"
-
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.box = "ubuntu/trusty65"
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
