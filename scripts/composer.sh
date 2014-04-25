@@ -49,9 +49,6 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
         echo "COMPOSER_HOME=\"/home/vagrant/.composer\"" >> /home/vagrant/.zshrc
         # Add composer home vendor bin dir to PATH to run globally installed executables
         printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.zshrc
-
-        # Source the .zshrc to pick up changes
-       # . /home/vagrant/.zshrc
     fi
 
 fi
