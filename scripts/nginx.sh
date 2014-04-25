@@ -34,7 +34,7 @@ if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
         location ~ \.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
             # With php5-fpm:
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_pass 127.0.0.1:9000;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
@@ -50,12 +50,12 @@ EOF
         location ~ \.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
             # With php5-fpm:
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_pass 127.0.0.1:9000;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
             fastcgi_param LARA_ENV local; # Environment variable for Laravel
-            fastcgi_param HTTPS off;
+            fastcgi_param HTTPS on;
         }
 EOF
 else

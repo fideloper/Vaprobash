@@ -18,17 +18,15 @@ fi
 # (Required to remove conflicts with PHP PPA due to partial Apache upgrade within it)
 sudo add-apt-repository -y ppa:ondrej/apache2
 
-# Add deb for libapache2-mod-fastcgi
-# Likely won't always be needed?
-echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main multiverse" | sudo tee /etc/apt/sources.list
 
 # Update Again
 sudo apt-get update
 
 # Install Apache
-sudo apt-get install -y apache2-mpm-event libapache2-mod-fastcgi
+sudo apt-get install -y apache2
 
 echo ">>> Configuring Apache"
+
 
 # Apache Config
 sudo a2enmod rewrite actions ssl
@@ -40,21 +38,13 @@ sudo mv vhost /usr/local/bin
 sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
+
     # PHP Config for Apache
-    cat > /etc/apache2/conf-available/php5-fpm.conf << EOF
-    <IfModule mod_fastcgi.c>
-            AddHandler php5-fcgi .php
-            Action php5-fcgi /php5-fcgi
-            Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
-            FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -socket /var/run/php5-fpm.sock -pass-header Authorization
-            <Directory /usr/lib/cgi-bin>
-                    Options ExecCGI FollowSymLinks
-                    SetHandler fastcgi-script
-                    Require all granted
-            </Directory>
-    </IfModule>
-EOF
-    sudo a2enconf php5-fpm
+    sudo a2enmod proxy_fcgi
+
+    # Add ProxyPassMatch to pass to php in document root
+    sudo sed -i "s@#ProxyPassMatch.*@ProxyPassMatch ^/(.*\\\.php(/.*)?)$ fcgi://127.0.0.1:9000"$public_folder"/\$1@" /etc/apache2/sites-available/$1.xip.io.conf
+
 fi
 
 sudo service apache2 restart
