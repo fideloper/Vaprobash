@@ -74,7 +74,7 @@ server {
     index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
-    server_name $1.xip.io;
+    server_name $1.xip.io $3;
 
     access_log /var/log/nginx/vagrant.com-access.log;
     error_log  /var/log/nginx/vagrant.com-error.log error;
@@ -109,7 +109,7 @@ server {
     index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
-    server_name $1.xip.io;
+    server_name $1.xip.io $3;
 
     access_log /var/log/nginx/vagrant.com-access.log;
     error_log  /var/log/nginx/vagrant.com-error.log error;

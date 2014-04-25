@@ -138,10 +138,10 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Apache Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, public_folder]
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, public_folder, hostname]
 
   # Provision Nginx Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder]
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder, hostname]
 
   # Provision HHVM & HHVM-FastCGI
   # Note: Should be installed after either Apache or Nginx, incase one of these are installed.

@@ -35,7 +35,7 @@ sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
 # Create a virtualhost to start, with SSL certificate
-sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io
+sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io -a $3
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 
