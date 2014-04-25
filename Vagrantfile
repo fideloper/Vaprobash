@@ -8,6 +8,8 @@ github_branch   = "master"
 
 # Server Configuration
 
+hostname        = "vaprobash.dev"
+
 # Set a local private network IP address.
 # See http://en.wikipedia.org/wiki/Private_network for explanation
 # You can use the following IP ranges:
@@ -64,7 +66,7 @@ Vagrant.configure("2") do |config|
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
   # TO DO: Make this work with virtualhost along-side xip.io URL
-  config.vm.hostname = "vaprobash.dev"
+  config.vm.hostname = hostname
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
