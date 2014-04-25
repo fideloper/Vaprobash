@@ -59,7 +59,7 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 12.04
-  config.vm.box = "ubuntu/trusty65"
+  config.vm.box = "ubuntu/trusty64"
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
