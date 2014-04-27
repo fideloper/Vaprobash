@@ -55,7 +55,7 @@ EOF
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
             fastcgi_param LARA_ENV local; # Environment variable for Laravel
-            fastcgi_param HTTPS off;
+            fastcgi_param HTTPS on;
         }
 EOF
 else
