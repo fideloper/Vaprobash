@@ -17,3 +17,6 @@ sudo sed -i "s/# index.number_of_shards: 1/index.number_of_shards: 1/" /etc/elas
 sudo sed -i "s/# index.number_of_replicas: 0/index.number_of_replicas: 0/" /etc/elasticsearch/elasticsearch.yml
 sudo sed -i "s/# bootstrap.mlockall: true/bootstrap.mlockall: true/" /etc/elasticsearch/elasticsearch.yml
 sudo service elasticsearch restart
+
+# Configure to start up Elasticsearch automatically
+sudo update-rc.d elasticsearch defaults 95 10
