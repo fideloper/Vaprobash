@@ -48,6 +48,7 @@ composer_packages     = [        # List any global Composer packages that you wa
 ]
 public_folder         = "/vagrant" # If installing Symfony or Laravel, leave this blank to default to the framework public directory
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
+laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
 symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
@@ -96,7 +97,7 @@ Vagrant.configure("2") do |config|
   # If using VMWare Fusion
   config.vm.provider "vmware_fusion" do |vb, override|
     override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
-    
+
     # Set server memory
     vb.vmx["memsize"] = server_memory
 
@@ -243,7 +244,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
 
   # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: [server_ip, laravel_root_folder, public_folder]
+  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: [server_ip, laravel_root_folder, public_folder, laravel_version]
 
   # Provision Symfony
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/symfony.sh", args: [server_ip, symfony_root_folder, public_folder]
