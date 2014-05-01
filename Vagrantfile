@@ -104,6 +104,42 @@ Vagrant.configure("2") do |config|
 
   end
 
+
+  #if using AWS
+  # you must do the following command to install the AWS plugin for vagrant:
+  # > vagrant plugin install vagrant-aws
+  # and install a dummy box to get going
+  # > vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+  # additional resources:
+  # https://github.com/mitchellh/vagrant-aws
+  # http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant/
+
+  # finally to run with vagrant:
+  # > vagrant up --provider=aws
+
+
+   config.vm.provider :aws do |aws, override|
+
+      config.vm.box = "dummy"
+
+      aws.access_key_id = "ACCESS_KEY_ID"
+      aws.secret_access_key = "SECRET_ACCESS_KEY"
+      aws.keypair_name = "KEYPAIR_NAME"
+
+      #us-ease-1 Ubuntu 12.04 LTS
+      aws.ami = "ami-b08b6cd8"
+
+      override.ssh.username = "ubuntu"
+      override.ssh.private_key_path = "PATH_TO_LOCAL_PEM_KEY"
+      aws.instance_type = "t1.micro"
+      aws.security_groups = "SECURITY_GROUP"
+      override.ssh.username = "ubuntu"
+      aws.tags = {
+        'Name' => 'TAG_NAMES',
+       }
+    end
+
+
   # If using Vagrant-Cachier
   # http://fgrehm.viewdocs.io/vagrant-cachier
   if Vagrant.has_plugin?("vagrant-cachier")
