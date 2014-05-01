@@ -30,7 +30,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
     # Install NVM
     #curl -L https://gist.githubusercontent.com/Ilyes512/8335484/raw/nvm_install.sh | sh
-    curl -L https://gist.githubusercontent.com/cmosguy/0b4ff5ff5e8396fc136e/raw/9b6b0a4fbe5c783274ebc154650d58e384126fad/nvm_install.sh | sh
+    curl -L https://gist.githubusercontent.com/cmosguy/0b4ff5ff5e8396fc136e/raw/5dfd7d1faa60ff7edb192f02931b7e962cdc548d/nvm_install.sh | sh
 
 
     # Re-source user profiles
