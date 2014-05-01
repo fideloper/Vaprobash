@@ -19,12 +19,13 @@ server_memory         = "384" # MB
 server_timezone       = "UTC"
 
 # Database Configuration
-mysql_root_password   = "root"   # We'll assume user "root"
-mysql_version         = "5.5"    # Options: 5.5 | 5.6
-mysql_enable_remote   = "false"  # remote access enabled when true
-pgsql_root_password   = "root"   # We'll assume user "root"
-mariadb_version       = "10.0"   # Options: 5.5 | 10.0
-mariadb_root_password = "root"   # We'll assume user "root"
+mysql_root_password   = "root"     # We'll assume user "root"
+mysql_version         = "5.5"      # Options: 5.5 | 5.6
+mysql_enable_remote   = "false"    # remote access enabled when true
+mysql_database        = "database" # The MySQL database
+pgsql_root_password   = "root"     # We'll assume user "root"
+mariadb_version       = "10.0"     # Options: 5.5 | 10.0
+mariadb_root_password = "root"     # We'll assume user "root"
 
 # Languages and Packages
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
@@ -98,7 +99,7 @@ Vagrant.configure("2") do |config|
   # If using VMWare Fusion
   config.vm.provider "vmware_fusion" do |vb, override|
     override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
-    
+
     # Set server memory
     vb.vmx["memsize"] = server_memory
 
@@ -159,7 +160,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision MySQL
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote, mysql_database]
 
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/pgsql.sh", args: pgsql_root_password
