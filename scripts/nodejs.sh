@@ -33,12 +33,12 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
     # Re-source user profiles
     # if they exist
-    if [[ -f "/home/vagrant/.profile" ]]; then
-        . /home/vagrant/.profile
+    if [[ -f "$HOME/.profile" ]]; then
+        . $HOME/.profile
     fi
 
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
-        . /home/vagrant/.zshrc
+    if [[ -f "$HOME/.zshrc" ]]; then
+        . $HOME/.zshrc
     fi
 
     echo ">>> Installing Node.js version $NODEJS_VERSION"
