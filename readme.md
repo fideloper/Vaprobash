@@ -1,6 +1,6 @@
 # Vaprobash
 
-**Va**grant **Pro**visioning **Bash** Scripts
+**Va**&#x200B;grant **Pro**&#x200B;visioning **Bash** Scripts
 
 [View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
 
