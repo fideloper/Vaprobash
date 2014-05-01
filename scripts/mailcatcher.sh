@@ -44,12 +44,12 @@ fi
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
 
 # Add aliases
-if [[ -f "/home/vagrant/.profile" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.profile
-	. /home/vagrant/.profile
+if [[ -f "$HOME/.profile" ]]; then
+	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> $HOME/.profile
+	. $HOME/.profile
 fi
 
-if [[ -f "/home/vagrant/.zshrc" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.zshrc
-	. /home/vagrant/.zshrc
+if [[ -f "$HOME/.zshrc" ]]; then
+	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> $HOME/.zshrc
+	. $HOME/.zshrc
 fi

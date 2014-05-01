@@ -21,10 +21,10 @@ fi
 echo ">>> Installing git-ftp";
 
 # Clone fit-ftp into .git-ftp folder
-git clone https://github.com/git-ftp/git-ftp.git /home/vagrant/.git-ftp
+git clone https://github.com/git-ftp/git-ftp.git $HOME/.git-ftp
 
 # Move to the .git-ftp folder
-cd /home/vagrant/.git-ftp
+cd $HOME/.git-ftp
 
 # Install git-ftp
 sudo make install

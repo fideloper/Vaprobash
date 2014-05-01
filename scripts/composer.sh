@@ -33,25 +33,25 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
     composer global require $@
 
     # Add Composer's Global Bin to ~/.profile path
-    if [[ -f "/home/vagrant/.profile" ]]; then
+    if [[ -f "$HOME/.profile" ]]; then
         # Ensure COMPOSER_HOME variable is set. This isn't set by Composer automatically
-        printf "\nCOMPOSER_HOME=\"/home/vagrant/.composer\"" >> /home/vagrant/.profile
+        printf "\nCOMPOSER_HOME=\"$HOME/.composer\"" >> $HOME/.profile
         # Add composer home vendor bin dir to PATH to run globally installed executables
-        printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.profile
+        printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> $HOME/.profile
 
         # Source the .profile to pick up changes
-        . /home/vagrant/.profile
+        . $HOME/.profile
     fi
 
     # Add Composer's Global Bin to ~/.zshrc path
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
+    if [[ -f "$HOME/.zshrc" ]]; then
         # Ensure COMPOSER_HOME variable is set. This isn't set by Composer automatically
-        printf "\nCOMPOSER_HOME=\"/home/vagrant/.composer\"" >> /home/vagrant/.zshrc
+        printf "\nCOMPOSER_HOME=\"$HOME/.composer\"" >> $HOME/.zshrc
         # Add composer home vendor bin dir to PATH to run globally installed executables
-        printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> /home/vagrant/.zshrc
+        printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vendor/bin' >> $HOME/.zshrc
 
         # Source the .zshrc to pick up changes
-        . /home/vagrant/.zshrc
+        . $HOME/.zshrc
     fi
 
 fi

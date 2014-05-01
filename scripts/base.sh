@@ -9,8 +9,8 @@ sudo apt-get update
 sudo apt-get install -y unzip git-core ack-grep vim tmux curl wget build-essential python-software-properties
 
 # Git Config and set Owner
-curl -L https://gist.githubusercontent.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
-sudo chown vagrant:vagrant /home/vagrant/.gitconfig
+curl -L https://gist.githubusercontent.com/fideloper/3751524/raw/.gitconfig > $HOME/.gitconfig
+sudo chown $USER:$USER $HOME/.gitconfig
 
 # Common fixes for git
 git config --global http.postBuffer 65536000
