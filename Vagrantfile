@@ -176,7 +176,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mongodb.sh"
 
   # Provision MariaDB
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mariadb.sh", args: [mariadb_root_password, mariadb_version]
+  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mariadb.sh", args: mariadb_root_password
 
   ####
   # Search Servers
