@@ -4,6 +4,7 @@ echo ">>> Installing PHP"
 
 sudo add-apt-repository -y ppa:ondrej/php5
 
+sudo apt-key update
 sudo apt-get update
 
 # Install PHP

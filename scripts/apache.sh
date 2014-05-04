@@ -20,10 +20,11 @@ sudo add-apt-repository -y ppa:ondrej/apache2
 
 
 # Update Again
+sudo apt-key update
 sudo apt-get update
 
 # Install Apache
-sudo apt-get install -y apache2
+sudo apt-get install -y --force-yes apache2
 
 echo ">>> Configuring Apache"
 
