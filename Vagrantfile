@@ -121,10 +121,10 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Base Packages
-  config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
+  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [server_timezone]
+  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [server_timezone]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
