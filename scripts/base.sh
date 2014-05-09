@@ -6,7 +6,7 @@ echo ">>> Installing Base Packages"
 sudo apt-get update
 
 # Install base packages
-sudo apt-get install -y unzip git-core ack-grep
+sudo apt-get install -y curl unzip git-core ack-grep
 
 # Git Config and set Owner
 curl -L https://gist.githubusercontent.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
