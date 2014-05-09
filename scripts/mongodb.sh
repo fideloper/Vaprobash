@@ -10,7 +10,12 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 sudo apt-get update
 
 # Install MongoDB
-sudo apt-get -y install mongodb-10gen
+if [[ $1 == 2.6* ]]; then
+    sudo apt-get -y install mongodb-org=$1
+else
+    sudo apt-get -y install mongodb-10gen=$1
+fi
+
 
 # Test if PHP is installed
 php -v > /dev/null 2>&1
@@ -18,7 +23,7 @@ PHP_IS_INSTALLED=$?
 
 if [ $PHP_IS_INSTALLED -eq 0 ]; then
     # install dependencies
-    sudo apt-get -y install php-pear php5-dev
+    sudo apt-get -y --force-yes install php-pear php5-dev
 
     # install php extencion
     echo "no" > answers.txt

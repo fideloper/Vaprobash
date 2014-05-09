@@ -24,6 +24,7 @@ server_timezone       = "UTC"
 mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
+mongo_version         = "2.6.1"  # Latest version of MongoDB
 pgsql_root_password   = "root"   # We'll assume user "root"
 mariadb_root_password = "root"   # We'll assume user "root"
 
@@ -173,7 +174,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchdb.sh"
 
   # Provision MongoDB
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mongodb.sh"
+  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mongodb.sh", args: mongo_version
 
   # Provision MariaDB
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mariadb.sh", args: mariadb_root_password
