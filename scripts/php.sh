@@ -13,6 +13,9 @@ sudo apt-get install --force-yes -y php5-cli php5-fpm php5-mysql php5-pgsql php5
 # Set PHP FPM to listen on TCP instead of Socket
 sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php5/fpm/pool.d/www.conf
 
+# Set PHP FPM allowed clients IP address
+sudo sed -i "s/;listen.allowed_clients/listen.allowed_clients/" /etc/php5/fpm/pool.d/www.conf
+
 # xdebug Config
 cat > $(find /etc/php5 -name xdebug.ini) << EOF
 zend_extension=$(find /usr/lib/php5 -name xdebug.so)
