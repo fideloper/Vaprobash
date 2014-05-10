@@ -35,9 +35,8 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"compass",
 ]
 
-# HHVM Options
-hhvm_use_fastcgi      = "false"  # Use HHVM as FastCGI (over php-fpm)
-hhvm_over_php         = "false"  # Symlink HHVM to PHP, so calls to PHP run via HHVM
+# To install HHVM instead of PHP, set this to "true"
+hhvm                  = "false"
 
 # PHP Options
 composer_packages     = [        # List any global Composer packages that you want to install
@@ -60,7 +59,7 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
 
 Vagrant.configure("2") do |config|
 
-  # Set server to Ubuntu 12.04
+  # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
   # Create a hostname, don't forget to put it to the `hosts` file
@@ -124,7 +123,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [server_timezone]
+  config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [server_timezone, hhvm]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
@@ -142,12 +141,6 @@ Vagrant.configure("2") do |config|
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder, hostname]
-
-  # Provision HHVM & HHVM-FastCGI
-  # Note: Should be installed after either Apache or Nginx, incase one of these are installed.
-  #       It's suggested that you do NOT install php if you are using HHVM. HHVM is meant to be used as a replacement.
-  #       Installing HHVM and PHP will install PHP-FPM ~AND~ HHVM, both of which may vie for Nginx's Apache's attention
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh", args: [hhvm_use_fastcgi, hhvm_over_php]
 
 
   ####
