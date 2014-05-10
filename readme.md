@@ -1,6 +1,6 @@
 # Vaprobash
 
-**Va**grant **Pro**visioning **Bash** Scripts
+**Va**&#x200B;grant **Pro**&#x200B;visioning **Bash** Scripts
 
 [View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
 
@@ -10,7 +10,7 @@
 
 The goal of this project is to create easy to use bash scripts in order to provision a Vagrant server.
 
-1. This targets Ubuntu LTS releases, currently 12.04.*
+1. This targets Ubuntu LTS releases, currently 14.04.*
 2. This project will give users various popular options such as LAMP, LEMP
 3. This project will attempt some modularity. For example, users might choose to install a Vim setup, or not.
 
@@ -21,7 +21,7 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 ## Dependencies
 
-* Vagrant `1.4.3`+
+* Vagrant `1.5.0`+
     * Use `vagrant -v` to check your version
 * Vitualbox or VMWare Fusion
 
