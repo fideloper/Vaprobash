@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "$2" -eq "true" ]]; then
+if [ $2 == "true" ]; then
 
     echo ">>> Installing HHVM"
 
@@ -24,7 +24,6 @@ if [[ "$2" -eq "true" ]]; then
     # Replace PHP with HHVM via symlinking
     sudo /usr/bin/update-alternatives --install /usr/bin/php php /usr/bin/hhvm 60
 else
-
     echo ">>> Installing PHP"
 
     sudo add-apt-repository -y ppa:ondrej/php5
