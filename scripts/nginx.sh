@@ -4,6 +4,11 @@
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
 
+# Test if HHVM is installed
+hhvm --version > /dev/null 2>&1
+HHVM_IS_INSTALLED=$?
+[[ $HHVM_IS_INSTALLED -eq 0 ]] && { PHP_IS_INSTALLED=-1; }
+
 echo ">>> Installing Nginx"
 
 [[ -z $1 ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
@@ -52,7 +57,13 @@ sudo ngxcb -d $public_folder -s "$1.xip.io$hostname" -e
 # Disable "default"
 sudo ngxdis default
 
-if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
+if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
+    echo ">>> Install HHVM FastCGI"
+    sudo /usr/share/hhvm/install_fastcgi.sh
+
+    sudo service hhvm restart
+elif [[ $PHP_IS_INSTALLED -eq 0 ]]; then
+    echo ">>> Configure PHP-FPM FastCGI"
     # PHP Config for Nginx
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 

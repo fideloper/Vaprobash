@@ -30,6 +30,11 @@ function create_server_block {
     php -v > /dev/null 2>&1
     PHP_IS_INSTALLED=$?
 
+    # Test if HHVM is installed
+    hhvm --version > /dev/null 2>&1
+    HHVM_IS_INSTALLED=$?
+    [[ $HHVM_IS_INSTALLED -eq 0 ]] && { PHP_IS_INSTALLED=-1; }
+
     # Default empty PHP Config
     PHP_NO_SSL=""
     PHP_WITH_SSL=""
@@ -73,6 +78,43 @@ read -d '' PHP_WITH_SSL <<EOF
 EOF
     fi
 
+    if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
+
+# Nginx Server Block config for HHVM (without using SSL)
+read -d '' PHP_NO_SSL <<EOF
+        # pass the PHP scripts to php5-fpm
+        location ~ \.(hh|php)$ {
+            try_files \$uri =404;
+            fastcgi_keep_conn on;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            # With HHVM:
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            fastcgi_param LARA_ENV local; # Environment variable for Laravel
+            fastcgi_param HTTPS off;
+        }
+EOF
+
+# Nginx Server Block config for HHVM (with SSL)
+read -d '' PHP_WITH_SSL <<EOF
+        # pass the PHP scripts to php5-fpm
+        location ~ \.(hh|php)$ {
+            try_files \$uri =404;
+            fastcgi_keep_conn on;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            # With HHVM:
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            fastcgi_param LARA_ENV local; # Environment variable for Laravel
+            fastcgi_param HTTPS on;
+        }
+EOF
+    fi
+
 # Main Nginx Server Block Config
 cat <<EOF
     server {
@@ -81,7 +123,7 @@ cat <<EOF
         root $DocumentRoot;
         index index.html index.htm index.php app.php app_dev.php;
 
-        # Make site accessible from http://set-ip-address.xip.io
+        # Make site accessible from ...
         server_name $ServerName;
 
         access_log /var/log/nginx/vagrant.com-access.log;
@@ -116,7 +158,7 @@ cat <<EOF
         root $DocumentRoot;
         index index.html index.htm index.php app.php app_dev.php;
 
-        # Make site accessible from http://set-ip-address.xip.io
+        # Make site accessible from ...
         server_name $ServerName;
 
         access_log /var/log/nginx/vagrant.com-access.log;
