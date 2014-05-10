@@ -17,7 +17,8 @@ if [ $2 == "true" ]; then
     # Start on system boot
     sudo update-rc.d hhvm defaults
 
-    # Use as FastCGI
+    # Use as FastCGI - this never does much, as
+    # we install nginx/apache after HHVM
     sudo /usr/share/hhvm/install_fastcgi.sh
     sudo service hhvm restart
 
