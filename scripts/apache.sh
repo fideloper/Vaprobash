@@ -39,6 +39,8 @@ sudo mv vhost /usr/local/bin
 sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io -a $3
 
 # Create virtualhost for hostname
+# This will allow to access via the hostname,
+# when ip_address hostname is added to the hosts file
 sudo vhost -s $3 -d $public_folder -a $3
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
