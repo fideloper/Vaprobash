@@ -197,7 +197,7 @@ EnableServerBlock=0
 
 # Parse flags:
 # - Run it in "silence"-mode by starting with a ":"
-# - Single ":" after an argument means "requred"
+# - Single ":" after an argument means "required"
 # - Double ":" after an argument means "optional"
 while getopts ":hd:s:n::e" OPTION; do
     case $OPTION in
