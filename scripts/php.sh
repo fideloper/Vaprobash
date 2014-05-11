@@ -19,6 +19,8 @@ if [[ $2 == "true" ]]; then
 
     # Replace PHP with HHVM via symlinking
     sudo /usr/bin/update-alternatives --install /usr/bin/php php /usr/bin/hhvm 60
+
+    sudo service hhvm restart
 else
     echo ">>> Installing PHP"
 
