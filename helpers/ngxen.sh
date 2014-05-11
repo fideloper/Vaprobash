@@ -10,7 +10,6 @@ if [[ -z $1 ]]; then
     echo "!!! Please choose a Server Block"
     exit 1
 else
-    echo ">>> Enabling Server Block \"$1\"..."
     # -h filename: True if file exists and is a symbolic link.
     # -f filename: Returns True if file, filename is an ordinary file.
     if [[ -h /etc/nginx/sites-enabled/$1 || -f /etc/nginx/sites-enabled/$1 ]]; then

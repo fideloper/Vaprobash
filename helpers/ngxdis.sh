@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ $EUID -ne 0 ]; then
+if [[ $EUID -ne 0 ]]; then
     echo "!!! Please use \"sudo ngxdis [Your_Server_Block]\""
     exit 1
 fi
@@ -10,7 +10,6 @@ if [[ -z $1 ]]; then
     echo "!!! Please choose a Server Block"
     exit 1
 else
-    echo ">>> Disabling Server Block \"$1\"..."
     # -h filename: True if file exists and is a symbolic link.
     # -f filename: Returns True if file, filename is an ordinary file.
     if [[ ! -h /etc/nginx/sites-enabled/$1  &&  ! -f /etc/nginx/sites-enabled/$1 ]]; then
