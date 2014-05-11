@@ -44,13 +44,13 @@ sudo mv vhost /usr/local/bin
 
 # Create a virtualhost to start, with SSL certificate
 sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io -a $3
+sudo a2dissite 000-default
 
 # If PHP is installed or HHVM is installed, proxy PHP requests to it
 if [[ $PHP_IS_INSTALLED -eq 0 || $HHVM_IS_INSTALLED -eq 0 ]]; then
 
     # PHP Config for Apache
     sudo a2enmod proxy_fcgi
-    sudo a2dissite 000-default
 
     # Add ProxyPassMatch to pass to php in document root
     sudo sed -i "s@#ProxyPassMatch.*@ProxyPassMatch ^/(.*\\\.php(/.*)?)$ fcgi://127.0.0.1:9000"$public_folder"/\$1@" /etc/apache2/sites-available/$1.xip.io.conf
