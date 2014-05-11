@@ -2,6 +2,12 @@
 
 echo ">>> Installing Base Packages"
 
+if [[ -z $1 ]]; then
+    github_url="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
+else
+    github_url="$1"
+fi
+
 # Update
 sudo apt-get update
 
@@ -9,7 +15,7 @@ sudo apt-get update
 sudo apt-get install -y curl unzip git-core ack-grep
 
 # Git Config and set Owner
-curl -L https://gist.githubusercontent.com/fideloper/3751524/raw/.gitconfig > /home/vagrant/.gitconfig
+curl -L $github_url/helpers/gitconfig > /home/vagrant/.gitconfig
 sudo chown vagrant:vagrant /home/vagrant/.gitconfig
 
 # Common fixes for git

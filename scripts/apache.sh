@@ -21,6 +21,12 @@ else
     public_folder="$2"
 fi
 
+if [[ -z $4 ]]; then
+    github_url="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
+else
+    github_url="$4"
+fi
+
 # Add repo for latest FULL stable Apache
 # (Required to remove conflicts with PHP PPA due to partial Apache upgrade within it)
 sudo add-apt-repository -y ppa:ondrej/apache2
@@ -38,7 +44,7 @@ echo ">>> Configuring Apache"
 
 # Apache Config
 sudo a2enmod rewrite actions ssl
-curl -L https://gist.githubusercontent.com/fideloper/2710970/raw/vhost.sh > vhost
+curl -L $github_url/helpers/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 
