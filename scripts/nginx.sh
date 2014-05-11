@@ -7,6 +7,8 @@ PHP_IS_INSTALLED=$?
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
 HHVM_IS_INSTALLED=$?
+
+# If HHVM is installed, assume PHP is *not*
 [[ $HHVM_IS_INSTALLED -eq 0 ]] && { PHP_IS_INSTALLED=-1; }
 
 echo ">>> Installing Nginx"
@@ -58,8 +60,7 @@ sudo ngxcb -d $public_folder -s "$1.xip.io$hostname" -e
 sudo ngxdis default
 
 if [[ $HHVM_IS_INSTALLED -ne 0 && $PHP_IS_INSTALLED -eq 0 ]]; then
-    echo ">>> Configure PHP-FPM FastCGI"
-    # PHP Config for Nginx
+    # PHP-FPM Config for Nginx
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
     sudo service php5-fpm restart
