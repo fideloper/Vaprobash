@@ -4,14 +4,21 @@
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
 
+# Test if HHVM is installed
+hhvm --version > /dev/null 2>&1
+HHVM_IS_INSTALLED=$?
+
+# If HHVM is installed, assume PHP is *not*
+[[ $HHVM_IS_INSTALLED -eq 0 ]] && { PHP_IS_INSTALLED=-1; }
+
 echo ">>> Installing Apache Server"
 
-[[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+[[ -z $1 ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
 
-if [ -z "$2" ]; then
-	public_folder="/vagrant"
+if [[ -z $2 ]]; then
+    public_folder="/vagrant"
 else
-	public_folder="$2"
+    public_folder="$2"
 fi
 
 # Add repo for latest FULL stable Apache
@@ -38,7 +45,8 @@ sudo mv vhost /usr/local/bin
 # Create a virtualhost to start, with SSL certificate
 sudo vhost -s $1.xip.io -d $public_folder -p /etc/ssl/xip.io -c xip.io -a $3
 
-if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
+# If PHP is installed or HHVM is installed, proxy PHP requests to it
+if [[ $PHP_IS_INSTALLED -eq 0 || $HHVM_IS_INSTALLED -eq 0 ]]; then
 
     # PHP Config for Apache
     sudo a2enmod proxy_fcgi
