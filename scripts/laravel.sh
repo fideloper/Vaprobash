@@ -25,11 +25,7 @@ else
     laravel_root_folder="$2"
 fi
 
-if [[ -z $3 ]]; then
-    laravel_public_folder="$laravel_root_folder/public"
-else
-    laravel_public_folder="$3"
-fi
+laravel_public_folder="$laravel_root_folder/public"
 
 # Test if Apache or Nginx is installed
 nginx -v > /dev/null 2>&1
