@@ -127,7 +127,7 @@ The vagrant file does three things you should take note of:
 
   Don't forget to reload your Vagrantfile running `vagrant reload --no-provision`, in case your virtual machine already exists.
 
-4. **AWS support using the vagrant-aws plugin
+4. **AWS support using the vagrant-aws plugin**
 
 Simply edit the file Vagrantfile with your security key infomration and name the actual EC2 instance.  You can modify the AMI image from the listing here:
 [View the ubuntu images heres.](https://cloud-images.ubuntu.com)
@@ -160,8 +160,10 @@ Simply edit the file Vagrantfile with your security key infomration and name the
   > vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
 
   Additional resources:
-  https://github.com/mitchellh/vagrant-aws
-  http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant/
+  
+  [https://github.com/mitchellh/vagrant-aws](https://github.com/mitchellh/vagrant-aws)
+  
+  [http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant](http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant)
 
   Finally to run with vagrant:
   > vagrant up --provider=aws
