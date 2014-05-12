@@ -154,10 +154,14 @@ Simply edit the file Vagrantfile with your security key infomration and name the
   ```
 
   You must do the following command to install the AWS plugin for vagrant:
-   > vagrant plugin install vagrant-aws
+  ```bash
+  vagrant plugin install vagrant-aws
+  ```
 
   and install a dummy box to get going
-  > vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+  ```bash
+  vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+  ```
 
   Additional resources:
   
@@ -166,7 +170,10 @@ Simply edit the file Vagrantfile with your security key infomration and name the
   [http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant](http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant)
 
   Finally to run with vagrant:
+  ```bash
   > vagrant up --provider=aws
+  ```
+
 
 ## Connecting to MySQL from Sequel Pro:
 
