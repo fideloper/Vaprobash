@@ -70,7 +70,7 @@ sed -i "s/'127.0.0.1',$/'127.0.0.1', '$host_ip',/" $symfony_public_folder/config
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
-    sed -i "s@root /vagrant@root $symfony_public_folder@" /etc/nginx/sites-available/vagrant
+    sudo sed -i "s@root /vagrant@root $symfony_public_folder@" /etc/nginx/sites-available/vagrant
     sudo service nginx reload
 fi
 
@@ -79,7 +79,7 @@ if [ $APACHE_IS_INSTALLED -eq 0 ]; then
     # Change DocumentRoot
     # Change ProxyPassMatch fcgi path
     # Change <Directory ...> path
-    sed -i "s@$3@$symfony_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
+    sudo sed -i "s@$3@$symfony_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
 
     sudo service apache2 reload
 fi
