@@ -33,8 +33,8 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
     # Re-source user profiles
     # if they exist
-    if [[ -f "/home/vagrant/.profile" ]]; then
-        . /home/vagrant/.profile
+    if [[ -f "$HOME/.profile" ]]; then
+        . $HOME/.profile
     fi
 
     echo ">>> Installing Node.js version $NODEJS_VERSION"
@@ -56,14 +56,14 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Starting to config Node.js"
 
     # Change where npm global packages are located
-    npm config set prefix /home/vagrant/npm
+    npm config set prefix $HOME/npm
 
-    if [[ -f "/home/vagrant/.profile" ]]; then
+    if [[ -f "$HOME/.profile" ]]; then
         # Add new NPM Global Packages location to PATH (.profile)
-        printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> /home/vagrant/.profile
+        printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> $HOME/.profile
 
         # Add new NPM root to NODE_PATH (.profile)
-        printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.profile
+        printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> $HOME/.profile
     fi
 
 fi
