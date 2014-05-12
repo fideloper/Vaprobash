@@ -40,11 +40,3 @@ sudo mkdir -p "$SSL_DIR"
 sudo openssl genrsa -out "$SSL_DIR/xip.io.key" 1024
 sudo openssl req -new -subj "$(echo -n "$SUBJ" | tr "\n" "/")" -key "$SSL_DIR/xip.io.key" -out "$SSL_DIR/xip.io.csr" -passin pass:$PASSPHRASE
 sudo openssl x509 -req -days 365 -in "$SSL_DIR/xip.io.csr" -signkey "$SSL_DIR/xip.io.key" -out "$SSL_DIR/xip.io.crt"
-
-echo ">>> Making swap space to 1G"
-sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
-sudo /sbin/mkswap /var/swap.1
-sudo /sbin/swapon /var/swap.1
-
-echo ">>> Updated /etc/fstab with new swap partition"
-echo "/var/swap.1 swap swap defaults 0 0" | sudo tee -a /etc/fstab > /dev/null
