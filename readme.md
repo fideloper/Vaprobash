@@ -129,8 +129,8 @@ The vagrant file does three things you should take note of:
 
 4. **AWS support using the vagrant-aws plugin**
 
-Simply edit the file Vagrantfile with your security key infomration and name the actual EC2 instance.  You can modify the AMI image from the listing here:
-[View the ubuntu images heres.](https://cloud-images.ubuntu.com)
+Simply edit the file Vagrantfile with your security key information and name the actual EC2 instance.  You can modify the AMI image from the listing here:
+[View additional ubuntu images here.](https://cloud-images.ubuntu.com)
 
   ```ruby
    config.vm.provider :aws do |aws, override|
