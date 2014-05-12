@@ -75,7 +75,11 @@ if [ $NGINX_IS_INSTALLED -eq 0 ]; then
 fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
-    # Remove apache vhost from default and create a new one
-    sed -i "s@DocumentRoot.*@DocumentRoot $symfony_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
+    # Find and replace to find public_folder and replace with laravel_public_folder
+    # Change DocumentRoot
+    # Change ProxyPassMatch fcgi path
+    # Change <Directory ...> path
+    sed -i "s@$3@$symfony_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
+
     sudo service apache2 reload
 fi
