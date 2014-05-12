@@ -44,7 +44,7 @@ echo ">>> Configuring Apache"
 
 # Apache Config
 sudo a2enmod rewrite actions ssl
-curl -L $github_url/helpers/vhost.sh > vhost
+curl --silent -L $github_url/helpers/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
 

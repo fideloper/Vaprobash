@@ -17,7 +17,7 @@ git clone https://github.com/gmarik/vundle.git /home/vagrant/.vim/bundle/vundle
 sudo chown -R vagrant:vagrant /home/vagrant/.vim
 
 # Grab .vimrc and set owner
-curl -L $github_url/helpers/vimrc > /home/vagrant/.vimrc
+curl --silent -L $github_url/helpers/vimrc > /home/vagrant/.vimrc
 sudo chown vagrant:vagrant /home/vagrant/.vimrc
 
 # Install Vundle Bundles

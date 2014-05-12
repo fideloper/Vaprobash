@@ -47,9 +47,9 @@ sudo apt-get install -y nginx
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 
 # Nginx enabling and disabling virtual hosts
-curl -L $github_url/helpers/ngxen.sh > ngxen
-curl -L $github_url/helpers/ngxdis.sh > ngxdis
-curl -L $github_url/helpers/ngxcb.sh > ngxcb
+curl --silent -L $github_url/helpers/ngxen.sh > ngxen
+curl --silent -L $github_url/helpers/ngxdis.sh > ngxdis
+curl --silent -L $github_url/helpers/ngxcb.sh > ngxcb
 sudo chmod guo+x ngxen ngxdis ngxcb
 sudo mv ngxen ngxdis ngxcb /usr/local/bin
 

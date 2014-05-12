@@ -15,7 +15,7 @@ sudo apt-get update
 sudo apt-get install -y curl unzip git-core ack-grep
 
 # Git Config and set Owner
-curl -L $github_url/helpers/gitconfig > /home/vagrant/.gitconfig
+curl --silent -L $github_url/helpers/gitconfig > /home/vagrant/.gitconfig
 sudo chown vagrant:vagrant /home/vagrant/.gitconfig
 
 # Common fixes for git

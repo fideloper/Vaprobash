@@ -32,7 +32,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Node Version Manager"
 
     # Install NVM
-    curl -L $GITHUB_URL/helpers/nvm_install.sh | sh
+    curl --silent -L $GITHUB_URL/helpers/nvm_install.sh | sh
 
     # Re-source user profiles
     # if they exist

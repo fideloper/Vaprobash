@@ -22,7 +22,7 @@ if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Composer"
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
         # Install Composer
-        sudo wget https://getcomposer.org/installer
+        sudo wget --quiet https://getcomposer.org/installer
         hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 installer
         sudo mv composer.phar /usr/local/bin/composer
         sudo rm installer
