@@ -163,16 +163,16 @@ Simply edit the file Vagrantfile with your security key infomration and name the
   vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
   ```
 
-  Additional resources:
-  
-  [https://github.com/mitchellh/vagrant-aws](https://github.com/mitchellh/vagrant-aws)
-  
-  [http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant](http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant)
-
   Finally to run with vagrant:
   ```bash
   > vagrant up --provider=aws
   ```
+
+  Additional resources:
+
+  [https://github.com/mitchellh/vagrant-aws](https://github.com/mitchellh/vagrant-aws)
+
+  [http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant](http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant)
 
 
 ## Connecting to MySQL from Sequel Pro:
