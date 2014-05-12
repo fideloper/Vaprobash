@@ -10,7 +10,7 @@
 
 The goal of this project is to create easy to use bash scripts in order to provision a Vagrant server.
 
-1. This targets Ubuntu LTS releases, currently 12.04.*
+1. This targets Ubuntu LTS releases, currently 14.04.*
 2. This project will give users various popular options such as LAMP, LEMP
 3. This project will attempt some modularity. For example, users might choose to install a Vim setup, or not.
 
@@ -21,7 +21,7 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 ## Dependencies
 
-* Vagrant `1.4.3`+
+* Vagrant `1.5.0`+
     * Use `vagrant -v` to check your version
 * Vitualbox or VMWare Fusion
 
@@ -71,7 +71,6 @@ Here's a quickstart screencast!
 
 * Base Packages
 	* Base Items (Git and more!)
-	* Oh-My-ZSH
 	* PHP (php-fpm)
 	* Vim
 	* PHP MsSQL (ability to connect to SQL Server)
@@ -110,7 +109,7 @@ Here's a quickstart screencast!
 
 The vagrant file does three things you should take note of:
 
-1. **Gives the virtual machine a static IP address of 192.168.33.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel/Symfony installers. This static IP allows us to use [xip.io](http://xip.io) for the virtual host setups while avoiding having to edit our computers' `hosts` file.
+1. **Gives the virtual machine a static IP address of 192.168.22.10.** This IP address is again hard-coded (for now) into the LAMP, LEMP and Laravel/Symfony installers. This static IP allows us to use [xip.io](http://xip.io) for the virtual host setups while avoiding having to edit our computers' `hosts` file.
 2. **Uses NFS instead of the default file syncing.** NFS is reportedly faster than the default syncing for large files. If, however, you experience issues with the files actually syncing between your host and virtual machine, you can change this to the default syncing by deleting the lines setting up NFS:
 
   ```ruby

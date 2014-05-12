@@ -34,7 +34,7 @@ if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
         location ~ \.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
             # With php5-fpm:
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_pass 127.0.0.1:9000;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
@@ -50,7 +50,7 @@ EOF
         location ~ \.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
             # With php5-fpm:
-            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            fastcgi_pass 127.0.0.1:9000;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
@@ -74,7 +74,7 @@ server {
     index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
-    server_name $1.xip.io;
+    server_name $1.xip.io $3;
 
     access_log /var/log/nginx/vagrant.com-access.log;
     error_log  /var/log/nginx/vagrant.com-error.log error;
@@ -109,7 +109,7 @@ server {
     index index.html index.htm index.php app.php app_dev.php;
 
     # Make site accessible from http://set-ip-address.xip.io
-    server_name $1.xip.io;
+    server_name $1.xip.io $3;
 
     access_log /var/log/nginx/vagrant.com-access.log;
     error_log  /var/log/nginx/vagrant.com-error.log error;

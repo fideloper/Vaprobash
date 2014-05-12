@@ -41,15 +41,11 @@ else
     fi
 
     # Re-source RVM
-    . $HOME/.rvm/scripts/rvm
+    . /home/vagrant/.rvm/scripts/rvm
 
-    # Re-source .profile or .zshrc if they exist
-    if [[ -f "$HOME/.profile" ]]; then
-        . $HOME/.profile
-    fi
-
-    if [[ -f "$HOME/.zshrc" ]]; then
-        . $HOME/.zshrc
+    # Re-source .profile if exists
+    if [[ -f "/home/vagrant/.profile" ]]; then
+        . /home/vagrant/.profile
     fi
 fi
 
