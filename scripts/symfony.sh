@@ -18,11 +18,7 @@ else
     symfony_root_folder="$2"
 fi
 
-if [ -z "$3" ]; then
-    symfony_public_folder="/vagrant/symfony/web"
-else
-    symfony_public_folder="$3"
-fi
+symfony_public_folder="$symfony_root_folder/web"
 
 # The host ip is same as guest ip with last octet equal to 1
 host_ip=`echo $1 | sed 's/\.[0-9]*$/.1/'`
@@ -73,17 +69,17 @@ sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '$host_ip', 'fe80::1'/" $symfony
 sed -i "s/'127.0.0.1',$/'127.0.0.1', '$host_ip',/" $symfony_public_folder/config.php
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
-    nginx_root=$(echo "$symfony_public_folder" | sed 's/\//\\\//g')
-
     # Change default vhost created
-    sed -i "s/root \/vagrant/root $nginx_root/" /etc/nginx/sites-available/vagrant
+    sudo sed -i "s@root /vagrant@root $symfony_public_folder@" /etc/nginx/sites-available/vagrant
     sudo service nginx reload
 fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
-    # Remove apache vhost from default and create a new one
-    rm /etc/apache2/sites-enabled/$1.xip.io.conf > /dev/null 2>&1
-    rm /etc/apache2/sites-available/$1.xip.io.conf > /dev/null 2>&1
-    vhost -s $1.xip.io -d "$symfony_public_folder"
+    # Find and replace to find public_folder and replace with laravel_public_folder
+    # Change DocumentRoot
+    # Change ProxyPassMatch fcgi path
+    # Change <Directory ...> path
+    sudo sed -i "s@$3@$symfony_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
+
     sudo service apache2 reload
 fi

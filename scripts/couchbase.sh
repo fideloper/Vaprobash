@@ -8,7 +8,7 @@ COUCHBASE_VERSION=2.2.0 # Check http://http://www.couchbase.com/download/ for la
 COUCHBASE_ARCH=x86_64
 
 
-wget http://packages.couchbase.com/releases/${COUCHBASE_VERSION}/couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
+wget --quiet http://packages.couchbase.com/releases/${COUCHBASE_VERSION}/couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
 sudo dpkg -i couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
 rm couchbase-server-${COUCHBASE_EDITION}_${COUCHBASE_VERSION}_${COUCHBASE_ARCH}.deb
 
@@ -31,8 +31,8 @@ if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
         sudo apt-get -y install php5-dev
     fi
 
-    sudo wget -O/etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1204.list
-    wget -O- http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
+    sudo wget --quiet -O/etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1204.list
+    wget --quiet -O- http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
     sudo apt-get update
     sudo apt-get -y install libcouchbase2-libevent libcouchbase-dev
 
