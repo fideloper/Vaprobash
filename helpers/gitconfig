@@ -1,0 +1,27 @@
+[alias]
+    #Basic
+    st = status -sb
+    co = checkout
+
+    #Flow
+    fs = flow feature start
+    ff = flow feature finish
+
+    #Infoz
+    count = shortlog -sn
+    df = diff --color
+    wdf = diff --word-diff --color
+    fdf = diff --name-only --color
+    br = branch -a
+    sh = show --pretty=format: --name-only
+
+    #Log
+    last = log -1 HEAD
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+
+    #Push/pull/commit
+    pdev = push origin develop
+    udev = pull origin develop
+    amend = commit --amend
+    cm = commit
+    cmm = commit -m

@@ -5,6 +5,7 @@
 github_username = "fideloper"
 github_repo     = "Vaprobash"
 github_branch   = "master"
+github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Server Configuration
 
@@ -45,10 +46,16 @@ composer_packages     = [        # List any global Composer packages that you wa
   #"phpspec/phpspec:2.0.*@dev",
   #"squizlabs/php_codesniffer:1.5.*",
 ]
-public_folder         = "/vagrant" # If installing Symfony or Laravel, leave this blank to default to the framework public directory
+
+# Default web server document root
+# Symfony's public directory is assumed "web"
+# Laravel's public directory is assumed "public"
+public_folder         = "/vagrant"
+
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
 symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
+
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
   #"grunt-cli",
@@ -163,16 +170,17 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Base Packages
-  config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
+  config.vm.provision "shell", path: "#{github_url}/scripts/base.sh", args: github_url
 
   # Provision PHP
-  config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [server_timezone, hhvm]
+  config.vm.provision "shell", path: "#{github_url}/scripts/php.sh", args: [server_timezone, hhvm]
+
 
   # Enable MSSQL for PHP
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mssql.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mssql.sh"
 
   # Provision Vim
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/vim.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/vim.sh", args: github_url
 
 
   ####
@@ -180,10 +188,10 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Apache Base
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, public_folder, hostname]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/apache.sh", args: [server_ip, public_folder, hostname, github_url]
 
   # Provision Nginx Base
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: [server_ip, public_folder, hostname]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/nginx.sh", args: [server_ip, public_folder, hostname, github_url]
 
 
   ####
@@ -191,38 +199,38 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision MySQL
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
 
   # Provision PostgreSQL
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/pgsql.sh", args: pgsql_root_password
+  # config.vm.provision "shell", path: "#{github_url}/scripts/pgsql.sh", args: pgsql_root_password
 
   # Provision SQLite
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sqlite.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/sqlite.sh"
 
   # Provision RethinkDB
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rethinkdb.sh", args: pgsql_root_password
+  # config.vm.provision "shell", path: "#{github_url}/scripts/rethinkdb.sh", args: pgsql_root_password
 
   # Provision Couchbase
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchbase.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/couchbase.sh"
 
   # Provision CouchDB
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/couchdb.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/couchdb.sh"
 
   # Provision MongoDB
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mongodb.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mongodb.sh"
 
   # Provision MariaDB
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mariadb.sh", args: mariadb_root_password
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: mariadb_root_password
 
   ####
   # Search Servers
   ##########
 
   # Install Elasticsearch
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elasticsearch.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/elasticsearch.sh"
 
   # Install SphinxSearch
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/sphinxsearch.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/sphinxsearch.sh"
 
   ####
   # Search Server Administration (web-based)
@@ -231,7 +239,7 @@ Vagrant.configure("2") do |config|
   # Install ElasticHQ
   # Admin for: Elasticsearch
   # Works on: Apache2, Nginx
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/elastichq.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/elastichq.sh"
 
 
   ####
@@ -239,13 +247,13 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Install Memcached
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/memcached.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/memcached.sh"
 
   # Provision Redis (without journaling and persistence)
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh"
 
   # Provision Redis (with journaling and persistence)
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/redis.sh", args: "persistent"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh", args: "persistent"
   # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
 
 
@@ -254,45 +262,45 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Install Beanstalkd
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/beanstalkd.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/beanstalkd.sh"
 
   # Install Heroku Toolbelt
   # config.vm.provision "shell", path: "https://toolbelt.heroku.com/install-ubuntu.sh"
 
   # Install Supervisord
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/supervisord.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/supervisord.sh"
 
   ####
   # Additional Languages
   ##########
 
   # Install Nodejs
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version)
+  # config.vm.provision "shell", path: "#{github_url}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version, github_url)
 
   # Install Ruby Version Manager (RVM)
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
+  # config.vm.provision "shell", path: "#{github_url}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
 
   ####
   # Frameworks and Tooling
   ##########
 
   # Provision Composer
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
+  # config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
 
   # Provision Laravel
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/laravel.sh", args: [server_ip, laravel_root_folder, public_folder, laravel_version]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/laravel.sh", privileged: false, args: [server_ip, laravel_root_folder, public_folder, laravel_version]
 
   # Provision Symfony
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/symfony.sh", args: [server_ip, symfony_root_folder, public_folder]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/symfony.sh", privileged: false, args: [server_ip, symfony_root_folder, public_folder]
 
   # Install Screen
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/screen.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/screen.sh"
 
   # Install Mailcatcher
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mailcatcher.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mailcatcher.sh"
 
   # Install git-ftp
-  # config.vm.provision "shell", path: "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/git-ftp.sh", privileged: false
+  # config.vm.provision "shell", path: "#{github_url}/scripts/git-ftp.sh", privileged: false
 
   ####
   # Local Scripts
