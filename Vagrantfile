@@ -142,6 +142,10 @@ Vagrant.configure("2") do |config|
       aws.tags = {
         'Name' => 'TAG_NAMES',
        }
+
+        # setting the swap pace to 1 GB for EC2 account
+        config.vm.provision "shell", path: "#{github_url}/scripts/aws.sh", args: github_url
+
     end
 
 
@@ -156,12 +160,6 @@ Vagrant.configure("2") do |config|
         type: :nfs,
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
     }
-  end
-
-  # If using vagrant AWS set the swap space
-  if Vagrant.has_plugin?("vagrant-aws")
-    # setting the swap pace to 1 GB for EC2 account
-    config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/aws.sh"
   end
 
 
