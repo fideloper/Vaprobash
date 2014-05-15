@@ -100,16 +100,6 @@ Vagrant.configure("2") do |config|
 
   end
 
-  # If using VMWare Fusion
-  config.vm.provider "vmware_fusion" do |vb, override|
-    override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
-
-    # Set server memory
-    vb.vmx["memsize"] = server_memory
-
-  end
-
-
   #if using AWS
   # you must do the following command to install the AWS plugin for vagrant:
   # > vagrant plugin install vagrant-aws
@@ -122,31 +112,37 @@ Vagrant.configure("2") do |config|
   # finally to run with vagrant:
   # > vagrant up --provider=aws
 
-
-   config.vm.provider :aws do |aws, override|
-
-      config.vm.box = "dummy"
-
-      aws.access_key_id = "ACCESS_KEY_ID"
-      aws.secret_access_key = "SECRET_ACCESS_KEY"
-      aws.keypair_name = "KEYPAIR_NAME"
-
-      #us-ease-1 Ubuntu 12.04 LTS
-      aws.ami = "ami-b08b6cd8"
-
-      override.ssh.username = "ubuntu"
-      override.ssh.private_key_path = "PATH_TO_LOCAL_PEM_KEY"
-      aws.instance_type = "t1.micro"
-      aws.security_groups = "SECURITY_GROUP"
-      override.ssh.username = "ubuntu"
-      aws.tags = {
-        'Name' => 'TAG_NAMES',
-       }
-
+  # uncomment below if you want to use AWS
+  # config.vm.provider :aws do |aws, override|
+  #    config.vm.box = "dummy"
+  #    aws.access_key_id = "ACCESS_KEY_ID"
+  #    aws.secret_access_key = "SECRET_ACCESS_KEY"
+  #    aws.keypair_name = "KEYPAIR_NAME"
+       #us-ease-1 Ubuntu 14.04 LTS
+  #    aws.ami = "ami-b08b6cd8"
+  #    override.ssh.username = "ubuntu"
+  #    override.ssh.private_key_path = "PATH_TO_LOCAL_PEM_KEY"
+  #    aws.instance_type = "t1.micro"
+  #    aws.security_groups = "SECURITY_GROUP"
+  #    override.ssh.username = "ubuntu"
+  #    aws.tags = {
+  #      'Name' => 'TAG_NAMES',
+  #     }
         # setting the swap pace to 1 GB for EC2 account
-        config.vm.provision "shell", path: "#{github_url}/scripts/aws.sh", args: github_url
+  #      config.vm.provision "shell", path: "#{github_url}/scripts/aws.sh", args: github_url
+  #  end
 
-    end
+
+  # If using VMWare Fusion
+  config.vm.provider "vmware_fusion" do |vb, override|
+    override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
+
+    # Set server memory
+    vb.vmx["memsize"] = server_memory
+
+  end
+
+
 
 
   # If using Vagrant-Cachier
