@@ -128,8 +128,6 @@ Vagrant.configure("2") do |config|
   #    aws.tags = {
   #      'Name' => 'TAG_NAMES',
   #     }
-        # setting the swap pace to 1 GB for EC2 account
-  #      config.vm.provision "shell", path: "#{github_url}/scripts/aws.sh", args: github_url
   #  end
 
 
@@ -296,6 +294,11 @@ Vagrant.configure("2") do |config|
   # Install git-ftp
   # config.vm.provision "shell", path: "#{github_url}/scripts/git-ftp.sh", privileged: false
 
+  ####
+  # If using AWS with vagrant uncomment the following line in order to create a swap space for your EC2 instance
+  # setting the swap pace to 1 GB for EC2 account
+  # config.vm.provision "shell", path: "#{github_url}/scripts/aws.sh", args: github_url
+  #
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
