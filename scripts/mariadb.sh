@@ -22,4 +22,4 @@ sudo debconf-set-selections <<< "maria-db-$MARIADB_VERSION mysql-server/root_pas
 sudo debconf-set-selections <<< "maria-db-$MARIADB_VERSION mysql-server/root_password_again password $1"
 
 # Install MariaDB
-sudo apt-get install -y mariadb-server
+sudo apt-get install -y --force-yes mariadb-server
