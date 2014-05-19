@@ -25,7 +25,7 @@ sudo debconf-set-selections <<< "maria-db-$MARIADB_VERSION mysql-server/root_pas
 sudo apt-get install -y --force-yes mariadb-server
 
 # Make Maria connectable from outside world without SSH tunnel
-if [ $3 == "true" ]; then
+if [ $2 == "true" ]; then
     # enable remote access
     # setting the mysql bind-address to allow connections from everywhere
     sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
