@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/usr/bin/env bash
 
 # Install Python package manager pip
 echo ">>> Installing Python pip"
