@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ $2 == "true" ]]; then
+# Disable case sensitivity
+shopt -s nocasematch
+
+if [[ $2 =~ true ]]; then
 
     echo ">>> Installing HHVM"
 
@@ -30,7 +33,7 @@ else
     sudo apt-get update
 
     # Install PHP
-    sudo apt-get install --force-yes -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-gmp php5-mcrypt php5-xdebug php5-memcached php5-imagick php5-intl
+    sudo apt-get install --force-yes -y php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-gmp php5-mcrypt php5-xdebug php5-memcached php5-imagick php5-intl php5-redis
 
     # Set PHP FPM to listen on TCP instead of Socket
     sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php5/fpm/pool.d/www.conf
@@ -38,6 +41,9 @@ else
     # Set PHP FPM allowed clients IP address
     sudo sed -i "s/;listen.allowed_clients/listen.allowed_clients/" /etc/php5/fpm/pool.d/www.conf
 
+    # Make MCrypt Available
+    ln -s /etc/php5/conf.d/mcrypt.ini /etc/php5/mods-available
+    sudo php5enmod mcrypt
 
     # xdebug Config
     cat > $(find /etc/php5 -name xdebug.ini) << EOF
@@ -55,13 +61,27 @@ xdebug.var_display_max_children = 256
 xdebug.var_display_max_data = 1024
 EOF
 
-    # PHP Error Reporting Config
+    # PHP Error Reporting FPM Config
     sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
     sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
+    # Same for CLI
+    sudo sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/cli/php.ini
+    sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/cli/php.ini
+
+    # Misc PHP FPM Config
+    sudo sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+    sudo sed -i "s/memory_limit = .*/memory_limit = 256M/" /etc/php5/fpm/php.ini
+    # Same for CLI
+    sudo sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/cli/php.ini
+    sudo sed -i "s/memory_limit = .*/memory_limit = 256M/" /etc/php5/cli/php.ini
 
     # PHP Date Timezone
     sudo sed -i "s/;date.timezone =.*/date.timezone = ${2/\//\\/}/" /etc/php5/fpm/php.ini
+    # Same for CLI
     sudo sed -i "s/;date.timezone =.*/date.timezone = ${2/\//\\/}/" /etc/php5/cli/php.ini
 
     sudo service php5-fpm restart
 fi
+
+# Enable case sensitivity
+shopt -u nocasematch

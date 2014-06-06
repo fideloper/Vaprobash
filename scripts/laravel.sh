@@ -44,17 +44,17 @@ if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
         # Create Laravel
         if [[ "$4" == 'latest-stable' ]]; then
             hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
-            create-project --prefer-dist laravel/laravel $laravel_root_folder
+            create-project laravel/laravel $laravel_root_folder --prefer-dist
         else
             hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
-            create-project laravel/laravel:$4 $laravel_root_folder
+            create-project laravel/laravel:$4 $laravel_root_folder --prefer-dist
         fi
     else
         # Create Laravel
         if [[ "$4" == 'latest-stable' ]]; then
-            composer create-project --prefer-dist laravel/laravel $laravel_root_folder
+            composer create-project laravel/laravel $laravel_root_folder --prefer-dist
         else
-            composer create-project laravel/laravel:$4 $laravel_root_folder
+            composer create-project laravel/laravel:$4 $laravel_root_folder --prefer-dist
         fi
     fi
 else

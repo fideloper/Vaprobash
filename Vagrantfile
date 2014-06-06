@@ -27,6 +27,7 @@ mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
+redis_persistent      = "false"  # Options: false | true
 
 # Languages and Packages
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
@@ -41,10 +42,10 @@ hhvm                  = "false"
 
 # PHP Options
 composer_packages     = [        # List any global Composer packages that you want to install
-  #"phpunit/phpunit:4.0.*",
-  #"codeception/codeception=*",
-  #"phpspec/phpspec:2.0.*@dev",
-  #"squizlabs/php_codesniffer:1.5.*",
+  #"phpunit/phpunit:~4.1.1",
+  #"codeception/codeception:~2.0.0",
+  #"phpspec/phpspec:~2.0.0@dev",
+  #"squizlabs/php_codesniffer:~1.5.3",
 ]
 
 # Default web server document root
@@ -205,11 +206,8 @@ Vagrant.configure("2") do |config|
   # Install Memcached
   # config.vm.provision "shell", path: "#{github_url}/scripts/memcached.sh"
 
-  # Provision Redis (without journaling and persistence)
-  # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh"
-
-  # Provision Redis (with journaling and persistence)
-  # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh", args: "persistent"
+  # Provision Redis
+  # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh", args: redis_persistent
   # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
 
 

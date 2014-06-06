@@ -31,7 +31,6 @@ fi
 # (Required to remove conflicts with PHP PPA due to partial Apache upgrade within it)
 sudo add-apt-repository -y ppa:ondrej/apache2
 
-
 # Update Again
 sudo apt-key update
 sudo apt-get update
@@ -40,7 +39,6 @@ sudo apt-get update
 sudo apt-get install -y --force-yes apache2
 
 echo ">>> Configuring Apache"
-
 
 # Apache Config
 sudo a2enmod rewrite actions ssl
