@@ -37,7 +37,11 @@ if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
     sudo apt-get -y install libcouchbase2-libevent libcouchbase-dev
 
     sudo pecl install couchbase
-    sudo echo "extension=couchbase.so" >> /etc/php5/fpm/php.ini
-    sudo echo "extension=couchbase.so" >> /etc/php5/cli/php.ini
+    sudo cat > /etc/php5/mods-available/couchbase.ini << EOF
+; configuration for php couchbase module
+; priority=30
+extension=couchbase.so
+EOF
+    sudo php5enmod couchbase
     sudo service php5-fpm restart
 fi
