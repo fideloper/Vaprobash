@@ -2,8 +2,10 @@
 
 echo ">>> Installing Redis"
 
-# Install Redis
-sudo apt-get install -y redis-server
+# Installing Redis
+sudo apt-add-repository ppa:rwky/redis -y
+
+sudo apt-get install -y -qq redis-server
 
 # Redis Configuration
 sudo mkdir -p /etc/redis/conf.d
