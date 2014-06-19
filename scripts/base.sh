@@ -12,7 +12,8 @@ fi
 sudo apt-get update
 
 # Install base packages
-sudo apt-get install -y curl unzip git-core ack-grep
+# -qq implies -y --force-yes
+sudo apt-get install -qq curl unzip git-core ack-grep
 
 # Git Config and set Owner
 curl --silent -L $github_url/helpers/gitconfig > /home/vagrant/.gitconfig

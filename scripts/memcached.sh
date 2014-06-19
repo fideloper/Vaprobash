@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 # Install Memcached
-sudo apt-get install -y memcached
+# -qq implies -y --force-yes
+sudo apt-get install -qq memcached

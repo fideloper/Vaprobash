@@ -41,7 +41,8 @@ sudo add-apt-repository -y ppa:nginx/stable
 sudo apt-get update
 
 # Install Nginx
-sudo apt-get install -y nginx
+# -qq implies -y --force-yes
+sudo apt-get install -qq nginx
 
 # Turn off sendfile to be more compatible with Windows, which can't use NFS
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf

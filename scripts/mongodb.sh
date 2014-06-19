@@ -10,7 +10,8 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 sudo apt-get update
 
 # Install MongoDB
-sudo apt-get -y install mongodb-10gen
+# -qq implies -y --force-yes
+sudo apt-get install -qq mongodb-10gen
 
 # Test if PHP is installed
 php -v > /dev/null 2>&1

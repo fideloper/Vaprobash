@@ -37,7 +37,8 @@ sudo apt-key update
 sudo apt-get update
 
 # Install Apache
-sudo apt-get install -y --force-yes apache2
+# -qq implies -y --force-yes
+sudo apt-get install -qq apache2
 
 echo ">>> Configuring Apache"
 
