@@ -58,10 +58,10 @@ if [[ $PHP_IS_INSTALLED -eq 0 || $HHVM_IS_INSTALLED -eq 0 ]]; then
 
     # PHP Config for Apache
     sudo a2enmod proxy_fcgi
-
-    # Add ProxyPassMatch to pass to php in document root
-    sudo sed -i "s@#ProxyPassMatch.*@ProxyPassMatch ^/(.*\\\.php(/.*)?)$ fcgi://127.0.0.1:9000"$public_folder"/\$1@" /etc/apache2/sites-available/$1.xip.io.conf
-
+else
+    # vHost script assumes ProxyPassMatch to PHP
+    # If PHP is not installed, we'll comment it out
+    sudo sed -i "s@ProxyPassMatch@#ProxyPassMatch@" /etc/apache2/sites-available/$1.xip.io.conf
 fi
 
 sudo service apache2 restart

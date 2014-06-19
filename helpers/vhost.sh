@@ -46,9 +46,7 @@ cat <<- _EOF_
 
     DocumentRoot $DocumentRoot
 
-    # Uncomment this to proxy pass to fastcgi
-    # Assumes Apache 2.4 with mod_proxy_fcgi
-    # ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
 
     <Directory $DocumentRoot>
         Options -Indexes +FollowSymLinks +MultiViews
@@ -80,9 +78,7 @@ cat <<- _EOF_
 
     DocumentRoot $DocumentRoot
 
-    # Uncomment this to proxy pass to fastcgi
-    # Assumes Apache 2.4 with mod_proxy_fcgi
-    # ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
 
     <Directory $DocumentRoot>
         Options -Indexes +FollowSymLinks +MultiViews
