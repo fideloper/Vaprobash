@@ -44,7 +44,8 @@ echo ">>> Configuring Apache"
 
 
 # Apache Config
-sudo a2enmod rewrite actions ssl
+sudo a2dismod php5 mpm_prefork
+sudo a2enmod mpm_worker rewrite actions ssl
 curl --silent -L $github_url/helpers/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
