@@ -11,7 +11,7 @@ sudo apt-get update
 
 # Install MongoDB
 # -qq implies -y --force-yes
-sudo apt-get install -qq mongodb-10gen
+sudo apt-get install -qq mongodb-org
 
 # Test if PHP is installed
 php -v > /dev/null 2>&1
