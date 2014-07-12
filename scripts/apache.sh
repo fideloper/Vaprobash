@@ -42,6 +42,8 @@ sudo apt-get install -qq apache2 apache2-mpm-event
 
 echo ">>> Configuring Apache"
 
+# Add vagrant user to www-data group
+sudo usermod -a -G www-data vagrant
 
 # Apache Config
 sudo a2dismod php5 mpm_prefork
