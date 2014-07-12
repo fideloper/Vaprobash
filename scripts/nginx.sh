@@ -47,6 +47,18 @@ sudo apt-get install -qq nginx
 # Turn off sendfile to be more compatible with Windows, which can't use NFS
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 
+# Set run-as user for PHP5-FPM processes to user/group "vagrant"
+# to avoid permission errors from apps writing to files
+sed -i "s/user www-data;/user vagrant;/" /etc/nginx/nginx.conf
+sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
+
+sed -i "s/user = www-data/user = vagrant/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/group = www-data/group = vagrant/" /etc/php5/fpm/pool.d/www.conf
+
+sed -i "s/;listen\.owner.*/listen.owner = vagrant/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/;listen\.group.*/listen.group = vagrant/" /etc/php5/fpm/pool.d/www.conf
+sed -i "s/;listen\.mode.*/listen.mode = 0666/" /etc/php5/fpm/pool.d/www.conf
+
 # Nginx enabling and disabling virtual hosts
 curl --silent -L $github_url/helpers/ngxen.sh > ngxen
 curl --silent -L $github_url/helpers/ngxdis.sh > ngxdis
