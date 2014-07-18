@@ -36,6 +36,8 @@ server_timezone  = "UTC"
 mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
+mysql_database_name   = ""       # database name to be created.
+mysql_sql_file        = ""       # file to be imported (use the full path with `public_folder`, ex: /vagrant/path/to/file.sql)
 pgsql_root_password   = "root"   # We'll assume user "root"
 mongo_version         = "2.6"    # Options: 2.6 | 3.0
 mongo_enable_remote   = "false"  # remote access enabled when true
@@ -226,6 +228,9 @@ Vagrant.configure("2") do |config|
 
   # Provision MySQL
   # config.vm.provision "shell", path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
+
+  # Import (and creates) a database from a SQL file to MySQL (works with MariaDB)
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mysql-createdb.sh", args: ["root", mysql_root_password, mysql_database_name, mysql_sql_file]
 
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "#{github_url}/scripts/pgsql.sh", args: pgsql_root_password
