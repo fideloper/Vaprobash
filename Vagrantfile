@@ -121,7 +121,18 @@ Vagrant.configure("2") do |config|
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
     }
   end
+  # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
+  # Needs to ensure that the vagrant plugin is installed
+  config.vm.provider :digital_ocean do |provider, override|
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
+    override.vm.box = 'digital_ocean'
+    override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
+    provider.token = 'YOUR TOKEN'
+    provider.image = 'Ubuntu 14.04 x64'
+    provider.region = 'nyc2'
+    provider.size = '512mb'
+  end
   ####
   # Base Items
   ##########
