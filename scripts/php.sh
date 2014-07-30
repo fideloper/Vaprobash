@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ $2 == "true" ]]; then
+PHP_TIMEZONE=$1
+HHVM=$2
+
+if [[ $HHVM == "true" ]]; then
 
     echo ">>> Installing HHVM"
 
@@ -72,8 +75,8 @@ EOF
     sudo sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
 
     # PHP Date Timezone
-    sudo sed -i "s/;date.timezone =.*/date.timezone = ${2/\//\\/}/" /etc/php5/fpm/php.ini
-    sudo sed -i "s/;date.timezone =.*/date.timezone = ${2/\//\\/}/" /etc/php5/cli/php.ini
+    sudo sed -i "s/;date.timezone =.*/date.timezone = ${PHP_TIMEZONE/\//\\/}/" /etc/php5/fpm/php.ini
+    sudo sed -i "s/;date.timezone =.*/date.timezone = ${PHP_TIMEZONE/\//\\/}/" /etc/php5/cli/php.ini
 
     sudo service php5-fpm restart
 fi
