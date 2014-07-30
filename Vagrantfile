@@ -20,7 +20,12 @@ hostname        = "vaprobash.dev"
 server_ip             = "192.168.22.10"
 server_memory         = "384" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
-server_timezone       = "UTC"
+
+# UTC        for Universal Coordinated Time
+# EST        for Eastern Standard Time
+# US/Central for American Central
+# US/Eastern for American Eastern
+server_timezone  = "UTC"
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
@@ -29,6 +34,7 @@ mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
 
 # Languages and Packages
+php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
   #"jekyll",
@@ -68,6 +74,10 @@ Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
+
+  # Set the server timezone
+  config.vm.provision "shell",
+    inline: "echo setting timezone to #{server_timezone}; ln -sf /usr/share/zoneinfo/#{server_timezone} /etc/localtime"
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
@@ -141,7 +151,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "#{github_url}/scripts/base.sh", args: [github_url, server_swap]
 
   # Provision PHP
-  config.vm.provision "shell", path: "#{github_url}/scripts/php.sh", args: [server_timezone, hhvm]
+  config.vm.provision "shell", path: "#{github_url}/scripts/php.sh", args: [php_timezone, hhvm]
 
   # Enable MSSQL for PHP
   # config.vm.provision "shell", path: "#{github_url}/scripts/mssql.sh"
