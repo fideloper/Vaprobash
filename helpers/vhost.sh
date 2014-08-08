@@ -66,6 +66,10 @@ cat <<- _EOF_
 
     #ProxyPassMatch
 
+    RewriteEngine on
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
 
 </VirtualHost>
 _EOF_
@@ -114,6 +118,12 @@ cat <<- _EOF_
         downgrade-1.0 force-response-1.0
     # MSIE 7 and newer should be able to use keepalive
     BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+
+    RewriteEngine on
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
 </VirtualHost>
 _EOF_
 }
