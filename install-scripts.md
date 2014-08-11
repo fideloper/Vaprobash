@@ -226,6 +226,10 @@ Install the [Heroku Toolbelt](https://toolbelt.heroku.com/). This is not a Vapro
 
 This install Supervisord, a process watcher which can restart processes if they fail and boot them on system start. More information [here](http://supervisord.org/) and a getting started guide with PHP/Laravel [here](http://fideloper.com/ubuntu-beanstalkd-and-laravel4).
 
+### <a href="install-scripts.html#zeromq" name="zeromq" id="zeromq">#</a> ØMQ
+
+This will install ØMQ (ZeroMQ), a messaging library, and configure itself for use with PHP. More information is [available online](http://zeromq.org/intro:read-the-manual).
+
 ## Additional Languages
 
 ### <a href="install-scripts.html#nodejs" name="nodejs" id="nodejs">#</a> NodeJS
