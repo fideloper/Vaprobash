@@ -247,6 +247,9 @@ Vagrant.configure("2") do |config|
   # Install Supervisord
   # config.vm.provision "shell", path: "#{github_url}/scripts/supervisord.sh"
 
+  # Install ØMQ
+  # config.vm.provision "shell", path: "#{github_url}/scripts/zeromq.sh"
+
   ####
   # Additional Languages
   ##########
