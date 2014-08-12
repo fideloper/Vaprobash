@@ -75,10 +75,6 @@ Vagrant.configure("2") do |config|
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
-  # Set the server timezone
-  config.vm.provision "shell",
-    inline: "echo setting timezone to #{server_timezone}; ln -sf /usr/share/zoneinfo/#{server_timezone} /etc/localtime"
-
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
   # TO DO: Make this work with virtualhost along-side xip.io URL
@@ -131,6 +127,7 @@ Vagrant.configure("2") do |config|
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
     }
   end
+
   # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
   # Needs to ensure that the vagrant plugin is installed
   config.vm.provider :digital_ocean do |provider, override|
@@ -143,9 +140,14 @@ Vagrant.configure("2") do |config|
     provider.region = 'nyc2'
     provider.size = '512mb'
   end
+
   ####
   # Base Items
   ##########
+
+  # Set the server timezone
+  config.vm.provision "shell",
+    inline: "echo setting timezone to #{server_timezone}; ln -sf /usr/share/zoneinfo/#{server_timezone} /etc/localtime"
 
   # Provision Base Packages
   config.vm.provision "shell", path: "#{github_url}/scripts/base.sh", args: [github_url, server_swap]
