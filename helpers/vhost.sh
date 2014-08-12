@@ -46,12 +46,17 @@ cat <<- _EOF_
 
     DocumentRoot $DocumentRoot
 
-    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
 
     <Directory $DocumentRoot>
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
+
+        <FilesMatch \.php$>
+            # Change this "proxy:unix:/path/to/fpm.socket"
+            # if using a Unix socket
+            SetHandler "proxy:fcgi://127.0.0.1:9000"
+        </FilesMatch>
     </Directory>
 
     ErrorLog \${APACHE_LOG_DIR}/$ServerName-error.log
@@ -61,8 +66,6 @@ cat <<- _EOF_
     LogLevel warn
 
     CustomLog \${APACHE_LOG_DIR}/$ServerName-access.log combined
-
-    #ProxyPassMatch
 
 
 </VirtualHost>
@@ -78,12 +81,16 @@ cat <<- _EOF_
 
     DocumentRoot $DocumentRoot
 
-    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
-
     <Directory $DocumentRoot>
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
+
+        <FilesMatch \.php$>
+            # Change this "proxy:unix:/path/to/fpm.socket"
+            # if using a Unix socket
+            SetHandler "proxy:fcgi://127.0.0.1:9000"
+        </FilesMatch>
     </Directory>
 
     ErrorLog \${APACHE_LOG_DIR}/$ServerName-error.log
@@ -93,8 +100,6 @@ cat <<- _EOF_
     LogLevel warn
 
     CustomLog \${APACHE_LOG_DIR}/$ServerName-access.log combined
-
-    #ProxyPassMatch
 
     SSLEngine on
 
