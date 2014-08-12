@@ -74,10 +74,8 @@ Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
-  config.vm.define "Ubuntu" do |ubuntu|
-  end
-  config.vm.provider :virtualbox do |vb|
-  vb.name = "Ubuntu"
+
+  config.vm.define "Vaprobash" do |vapro|
   end
 
 
@@ -97,6 +95,8 @@ Vagrant.configure("2") do |config|
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
+
+    vb.name = "Vaprobash"
 
     # Set server memory
     vb.customize ["modifyvm", :id, "--memory", server_memory]
