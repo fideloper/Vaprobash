@@ -227,10 +227,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision MySQL
-  # config.vm.provision "shell", path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
-
-  # Import (and creates) a database from a SQL file to MySQL (works with MariaDB)
-  # config.vm.provision "shell", path: "#{github_url}/scripts/mysql-createdb.sh", args: ["root", mysql_root_password, mysql_database_name, mysql_sql_file]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote, mysql_database_name, mysql_sql_file]
 
   # Provision PostgreSQL
   # config.vm.provision "shell", path: "#{github_url}/scripts/pgsql.sh", args: pgsql_root_password
@@ -251,7 +248,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/mongodb.sh", args: [mongo_enable_remote, mongo_version]
 
   # Provision MariaDB
-  # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote, mysql_database_name, mysql_sql_file]
 
   # Provision Neo4J
   # config.vm.provision "shell", path: "#{github_url}/scripts/neo4j.sh"

@@ -4,6 +4,12 @@ echo ">>> Installing MariaDB"
 
 [[ -z $1 ]] && { echo "!!! MariaDB root password not set. Check the Vagrant file."; exit 1; }
 
+if [[ -z $5 ]]; then
+    github_url="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
+else
+    github_url="$5"
+fi
+
 # default version
 MARIADB_VERSION='10.0'
 
@@ -25,21 +31,23 @@ sudo debconf-set-selections <<< "maria-db-$MARIADB_VERSION mysql-server/root_pas
 # -qq implies -y --force-yes
 sudo apt-get install -qq mariadb-server
 
-# Make Maria connectable from outside world without SSH tunnel
+# Installing mysql_helper script
+curl --silent -L $github_url/helpers/mysql_helper.sh > mysql_helper
+sudo chmod guo+x mysql_helper
+sudo mv mysql_helper /usr/local/bin
+
+# Make MySQL connectable from outside world without SSH tunnel
 if [ $2 == "true" ]; then
-    # enable remote access
-    # setting the mysql bind-address to allow connections from everywhere
-    sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+    echo ">>> Provision remote access to MySQL"
+    mysql_helper -u root -p $1 enable-remote
+fi
 
-    # adding grant privileges to mysql root user from everywhere
-    # thx to http://stackoverflow.com/questions/7528967/how-to-grant-mysql-privileges-in-a-bash-script for this
-    MYSQL=`which mysql`
+if [ ! -z "$3" ]; then
+    echo ">>> Provision MySQL database"
+    mysql_helper -u root -p $1 -d $3 create-database
+fi
 
-    Q1="GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$1' WITH GRANT OPTION;"
-    Q2="FLUSH PRIVILEGES;"
-    SQL="${Q1}${Q2}"
-
-    $MYSQL -uroot -p$1 -e "$SQL"
-
-    service mysql restart
+if [ ! -z "$4" ]; then
+    echo ">>> Provision import of MySQL database"
+    mysql_helper -u root -p $1 -d $3 -i $4 import-database
 fi
