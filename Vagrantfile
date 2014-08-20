@@ -260,6 +260,12 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/zeromq.sh"
 
   ####
+  # Utility (push service)
+  ##########
+  # Install Thunderpush
+  # config.vm.provision "shell", path: "#{github_url}/scripts/thunderpush.sh"
+
+  ####
   # Additional Languages
   ##########
 
