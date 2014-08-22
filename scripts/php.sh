@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export LANG=C.UTF-8
+
 PHP_TIMEZONE=$1
 HHVM=$2
 
