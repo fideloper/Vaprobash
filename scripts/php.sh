@@ -29,7 +29,7 @@ else
     echo ">>> Installing PHP"
 
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
-    sudo add-apt-repository -y ppa:ondrej/php5
+    sudo add-apt-repository -y ppa:ondrej/php5-5.6
 
     sudo apt-key update
     sudo apt-get update
