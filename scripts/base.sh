@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+echo "Setting Timezone & Locale to #{server_timezone} & en_US.UTF-8"
+
+sudo ln -sf /usr/share/zoneinfo/#{server_timezone} /etc/localtime
+sudo locale-gen en_US.UTF-8
+export LANG=en_US.UTF-8
+
 echo ">>> Installing Base Packages"
 
 if [[ -z $1 ]]; then
