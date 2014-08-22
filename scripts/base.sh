@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-echo "Setting Timezone & Locale to $3 & en_US.UTF-8"
+echo "Setting Timezone & Locale to $3 & C.UTF-8"
 
 sudo ln -sf /usr/share/zoneinfo/$3 /etc/localtime
-sudo locale-gen en_US.UTF-8
-export LANG=en_US.UTF-8
+sudo locale-gen C.UTF-8
+export LANG=C.UTF-8
 
-echo "export LANG=en_US.UTF-8" >> /home/vagrant/.bashrc
+echo "export LANG=C.UTF-8" >> /home/vagrant/.bashrc
 
 echo ">>> Installing Base Packages"
 
