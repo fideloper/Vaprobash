@@ -116,7 +116,7 @@ Vagrant.configure("2") do |config|
   end
 
   # If you're using the VMware provider
-  ['vmware_fusion', 'vmware_workstaion', 'vmware_desktop'].each do |vmware_provider|
+  ['vmware_fusion', 'vmware_workstation', 'vmware_desktop'].each do |vmware_provider|
     config.vm.provider vmware_provider do |vmware, override|
       override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
 
