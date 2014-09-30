@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "fideloper"
 github_repo     = "Vaprobash"
-github_branch   = "1.1.0"
+github_branch   = "master"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Server Configuration
@@ -118,7 +118,7 @@ Vagrant.configure("2") do |config|
   # If you're using the VMware provider
   ['vmware_fusion', 'vmware_workstation', 'vmware_desktop'].each do |vmware_provider|
     config.vm.provider vmware_provider do |vmware, override|
-      override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
+      override.vm.box = "puphpet/ubuntu1404-x64"
 
       # Set server memory
       vmware.vmx["memsize"]   = server_memory
