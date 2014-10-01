@@ -8,6 +8,7 @@ NGXCB:
 Create a new Nginx Server Block (Ubuntu Server).
 Assumes /etc/nginx/sites-available and /etc/nginx/sites-enabled setup used.
 
+    -f    Force ngxcb to overwrite given server block file name
     -e    Enable the Server Block right away with NGXEN - i.e -e (without any value)
     -d    DocumentRoot - i.e. -d /vagrant/yoursite
     -h    Help - Show this menu.
@@ -199,7 +200,7 @@ EnableServerBlock=0
 # - Run it in "silence"-mode by starting with a ":"
 # - Single ":" after an argument means "required"
 # - Double ":" after an argument means "optional"
-while getopts ":hd:s:n::e" OPTION; do
+while getopts ":hd:s:n::ef" OPTION; do
     case $OPTION in
         h)
             show_usage
@@ -216,6 +217,9 @@ while getopts ":hd:s:n::e" OPTION; do
         e)
             EnableServerBlock=1
             ;;
+        f)
+            ForceOverwrite=1
+            ;;
         *)
             show_usage
             ;;
@@ -226,19 +230,28 @@ if [[ ! -d $DocumentRoot ]]; then
     mkdir -p $DocumentRoot
 fi
 
-if [[ -f "/etc/nginx/sites-available/$ServerBlockName" ]]; then
+if [[ $ForceOverwrite -eq 1 ]]; then
+    # remove symlink from sites-enabled directory
+    rm -f "/etc/nginx/sites-enabled/${ServerBlockName}" &>/dev/null
+    if [ $? -eq 0 ]; then
+        # if file has been removed, provide user with information that existing server 
+        # block is being overwritten
+        echo ">>> ${ServerBlockName} is enabled and will be overwritten"
+        echo "to enable this server block again use the command 'ngxen ${ServerBlockName}'"
+    fi
+else [[ -f "/etc/nginx/sites-available/$ServerBlockName" ]]; then
     echo "!!! Nginx Server Block already exists. Aborting!"
     show_usage
-else
-    # Create the Server Block config
-    create_server_block > /etc/nginx/sites-available/${ServerBlockName}
+fi
 
-    # Enable the Server Block and reload Nginx
-    if [[ $EnableServerBlock -eq 1 ]]; then
-        # Enable Server Block
-        ngxen ${ServerBlockName}
+# Create the Server Block config
+create_server_block > /etc/nginx/sites-available/${ServerBlockName}
 
-        # Reload Nginx
-        service nginx reload
-    fi
+# Enable the Server Block and reload Nginx
+if [[ $EnableServerBlock -eq 1 ]]; then
+    # Enable Server Block
+    ngxen ${ServerBlockName}
+
+    # Reload Nginx
+    service nginx reload
 fi
