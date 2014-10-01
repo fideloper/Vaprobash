@@ -195,6 +195,8 @@ fi
 # The default for the optional argument's:
 ServerBlockName="vagrant"
 EnableServerBlock=0
+NeedsReload=0
+ForceOverwrite=0
 
 # Parse flags:
 # - Run it in "silence"-mode by starting with a ":"
@@ -251,7 +253,7 @@ create_server_block > /etc/nginx/sites-available/${ServerBlockName}
 # Enable the Server Block and reload Nginx
 if [[ $EnableServerBlock -eq 1 ]]; then
     # Enable Server Block
-    ngxen ${ServerBlockName}
+    ngxen -q ${ServerBlockName}
 
     # Reload Nginx
     NeedsReload=1
