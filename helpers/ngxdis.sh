@@ -18,5 +18,8 @@ else
     else
         rm /etc/nginx/sites-enabled/$1
         echo ">>> Disabled Server Block \"$1\""
+
+        # Reload nginx configuration
+        service nginx reload
     fi
 fi

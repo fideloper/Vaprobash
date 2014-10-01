@@ -22,6 +22,9 @@ else
         else
             ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
             echo ">>> Enabled Server Block \"$1\""
+
+            # Reload nginx configuration
+            service nginx reload
             exit 0
         fi
     fi

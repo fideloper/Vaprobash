@@ -233,13 +233,14 @@ fi
 if [[ $ForceOverwrite -eq 1 ]]; then
     # remove symlink from sites-enabled directory
     rm -f "/etc/nginx/sites-enabled/${ServerBlockName}" &>/dev/null
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         # if file has been removed, provide user with information that existing server 
         # block is being overwritten
         echo ">>> ${ServerBlockName} is enabled and will be overwritten"
-        echo "to enable this server block again use the command 'ngxen ${ServerBlockName}'"
+        echo ">>> to enable this server block execute 'ngxen ${ServerBlockName}' or use the -e flag"
+        NeedsReload=1
     fi
-else [[ -f "/etc/nginx/sites-available/$ServerBlockName" ]]; then
+elif [[ -f "/etc/nginx/sites-available/${ServerBlockName}" ]]; then
     echo "!!! Nginx Server Block already exists. Aborting!"
     show_usage
 fi
@@ -253,5 +254,7 @@ if [[ $EnableServerBlock -eq 1 ]]; then
     ngxen ${ServerBlockName}
 
     # Reload Nginx
-    service nginx reload
+    NeedsReload=1
 fi
+
+[[ $NeedsReload -eq 1 ]] && service nginx reload
