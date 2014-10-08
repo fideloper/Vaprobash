@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "fideloper"
 github_repo     = "Vaprobash"
-github_branch   = "1.1.0"
+github_branch   = "master"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Server Configuration
@@ -258,6 +258,12 @@ Vagrant.configure("2") do |config|
 
   # Install ØMQ
   # config.vm.provision "shell", path: "#{github_url}/scripts/zeromq.sh"
+
+  ####
+  # Utility (push service)
+  ##########
+  # Install Thunderpush
+  # config.vm.provision "shell", path: "#{github_url}/scripts/thunderpush.sh"
 
   ####
   # Additional Languages
