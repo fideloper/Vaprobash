@@ -291,6 +291,9 @@ Vagrant.configure("2") do |config|
   # Install git-ftp
   # config.vm.provision "shell", path: "#{github_url}/scripts/git-ftp.sh", privileged: false
 
+  # Install Ansible
+  # config.vm.provision "shell", path: "#{github_url}/scripts/ansible.sh"
+
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
