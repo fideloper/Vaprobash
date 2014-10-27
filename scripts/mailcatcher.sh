@@ -27,7 +27,7 @@ else
 fi
 
 # Make it start on boot
-sudo echo "@reboot $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
+sudo echo "@reboot root $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
 sudo update-rc.d cron defaults
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
