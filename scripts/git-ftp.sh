@@ -20,7 +20,7 @@ fi
 
 echo ">>> Installing git-ftp";
 
-# Clone fit-ftp into .git-ftp folder
+# Clone git-ftp into .git-ftp folder
 git clone https://github.com/git-ftp/git-ftp.git /home/vagrant/.git-ftp
 
 # Move to the .git-ftp folder
