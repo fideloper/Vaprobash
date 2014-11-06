@@ -18,6 +18,7 @@ hostname        = "vaprobash.dev"
 #   172.16.0.1  - 172.31.255.254
 #   192.168.0.1 - 192.168.255.254
 server_ip             = "192.168.22.10"
+server_cpus           = "1"   # Cores
 server_memory         = "384" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
@@ -98,6 +99,9 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
 
     vb.name = "Vaprobash"
+
+    # Set server cpus
+    vb.customize ["modifyvm", :id, "--cpus", server_cpus]
 
     # Set server memory
     vb.customize ["modifyvm", :id, "--memory", server_memory]
