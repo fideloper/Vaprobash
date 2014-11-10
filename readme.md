@@ -75,6 +75,7 @@ Here's a quickstart screencast!
 	* Vim
 	* PHP MsSQL (ability to connect to SQL Server)
 	* Screen
+	* Docker
 * Web Servers
 	* Apache
 	* HHVM
