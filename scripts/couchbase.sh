@@ -36,7 +36,7 @@ if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
     sudo apt-get update
     sudo apt-get -qq install libcouchbase2-libevent libcouchbase-dev
 
-    sudo pecl install couchbase
+    sudo pecl install couchbase-1.2.2
     sudo cat > /etc/php5/mods-available/couchbase.ini << EOF
 ; configuration for php couchbase module
 ; priority=30
