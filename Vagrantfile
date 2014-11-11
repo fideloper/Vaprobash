@@ -171,6 +171,9 @@ Vagrant.configure("2") do |config|
   # Provision Vim
   # config.vm.provision "shell", path: "#{github_url}/scripts/vim.sh", args: github_url
 
+  # Provision Docker
+  # config.vm.provision "shell", path: "#{github_url}/scripts/docker.sh"
+
 
   ####
   # Web Servers
