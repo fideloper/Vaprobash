@@ -80,6 +80,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "Vaprobash" do |vapro|
   end
 
+  if Vagrant.has_plugin?("vagrant-hostmanager")
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = false
+  end
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
