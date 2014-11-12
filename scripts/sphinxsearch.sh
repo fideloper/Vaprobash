@@ -2,8 +2,14 @@
 
 echo ">>> Installing Sphinx"
 
+if [[ -z $1 ]]; then
+    sphinxsearch_version="stable"
+else
+    sphinxsearch_version="$1"
+fi
+
 # Add sphinxsearch repo
-sudo add-apt-repository -y ppa:builds/sphinxsearch-$1
+sudo add-apt-repository -y ppa:builds/sphinxsearch-$sphinxsearch_version
 
 # The usual updates
 sudo apt-get update
