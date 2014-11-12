@@ -72,6 +72,9 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   #"yo",
 ]
 
+sphinxsearch_version  = "rel22" # rel20, rel21, rel22, beta, daily, stable
+
+
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 14.04
@@ -222,7 +225,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/elasticsearch.sh"
 
   # Install SphinxSearch
-  # config.vm.provision "shell", path: "#{github_url}/scripts/sphinxsearch.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/sphinxsearch.sh", args: [sphinxsearch_version]
 
   ####
   # Search Server Administration (web-based)
