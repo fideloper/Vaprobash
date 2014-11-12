@@ -72,6 +72,8 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   #"yo",
 ]
 
+use_nfs = true
+
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 14.04
@@ -90,10 +92,12 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: server_ip
 
   # Use NFS for the shared folder
-  config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['nolock,vers=3,udp,noatime']
+    if use_nfs
+      config.vm.synced_folder ".", "/vagrant",
+              id: "core",
+              :nfs => true,
+              :mount_options => ['nolock,vers=3,udp,noatime']
+    end
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
@@ -133,10 +137,12 @@ Vagrant.configure("2") do |config|
     # Usage docs: http://fgrehm.viewdocs.io/vagrant-cachier/usage
     config.cache.scope = :box
 
-    config.cache.synced_folder_opts = {
+    if use_nfs
+      config.cache.synced_folder_opts = {
         type: :nfs,
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
-    }
+      }
+    end
   end
 
   # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
