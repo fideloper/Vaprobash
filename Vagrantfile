@@ -72,6 +72,8 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   #"yo",
 ]
 
+sphinxsearch_version  = "rel22" # rel20, rel21, rel22, beta, daily, stable
+
 use_nfs = "true"
 
 Vagrant.configure("2") do |config|
@@ -82,6 +84,12 @@ Vagrant.configure("2") do |config|
   config.vm.define "Vaprobash" do |vapro|
   end
 
+  if Vagrant.has_plugin?("vagrant-hostmanager")
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = false
+  end
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
@@ -228,7 +236,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/elasticsearch.sh"
 
   # Install SphinxSearch
-  # config.vm.provision "shell", path: "#{github_url}/scripts/sphinxsearch.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/sphinxsearch.sh", args: [sphinxsearch_version]
 
   ####
   # Search Server Administration (web-based)
