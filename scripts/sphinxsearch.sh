@@ -1,18 +1,29 @@
 #!/usr/bin/env bash
 
-# https://launchpad.net/~builds/+archive/sphinxsearch-stable
-# sudo add-apt-repository -y ppa:builds/sphinxsearch-stable # 2.0.11 on Precise
+echo ">>> Installing Sphinx"
 
-# https://launchpad.net/~builds/+archive/sphinxsearch-daily
-# sudo add-apt-repository -y ppa:builds/sphinxsearch-daily  # 2.2.* on Precise
+if [[ -z $1 ]]; then
+    sphinxsearch_version="stable"
+else
+    sphinxsearch_version="$1"
+fi
 
-# https://launchpad.net/~builds/+archive/sphinxsearch-beta
-sudo add-apt-repository -y ppa:builds/sphinxsearch-beta     # 2.1.*  on Precise
+# Add sphinxsearch repo
+sudo add-apt-repository -y ppa:builds/sphinxsearch-$sphinxsearch_version
 
 # The usual updates
 sudo apt-get update
 
 # Install SphinxSearch
-sudo apt-get install sphinxsearch
+sudo apt-get install -qq sphinxsearch
 
 # Create a base conf file (Altho we can't make any assumptions about its use)
+
+# Stop searchd so we can change the config file
+searchd --stop
+
+# Move pid file since searchd will fail to start after reboot
+sudo sed -i 's/sphinxsearch\/searchd.pid/searchd.pid/' /etc/sphinxsearch/sphinx.conf
+
+# Start searchd
+searchd

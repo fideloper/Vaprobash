@@ -9,4 +9,5 @@ sudo add-apt-repository -y ppa:rethinkdb/ppa
 sudo apt-get update
 
 # Install
-sudo apt-get install rethinkdb -y --force-yes
+# -qq implies -y --force-yes
+sudo apt-get install -qq rethinkdb

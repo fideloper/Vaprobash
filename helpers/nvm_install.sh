@@ -22,7 +22,7 @@ SOURCE_STR="\n# This loads NVM\n[[ -s /home/$USER/.nvm/nvm.sh ]] && . /home/$USE
 # Append NVM script to ~/.profile
 if ! grep -qsc 'nvm.sh' $PROFILE; then
   echo ">>> Appending source string to $PROFILE"
-  echo $SOURCE_STR >> "$PROFILE"
+  printf "$SOURCE_STR" >> "$PROFILE"
 else
   echo ">>> Source string already in $PROFILE"
 fi

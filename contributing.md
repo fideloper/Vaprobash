@@ -1,3 +1,7 @@
 # Contributing to Vaprobash
 
-Please make pull requests to the **Develop** branch. Github will, by default, attempt to merge with the **Master** branch. However, I'd like to have them in **Develop** before testing them and finally merging them into **Master**.
+Please make pull requests to the **Master** branch.
+
+Vaprobash now uses SemVer, so bug fixes/tweaks will create patch releases and new features will create minor releases.
+
+Note that this means that bug fixes and minor tweaks will likely get accepted before feature additions, however all PR's will be reviewed!

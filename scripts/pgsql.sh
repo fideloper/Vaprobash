@@ -20,7 +20,8 @@ sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" | sudo
 sudo apt-get update
 
 # Install PostgreSQL
-sudo apt-get install -y postgresql postgresql-contrib
+# -qq implies -y --force-yes
+sudo apt-get install -qq postgresql postgresql-contrib
 
 
 # Configure PostgreSQL

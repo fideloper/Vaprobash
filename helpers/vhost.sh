@@ -46,14 +46,17 @@ cat <<- _EOF_
 
     DocumentRoot $DocumentRoot
 
-    # Uncomment this to proxy pass to fastcgi
-    # Assumes Apache 2.4 with mod_proxy_fcgi
-    # ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
 
     <Directory $DocumentRoot>
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
+
+        <FilesMatch \.php$>
+            # Change this "proxy:unix:/path/to/fpm.socket"
+            # if using a Unix socket
+            SetHandler "proxy:fcgi://127.0.0.1:9000"
+        </FilesMatch>
     </Directory>
 
     ErrorLog \${APACHE_LOG_DIR}/$ServerName-error.log
@@ -63,12 +66,6 @@ cat <<- _EOF_
     LogLevel warn
 
     CustomLog \${APACHE_LOG_DIR}/$ServerName-access.log combined
-
-    #ProxyPassMatch
-
-    RewriteEngine on
-    RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 
 </VirtualHost>
@@ -84,14 +81,16 @@ cat <<- _EOF_
 
     DocumentRoot $DocumentRoot
 
-    # Uncomment this to proxy pass to fastcgi
-    # Assumes Apache 2.4 with mod_proxy_fcgi
-    # ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000$DocumentRoot/$1
-
     <Directory $DocumentRoot>
         Options -Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
+
+        <FilesMatch \.php$>
+            # Change this "proxy:unix:/path/to/fpm.socket"
+            # if using a Unix socket
+            SetHandler "proxy:fcgi://127.0.0.1:9000"
+        </FilesMatch>
     </Directory>
 
     ErrorLog \${APACHE_LOG_DIR}/$ServerName-error.log
@@ -101,8 +100,6 @@ cat <<- _EOF_
     LogLevel warn
 
     CustomLog \${APACHE_LOG_DIR}/$ServerName-access.log combined
-
-    #ProxyPassMatch
 
     SSLEngine on
 
@@ -118,12 +115,6 @@ cat <<- _EOF_
         downgrade-1.0 force-response-1.0
     # MSIE 7 and newer should be able to use keepalive
     BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
-
-
-    RewriteEngine on
-    RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
-
 </VirtualHost>
 _EOF_
 }

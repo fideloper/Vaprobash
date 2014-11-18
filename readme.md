@@ -75,6 +75,7 @@ Here's a quickstart screencast!
 	* Vim
 	* PHP MsSQL (ability to connect to SQL Server)
 	* Screen
+	* Docker
 * Web Servers
 	* Apache
 	* HHVM
@@ -104,6 +105,7 @@ Here's a quickstart screencast!
 	* Symfony
 	* PHPUnit
 	* MailCatcher
+	* Ansible
 
 ## The Vagrantfile
 
@@ -183,4 +185,4 @@ Change your IP address as needed. The default IP address is now `192.168.22.10`
 
 ## Contribute!
 
-Do it! Any new install or improvement on existing ones are welcome! Please see the [contributing doc](/contributing.md), which only asks that pull requests be made to the `develop` branch.
+Do it! Any new install or improvement on existing ones are welcome! Please see the [contributing doc](/contributing.md).

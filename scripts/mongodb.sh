@@ -10,7 +10,15 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 sudo apt-get update
 
 # Install MongoDB
-sudo apt-get -y install mongodb-10gen
+# -qq implies -y --force-yes
+sudo apt-get install -qq mongodb-org
+
+# Make MongoDB connectable from outside world without SSH tunnel
+if [ $1 == "true" ]; then
+    # enable remote access
+    # setting the mongodb bind_ip to allow connections from everywhere
+    sed -i "s/bind_ip = */bind_ip = 0.0.0.0/" /etc/mongod.conf
+fi
 
 # Test if PHP is installed
 php -v > /dev/null 2>&1

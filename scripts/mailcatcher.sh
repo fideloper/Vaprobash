@@ -11,7 +11,8 @@ apache2 -v > /dev/null 2>&1
 APACHE_IS_INSTALLED=$?
 
 # Installing dependency
-sudo apt-get install -y libsqlite3-dev
+# -qq implies -y --force-yes
+sudo apt-get install -qq libsqlite3-dev ruby1.9.1-dev
 
 if $(which rvm) -v > /dev/null 2>&1; then
 	echo ">>>>Installing with RVM"
@@ -26,12 +27,12 @@ else
 fi
 
 # Make it start on boot
-sudo sh -c "echo '@reboot $(which mailcatcher) --ip=0.0.0.0' >> /etc/crontab"
+sudo echo "@reboot root $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
 sudo update-rc.d cron defaults
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 	# Make php use it to send mail
-	sudo echo "sendmail_path = /usr/bin/env $(which catchmail)" >> /etc/php5/mods-available/mailcatcher.ini
+    echo "sendmail_path = /usr/bin/env $(which catchmail)" | sudo tee /etc/php5/mods-available/mailcatcher.ini
 	sudo php5enmod mailcatcher
 	sudo service php5-fpm restart
 fi
@@ -44,7 +45,7 @@ fi
 /usr/bin/env $(which mailcatcher) --ip=0.0.0.0
 
 # Add aliases
-if [[ -f "$HOME/.profile" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> $HOME/.profile
-	. $HOME/.profile
+if [[ -f "/home/vagrant/.profile" ]]; then
+	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.profile
+	. /home/vagrant/.profile
 fi
