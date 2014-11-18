@@ -293,6 +293,9 @@ Vagrant.configure("2") do |config|
 
   # Install Ansible
   # config.vm.provision "shell", path: "#{github_url}/scripts/ansible.sh"
+  
+  # Insatll Phalcon
+  # config.vm.provision "shell", path: "#{github_url}/scripts/phalcon.sh"
 
   ####
   # Local Scripts
