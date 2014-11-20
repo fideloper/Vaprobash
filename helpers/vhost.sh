@@ -67,6 +67,11 @@ cat <<- _EOF_
 
     CustomLog \${APACHE_LOG_DIR}/$ServerName-access.log combined
 
+    #turning on the authentication header
+    RewriteEngine on
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1
+
 
 </VirtualHost>
 _EOF_
