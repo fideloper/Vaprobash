@@ -12,7 +12,7 @@ PHP_IS_INSTALLED=$?
 sudo -i
 
 # Requiments packages 
-apt-get install php5-dev libpcre3-dev gcc make php5-mysql -y
+apt-get install php5-dev libpcre3-dev gcc make  -y
 
 # Clone the repo
 git clone --depth=1 https://github.com/phalcon/cphalcon.git
