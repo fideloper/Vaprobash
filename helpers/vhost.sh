@@ -70,7 +70,7 @@ cat <<- _EOF_
     #turning on the authentication header
     RewriteEngine on
     RewriteCond %{HTTP:Authorization} ^(.*)
-    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 
 </VirtualHost>
