@@ -11,16 +11,19 @@ NODE_ARG=($@)
 NUMBER_OF_ARG=${#NODE_ARG[@]}
 
 # Prepare the variables for installing specific Nodejs version and Global Node Packages
-if [[ $NUMBER_OF_ARG -gt 1 ]]; then
-    # Both Nodejs version and Global Node Packages are given
+if [[ $NUMBER_OF_ARG -gt 2 ]]; then
+    # Nodejs version, github url and Global Node Packages are given
     NODEJS_VERSION=${NODE_ARG[0]}
-    NODE_PACKAGES=${NODE_ARG[@]:1}
-elif [[ $NUMBER_OF_ARG -eq 1 ]]; then
-    # Only Nodejs version is given
-    NODEJS_VERSION=$NODE_ARG
+    GITHUB_URL=${NODE_ARG[1]}
+    NODE_PACKAGES=${NODE_ARG[@]:2}
+elif [[ $NUMBER_OF_ARG -eq 2 ]]; then
+    # Only Nodejs version and github url are given
+    NODEJS_VERSION=${NODE_ARG[0]}
+    GITHUB_URL=${NODE_ARG[1]}
 else
     # Default Nodejs version when nothing is given
     NODEJS_VERSION=latest
+    GITHUB_URL="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
 fi
 
 # True, if Node is not installed
@@ -29,7 +32,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Node Version Manager"
 
     # Install NVM
-    curl -L https://gist.githubusercontent.com/Ilyes512/8335484/raw/nvm_install.sh | sh
+    curl --silent -L $GITHUB_URL/helpers/nvm_install.sh | sh
 
     # Re-source user profiles
     # if they exist
@@ -37,16 +40,12 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
         . /home/vagrant/.profile
     fi
 
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
-        . /home/vagrant/.zshrc
-    fi
-
     echo ">>> Installing Node.js version $NODEJS_VERSION"
     echo "    This will also be set as the default node version"
 
     # If set to latest, get the current node version from the home page
     if [[ $NODEJS_VERSION -eq "latest" ]]; then
-        NODEJS_VERSION=`curl 'nodejs.org' | grep 'Current Version' | awk '{ print $3 }' | awk -F\< '{ print $1 }'`
+        NODEJS_VERSION=`curl 'nodejs.org' | grep 'Current Version' | awk '{ print $4 }' | awk -F\< '{ print $1 }'`
     fi
 
     # Install Node
@@ -68,15 +67,6 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
         # Add new NPM root to NODE_PATH (.profile)
         printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.profile
-    fi
-
-
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
-        # Add new NPM Global Packages location to PATH (.zshrc)
-        printf "\n# Add new NPM global packages location to PATH\n%s" 'export PATH=$PATH:~/npm/bin' >> /home/vagrant/.zshrc
-
-        # Add new NPM root to NODE_PATH (.zshrc)
-        printf "\n# Add the new NPM root to NODE_PATH\n%s" 'export NODE_PATH=$NODE_PATH:~/npm/lib/node_modules' >> /home/vagrant/.zshrc
     fi
 
 fi

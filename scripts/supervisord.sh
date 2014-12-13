@@ -3,4 +3,5 @@
 echo ">>> Installing Supervisord"
 
 # Supervisord
-sudo apt-get -y install supervisor
+# -qq implies -y --force-yes
+sudo apt-get install -qq supervisor

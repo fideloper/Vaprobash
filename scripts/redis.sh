@@ -2,8 +2,12 @@
 
 echo ">>> Installing Redis"
 
+# Add repository
+sudo apt-add-repository ppa:rwky/redis -y
+
 # Install Redis
-sudo apt-get install -y redis-server
+# -qq implies -y --force-yes
+sudo apt-get install -qq redis-server
 
 # Redis Configuration
 sudo mkdir -p /etc/redis/conf.d
@@ -24,7 +28,7 @@ if [ ! -z "$1" ]; then
 			sudo echo "include /etc/redis/conf.d/journaling.conf" >> /etc/redis/redis.conf
 		fi
 
-		# schedule background append rewriting		
+		# schedule background append rewriting
 		if ! crontab -l | grep -q "redis-cli bgrewriteaof"; then
 			line="*/5 * * * * /usr/bin/redis-cli bgrewriteaof > /dev/null 2>&1"
 			(sudo crontab -l; echo "$line" ) | sudo crontab -

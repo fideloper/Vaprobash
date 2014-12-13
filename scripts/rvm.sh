@@ -27,8 +27,12 @@ if [[ $RVM_IS_INSTALLED -eq 0 ]]; then
     echo ">>> Updating Ruby Version Manager"
     rvm get stable --ignore-dotfiles
 else
+    # Import Michal Papis' key to be able to verify the installation
+    echo ">>> Importing rvm public key"
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+
     # Install RVM and install Ruby
-    if [[ $RUBY_VERSION =~ "latest" ]]; then # experimental =~. This should pass "latest", " latest" and "latest "
+    if [[ $RUBY_VERSION =~ "latest" ]]; then
         echo ">>> Installing Ruby Version Manager and installing latest stable Ruby version"
 
         # Install RVM and install latest stable Ruby version
@@ -40,13 +44,12 @@ else
         \curl -sSL https://get.rvm.io | bash -s stable --ruby=$RUBY_VERSION
     fi
 
-    # Re-source .profile, .zshrc or .bashrc if they exist
+    # Re-source RVM
+    . /home/vagrant/.rvm/scripts/rvm
+
+    # Re-source .profile if exists
     if [[ -f "/home/vagrant/.profile" ]]; then
         . /home/vagrant/.profile
-    fi
-
-    if [[ -f "/home/vagrant/.zshrc" ]]; then
-        . /home/vagrant/.zshrc
     fi
 fi
 
