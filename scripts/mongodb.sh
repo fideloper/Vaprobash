@@ -11,7 +11,7 @@ sudo apt-get update
 
 # Install MongoDB
 # -qq implies -y --force-yes
-sudo apt-get install -qq mongodb-org
+sudo apt-get install -qq mongodb-org build-essential
 
 # Make MongoDB connectable from outside world without SSH tunnel
 if [ $1 == "true" ]; then
