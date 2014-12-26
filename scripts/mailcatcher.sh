@@ -27,8 +27,21 @@ else
 fi
 
 # Make it start on boot
-sudo echo "@reboot root $(which mailcatcher) --ip=0.0.0.0" >> /etc/crontab
-sudo update-rc.d cron defaults
+sudo tee /etc/init/mailcatcher.conf <<EOL
+description "Mailcatcher"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+
+pre-start script
+	exec su - vagrant -c "/usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0'"
+end script
+EOL
+
+# Start Mailcatcher
+sudo service mailcatcher start
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 	# Make php use it to send mail
@@ -39,13 +52,4 @@ fi
 
 if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
 	sudo service apache2 restart
-fi
-
-# Start it now
-/usr/bin/env $(which mailcatcher) --ip=0.0.0.0
-
-# Add aliases
-if [[ -f "/home/vagrant/.profile" ]]; then
-	sudo echo "alias mailcatcher=\"mailcatcher --ip=0.0.0.0\"" >> /home/vagrant/.profile
-	. /home/vagrant/.profile
 fi
