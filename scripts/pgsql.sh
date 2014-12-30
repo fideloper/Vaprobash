@@ -5,7 +5,7 @@ echo ">>> Installing PostgreSQL"
 [[ -z "$1" ]] && { echo "!!! PostgreSQL root password not set. Check the Vagrant file."; exit 1; }
 
 # Set some variables
-POSTGRE_VERSION=9.3
+POSTGRE_VERSION=9.4
 
 # Add PostgreSQL GPG public key
 # to get latest stable
