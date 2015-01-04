@@ -35,9 +35,7 @@ stop on runlevel [!2345]
 
 respawn
 
-pre-start script
-	exec su - vagrant -c "/usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0'"
-end script
+exec /usr/bin/env $(which mailcatcher) --foreground --http-ip=0.0.0.0
 EOL
 
 # Start Mailcatcher
