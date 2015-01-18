@@ -3,10 +3,11 @@
 echo ">>> Installing Elasticsearch"
 
 # Set some variables
-ELASTICSEARCH_VERSION=1.0.0 # Check http://www.elasticsearch.org/download/ for latest version
+ELASTICSEARCH_VERSION=1.4.2 # Check http://www.elasticsearch.org/download/ for latest version
 
 # Install prerequisite: Java
 # -qq implies -y --force-yes
+sudo apt-get update
 sudo apt-get install -qq openjdk-7-jre-headless
 
 wget --quiet https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.deb
