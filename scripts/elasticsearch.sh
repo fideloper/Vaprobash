@@ -7,6 +7,7 @@ ELASTICSEARCH_VERSION=1.0.0 # Check http://www.elasticsearch.org/download/ for l
 
 # Install prerequisite: Java
 # -qq implies -y --force-yes
+sudo apt-get update
 sudo apt-get install -qq openjdk-7-jre-headless
 
 wget --quiet https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.deb
