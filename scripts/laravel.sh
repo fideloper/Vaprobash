@@ -65,7 +65,7 @@ else
         hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
         install --prefer-dist
     else
-        composer install --prefer-dist
+        composer install --prefer-source
     fi
 
     # Go to the previous folder
