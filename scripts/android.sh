@@ -20,7 +20,7 @@ sudo rm -rf $ANDROID_SDK_FILENAME
 echo "" >> /home/vagrant/.bashrc
 echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386/jre/bin/java" >> /home/vagrant/.bashrc
 echo "ANDROID_HOME=~/android-sdk-linux" >> /home/vagrant/.bashrc
-echo "PATH=\$PATH:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools" >> /home/vagrant/.bashrc
+echo "export PATH=\$PATH:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools" >> /home/vagrant/.bashrc
 
 expect -c '
 set timeout -1   ;
