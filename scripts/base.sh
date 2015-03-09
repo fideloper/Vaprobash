@@ -23,6 +23,10 @@ sudo apt-get update
 # -qq implies -y --force-yes
 sudo apt-get install -qq curl unzip git-core ack-grep software-properties-common build-essential
 
+# create user vagrant
+sudo adduser vagrant
+sudo gpasswd -a vagrant sudo
+
 # Git Config and set Owner
 curl --silent -L $github_url/helpers/gitconfig > /home/vagrant/.gitconfig
 sudo chown vagrant:vagrant /home/vagrant/.gitconfig
