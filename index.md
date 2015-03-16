@@ -35,7 +35,7 @@ $ vagrant up
 
 ## Requirements
 
-* Vagrant `1.4.3`
+* Vagrant `1.5.0`+
 	* You can check your vagrant version by running `vagrant -v` in your terminal
 * VirtualBox or VMWare Fusion
 
