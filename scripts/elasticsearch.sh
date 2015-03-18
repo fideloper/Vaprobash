@@ -10,7 +10,7 @@ ELASTICSEARCH_VERSION=1.4.2 # Check http://www.elasticsearch.org/download/ for l
 sudo apt-get update
 sudo apt-get install -qq openjdk-7-jre-headless
 
-wget --quiet https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.deb
+wget --quiet https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.4.deb
 sudo dpkg -i elasticsearch-$ELASTICSEARCH_VERSION.deb
 rm elasticsearch-$ELASTICSEARCH_VERSION.deb
 
