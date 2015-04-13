@@ -86,6 +86,7 @@ Here's a quickstart screencast!
 	* MariaDB
 	* MongoDB
 	* MySQL
+	* Percona MySQL
 	* PostgreSQL
 	* SQLite
 * In-Memory Stores

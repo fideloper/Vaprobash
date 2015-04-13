@@ -229,6 +229,9 @@ Vagrant.configure("2") do |config|
   # Provision MariaDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
 
+  # Provision Percona
+  # config.vm.provision "shell", path: "#{github_url}/scripts/percona.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
+
   ####
   # Search Servers
   ##########
