@@ -9,7 +9,7 @@ github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
 # https://github.com/settings/tokens
-github_pat          = "c969c72e985ac1f6b72430388b32b0e3c8abfc3b"
+github_pat          = ""
 
 # Server Configuration
 
