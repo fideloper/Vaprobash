@@ -7,6 +7,10 @@ github_repo     = "Vaprobash"
 github_branch   = "1.4.0"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
+# Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
+# https://github.com/settings/tokens
+github_pat          = "c969c72e985ac1f6b72430388b32b0e3c8abfc3b"
+
 # Server Configuration
 
 hostname        = "vaprobash.dev"
