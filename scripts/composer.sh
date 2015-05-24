@@ -14,8 +14,11 @@ HHVM_IS_INSTALLED=$?
 composer -v > /dev/null 2>&1
 COMPOSER_IS_INSTALLED=$?
 
-# Retrieve the Global Composer Packages, if any are given
-COMPOSER_PACKAGES=($@)
+# Contains all arguments that are passed
+COMPOSER_ARG=($@)
+
+GITHUB_OAUTH=${COMPOSER_ARG[0]}
+COMPOSER_PACKAGES=${COMPOSER_ARG[@]:1}
 
 # True, if composer is not installed
 if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
@@ -51,16 +54,23 @@ else
     fi
 fi
 
+if [[ $GITHUB_OAUTH -ne "" ]]; then
+    if [[ ! $COMPOSER_IS_INSTALLED -ne 0 ]]; then
+    else
+        composer config -g github-oauth.github.com $GITHUB_OAUTH
+    fi
+fi
+
 
 # Install Global Composer Packages if any are given
 if [[ ! -z $COMPOSER_PACKAGES ]]; then
 
     echo ">>> Installing Global Composer Packages:"
-    echo "    " $@
+    echo "    " ${COMPOSER_PACKAGES[@]}
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
-        hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer global require $@
+        hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer global require ${COMPOSER_PACKAGES[@]}
     else
-        composer global require $@
+        composer global require ${COMPOSER_PACKAGES[@]}
     fi
 
     # Add Composer's Global Bin to ~/.profile path
