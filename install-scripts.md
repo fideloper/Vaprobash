@@ -18,12 +18,6 @@ This installs some basics items.
 - build-essential, python-software-properties
 - SSL certificate (self-signed) for [#](https://*.xip.io) addresses
 
-### <a href="install-scripts.html#oh-my-zsh" name="oh-my-zsh" id="oh-my-zsh">#</a> Oh-My-Zsh
-
-This installs ZSH and runs the [installer for Oh-My-Zsh](https://gist.github.com/tsabat/1498393).
-
-<p class="alert alert-danger">This install may be deleted, as Oh-My-Zsh appears to edit the users PATH variable, causing issues with the installation of other scripts.</p>
-
 ### <a href="install-scripts.html#base" name="php" id="php">#</a> PHP
 
 This will install PHP 5.5 and its common modules. This also install xdebug and sets the following:
