@@ -55,8 +55,7 @@ else
 fi
 
 if [[ $GITHUB_OAUTH -ne "" ]]; then
-    if [[ ! $COMPOSER_IS_INSTALLED -ne 0 ]]; then
-    else
+    if [[ ! $COMPOSER_IS_INSTALLED -eq 1 ]]; then
         composer config -g github-oauth.github.com $GITHUB_OAUTH
     fi
 fi
