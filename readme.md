@@ -80,12 +80,15 @@ Here's a quickstart screencast!
 	* Apache
 	* HHVM
 	* Nginx
+* HTTP Reverse Proxy / Web Application Accelerator
+	* Varnish
 * Databases
 	* Couchbase
 	* CouchDB
 	* MariaDB
 	* MongoDB
 	* MySQL
+	* Percona MySQL
 	* PostgreSQL
 	* SQLite
 * In-Memory Stores

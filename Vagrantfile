@@ -69,6 +69,10 @@ laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `com
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
 symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 
+# HTTP Reverse Proxy
+varnish_version       = "4"     # Options: 3 | 4
+varnish_port_update   = "true"  # Update varnish port to 80 and apache/nginx to port 8080
+
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
   #"grunt-cli",
@@ -204,6 +208,13 @@ Vagrant.configure("2") do |config|
   # Provision Nginx Base
   # config.vm.provision "shell", path: "#{github_url}/scripts/nginx.sh", args: [server_ip, public_folder, hostname, github_url]
 
+  ####
+  # Reverse Proxy Servers
+  ##########
+
+  # Provision Varnish
+  # config.vm.provision "shell", path: "#{github_url}/scripts/varnish.sh", args: [varnish_version, varnish_port_update]
+
 
   ####
   # Databases
@@ -232,6 +243,9 @@ Vagrant.configure("2") do |config|
 
   # Provision MariaDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
+
+  # Provision Percona
+  # config.vm.provision "shell", path: "#{github_url}/scripts/percona.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
 
   ####
   # Search Servers
