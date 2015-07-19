@@ -306,7 +306,8 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Composer
-  # config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
+  # You may pass a github auth token as the first argument
+  # config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: [“”, composer_packages.join(" “)]
 
   # Provision Laravel
   # config.vm.provision "shell", path: "#{github_url}/scripts/laravel.sh", privileged: false, args: [server_ip, laravel_root_folder, public_folder, laravel_version]
