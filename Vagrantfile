@@ -118,6 +118,9 @@ Vagrant.configure("2") do |config|
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
 
+  # Replicate local ~/.gitconfig
+  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
