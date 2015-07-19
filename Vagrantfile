@@ -237,6 +237,9 @@ Vagrant.configure("2") do |config|
   # Provision MariaDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
 
+  # Provision Neo4J
+  # config.vm.provision "shell", path: "#{github_url}/scripts/neo4j.sh"
+
   ####
   # Search Servers
   ##########
