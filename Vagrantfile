@@ -108,6 +108,9 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: server_ip
   config.vm.network :forwarded_port, guest: 80, host: 8000
 
+  # Enable agent forwarding over SSH connections
+  config.ssh.forward_agent = true
+  
   # Use NFS for the shared folder
   config.vm.synced_folder ".", "/vagrant",
             id: "core",
