@@ -50,6 +50,8 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"compass",
 ]
 
+go_version            = "latest" # Example: go1.4 (latest equals the latest stable version)
+
 # To install HHVM instead of PHP, set this to "true"
 hhvm                  = "false"
 
@@ -303,6 +305,9 @@ Vagrant.configure("2") do |config|
 
   # Install Ruby Version Manager (RVM)
   # config.vm.provision "shell", path: "#{github_url}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
+
+  # Install Go Version Manager (GVM)
+  # config.vm.provision "shell", path: "#{github_url}/scripts/go.sh", privileged: false, args: [go_version]
 
   ####
   # Frameworks and Tooling
