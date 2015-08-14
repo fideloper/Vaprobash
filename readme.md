@@ -105,6 +105,7 @@ Here's a quickstart screencast!
 	* Laravel
 	* Symfony
 	* PHPUnit
+	* WordPress CLI
 	* MailCatcher
     * Ansible
 	* Android
