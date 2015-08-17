@@ -111,12 +111,17 @@ Vagrant.configure("2") do |config|
 
   # Enable agent forwarding over SSH connections
   config.ssh.forward_agent = true
-  
+
   # Use NFS for the shared folder
   config.vm.synced_folder ".", "/vagrant",
             id: "core",
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime']
+
+  # Replicate local .gitconfig file if it exists
+  if File.file?(File.expand_path("~/.gitconfig"))
+    config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+  end
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
