@@ -48,28 +48,22 @@ else
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
         sudo hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer self-update
     else
-        sudo composer self-update
+        composer self-update
     fi
 fi
 
 if [[ $GITHUB_OAUTH -ne "" ]]; then
     if [[ ! $COMPOSER_IS_INSTALLED -eq 1 ]]; then
-        sudo composer config -g github-oauth.github.com $GITHUB_OAUTH
+        composer config -g github-oauth.github.com $GITHUB_OAUTH
     fi
 fi
 
 
 # Install Global Composer Packages if any are given
 if [[ ! -z $COMPOSER_PACKAGES ]]; then
-
     echo ">>> Installing Global Composer Packages:"
     echo "    " ${COMPOSER_PACKAGES[@]}
-    if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
-        hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer global require ${COMPOSER_PACKAGES[@]}
-    else
-        sudo composer global require ${COMPOSER_PACKAGES[@]}
-    fi
-
+    
     # Add Composer's Global Bin to ~/.profile path
     if [[ -f "/home/vagrant/.profile" ]]; then
         if ! grep -qsc 'COMPOSER_HOME=' /home/vagrant/.profile; then
@@ -81,5 +75,11 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
             # Source the .profile to pick up changes
             . /home/vagrant/.profile
         fi
+    fi
+    
+    if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
+        hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer global require ${COMPOSER_PACKAGES[@]}
+    else
+        composer global require ${COMPOSER_PACKAGES[@]}
     fi
 fi
