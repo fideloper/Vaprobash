@@ -3,7 +3,7 @@
 echo ">>> Installing Elasticsearch"
 
 # Set some variables
-ELASTICSEARCH_VERSION=1.6.0 # Check https://www.elastic.co/downloads/elasticsearch for latest version
+ELASTICSEARCH_VERSION=1.7.1 # Check https://www.elastic.co/downloads/elasticsearch for latest version
 
 # Install prerequisite: Java
 # -qq implies -y --force-yes
