@@ -131,6 +131,54 @@ The vagrant file does three things you should take note of:
 
   Don't forget to reload your Vagrantfile running `vagrant reload --no-provision`, in case your virtual machine already exists.
 
+4. **AWS support using the vagrant-aws plugin**
+
+Simply edit the file Vagrantfile with your security key information and name the actual EC2 instance.  You can modify the AMI image from the listing here:
+[View additional ubuntu images here.](https://cloud-images.ubuntu.com)
+
+  ```ruby
+   config.vm.provider :aws do |aws, override|
+      config.vm.box = "dummy"
+      aws.access_key_id = "ACCESS_KEY_ID"
+      aws.secret_access_key = "SECRET_ACCESS_KEY"
+      aws.keypair_name = "KEYPAIR_NAME"
+
+      #us-ease-1 Ubuntu 12.04 LTS
+      aws.ami = "ami-b08b6cd8"
+
+      override.ssh.username = "ubuntu"
+      override.ssh.private_key_path = "PATH_TO_LOCAL_PEM_KEY"
+      aws.instance_type = "t1.micro"
+      aws.security_groups = "SECURITY_GROUP"
+      override.ssh.username = "ubuntu"
+      aws.tags = {
+        'Name' => 'TAG_NAMES',
+       }
+    end
+  ```
+
+  You must do the following command to install the AWS plugin for vagrant:
+  ```bash
+  vagrant plugin install vagrant-aws
+  ```
+
+  and install a dummy box to get going
+  ```bash
+  vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+  ```
+
+  Finally to run with vagrant:
+  ```bash
+  > vagrant up --provider=aws
+  ```
+
+  Additional resources:
+
+  [https://github.com/mitchellh/vagrant-aws](https://github.com/mitchellh/vagrant-aws)
+
+  [http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant](http://www.iheavy.com/2014/01/16/how-to-deploy-on-amazon-ec2-with-vagrant)
+
+
 ## Connecting to MySQL from Sequel Pro:
 
 Change your IP address as needed. The default IP address is now `192.168.22.10`
