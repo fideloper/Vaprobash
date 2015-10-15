@@ -56,7 +56,7 @@ fi
 
 if [[ $GITHUB_OAUTH != "" ]]; then
     if [[ ! $COMPOSER_IS_INSTALLED -eq 1 ]]; then
-        echo ">>> Setting Github Personal Access Token: $GITHUB_OAUTH"
+        echo ">>> Setting Github Personal Access Token"
         composer config -g github-oauth.github.com $GITHUB_OAUTH
     fi
 fi
