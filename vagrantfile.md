@@ -19,6 +19,10 @@ These are the user, repository and branch from which the shell scripts are downl
 
 ```ruby
 server_ip             = "192.168.33.10"
+server_cpus           = "1"   # Cores
+server_memory         = "384" # MB
+server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
+
 mysql_root_password   = "root" # We'll assume user "root"
 pgsql_root_password   = "root" # We'll assume user "root"
 ```
@@ -29,14 +33,13 @@ These variables are used throughout various install scripts. The IP address is a
 
 ```ruby
 # Set server to Ubuntu 12.04
-config.vm.box = "precise64"
-config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+config.vm.box = "ubuntu/trusty64"
 
 # Create a static IP
 config.vm.network :private_network, ip: server_ip
 ```
 
-We use Ubuntu Server LTS releases. Currently, this is Ubuntu 12.04. The next release will be Ubuntu 14.04, coming in Spring 2014. For network settings, we set the static IP address as defined above.
+We use Ubuntu Server LTS releases. Currently, this is Ubuntu 14.04. For network settings, we set the static IP address as defined above.
 
 ## NFS
 
@@ -49,13 +52,17 @@ config.vm.synced_folder ".", "/vagrant",
 
 Because the default file sync can have speed issues with large amounts of files, this repository defaults to setting up a Network File System to share files between the host system and the virtual machine.
 
-## Memory
+## Memory and CPUs
 
 ```ruby
-vb.customize ["modifyvm", :id, "--memory", "384"]
+# Set server cpus
+vb.customize ["modifyvm", :id, "--cpus", server_cpus]
+
+# Set server memory
+vb.customize ["modifyvm", :id, "--memory", server_memory]
 ```
 
-We can set how much memory is allocated to the VM. Vagrant defaults to 384, and so do we here.
+We can set how much memory is allocated to the VM both values are set above in the "variables" section.
 
 ## Scripts
 
