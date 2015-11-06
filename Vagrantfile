@@ -128,7 +128,7 @@ Vagrant.configure("2") do |config|
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.name = "Vaprobash"
+    vb.name = hostname
 
     # Set server cpus
     vb.customize ["modifyvm", :id, "--cpus", server_cpus]
