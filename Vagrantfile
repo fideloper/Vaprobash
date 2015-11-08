@@ -100,6 +100,8 @@ Vagrant.configure("2") do |config|
     config.hostmanager.manage_host = true
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = false
+  else
+    warn "The recommeded plugin 'vagrant-hostmanager' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-hostmanager'"
   end
 
   # Create a hostname, don't forget to put it to the `hosts` file
@@ -170,6 +172,8 @@ Vagrant.configure("2") do |config|
         type: :nfs,
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
     }
+  else
+    warn "The recommeded plugin 'vagrant-cachier' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-cachier'"
   end
 
   # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
