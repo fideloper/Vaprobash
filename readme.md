@@ -111,6 +111,10 @@ Here's a quickstart screencast!
 	* MailCatcher
     * Ansible
 	* Android
+    * Maven
+    * M4
+    * Puppet Client
+    * wkhtmltopdf
 
 ## The Vagrantfile
 

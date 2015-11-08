@@ -208,6 +208,7 @@ Vagrant.configure("2") do |config|
   # Provision docker-compose
   # config.vm.provision "shell", path: "#{github_url}/scripts/docker-compose.sh"
 
+
   ####
   # Web Servers
   ##########
@@ -249,6 +250,7 @@ Vagrant.configure("2") do |config|
 
   # Provision Neo4J
   # config.vm.provision "shell", path: "#{github_url}/scripts/neo4j.sh"
+
 
   ####
   # Search Servers
@@ -307,6 +309,7 @@ Vagrant.configure("2") do |config|
   # Install RabbitMQ
   # config.vm.provision "shell", path: "#{github_url}/scripts/rabbitmq.sh", args: [rabbitmq_user, rabbitmq_password]
 
+
   ####
   # Additional Languages
   ##########
@@ -322,6 +325,7 @@ Vagrant.configure("2") do |config|
 
   # Install Oracle Java 8
   # config.vm.provision "shell", path: "#{github_url}/scripts/oracle-java.sh"
+
 
   ####
   # Frameworks and Tooling
@@ -352,11 +356,25 @@ Vagrant.configure("2") do |config|
   # Install Android
   # config.vm.provision "shell", path: "#{github_url}/scripts/android.sh"
 
+  # Install Maven
+  config.vm.provision "shell", path: "#{github_url}/scripts/maven.sh"
+
+  # Install M4
+  config.vm.provision "shell", path: "#{github_url}/scripts/m4.sh"
+
+  # Install Puppet Client
+  config.vm.provision "shell", path: "#{github_url}/scripts/puppet-client.sh"
+
+  # Install wkhtml2pdf
+  config.vm.provision "shell", path: "#{github_url}/scripts/wkhtmltopdf.sh"
+
+
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
   # Add these to the same directory as the Vagrantfile.
   ##########
   # config.vm.provision "shell", path: "./local-script.sh"
+
 
 end
