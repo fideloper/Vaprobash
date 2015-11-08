@@ -143,7 +143,7 @@ Vagrant.configure("2") do |config|
     # to sleep for instance, then some 3rd party services will reject requests.
     vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
 
-    #Allow symlinks inside shared folders
+    # Allow symlinks inside shared folders
     vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
 
     # Prevent VMs running on Ubuntu to lose internet connection
