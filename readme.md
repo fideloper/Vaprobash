@@ -138,6 +138,14 @@ The vagrant file does three things you should take note of:
 
   Don't forget to reload your Vagrantfile running `vagrant reload --no-provision`, in case your virtual machine already exists.
 
+## Recommended Plugins
+
+For an optimal experience we are recommending the installation of the following Vagrant plugins:
+
+* [vagrant-hostmanager](https://github.com/smdahlen/vagrant-hostmanager)
+* [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier)
+* [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) (VirtualBox users only)
+
 ## Connecting to MySQL from Sequel Pro:
 
 Change your IP address as needed. The default IP address is now `192.168.22.10`
