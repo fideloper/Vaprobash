@@ -205,6 +205,9 @@ Vagrant.configure("2") do |config|
   # Provision Docker
   # config.vm.provision "shell", path: "#{github_url}/scripts/docker.sh", args: "permissions"
 
+  # Provision docker-compose
+  # config.vm.provision "shell", path: "#{github_url}/scripts/docker-compose.sh"
+
   ####
   # Web Servers
   ##########
