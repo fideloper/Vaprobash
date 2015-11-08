@@ -357,16 +357,16 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/android.sh"
 
   # Install Maven
-  config.vm.provision "shell", path: "#{github_url}/scripts/maven.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/maven.sh"
 
   # Install M4
-  config.vm.provision "shell", path: "#{github_url}/scripts/m4.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/m4.sh"
 
   # Install Puppet Client
-  config.vm.provision "shell", path: "#{github_url}/scripts/puppet-client.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/puppet-client.sh"
 
   # Install wkhtml2pdf
-  config.vm.provision "shell", path: "#{github_url}/scripts/wkhtmltopdf.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/wkhtmltopdf.sh"
 
 
   ####
