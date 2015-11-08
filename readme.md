@@ -101,6 +101,7 @@ Here's a quickstart screencast!
 * Additional Languages
 	* NodeJS via NVM
 	* Ruby via RVM
+    * Orcale Java 8
 * Frameworks / Tooling
 	* Composer
 	* Laravel
