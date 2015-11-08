@@ -76,6 +76,7 @@ Here's a quickstart screencast!
 	* PHP MsSQL (ability to connect to SQL Server)
 	* Screen
 	* Docker
+    * docker-compose
 * Web Servers
 	* Apache
 	* HHVM
