@@ -320,6 +320,9 @@ Vagrant.configure("2") do |config|
   # Install Go Version Manager (GVM)
   # config.vm.provision "shell", path: "#{github_url}/scripts/go.sh", privileged: false, args: [go_version]
 
+  # Install Oracle Java 8
+  # config.vm.provision "shell", path: "#{github_url}/scripts/oracle-java.sh"
+
   ####
   # Frameworks and Tooling
   ##########
