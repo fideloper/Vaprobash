@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "n3r0-ch"
 github_repo     = "Vaprobash"
-github_branch   = "1.4.1"
+github_branch   = "develop"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
