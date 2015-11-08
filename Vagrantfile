@@ -150,6 +150,15 @@ Vagrant.configure("2") do |config|
     # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
 
+    # Automatically update VirtualBox Guest Additions
+    if Vagrant.has_plugin?("vagrant-vbguest")
+      # set auto_update to false, if you do NOT want to check the correct
+      # additions version when booting this machine
+      config.vbguest.auto_update = true
+    else
+      warn "The recommeded plugin 'vagrant-vbguest' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-vbguest'"
+    end
+
   end
 
   # If using VMWare Fusion
