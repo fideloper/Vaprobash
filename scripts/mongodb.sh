@@ -35,12 +35,12 @@ if [ $PHP_IS_INSTALLED -eq 0 ]; then
     # install dependencies
     sudo apt-get -y install php-pear php5-dev
 
-    # install php extencion
+    # install php extension
     echo "no" > answers.txt
     sudo pecl install mongo < answers.txt
     rm answers.txt
 
-    # add extencion file and restart service
+    # add extension file and restart service
     echo 'extension=mongo.so' | sudo tee /etc/php5/mods-available/mongo.ini
 
     ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
