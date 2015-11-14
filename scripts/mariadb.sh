@@ -43,3 +43,26 @@ if [ $2 == "true" ]; then
 
     service mysql restart
 fi
+
+# Add .my.ini file
+cat <<EOT >> ~/.my.cnf
+[client]
+user=root
+password="$1"
+
+[mysql]
+user=root
+password="$1"
+
+[mysqldump]
+user=root
+password="$1"
+
+[mysqldiff]
+user=root
+password="$1"
+EOT
+chmod 600 ~/.my.cnf
+cp ~/.my.cnf /home/vagrant
+chown vagrant:vagrant /home/vagrant/.my.cnf
+chmod 600 /home/vagrant/.my.cnf
