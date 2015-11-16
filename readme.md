@@ -109,6 +109,7 @@ Here's a quickstart screencast!
 	* MailCatcher
     * Ansible
 	* Android
+    * docker-nuke
 
 ## The Vagrantfile
 
