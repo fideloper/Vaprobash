@@ -76,6 +76,7 @@ Here's a quickstart screencast!
 	* PHP MsSQL (ability to connect to SQL Server)
 	* Screen
 	* Docker
+    * docker-compose
 * Web Servers
 	* Apache
 	* HHVM
@@ -101,6 +102,7 @@ Here's a quickstart screencast!
 * Additional Languages
 	* NodeJS via NVM
 	* Ruby via RVM
+    * Orcale Java 8
 * Frameworks / Tooling
 	* Composer
 	* Laravel
@@ -109,6 +111,10 @@ Here's a quickstart screencast!
 	* MailCatcher
     * Ansible
 	* Android
+    * Maven
+    * M4
+    * Puppet Client
+    * wkhtmltopdf
 
 ## The Vagrantfile
 
@@ -131,6 +137,14 @@ The vagrant file does three things you should take note of:
   ```
 
   Don't forget to reload your Vagrantfile running `vagrant reload --no-provision`, in case your virtual machine already exists.
+
+## Recommended Plugins
+
+For an optimal experience we are recommending the installation of the following Vagrant plugins:
+
+* [vagrant-hostmanager](https://github.com/smdahlen/vagrant-hostmanager)
+* [vagrant-cachier](https://github.com/fgrehm/vagrant-cachier)
+* [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) (VirtualBox users only)
 
 ## Connecting to MySQL from Sequel Pro:
 

@@ -22,7 +22,7 @@ sudo apt-get update
 
 # Install base packages
 # -qq implies -y --force-yes
-sudo apt-get install -qq curl unzip git-core ack-grep software-properties-common build-essential
+sudo apt-get install -qq curl unzip git-core ack-grep software-properties-common build-essential telnet dnsutils
 
 
 echo ">>> Installing *.xip.io self-signed SSL"
@@ -80,3 +80,16 @@ fi
 
 # Enable case sensitivity
 shopt -u nocasematch
+
+# Edit MOTD
+echo '
+__      __                   _               _
+\ \    / /                  | |             | |
+ \ \  / /_ _ _ __  _ __ ___ | |__   __ _ ___| |__
+  \ \/ / _  |  _ \|  __/ _ \|  _ \ / _  / __|  _ \
+   \  / (_| | |_) | | | (_) | |_) | (_| \__ \ | | |
+    \/ \__,_| .__/|_|  \___/|_.__/ \__,_|___/_| |_|
+            | |
+            |_|
+
+' > /etc/motd

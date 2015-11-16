@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "n3r0-ch"
 github_repo     = "Vaprobash"
-github_branch   = "1.4.1"
+github_branch   = "develop"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
@@ -100,6 +100,8 @@ Vagrant.configure("2") do |config|
     config.hostmanager.manage_host = true
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = false
+  else
+    warn "The recommeded plugin 'vagrant-hostmanager' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-hostmanager'"
   end
 
   # Create a hostname, don't forget to put it to the `hosts` file
@@ -141,9 +143,21 @@ Vagrant.configure("2") do |config|
     # to sleep for instance, then some 3rd party services will reject requests.
     vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
 
+    # Allow symlinks inside shared folders
+    vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+
     # Prevent VMs running on Ubuntu to lose internet connection
     # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+
+    # Automatically update VirtualBox Guest Additions
+    if Vagrant.has_plugin?("vagrant-vbguest")
+      # set auto_update to false, if you do NOT want to check the correct
+      # additions version when booting this machine
+      config.vbguest.auto_update = true
+    else
+      warn "The recommeded plugin 'vagrant-vbguest' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-vbguest'"
+    end
 
   end
 
@@ -167,6 +181,8 @@ Vagrant.configure("2") do |config|
         type: :nfs,
         mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
     }
+  else
+    warn "The recommeded plugin 'vagrant-cachier' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-cachier'"
   end
 
   # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
@@ -204,6 +220,10 @@ Vagrant.configure("2") do |config|
 
   # Provision Docker
   # config.vm.provision "shell", path: "#{github_url}/scripts/docker.sh", args: "permissions"
+
+  # Provision docker-compose
+  # config.vm.provision "shell", path: "#{github_url}/scripts/docker-compose.sh"
+
 
   ####
   # Web Servers
@@ -246,6 +266,7 @@ Vagrant.configure("2") do |config|
 
   # Provision Neo4J
   # config.vm.provision "shell", path: "#{github_url}/scripts/neo4j.sh"
+
 
   ####
   # Search Servers
@@ -304,6 +325,7 @@ Vagrant.configure("2") do |config|
   # Install RabbitMQ
   # config.vm.provision "shell", path: "#{github_url}/scripts/rabbitmq.sh", args: [rabbitmq_user, rabbitmq_password]
 
+
   ####
   # Additional Languages
   ##########
@@ -316,6 +338,10 @@ Vagrant.configure("2") do |config|
 
   # Install Go Version Manager (GVM)
   # config.vm.provision "shell", path: "#{github_url}/scripts/go.sh", privileged: false, args: [go_version]
+
+  # Install Oracle Java 8
+  # config.vm.provision "shell", path: "#{github_url}/scripts/oracle-java.sh"
+
 
   ####
   # Frameworks and Tooling
@@ -346,11 +372,25 @@ Vagrant.configure("2") do |config|
   # Install Android
   # config.vm.provision "shell", path: "#{github_url}/scripts/android.sh"
 
+  # Install Maven
+  # config.vm.provision "shell", path: "#{github_url}/scripts/maven.sh"
+
+  # Install M4
+  # config.vm.provision "shell", path: "#{github_url}/scripts/m4.sh"
+
+  # Install Puppet Client
+  # config.vm.provision "shell", path: "#{github_url}/scripts/puppet-client.sh"
+
+  # Install wkhtml2pdf
+  # config.vm.provision "shell", path: "#{github_url}/scripts/wkhtmltopdf.sh"
+
+
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
   # Add these to the same directory as the Vagrantfile.
   ##########
   # config.vm.provision "shell", path: "./local-script.sh"
+
 
 end
