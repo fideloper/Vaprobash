@@ -116,9 +116,9 @@ Vagrant.configure("2") do |config|
 
   # Use NFS for the shared folder
   config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2']
+    id: "core",
+    :nfs => true,
+    :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2,fsc']
 
   # Replicate local .gitconfig file if it exists
   if File.file?(File.expand_path("~/.gitconfig"))
