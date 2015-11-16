@@ -22,9 +22,27 @@ hostname        = "vaprobash.dev"
 #   172.16.0.1  - 172.31.255.254
 #   192.168.0.1 - 192.168.255.254
 server_ip             = "192.168.22.10"
-server_cpus           = "1"   # Cores
-server_memory         = "384" # MB
-server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
+
+# Calculate system resources
+# Default: all CPU cores, an eighth of available RAM as memory and swap size
+host = RbConfig::CONFIG['host_os']
+if host =~ /darwin/
+  server_cpus = `sysctl -n hw.ncpu`.to_i
+  server_memory = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 8
+elsif host =~ /linux/
+  server_cpus = `nproc`.to_i
+  server_memory = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 1024 / 8
+else # sorry Windows folks, I can't help you
+  server_cpus = 1
+  server_memory = 512
+end
+server_swap = server_memory
+
+# Manual resource setting
+# Overrides calculation
+# server_cpus           = "1"   # Cores
+# server_memory         = "384" # MB
+# server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
