@@ -25,6 +25,7 @@ server_ip             = "192.168.22.10"
 server_cpus           = "1"   # Cores
 server_memory         = "384" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
+synced_folder         = "."   # Change the location of the synced folder in the host machine e.g. "/var/www"
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
@@ -115,7 +116,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Use NFS for the shared folder
-  config.vm.synced_folder ".", "/vagrant",
+  config.vm.synced_folder synced_folder, "/vagrant",
             id: "core",
             :nfs => true,
             :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2']
