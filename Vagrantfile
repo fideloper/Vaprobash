@@ -86,6 +86,8 @@ rabbitmq_password = "password"
 
 sphinxsearch_version  = "rel22" # rel20, rel21, rel22, beta, daily, stable
 
+# SSH public key
+ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
 
 Vagrant.configure("2") do |config|
 
@@ -123,6 +125,14 @@ Vagrant.configure("2") do |config|
   # Replicate local .gitconfig file if it exists
   if File.file?(File.expand_path("~/.gitconfig"))
     config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+  end
+
+  # Add SSH public key to authorized_keys
+  config.vm.provision "shell" do |s| 
+    s.inline = <<-SHELL
+      echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+      echo #{ssh_pub_key} >> /root/.ssh/authorized_keys 
+    SHELL
   end
 
   # If using VirtualBox
