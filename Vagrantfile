@@ -17,8 +17,7 @@ hostname        = "vaprobash.dev"
 #   10.0.0.1    - 10.255.255.254
 #   172.16.0.1  - 172.31.255.254
 #   192.168.0.1 - 192.168.255.254
-# Or use 0.0.0.0 if you have the Vagrant Auto-network plugin installed
-server_ip             = "0.0.0.0"
+server_ip             = "192.168.22.10"
 server_cpus           = "1"   # Cores
 server_memory         = "384" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
@@ -102,8 +101,8 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = hostname
 
   # Create a static IP
-  if server_ip == "0.0.0.0" && Vagrant.has_plugin?("vagrant-auto_network")
-    config.vm.network :private_network, :ip => server_ip, :auto_network => true
+  if Vagrant.has_plugin?("vagrant-auto_network")
+    config.vm.network :private_network, :ip => "0.0.0.0", :auto_network => true
   else
     config.vm.network :private_network, ip: server_ip
     config.vm.network :forwarded_port, guest: 80, host: 8000
