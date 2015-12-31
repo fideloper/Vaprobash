@@ -28,6 +28,7 @@ server_swap           = "768" # Options: false | int (MB) - Guideline: Between o
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
+# CET        for Central European Time
 # US/Central for American Central
 # US/Eastern for American Eastern
 server_timezone  = "UTC"
