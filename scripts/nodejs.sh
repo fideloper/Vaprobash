@@ -45,7 +45,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
     # If set to latest, get the current node version from the home page
     if [[ $NODEJS_VERSION -eq "latest" ]]; then
-        NODEJS_VERSION=`curl -L 'nodejs.org/dist/index.tab' | sed -n '2p' | awk '{ print $1 }'`
+        NODEJS_VERSION="node"
     fi
 
     # Install Node
