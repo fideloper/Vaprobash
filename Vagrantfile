@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "fideloper"
 github_repo     = "Vaprobash"
-github_branch   = "1.4.0"
+github_branch   = "1.4.2"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
@@ -28,6 +28,7 @@ server_swap           = "768" # Options: false | int (MB) - Guideline: Between o
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
+# CET        for Central European Time
 # US/Central for American Central
 # US/Eastern for American Eastern
 server_timezone  = "UTC"
@@ -37,6 +38,7 @@ mysql_root_password   = "root"   # We'll assume user "root"
 mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "false"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
+mongo_version         = "2.6"    # Options: 2.6 | 3.0
 mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
@@ -48,6 +50,8 @@ ruby_gems             = [        # List any Ruby Gems that you want to install
   #"sass",
   #"compass",
 ]
+
+go_version            = "latest" # Example: go1.4 (latest equals the latest stable version)
 
 # To install HHVM instead of PHP, set this to "true"
 hhvm                  = "false"
@@ -105,19 +109,31 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = hostname
 
   # Create a static IP
-  config.vm.network :private_network, ip: server_ip
-  config.vm.network :forwarded_port, guest: 80, host: 8000
+  if Vagrant.has_plugin?("vagrant-auto_network")
+    config.vm.network :private_network, :ip => "0.0.0.0", :auto_network => true
+  else
+    config.vm.network :private_network, ip: server_ip
+    config.vm.network :forwarded_port, guest: 80, host: 8000
+  end
+
+  # Enable agent forwarding over SSH connections
+  config.ssh.forward_agent = true
 
   # Use NFS for the shared folder
   config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['nolock,vers=3,udp,noatime']
+    id: "core",
+    :nfs => true,
+    :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2,fsc']
+
+  # Replicate local .gitconfig file if it exists
+  if File.file?(File.expand_path("~/.gitconfig"))
+    config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+  end
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.name = "Vaprobash"
+    vb.name = hostname
 
     # Set server cpus
     vb.customize ["modifyvm", :id, "--cpus", server_cpus]
@@ -228,10 +244,13 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/couchdb.sh"
 
   # Provision MongoDB
-  # config.vm.provision "shell", path: "#{github_url}/scripts/mongodb.sh", args: mongo_enable_remote
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mongodb.sh", args: [mongo_enable_remote, mongo_version]
 
   # Provision MariaDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
+
+  # Provision Neo4J
+  # config.vm.provision "shell", path: "#{github_url}/scripts/neo4j.sh"
 
   ####
   # Search Servers
@@ -281,6 +300,9 @@ Vagrant.configure("2") do |config|
   # Install Supervisord
   # config.vm.provision "shell", path: "#{github_url}/scripts/supervisord.sh"
 
+  # Install Kibana
+  # config.vm.provision "shell", path: "#{github_url}/scripts/kibana.sh"
+
   # Install ØMQ
   # config.vm.provision "shell", path: "#{github_url}/scripts/zeromq.sh"
 
@@ -297,12 +319,16 @@ Vagrant.configure("2") do |config|
   # Install Ruby Version Manager (RVM)
   # config.vm.provision "shell", path: "#{github_url}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
 
+  # Install Go Version Manager (GVM)
+  # config.vm.provision "shell", path: "#{github_url}/scripts/go.sh", privileged: false, args: [go_version]
+
   ####
   # Frameworks and Tooling
   ##########
 
   # Provision Composer
-  # config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: composer_packages.join(" ")
+  # You may pass a github auth token as the first argument
+  # config.vm.provision "shell", path: "#{github_url}/scripts/composer.sh", privileged: false, args: [github_pat, composer_packages.join(" ")]
 
   # Provision Laravel
   # config.vm.provision "shell", path: "#{github_url}/scripts/laravel.sh", privileged: false, args: [server_ip, laravel_root_folder, public_folder, laravel_version]

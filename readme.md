@@ -86,6 +86,7 @@ Here's a quickstart screencast!
 	* MariaDB
 	* MongoDB
 	* MySQL
+	* Neo4J
 	* PostgreSQL
 	* SQLite
 * In-Memory Stores
@@ -96,6 +97,7 @@ Here's a quickstart screencast!
 * Utility
 	* Beanstalkd
 	* Supervisord
+    * Kibana
 * Additional Languages
 	* NodeJS via NVM
 	* Ruby via RVM
