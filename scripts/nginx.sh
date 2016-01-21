@@ -3,6 +3,8 @@
 # Test if PHP is installed
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
+PHP_VERSION=0 && [[ $PHP_IS_INSTALLED -eq 0 ]] && PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION;')
+PHP_PATH="/etc/php5" && [[ $PHP_VERSION -eq 7 ]] && PHP_PATH="/etc/php/7.0"
 
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
@@ -70,9 +72,13 @@ sudo ngxdis default
 
 if [[ $HHVM_IS_INSTALLED -ne 0 && $PHP_IS_INSTALLED -eq 0 ]]; then
     # PHP-FPM Config for Nginx
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" "${PHP_PATH}"/fpm/php.ini
 
-    sudo service php5-fpm restart
+    if [[ PHP_VERSION -eq 7 ]]; then
+        sudo service php7.0-fpm restart
+    else
+        sudo service php5-fpm restart
+    fi
 fi
 
 sudo service nginx restart
