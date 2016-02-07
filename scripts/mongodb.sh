@@ -29,6 +29,7 @@ if [ $1 == "true" ]; then
     # enable remote access
     # setting the mongodb bind_ip to allow connections from everywhere
     sed -i "s/bind_ip = .*/bind_ip = 0.0.0.0/" /etc/mongod.conf
+    sed -i "s/bindIp: .*/bindIp: 0.0.0.0/" /etc/mongod.conf
 fi
 
 # Test if PHP is installed
