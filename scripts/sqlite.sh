@@ -2,6 +2,6 @@
 
 echo ">>> Installing SQLite Server"
 
-# Install MySQL Server
+# Install SQLite Server
 # -qq implies -y --force-yes
 sudo apt-get install -qq sqlite
