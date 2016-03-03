@@ -5,13 +5,13 @@ echo ">>> Installing MariaDB"
 [[ -z $1 ]] && { echo "!!! MariaDB root password not set. Check the Vagrant file."; exit 1; }
 
 # default version
-MARIADB_VERSION='10.0'
+MARIADB_VERSION='10.1'
 
 # Import repo key
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 
 # Add repo for MariaDB
-sudo add-apt-repository -y "deb http://mirrors.syringanetworks.net/mariadb/repo/10.0/ubuntu trusty main"
+sudo add-apt-repository "deb [arch=amd64,i386] http://mirrors.accretive-networks.net/mariadb/repo/$MARIADB_VERSION/ubuntu trusty main"
 
 # Update
 sudo apt-get update
