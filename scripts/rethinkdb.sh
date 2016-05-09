@@ -12,4 +12,4 @@ wget -qO- https://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
 sudo apt-get update
 
 # Install
-sudo apt-get install rethinkdb
+sudo apt-get install -qq rethinkdb
