@@ -10,15 +10,24 @@ PHP_IS_INSTALLED=$1
 apache2 -v > /dev/null 2>&1
 APACHE_IS_INSTALLED=$?
 
-# Installing dependency
+# Source .profile for RVM, if available
+if [[ -f "/home/vagrant/.profile" ]]; then
+	source /home/vagrant/.profile
+fi
+
+# Installing sqlite dependency
 # -qq implies -y --force-yes
-sudo apt-get install -qq libsqlite3-dev ruby1.9.1-dev
+sudo apt-get install -qq libsqlite3-dev
 
 if $(which rvm) -v > /dev/null 2>&1; then
 	echo ">>>>Installing with RVM"
 	$(which rvm) default@mailcatcher --create do gem install --no-rdoc --no-ri mailcatcher
 	$(which rvm) wrapper default@mailcatcher --no-prefix mailcatcher catchmail
 else
+	# Installing ruby dependency
+	# -qq implies -y --force-yes
+	sudo apt-get install -qq ruby-2.0.0-dev
+
 	# Gem check
 	if ! gem -v > /dev/null 2>&1; then sudo aptitude install -y libgemplugin-ruby; fi
 
