@@ -6,12 +6,15 @@ echo ">>> Installing MariaDB"
 
 # default version
 MARIADB_VERSION='10.1'
+SO_VERSION=`lsb_release -c | awk -F':' '{ print $2 }' | sed 's/\t//g'`
+
+sudo apt-get install software-properties-common
 
 # Import repo key
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 
 # Add repo for MariaDB
-sudo add-apt-repository "deb [arch=amd64,i386] http://mirrors.accretive-networks.net/mariadb/repo/$MARIADB_VERSION/ubuntu trusty main"
+sudo add-apt-repository "deb [arch=amd64,i386,ppc64el] http://tedeco.fi.upm.es/mirror/mariadb/repo/$MARIADB_VERSION/ubuntu $SO_VERSION main"
 
 # Update
 sudo apt-get update
