@@ -3,6 +3,7 @@
 # Test if PHP is installed
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
+PHP_VERSION=0 && [[ $PHP_IS_INSTALLED -eq 0 ]] && PHP_VERSION=$(php -r 'echo PHP_MAJOR_VERSION;')
 
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
@@ -49,8 +50,12 @@ sudo usermod -a -G www-data vagrant
 # On separate lines since some may cause an error
 # if not installed
 sudo a2dismod mpm_prefork mpm_worker
-sudo a2dismod php5
-sudo a2enmod rewrite actions ssl
+
+if [[ PHP_VERSION -eq 5 ]]; then
+	sudo a2dismod php5
+fi
+
+	sudo a2enmod rewrite actions ssl
 curl --silent -L $github_url/helpers/vhost.sh > vhost
 sudo chmod guo+x vhost
 sudo mv vhost /usr/local/bin
