@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PHP_VERSION=$1
+
 # Test if PHP is installed
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
@@ -14,7 +16,7 @@ sudo apt-get install -qq libtool autoconf automake uuid uuid-dev uuid-runtime bu
 
 echo "" | sudo pecl install zmq-beta > /dev/null
 
-sudo echo "extension=zmq.so" >> /etc/php5/mods-available/zmq.ini
-sudo php5enmod zmq > /dev/null
-sudo service php5-fpm restart > /dev/null
+sudo echo "extension=zmq.so" >> /etc/php/${PHP_VERSION}/mods-available/zmq.ini
+sudo phpenmod zmq > /dev/null
+sudo service php${PHP_VERSION}-fpm restart > /dev/null
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PHP_VERSION=$1
+
 echo ">>> Installing Mailcatcher"
 
 # Test if PHP is installed
@@ -43,9 +45,9 @@ sudo service mailcatcher start
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
 	# Make php use it to send mail
-    echo "sendmail_path = /usr/bin/env $(which catchmail)" | sudo tee /etc/php5/mods-available/mailcatcher.ini
-	sudo php5enmod mailcatcher
-	sudo service php5-fpm restart
+    echo "sendmail_path = /usr/bin/env $(which catchmail)" | sudo tee /etc/php/${PHP_VERSION}/mods-available/mailcatcher.ini
+	sudo phpenmod mailcatcher
+	sudo service php${PHP_VERSION}-fpm restart
 fi
 
 if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
