@@ -12,7 +12,7 @@ APACHE_IS_INSTALLED=$?
 
 # Installing dependency
 # -qq implies -y --force-yes
-sudo apt-get install -qq libsqlite3-dev ruby1.9.1-dev
+sudo apt-get install -qq libsqlite3-dev ruby1.9.1-dev g++
 
 if $(which rvm) -v > /dev/null 2>&1; then
 	echo ">>>>Installing with RVM"
