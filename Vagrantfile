@@ -352,6 +352,9 @@ Vagrant.configure("2") do |config|
   # Install Android
   # config.vm.provision "shell", path: "#{github_url}/scripts/android.sh"
 
+  # Enable MySql remote connection
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/mysql-remote.sh", args: [mysql_root_password, mysql_version]
+
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
