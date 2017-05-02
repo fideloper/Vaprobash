@@ -109,6 +109,7 @@ Here's a quickstart screencast!
 	* MailCatcher
     * Ansible
 	* Android
+    * tutum-cli
 
 ## The Vagrantfile
 

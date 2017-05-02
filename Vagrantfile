@@ -352,6 +352,9 @@ Vagrant.configure("2") do |config|
   # Install Android
   # config.vm.provision "shell", path: "#{github_url}/scripts/android.sh"
 
+  # Install tutum-cli
+  # config.vm.provision "shell", path: "#{github_url}/scripts/tutum-cli.sh"
+
   ####
   # Local Scripts
   # Any local scripts you may want to run post-provisioning.
