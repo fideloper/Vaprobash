@@ -109,8 +109,9 @@ Vagrant.configure("2") do |config|
   # TO DO: Make this work with virtualhost along-side xip.io URL
   config.vm.hostname = hostname
 
-  # Create a static IP
-  if Vagrant.has_plugin?("vagrant-auto_network")
+  # Create a static IP. Use auto network only if hostmanager is installed as
+  # well as it is not straight-forward to figure out the assigned IP address.
+  if Vagrant.has_plugin?("vagrant-auto_network") and Vagrant.has_plugin?("vagrant-hostmanager")
     config.vm.network :private_network, :ip => "0.0.0.0", :auto_network => true
   else
     config.vm.network :private_network, ip: server_ip
