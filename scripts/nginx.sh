@@ -34,6 +34,8 @@ else
     github_url="$4"
 fi
 
+PHP_VERSION=$5
+
 # Add repo for latest stable nginx
 sudo add-apt-repository -y ppa:nginx/stable
 
@@ -70,9 +72,9 @@ sudo ngxdis default
 
 if [[ $HHVM_IS_INSTALLED -ne 0 && $PHP_IS_INSTALLED -eq 0 ]]; then
     # PHP-FPM Config for Nginx
-    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
+    sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/${PHP_VERSION}/fpm/php.ini
 
-    sudo service php5-fpm restart
+    sudo service php${PHP_VERSION}-fpm restart
 fi
 
 sudo service nginx restart
