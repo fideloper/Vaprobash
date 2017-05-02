@@ -1,6 +1,7 @@
 .DS_Store
 notes.md
 .vagrant
+.bundle
 play
 
 # editor backup files

@@ -358,5 +358,16 @@ Vagrant.configure("2") do |config|
   # Add these to the same directory as the Vagrantfile.
   ##########
   # config.vm.provision "shell", path: "./local-script.sh"
+  
+
+  ####
+  # System restart
+  # Restart VM after provisioning
+  ##########
+  if Vagrant.has_plugin?("vagrant-reload")
+    config.vm.provision :reload
+  else
+    warn "The recommeded plugin 'vagrant-reload' is currently not installed. You can install it by executing: 'vagrant plugin install vagrant-reload'"
+  end
 
 end
