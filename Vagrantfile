@@ -359,4 +359,13 @@ Vagrant.configure("2") do |config|
   ##########
   # config.vm.provision "shell", path: "./local-script.sh"
 
+
+  ####
+  # Cleaning up
+  ##########
+
+  # Basic cleaning up task
+  config.vm.provision "shell", path: "#{github_url}/scripts/cleanup.sh"
+
+
 end
