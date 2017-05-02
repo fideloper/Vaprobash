@@ -2,12 +2,14 @@
 
 echo ">>> Installing RethinkDB"
 
-# Add PPA to server
-sudo add-apt-repository -y ppa:rethinkdb/ppa
+# update source list
+source /etc/lsb-release && echo "deb http://download.rethinkdb.com/apt $DISTRIB_CODENAME main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
+
+# add key
+wget -qO- https://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
 
 # Update
 sudo apt-get update
 
 # Install
-# -qq implies -y --force-yes
 sudo apt-get install -qq rethinkdb
