@@ -81,3 +81,6 @@ shopt -u nocasematch
 
 # Enable cachefilesd
 echo "RUN=yes" > /etc/default/cachefilesd
+
+# Set start directory
+echo "cd $4" >> /home/vagrant/.bashrc
