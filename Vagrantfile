@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "ChrisRM"
 github_repo     = "Vaprobash"
 github_branch   = "1.4.2"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
@@ -309,6 +309,9 @@ Vagrant.configure("2") do |config|
 
   # Install RabbitMQ
   # config.vm.provision "shell", path: "#{github_url}/scripts/rabbitmq.sh", args: [rabbitmq_user, rabbitmq_password]
+
+  # Install Gearman
+  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/gearman.sh"
 
   ####
   # Additional Languages
