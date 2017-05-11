@@ -8,7 +8,10 @@ mysql_package=mysql-server
 
 if [ $2 == "5.6" ]; then
     # Add repo for MySQL 5.6
-	sudo add-apt-repository -y ppa:ondrej/mysql-5.6
+	sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
+
+    # Remove flag file to avoid dpkg error
+    sudo rm /var/lib/mysql/debian-5.7.flag
 
 	# Update Again
 	sudo apt-get update
@@ -28,12 +31,16 @@ sudo apt-get install -qq $mysql_package
 
 # Make MySQL connectable from outside world without SSH tunnel
 if [ $3 == "true" ]; then
-    # enable remote access
-    # setting the mysql bind-address to allow connections from everywhere
+
     if [ $2 == "5.6" ]; then
-        sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
+
+cat > /etc/mysql/conf.d/mysqld.cnf << EOF
+[mysqld]
+bind-address = 0.0.0.0
+EOF
+
     else
-        sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+         sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
     fi
 
     # adding grant privileges to mysql root user from everywhere
