@@ -2,16 +2,23 @@
 
 echo ">>> Installing MongoDB"
 
-# Get key and add to sources
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+MONGODB_VERSION=$2
+PHP_VERSION=$3
 
-# Make MongoDB connectable from outside world without SSH tunnel
-if [ $2 == "3.0" ]; then
-  echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
+if [[ "$MONGODB_VERSION" == "3.2" ]]; then
+
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+
+    echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
 else
-  echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-fi
 
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+
+    echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/$MONGODB_VERSION multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-${MONGODB_VERSION}.list
+
+fi
 
 # Update
 sudo apt-get update
@@ -27,23 +34,35 @@ if [ $1 == "true" ]; then
     sed -i "s/bind_ip = .*/bind_ip = 0.0.0.0/" /etc/mongod.conf
 fi
 
+if [[ "$MONGODB_VERSION" == "3.2" ]]; then
+
+
+    cat > /lib/systemd/system/mongod.service << EOF
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+Documentation=https://docs.mongodb.org/manual
+
+[Service]
+User=mongodb
+Group=mongodb
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+fi
+
+sudo service mongod start
+
 # Test if PHP is installed
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
 
 if [ $PHP_IS_INSTALLED -eq 0 ]; then
     # install dependencies
-    sudo apt-get -y install php-pear php5-dev
+    sudo apt-get -y install php-mongodb
 
-    # install php extension
-    echo "no" > answers.txt
-    sudo pecl install mongo < answers.txt
-    rm answers.txt
-
-    # add extension file and restart service
-    echo 'extension=mongo.so' | sudo tee /etc/php5/mods-available/mongo.ini
-
-    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
-    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/cli/conf.d/mongo.ini
-    sudo service php5-fpm restart
+    sudo service php${PHP_VERSION}-fpm restart
 fi
