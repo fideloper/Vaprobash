@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "fideloper"
+github_username = "Repox"
 github_repo     = "Vaprobash"
-github_branch   = "1.4.2"
+github_branch   = "feature/ubuntu-16.04"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
@@ -43,7 +43,7 @@ mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
 php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
-php_version           = "5.6"    # Options: 5.5 | 5.6 | 7.0 | 7.1
+php_version           = "7.1"    # Options: 5.6 | 7.0 | 7.1
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
   #"jekyll",
@@ -91,8 +91,8 @@ elasticsearch_version = "2.3.1" # 5.0.0-alpha1, 2.3.1, 2.2.2, 2.1.2, 1.7.5
 
 Vagrant.configure("2") do |config|
 
-  # Set server to Ubuntu 14.04
-  config.vm.box = "ubuntu/trusty64"
+  # Set server to Ubuntu 16.04
+  config.vm.box = "bento/ubuntu-16.04"
 
   config.vm.define "Vaprobash" do |vapro|
   end
