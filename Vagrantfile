@@ -25,6 +25,7 @@ server_ip             = "192.168.22.10"
 server_cpus           = "1"   # Cores
 server_memory         = "384" # MB
 server_swap           = "768" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
+server_num_cpus       = "1"
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
@@ -140,7 +141,8 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--cpus", server_cpus]
 
     # Set server memory
-    vb.customize ["modifyvm", :id, "--memory", server_memory]
+    vb.customize ["modifyvm", :id, "--memory",  server_memory]
+    vb.customize ["modifyvm", :id, "--cpus",    server_num_cpus]
 
     # Set the timesync threshold to 10 seconds, instead of the default 20 minutes.
     # If the clock gets more than 15 minutes out of sync (due to your laptop going
@@ -153,13 +155,15 @@ Vagrant.configure("2") do |config|
 
   end
 
-  # If using VMWare Fusion
-  config.vm.provider "vmware_fusion" do |vb, override|
-    override.vm.box_url = "http://files.vagrantup.com/precise64_vmware.box"
+  # If you're using the VMware provider
+  ['vmware_fusion', 'vmware_workstation', 'vmware_desktop'].each do |vmware_provider|
+    config.vm.provider vmware_provider do |vmware, override|
+      override.vm.box = "puphpet/ubuntu1404-x64"
 
-    # Set server memory
-    vb.vmx["memsize"] = server_memory
-
+      # Set server memory
+      vmware.vmx["memsize"]   = server_memory
+      vmware.vmx["numvcpus"]  = server_num_cpus
+    end
   end
 
   # If using Vagrant-Cachier
