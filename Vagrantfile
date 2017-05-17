@@ -66,12 +66,14 @@ composer_packages     = [        # List any global Composer packages that you wa
 
 # Default web server document root
 # Symfony's public directory is assumed "web"
+# Silex's public directory is assumed "web"
 # Laravel's public directory is assumed "public"
 public_folder         = "/vagrant"
 
 laravel_root_folder   = "/vagrant/laravel" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
 symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
+silex_root_folder   = "/vagrant/silex" # Where to install Silex.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
@@ -336,6 +338,9 @@ Vagrant.configure("2") do |config|
 
   # Provision Symfony
   # config.vm.provision "shell", path: "#{github_url}/scripts/symfony.sh", privileged: false, args: [server_ip, symfony_root_folder, public_folder]
+
+  # Provision Silex
+  # config.vm.provision "shell", path: "#{github_url}/scripts/silex.sh", privileged: false, args: [server_ip, silex_root_folder, public_folder]
 
   # Install Screen
   # config.vm.provision "shell", path: "#{github_url}/scripts/screen.sh"
