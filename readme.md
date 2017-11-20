@@ -10,7 +10,7 @@
 
 The goal of this project is to create easy to use bash scripts in order to provision a Vagrant server.
 
-1. This targets Ubuntu LTS releases, currently 14.04.*
+1. This targets Ubuntu LTS releases, currently 16.04.*
 2. This project will give users various popular options such as LAMP, LEMP
 3. This project will attempt some modularity. For example, users might choose to install a Vim setup, or not.
 
