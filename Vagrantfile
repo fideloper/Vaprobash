@@ -138,10 +138,10 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Use NFS for the shared folder
-  config.vm.synced_folder vm_synced_folder_host, vm_synced_folder_guest
-    id: "core",
-    :nfs => true,
-    :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2,fsc']
+  #config.vm.synced_folder vm_synced_folder_host, vm_synced_folder_guest
+  #  id: "core"
+  #  :nfs => true,
+  #  :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2,fsc']
 
   # Replicate local .gitconfig file if it exists
   if File.file?(File.expand_path("~/.gitconfig"))
