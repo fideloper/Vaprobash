@@ -2,9 +2,9 @@
 
 **Va**&#x200B;grant **Pro**&#x200B;visioning **Bash** Scripts
 
-[View the site and extended docs.](http://fideloper.github.io/Vaprobash/index.html)
+[View the site and extended docs](http://fideloper.github.io/Vaprobash/index.html).
 
-[![Build Status](https://travis-ci.org/fideloper/Vaprobash.png?branch=master)](https://travis-ci.org/fideloper/Vaprobash)
+[![Build Status](https://travis-ci.org/rattfieldnz/Vaprobash.png?branch=master)](https://travis-ci.org/rattfieldnz/Vaprobash)
 
 ## Goal
 
@@ -31,10 +31,10 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 
 ```bash
 # curl
-$ curl -L http://bit.ly/vaprobash > Vagrantfile
+$ curl -L http://bit.ly/rattfieldnz-vaprobash > Vagrantfile
 
 # wget
-$ wget -O Vagrantfile http://bit.ly/vaprobash
+$ wget -O Vagrantfile http://bit.ly/rattfieldnz-vaprobash
 ```
 
 > The `bit.ly` link will always point to the master branch version of the Vagrantfile.
