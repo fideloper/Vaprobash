@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 set encoding=utf-8
+syntax enable
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
@@ -17,6 +18,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
+
+colorscheme solarized
 
 filetype plugin indent on
 "

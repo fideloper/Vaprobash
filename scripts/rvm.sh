@@ -10,6 +10,9 @@ RUBY_ARG=($@)
 # Number of arguments that are given
 NUMBER_OF_ARG=${#RUBY_ARG[@]}
 
+PROFILE="/home/ubuntu/.profile"
+BASHRC="/home/ubuntu/.bashrc"
+
 # Prepare the variables for installing specific Ruby version and Gems
 if [[ $NUMBER_OF_ARG -gt 1 ]]; then
     # Both Ruby version and Gems are given
@@ -48,13 +51,18 @@ else
     . /home/ubuntu/.rvm/scripts/rvm
 
     # Re-source .profile if exists
-    if [[ -f "/home/ubuntu/.profile" ]]; then
-        . /home/ubuntu/.profile
+    if [ -f ${PROFILE} ]; then
+        . ${PROFILE}
+    fi
+	
+	# Re-source .bashrc if exists
+    if [ -f ${BASHRC} ]; then
+        . ${BASHRC}
     fi
 fi
 
 # Install (optional) Ruby Gems
-if [[ ! -z $RUBY_GEMS ]]; then
+if [ ! -z $RUBY_GEMS ]; then
     echo ">>> Start installing Ruby Gems"
 
     gem install ${RUBY_GEMS[@]}

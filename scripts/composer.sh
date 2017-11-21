@@ -18,6 +18,9 @@ COMPOSER_IS_INSTALLED=$?
 GITHUB_OAUTH=$1
 COMPOSER_PACKAGES=$2
 
+PROFILE="/home/ubuntu/.profile"
+BASHRC="/home/ubuntu/.bashrc"
+
 # True, if composer is not installed
 if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Composer"
@@ -28,15 +31,31 @@ if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
         sudo mv composer.phar /usr/local/bin/composer
         sudo rm installer
 
-        # Add an alias that will allow us to use composer without timeout's
-        printf "\n# Add an alias for sudo\n%s\n# Use HHVM when using Composer\n%s" \
-        "alias sudo=\"sudo \"" \
-        "alias composer=\"hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer\"" \
-        >> "/home/ubuntu/.profile"
-
         # Resource .profile
         # Doesn't seem to work do! The alias is only usefull from the moment you log in: vagrant ssh
-        . /home/ubuntu/.profile
+        
+		# Re-source .profile if exists
+		if [ -f ${PROFILE} ]; then 
+
+			# Add an alias that will allow us to use composer without timeout's
+			printf "\n# Add an alias for sudo\n%s\n# Use HHVM when using Composer\n%s" \
+			"alias sudo=\"sudo \"" \
+			"alias composer=\"hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer\"" \
+			>> ${PROFILE}
+			
+			. ${PROFILE}
+		fi
+		
+		# Re-source .bashrc if exists
+		if [ -f ${BASHRC} ]; then
+		
+		    # Add an alias that will allow us to use composer without timeout's
+			printf "\n# Add an alias for sudo\n%s\n# Use HHVM when using Composer\n%s" \
+			"alias sudo=\"sudo \"" \
+			"alias composer=\"hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer\"" \
+			>> ${BASHRC}
+			. ${BASHRC}
+		fi
     else
         # Install Composer
         curl -sS https://getcomposer.org/installer | php
@@ -73,10 +92,17 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
             # Add composer home vendor bin dir to PATH to run globally installed executables
             printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/ubuntu/bin' >> /home/ubuntu/.profile
 
-            # Source the .profile to pick up changes
-            . /home/ubuntu/.profile
-        fi
-    fi
+			# Re-source .profile if exists
+			if [[ -f ${PROFILE} ]]; then
+				. ${PROFILE}
+			fi
+			
+			# Re-source .bashrc if exists
+			if [[ -f ${BASHRC} ]]; then
+				. ${BASHRC}
+			fi
+		fi
+	fi
     
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
         hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer global require ${COMPOSER_PACKAGES[@]}
