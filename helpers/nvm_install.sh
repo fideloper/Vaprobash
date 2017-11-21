@@ -8,33 +8,36 @@ if ! hash git 2>/dev/null; then
 fi
 
 if [ -d "$NVM_DIR" ]; then
-  echo ">>> NVM is already installed in $NVM_DIR, trying to update"
+  echo ">>> NVM is already installed in $NVM_DIR."
   echo -ne "\r=> "
-  cd $NVM_DIR && git pull origin master
-else
-  # Cloning to $NVM_DIR
-  git clone https://github.com/creationix/nvm.git $NVM_DIR
-  cd $NVM_DIR
-  git checkout master
-  . nvm.sh
 fi
 
 PROFILE="/home/ubuntu/.profile"
 BASHRC="/home/ubuntu/.bashrc"
 
-SOURCE_CONTENT='export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion'
+NVMSCRIPTURL="https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh"
 
-echo $SOURCE_CONTENT >> $PROFILE
-echo $SOURCE_CONTENT >> $BASHRC
+# The script clones the nvm repository to ~/.nvm and adds the source line to your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
+curl -o- $NVMSCRIPTURL | bash
 
-# Re-source .profile if exists
-if [ -f ${PROFILE} ]; then
-	. ${PROFILE}
+# Source nvm in .profile / .bashrc
+if [ $(command -v nvm) != "nvm" ]; then 
+    
+	if [ ! -f $PROFILE ]; then
+	
+	    touch $PROFILE
+		curl -o- $NVMSCRIPTURL | bash
+	fi
+    
+	if [ ! -f $BASHRC ]; then
+	
+	    touch $BASHRC
+		curl -o- $NVMSCRIPTURL | bash
+	fi
 fi
 
-# Re-source .bashrc if exists
-if [ -f ${BASHRC} ]; then
-	. ${BASHRC}
+# If nvm command still results in 'not found' error
+if [ $(command -v nvm) != "nvm" ]; then 
+    echo "\nsource $BASHRC" >> $PROFILE
+	. $PROFILE
 fi
