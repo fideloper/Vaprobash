@@ -18,8 +18,8 @@ COMPOSER_IS_INSTALLED=$?
 GITHUB_OAUTH=$1
 COMPOSER_PACKAGES=$2
 
-PROFILE=/home/ubuntu/.profile
-BASHRC=/home/ubuntu/.bashrc
+PROFILE=~/.profile
+BASHRC=~/.bashrc
 
 # True, if composer is not installed
 if [[ $COMPOSER_IS_INSTALLED -ne 0 ]]; then
@@ -90,7 +90,7 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
             # Ensure COMPOSER_HOME variable is set. This isn't set by Composer automatically
             printf "\n\nCOMPOSER_HOME=\"/home/ubuntu/.composer\"" >> $PROFILE
             # Add composer home vendor bin dir to PATH to run globally installed executables
-            printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/ubuntu/bin' >> /home/ubuntu/.profile
+            printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/ubuntu/bin' >> ~/.profile
 
 			# Re-source .profile if exists
 			if [[ -f $PROFILE ]]; then

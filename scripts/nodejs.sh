@@ -10,8 +10,8 @@ NODE_ARG=($@)
 # Number of arguments that are given
 NUMBER_OF_ARG=${#NODE_ARG[@]}
 
-PROFILE=/home/ubuntu/.profile
-BASHRC=/home/ubuntu/.bashrc
+PROFILE=~/.profile
+BASHRC=~/.bashrc
 
 # Prepare the variables for installing specific Nodejs version and Global Node Packages
 if [[ $NUMBER_OF_ARG -gt 2 ]]; then

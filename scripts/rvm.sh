@@ -10,8 +10,8 @@ RUBY_ARG=($@)
 # Number of arguments that are given
 NUMBER_OF_ARG=${#RUBY_ARG[@]}
 
-PROFILE=/home/ubuntu/.profile
-BASHRC=/home/ubuntu/.bashrc
+PROFILE=~/.profile
+BASHRC=~/.bashrc
 
 # Prepare the variables for installing specific Ruby version and Gems
 if [[ $NUMBER_OF_ARG -gt 1 ]]; then

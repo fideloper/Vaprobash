@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-PROFILE=/home/ubuntu/.profile
-BASHRC=/home/ubuntu/.bashrc
+PROFILE=~/.profile
+BASHRC=~/.bashrc
 
 NVMSCRIPTURL="https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh"
 
