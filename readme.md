@@ -24,6 +24,7 @@ Some further assumptions and self-imposed restrictions. If you find yourself nee
 * Vagrant `1.5.0`+
     * Use `vagrant -v` to check your version
 * Vitualbox or VMWare Fusion
+* Vagrant plugin `vagrant-disksize`
 
 ## Instructions
 

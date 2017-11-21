@@ -12,7 +12,7 @@ if [[ $HHVM == "true" ]]; then
 
     # Get key and add to sources
     wget --quiet -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
-    echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list
+    echo deb http://dl.hhvm.com/ubuntu xenial main | sudo tee /etc/apt/sources.list.d/hhvm.list
 
     # Update
     sudo apt-get update
@@ -39,7 +39,8 @@ else
     # Install PHP
     # -qq implies -y --force-yes
 
-    sudo apt-get install -qq php${PHP_VERSION}-cli php${PHP_VERSION}-fpm php${PHP_VERSION}-mysql php${PHP_VERSION}-pgsql php${PHP_VERSION}-sqlite php${PHP_VERSION}-curl php${PHP_VERSION}-gd php${PHP_VERSION}-gmp php${PHP_VERSION}-mcrypt php${PHP_VERSION}-memcached php${PHP_VERSION}-imagick php${PHP_VERSION}-intl php${PHP_VERSION}-mbstring php${PHP_VERSION}-xml php-xdebug
+    # Install PHP module for Apache
+    sudo apt-get install -qq libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-cli php${PHP_VERSION}-fpm php${PHP_VERSION}-mysql php${PHP_VERSION}-pgsql php${PHP_VERSION}-sqlite php${PHP_VERSION}-curl php${PHP_VERSION}-gd php${PHP_VERSION}-gmp php${PHP_VERSION}-mcrypt php${PHP_VERSION}-memcached php${PHP_VERSION}-imagick php${PHP_VERSION}-intl php${PHP_VERSION}-mbstring php${PHP_VERSION}-xml php-xdebug
 
     # Set PHP FPM to listen on TCP instead of Socket
     sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
@@ -47,13 +48,13 @@ else
     # Set PHP FPM allowed clients IP address
     sudo sed -i "s/;listen.allowed_clients/listen.allowed_clients/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
-    # Set run-as user for PHP5-FPM processes to user/group "vagrant"
+    # Set run-as user for PHP5-FPM processes to user/group "ubuntu"
     # to avoid permission errors from apps writing to files
-    sudo sed -i "s/user = www-data/user = vagrant/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
-    sudo sed -i "s/group = www-data/group = vagrant/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
+    sudo sed -i "s/user = www-data/user = ubuntu/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
+    sudo sed -i "s/group = www-data/group = ubuntu/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
-    sudo sed -i "s/listen\.owner.*/listen.owner = vagrant/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
-    sudo sed -i "s/listen\.group.*/listen.group = vagrant/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
+    sudo sed -i "s/listen\.owner.*/listen.owner = ubuntu/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
+    sudo sed -i "s/listen\.group.*/listen.group = ubuntu/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
     sudo sed -i "s/listen\.mode.*/listen.mode = 0666/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
 

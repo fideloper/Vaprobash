@@ -12,25 +12,25 @@ sudo apt-get install -y openjdk-7-jdk ant expect
 curl -O $ANDROID_SDK
 tar -xzvf $ANDROID_SDK_FILENAME
 
-# Add permissions for vagrant user and removing .tgz file
-sudo chown -R vagrant android-sdk-linux/
+# Add permissions for ubuntu user and removing .tgz file
+sudo chown -R ubuntu android-sdk-linux/
 sudo rm -rf $ANDROID_SDK_FILENAME
 
 # Add new values of variables environment in .bashrc
-echo "" >> /home/vagrant/.bashrc
-echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386/jre/bin/java" >> /home/vagrant/.bashrc
-echo "ANDROID_HOME=~/android-sdk-linux" >> /home/vagrant/.bashrc
-echo "export PATH=\$PATH:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools" >> /home/vagrant/.bashrc
+echo "" >> /home/ubuntu/.bashrc
+echo "JAVA_HOME=/usr/lib/jvm/java-7-openjdk-i386/jre/bin/java" >> /home/ubuntu/.bashrc
+echo "ANDROID_HOME=~/android-sdk-linux" >> /home/ubuntu/.bashrc
+echo "export PATH=\$PATH:~/android-sdk-linux/tools:~/android-sdk-linux/platform-tools" >> /home/ubuntu/.bashrc
 
 expect -c '
 set timeout -1   ;
-spawn /home/vagrant/android-sdk-linux/tools/android update sdk -u --all --filter platform-tool,android-19,build-tools-19.1.0
+spawn /home/ubuntu/android-sdk-linux/tools/android update sdk -u --all --filter platform-tool,android-19,build-tools-19.1.0
 expect {
     "Do you accept the license" { exp_send "y\r" ; exp_continue }
     eof
 }
 '
 
-sudo /home/vagrant/android-sdk-linux/platform-tools/adb kill-server
-sudo /home/vagrant/android-sdk-linux/platform-tools/adb start-server
-sudo /home/vagrant/android-sdk-linux/platform-tools/adb devices
+sudo /home/ubuntu/android-sdk-linux/platform-tools/adb kill-server
+sudo /home/ubuntu/android-sdk-linux/platform-tools/adb start-server
+sudo /home/ubuntu/android-sdk-linux/platform-tools/adb devices

@@ -45,11 +45,11 @@ else
     fi
 
     # Re-source RVM
-    . /home/vagrant/.rvm/scripts/rvm
+    . /home/ubuntu/.rvm/scripts/rvm
 
     # Re-source .profile if exists
-    if [[ -f "/home/vagrant/.profile" ]]; then
-        . /home/vagrant/.profile
+    if [[ -f "/home/ubuntu/.profile" ]]; then
+        . /home/ubuntu/.profile
     fi
 fi
 

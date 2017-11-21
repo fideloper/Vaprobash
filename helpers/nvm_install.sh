@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NVM_DIR="/home/vagrant/.nvm"
+NVM_DIR="/home/ubuntu/.nvm"
 
 if ! hash git 2>/dev/null; then
   echo >&2 "!!! You need to install git"
@@ -13,11 +13,12 @@ if [ -d "$NVM_DIR" ]; then
   cd $NVM_DIR && git pull
 else
   # Cloning to $NVM_DIR
+  mkdir $NVM_DIR
   git clone https://github.com/creationix/nvm.git $NVM_DIR
 fi
 
-PROFILE="/home/vagrant/.profile"
-SOURCE_STR="\n# This loads NVM\n[[ -s /home/vagrant/.nvm/nvm.sh ]] && . /home/vagrant/.nvm/nvm.sh"
+PROFILE="/home/ubuntu/.profile"
+SOURCE_STR="\n# This loads NVM\n[[ -s /home/ubuntu/.nvm/nvm.sh ]] && source /home/ubuntu/.nvm/nvm.sh"
 
 # Append NVM script to ~/.profile
 if ! grep -qsc 'nvm.sh' $PROFILE; then

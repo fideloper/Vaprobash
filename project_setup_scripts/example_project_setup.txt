@@ -5,8 +5,8 @@
 PROJECT_LOG_FILE=./EXAMPLE_WEB_PROJECT.build.log;
 echo "" > $PROJECT_LOG_FILE;
 
-echo "Moving into /home/vagrant/code/EXAMPLE_WEB_PROJECT_FOLDER.\n" >> $PROJECT_LOG_FILE;
-cd /home/vagrant/code/EXAMPLE_WEB_PROJECT_FOLDER >> $PROJECT_LOG_FILE;
+echo "Moving into /home/ubuntu/code/EXAMPLE_WEB_PROJECT_FOLDER.\n" >> $PROJECT_LOG_FILE;
+cd /home/ubuntu/code/EXAMPLE_WEB_PROJECT_FOLDER >> $PROJECT_LOG_FILE;
 
 echo "Update global Composer first, befire installing/updating packages.\n"
 composer self-update >> $PROJECT_LOG_FILE;
@@ -42,10 +42,10 @@ gulp minifycss &&
 gulp minifyjs >> $PROJECT_LOG_FILE;
 
 echo "Chown storage directory for Apache user:group (www-data:www-data).\n"
-chown -R www-data:www-data /home/vagrant/code/EXAMPLE_WEB_PROJECT_FOLDER/storage
+chown -R www-data:www-data /home/ubuntu/code/EXAMPLE_WEB_PROJECT_FOLDER/storage
 
 echo "Make storage directory readable/writeable.\n"
-chmod -R 755 /home/vagrant/code/EXAMPLE_WEB_PROJECT_FOLDER/storage
+chmod -R 755 /home/ubuntu/code/EXAMPLE_WEB_PROJECT_FOLDER/storage
 
 echo "Now create Apache Vhost file and enable site.\n"
-sudo vhost -s EXAMPLE_WEB_PROJECT_VHOST_NAME -d /home/vagrant/code/EXAMPLE_WEB_PROJECT_FOLDER/public
+sudo vhost -s EXAMPLE_WEB_PROJECT_VHOST_NAME -d /home/ubuntu/code/EXAMPLE_WEB_PROJECT_FOLDER/public

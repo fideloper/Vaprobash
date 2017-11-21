@@ -1,15 +1,9 @@
 #!/usr/bin/env bash
 
-unset UCF_FORCE_CONFFOLD;
-export UCF_FORCE_CONFFNEW=YES;
-ucf --purge /boot/grub/menu.lst;
-
-export DEBIAN_FRONTEND=noninteractive;
-
 echo "Lets update our packages list, and currently installed packages...\n";
 sudo apt-get update;
-sudo DEBIAN_FRONTEND=noninteractive apt-get -f -y -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" --force-yes -fuy upgrade;
-sudo DEBIAN_FRONTEND=noninteractive apt-get -f -y -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" --force-yes -fuy dist-upgrade;
+sudo apt-get -f -y upgrade;
+sudo apt-get -f -y dist-upgrade;
 
 echo "Set-up MySQL and phpMyAdmin (for development purposes ONLY).\n"
 DBHOST=localhost
@@ -22,7 +16,7 @@ echo 'phpmyadmin phpmyadmin/app-password-confirm password $DBPASSWD' | debconf-s
 echo 'phpmyadmin phpmyadmin/mysql/admin-pass password $DBPASSWD' | debconf-set-selections;
 echo 'phpmyadmin phpmyadmin/mysql/app-pass password $DBPASSWD' | debconf-set-selections;
 echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect none' | debconf-set-selections;
-sudo DEBIAN_FRONTEND=noninteractive apt-get -f -y -o DPkg::options::="--force-confdef" -o DPkg::options::="--force-confold" install phpmyadmin;
+sudo apt-get -f -y install phpmyadmin;
 
 echo "Set-up Apache Vhost file (assuming phpMyAdmin has been installed to /usr/share/phpmyadmin.\n"
 if [ -d "/usr/share/phpmyadmin" ]; then

@@ -20,7 +20,7 @@ composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    In
 
 # Check if Laravel root is set. If not set use default
 if [[ -z $2 ]]; then
-    laravel_root_folder="/vagrant/laravel"
+    laravel_root_folder="/home/ubuntu/code/laravel-test"
 else
     laravel_root_folder="$2"
 fi
@@ -58,7 +58,7 @@ if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
         fi
     fi
 else
-    # Go to vagrant folder
+    # Go to ubuntu folder
     cd $laravel_root_folder
 
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
@@ -74,7 +74,7 @@ fi
 
 if [[ $NGINX_IS_INSTALLED -eq 0 ]]; then
     # Change default vhost created
-    sudo sed -i "s@root /vagrant@root $laravel_public_folder@" /etc/nginx/sites-available/vagrant
+    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/ubuntu
     sudo service nginx reload
 fi
 

@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
-echo "Setting Timezone & Locale to $3 & en_US.UTF-8"
+echo "Setting Timezone & Locale to $3 & en_NZ.UTF-8"
 
 sudo ln -sf /usr/share/zoneinfo/$3 /etc/localtime
 sudo apt-get install -qq language-pack-en
-sudo locale-gen en_US
-sudo update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+sudo locale-gen en_NZ
+sudo update-locale LANG=en_NZ.UTF-8 LC_CTYPE=en_NZ.UTF-8
 
 echo ">>> Installing Base Packages"
 
 if [[ -z $1 ]]; then
-    github_url="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
+    github_url="https://raw.githubusercontent.com/rattfieldnz/Vaprobash/master"
 else
     github_url="$1"
 fi
 
 # Update
-sudo apt-get update
+sudo apt-get update && sudo apt-get -f -y upgrade && sudo apt-get -f -y dist-upgrade
 
 # Install base packages
 # -qq implies -y --force-yes
-sudo apt-get install -qq curl unzip git-core ack-grep software-properties-common build-essential cachefilesd
+sudo apt-get install -qq vim build-essential python-software-properties git zip unzip tcl curl git-core ack-grep software-properties-common cachefilesd virtualbox-guest-dkms
 
 
 echo ">>> Installing *.xip.io self-signed SSL"
@@ -30,10 +30,10 @@ DOMAIN="*.xip.io"
 PASSPHRASE="vaprobash"
 
 SUBJ="
-C=US
-ST=Connecticut
+C=NZ
+ST=Otago
 O=Vaprobash
-localityName=New Haven
+localityName=Dunedin
 commonName=$DOMAIN
 organizationalUnitName=
 emailAddress=

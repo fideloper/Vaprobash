@@ -23,7 +23,7 @@ elif [[ $NUMBER_OF_ARG -eq 2 ]]; then
 else
     # Default Nodejs version when nothing is given
     NODEJS_VERSION=latest
-    GITHUB_URL="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
+    GITHUB_URL="https://raw.githubusercontent.com/rattfieldnz/Vaprobash/master"
 fi
 
 # True, if Node is not installed
@@ -32,12 +32,12 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing Node Version Manager"
 
     # Install NVM
-    curl --silent -L $GITHUB_URL/helpers/nvm_install.sh | sh
+	curl --silent -L $GITHUB_URL/helpers/nvm_install.sh | sh
 
     # Re-source user profiles
     # if they exist
-    if [[ -f "/home/vagrant/.profile" ]]; then
-        . /home/vagrant/.profile
+    if [[ -f "/home/ubuntu/.profile" ]]; then
+        source /home/ubuntu/.profile
     fi
 
     echo ">>> Installing Node.js version $NODEJS_VERSION"

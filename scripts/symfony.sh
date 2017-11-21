@@ -13,7 +13,7 @@ composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    In
 
 # Check if Symfony root is set. If not set use default
 if [ -z "$2" ]; then
-    symfony_root_folder="/vagrant/symfony"
+    symfony_root_folder="/home/ubuntu/code/symfony-test"
 else
     symfony_root_folder="$2"
 fi
@@ -47,7 +47,7 @@ if [ ! -f "$symfony_root_folder/composer.json" ]; then
         composer create-project --prefer-dist symfony/framework-standard-edition $symfony_root_folder
     fi
 else
-    # Go to vagrant folder
+    # Go to ubuntu folder
     cd $symfony_root_folder
 
     # Install Symfony
@@ -70,7 +70,7 @@ sed -i "s/'127.0.0.1',$/'127.0.0.1', '$host_ip',/" $symfony_public_folder/config
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
-    sudo sed -i "s@root /vagrant@root $symfony_public_folder@" /etc/nginx/sites-available/vagrant
+    sudo sed -i "s@root /ubuntu@root $symfony_public_folder@" /etc/nginx/sites-available/ubuntu
     sudo service nginx reload
 fi
 

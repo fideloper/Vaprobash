@@ -33,7 +33,7 @@ PHP_IS_INSTALLED=$?
 
 if [ $PHP_IS_INSTALLED -eq 0 ]; then
     # install dependencies
-    sudo apt-get -y install php-pear php5-dev
+    sudo apt-get -y install php-pear php7.1-dev
 
     # install php extension
     echo "no" > answers.txt
@@ -41,9 +41,9 @@ if [ $PHP_IS_INSTALLED -eq 0 ]; then
     rm answers.txt
 
     # add extension file and restart service
-    echo 'extension=mongo.so' | sudo tee /etc/php5/mods-available/mongo.ini
+    echo 'extension=mongo.so' | sudo tee /etc/php/7.1/mods-available/mongo.ini
 
-    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
-    ln -s /etc/php5/mods-available/mongo.ini /etc/php5/cli/conf.d/mongo.ini
-    sudo service php5-fpm restart
+    ln -s /etc/php/7.1/mods-available/mongo.ini /etc/php/7.1/fpm/conf.d/mongo.ini
+    ln -s /etc/php/7.1/mods-available/mongo.ini /etc/php/7.1/cli/conf.d/mongo.ini
+    sudo service php7.1-fpm restart
 fi

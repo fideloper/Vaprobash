@@ -16,7 +16,7 @@ echo ">>> Installing Nginx"
 [[ -z $1 ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
 
 if [[ -z $2 ]]; then
-    public_folder="/vagrant"
+    public_folder="/home/ubuntu/code"
 else
     public_folder="$2"
 fi
@@ -29,7 +29,7 @@ else
 fi
 
 if [[ -z $4 ]]; then
-    github_url="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
+    github_url="https://raw.githubusercontent.com/rattfieldnz/Vaprobash/master"
 else
     github_url="$4"
 fi
@@ -49,13 +49,13 @@ sudo apt-get install -qq nginx
 # Turn off sendfile to be more compatible with Windows, which can't use NFS
 sed -i 's/sendfile on;/sendfile off;/' /etc/nginx/nginx.conf
 
-# Set run-as user for PHP5-FPM processes to user/group "vagrant"
+# Set run-as user for PHP5-FPM processes to user/group "ubuntu"
 # to avoid permission errors from apps writing to files
-sed -i "s/user www-data;/user vagrant;/" /etc/nginx/nginx.conf
+sed -i "s/user www-data;/user ubuntu;/" /etc/nginx/nginx.conf
 sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
 
-# Add vagrant user to www-data group
-usermod -a -G www-data vagrant
+# Add ubuntu user to www-data group
+usermod -a -G www-data ubuntu
 
 # Nginx enabling and disabling virtual hosts
 curl --silent -L $github_url/helpers/ngxen.sh > ngxen
@@ -64,7 +64,7 @@ curl --silent -L $github_url/helpers/ngxcb.sh > ngxcb
 sudo chmod guo+x ngxen ngxdis ngxcb
 sudo mv ngxen ngxdis ngxcb /usr/local/bin
 
-# Create Nginx Server Block named "vagrant" and enable it
+# Create Nginx Server Block named "ubuntu" and enable it
 sudo ngxcb -d $public_folder -s "$1.xip.io$hostname" -e
 
 # Disable "default"

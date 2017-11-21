@@ -9,7 +9,7 @@ sudo apt-get update
 
 # Install PHP MSSQL
 # -qq implies -y --force-yes
-sudo apt-get install -qq php5-mssql
+sudo apt-get install -qq php7.1-mssql
 
 echo ">>> Installing freeTDS for MSSQL"
 
@@ -21,5 +21,5 @@ echo ">>> Installing UnixODBC for MSSQL"
 # Install unixodbc
 sudo apt-get install -qq unixodbc unixodbc-dev
 
-# Restart php5-fpm
-sudo service php5-fpm restart
+# Restart php7.1-fpm
+sudo service php7.1-fpm restart

@@ -17,6 +17,17 @@ if [ $2 == "5.6" ]; then
 	mysql_package=mysql-server-5.6
 fi
 
+if [ $2 == "5.7" ]; then
+    # Add repo for MySQL 5.7
+	sudo add-apt-repository -y ppa:ondrej/mysql-5.7
+
+	# Update Again
+	sudo apt-get update
+
+	# Change package
+	mysql_package=mysql-server-5.7
+fi
+
 # Install MySQL without password prompt
 # Set username and password to 'root'
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $1"
