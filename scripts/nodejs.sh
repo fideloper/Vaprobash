@@ -10,8 +10,8 @@ NODE_ARG=($@)
 # Number of arguments that are given
 NUMBER_OF_ARG=${#NODE_ARG[@]}
 
-PROFILE="/home/ubuntu/.profile"
-BASHRC="/home/ubuntu/.bashrc"
+PROFILE=/home/ubuntu/.profile
+BASHRC=/home/ubuntu/.bashrc
 
 # Prepare the variables for installing specific Nodejs version and Global Node Packages
 if [[ $NUMBER_OF_ARG -gt 2 ]]; then
@@ -39,13 +39,13 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
     # Re-source user profiles
     # if they exist
-    if [ -f ${PROFILE} ]; then
-        . ${PROFILE}
+    if [[ -f $PROFILE ]]; then
+        . $PROFILE
     fi
 	
 	# Re-source .bashrc if exists
-    if [ -f ${BASHRC} ]; then
-        . ${BASHRC}
+    if [[ -f $BASHRC ]]; then
+        . $BASHRC
     fi
 
     echo ">>> Installing Node.js version $NODEJS_VERSION"
