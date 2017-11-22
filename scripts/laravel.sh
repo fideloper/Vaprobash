@@ -15,8 +15,8 @@ HHVM_IS_INSTALLED=$?
 # Test if Composer is installed
 composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    Installing Laravel aborted!"; exit 0; }
 
-# Test if Server IP is set in Vagrantfile
-[[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Laravel aborted!\n"; exit 0; }
+# Test if Server Name is set in Vagrantfile
+[[ -z "$1" ]] && { printf "!!! Server name address not set. Check the Vagrantfile.\n    Installing Laravel aborted!\n"; exit 0; }
 
 # Check if Laravel root is set. If not set use default
 if [[ -z $2 ]]; then
@@ -74,17 +74,18 @@ fi
 
 if [[ $NGINX_IS_INSTALLED -eq 0 ]]; then
     # Change default vhost created
-    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/ubuntu
+    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/$1
     sudo service nginx reload
 fi
 
 if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
-    # Find and replace to find public_folder and replace with laravel_public_folder
-    # Change DocumentRoot
-    # Change ProxyPassMatch fcgi path
-    # Change <Directory ...> path
-    sudo sed -i "s@$3@$laravel_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
 
+    # Make Laravel storage folder readable and writeable, 
+    # and accessable by Apache.
+    chown -R www-data:www-data $laravel_root_folder/storage
+    chmod -R 755 $laravel_root_folder/storage
+	
+    sudo vhost -s $1 -d $laravel_public_folder
 
-    sudo service apache2 reload
+    sudo service apache2 restart
 fi

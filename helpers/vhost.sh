@@ -182,6 +182,6 @@ else
     fi
 
     # Enable Site
-    cd /etc/apache2/sites-available/ && a2ensite ${ServerName}.conf
+    a2ensite ${ServerName}.conf
     service apache2 reload
 fi

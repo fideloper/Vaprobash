@@ -20,7 +20,7 @@ sudo apt-get -f -y install phpmyadmin;
 
 echo "Set-up Apache Vhost file (assuming phpMyAdmin has been installed to /usr/share/phpmyadmin.\n"
 if [ -d "/usr/share/phpmyadmin" ]; then
-sudo echo '<VirtualHost *:80>
+sudo echo "<VirtualHost *:80>
 	ServerName $ServerName
 	$ServerAlias
 	DocumentRoot /usr/share/phpmyadmin
@@ -31,7 +31,7 @@ sudo echo '<VirtualHost *:80>
 		<IfModule mod_mime.c>
 			AddType application/x-httpd-php .php
 		</IfModule>
-		<FilesMatch ".+\.php$">
+		<FilesMatch \".+\.php$\">
 			SetHandler application/x-httpd-php
 		</FilesMatch>
 		php_flag magic_quotes_gpc Off
@@ -56,14 +56,14 @@ sudo echo '<VirtualHost *:80>
 		</IfModule>
 	</Directory>
 
-	# Disallow web access to directories that don\''t need it
+	# Disallow web access to directories that don't need it
 	<Directory /usr/share/phpmyadmin/libraries>
 		Require all denied
 	</Directory>
 	<Directory /usr/share/phpmyadmin/setup/lib>
 		Require all denied
 	</Directory>
-</VirtualHost>' > /etc/apache2/sites-available/phpmyadmin.localhost.conf
+</VirtualHost>" > /etc/apache2/sites-available/phpmyadmin.localhost.conf
 sudo a2ensite phpmyadmin.localhost.conf
 sudo service apache2 reload
 fi

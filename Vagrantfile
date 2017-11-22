@@ -78,9 +78,12 @@ composer_packages     = [        # List any global Composer packages that you wa
 # Laravel's public directory is assumed "public"
 public_folder         = "/home/ubuntu/code"
 
-laravel_root_folder   = "#{public_folder}/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
+laravel_server_name   = "laravel-test.localhost"
+laravel_root_folder   = "/home/ubuntu/code/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
-symfony_root_folder   = "#{public_folder}/code/symfony-test" # Where to install Symfony.
+
+symfony_server_name   = "symfony-test.localhost"
+symfony_root_folder   = "/home/ubuntu/code/symfony-test" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
@@ -141,10 +144,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   # Use NFS for the shared folder
-  #config.vm.synced_folder vm_synced_folder_host, vm_synced_folder_guest
-  #  id: "core"
-  #  :nfs => true,
-  #  :mount_options => ['nolock,vers=3,udp,noatime,actimeo=2,fsc']
+  config.vm.synced_folder vm_synced_folder_host, vm_synced_folder_guest
 
   # Replicate local .gitconfig file if it exists
   if File.file?(File.expand_path("~/.gitconfig"))
@@ -375,10 +375,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/composer.sh", privileged: false, args: [github_pat, composer_packages.join(" ")]
 
   # Provision Laravel
-  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [server_ip, laravel_root_folder, public_folder, laravel_version]
+  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_server_name, laravel_root_folder, laravel_version]
 
   # Provision Symfony
-  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [server_ip, symfony_root_folder, public_folder]
+  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_server_name, symfony_root_folder]
 
   # Install Screen
   config.vm.provision "shell", path: "./scripts/screen.sh"
