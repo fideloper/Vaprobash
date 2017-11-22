@@ -80,7 +80,7 @@ public_folder         = "/home/ubuntu/code"
 laravel_server_name   = "laravel-test.#{server_ip}.xip.io"
 laravel_alias         = "laravel-test.localhost"
 laravel_root_folder   = "/var/www/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
-laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
+laravel_version       = "master" # If you need a specific version of Laravel, set it here
 
 symfony_server_name   = "symfony-test.#{server_ip}.xip.io"
 symfony_alias         = "symfony-test.localhost"
