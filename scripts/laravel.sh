@@ -42,7 +42,7 @@ fi
 if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
         # Create Laravel
-        if [[ "$4" == 'latest-stable' ]]; then
+        if [[ "$laravel_version" == 'latest-stable' || "$laravel_version" == '' ]]; then
             hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
             create-project --prefer-dist laravel/laravel $laravel_root_folder
         else
@@ -51,7 +51,7 @@ if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
         fi
     else
         # Create Laravel
-        if [[ "$laravel_version" == 'latest-stable' ]]; then
+        if [[ "$laravel_version" == 'latest-stable' || "$laravel_version" == '' ]]; then
             composer create-project --prefer-dist laravel/laravel $laravel_root_folder
         else
             composer create-project laravel/laravel:$laravel_version $laravel_root_folder
