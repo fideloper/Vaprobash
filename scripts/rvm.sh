@@ -48,17 +48,13 @@ else
     fi
 
     # Re-source RVM
-    source /home/ubuntu/.rvm/scripts/rvm
+    source ~/.rvm/scripts/rvm
 
-    # Re-source .profile if exists
-    if [[ -f $PROFILE ]]; then
-        source $PROFILE
-    fi
+    # Re-source .profile
+    source $PROFILE
 	
-	# Re-source .bashrc if exists
-    if [[ -f $BASHRC ]]; then
-        source $BASHRC
-    fi
+	# Re-source .bashrc
+    source $BASHRC
 fi
 
 # Install (optional) Ruby Gems

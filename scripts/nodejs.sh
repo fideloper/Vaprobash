@@ -13,56 +13,24 @@ NUMBER_OF_ARG=${#NODE_ARG[@]}
 PROFILE=~/.profile
 BASHRC=~/.bashrc
 
-# Prepare the variables for installing specific Nodejs version and Global Node Packages
-if [[ $NUMBER_OF_ARG -gt 2 ]]; then
-    # Nodejs version, github url and Global Node Packages are given
-    NODEJS_VERSION=${NODE_ARG[0]}
-    GITHUB_URL=${NODE_ARG[1]}
-    NODE_PACKAGES=${NODE_ARG[@]:2}
-elif [[ $NUMBER_OF_ARG -eq 2 ]]; then
-    # Only Nodejs version and github url are given
-    NODEJS_VERSION=${NODE_ARG[0]}
-    GITHUB_URL=${NODE_ARG[1]}
-else
-    # Default Nodejs version when nothing is given
-    NODEJS_VERSION=latest
-    GITHUB_URL="https://raw.githubusercontent.com/rattfieldnz/Vaprobash/master"
-fi
-
 # True, if Node is not installed
 if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
-    echo ">>> Installing Node Version Manager"
+    echo ">>> Installing latest stable Node LTS - 6.X"
 
+	sudo apt-get -qq install python-software-properties
+	
     # Install NVM
-	curl --silent -L $GITHUB_URL/helpers/nvm_install.sh | sh
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	sudo apt-get update
+	sudo apt-get -qq install nodejs
 
     # Re-source user profiles
     # if they exist
-    if [[ -f $PROFILE ]]; then
-        . $PROFILE
-    fi
+    source $PROFILE
 	
 	# Re-source .bashrc if exists
-    if [[ -f $BASHRC ]]; then
-        . $BASHRC
-    fi
-
-    echo ">>> Installing Node.js version $NODEJS_VERSION"
-    echo "    This will also be set as the default node version"
-
-    # If set to latest, get the current node version from the home page
-    if [[ $NODEJS_VERSION -eq "latest" ]]; then
-        NODEJS_VERSION="node"
-    fi
-
-    # Install Node
-    nvm install $NODEJS_VERSION
-
-    # Set a default node version and start using it
-    nvm alias default $NODEJS_VERSION
-
-    nvm use default
+    source $BASHRC
 
 fi
 

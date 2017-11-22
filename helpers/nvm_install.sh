@@ -9,4 +9,11 @@ NVMSCRIPTURL="https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.s
 curl -sL $NVMSCRIPTURL -o install_nvm.sh
 bash install_nvm.sh
 
-source $PROFILE && source $BASHRC
+printf '\n\nexport NVM_DIR=~/.nvm
+[ -s "~/.nvm/nvm.sh" ] && . "~/.nvm/nvm.sh"' >> $PROFILE
+
+printf '\n\nexport NVM_DIR=~/.nvm
+[ -s "~/.nvm/nvm.sh" ] && . "~/.nvm/nvm.sh"' >> $BASHRC
+
+source $PROFILE
+source $BASHRC
