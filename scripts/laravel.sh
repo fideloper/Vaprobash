@@ -85,7 +85,7 @@ if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
     chown -R www-data:www-data $laravel_root_folder/storage
     chmod -R 755 $laravel_root_folder/storage
 	
-    sudo vhost -s $1 -d $laravel_public_folder
+    sudo vhost -s $laravel_server_name -a $laravel_alias -d $laravel_public_folder
 
     sudo service apache2 restart
 fi

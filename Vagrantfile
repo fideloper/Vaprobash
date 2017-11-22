@@ -2,11 +2,10 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-#github_username = "rattfieldnz"
-#github_repo     = "Vaprobash"
-#github_branch   = "1.4.3"
-#github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
-github_url=""
+github_username = "rattfieldnz"
+github_repo     = "Vaprobash"
+github_branch   = "1.4.3"
+github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 vm_synced_folder_host  = "code"
 vm_synced_folder_guest = "/var/www"
@@ -17,7 +16,7 @@ github_pat          = ""
 
 # Server Configuration
 
-hostname        = "vaprobash.dev"
+hostname        = "vaprobash.localhost"
 
 # Set a local private network IP address.
 # See http://en.wikipedia.org/wiki/Private_network for explanation
@@ -78,11 +77,13 @@ composer_packages     = [        # List any global Composer packages that you wa
 # Laravel's public directory is assumed "public"
 public_folder         = "/home/ubuntu/code"
 
-laravel_server_name   = "laravel-test.localhost"
+laravel_server_name   = "laravel-test." + server_ip + ".xip.io"
+laravel_alias         = "laravel-test.localhost"
 laravel_root_folder   = "/var/www/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
 
-symfony_server_name   = "symfony-test.localhost"
+symfony_server_name   = "symfony-test." + server_ip + ".xip.io"
+symfony_alias         = "symfony-test.localhost"
 symfony_root_folder   = "/var/www/symfony-test" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
@@ -245,7 +246,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Apache Base
-  config.vm.provision "shell", path: "./scripts/apache.sh", args: [server_ip, public_folder, hostname, github_url]
+  config.vm.provision "shell", path: "./scripts/apache.sh", args: [server_ip, "/var/www/html", hostname, github_url]
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "#{github_url}/scripts/nginx.sh", args: [server_ip, public_folder, hostname, github_url, php_version]
@@ -375,10 +376,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/composer.sh", privileged: false, args: [github_pat, composer_packages.join(" ")]
 
   # Provision Laravel
-  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_server_name, laravel_root_folder, laravel_version]
+  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_server_name, laravel_alias, laravel_root_folder, laravel_version]
 
   # Provision Symfony
-  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_server_name, symfony_root_folder]
+  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_server_name, symfony_alias, symfony_root_folder]
 
   # Install Screen
   config.vm.provision "shell", path: "./scripts/screen.sh"
@@ -409,10 +410,6 @@ Vagrant.configure("2") do |config|
   # add a bash script file (project_name.sh) in
   # the 'project_setup_scripts' directory which
   # contains the necessary functionality to set it/them up.
-  #
-  # The bash script referenced below will loop over
-  # and execute scripts (with .sh extension) in the
-  # mentioned directory.
   ##########
   config.vm.provision "shell", path: "./setup_projects.sh"
 

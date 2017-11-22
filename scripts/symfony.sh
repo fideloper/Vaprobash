@@ -13,7 +13,7 @@ composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    In
 
 # Check if Symfony root is set. If not set use default
 if [ -z "$2" ]; then
-    symfony_root_folder="/home/ubuntu/code/symfony-test"
+    symfony_root_folder="/var/www/symfony-test"
 else
     symfony_root_folder="$2"
 fi
@@ -76,7 +76,7 @@ fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
 	
-    sudo vhost -s $1 -d $symfony_public_folder
+    sudo vhost -s $symfony_server_name -a $symfony_alias -d $symfony_public_folder
 
     sudo service apache2 restart
 fi
