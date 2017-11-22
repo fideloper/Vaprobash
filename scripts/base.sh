@@ -2,6 +2,9 @@
 
 echo "Setting Timezone & Locale to $3 & en_NZ.UTF-8"
 
+# Update
+sudo apt-get update && sudo apt-get -f -y upgrade && sudo apt-get -f -y dist-upgrade
+
 sudo ln -sf /usr/share/zoneinfo/$3 /etc/localtime
 sudo apt-get install -qq language-pack-en
 sudo locale-gen en_NZ
@@ -15,13 +18,9 @@ else
     github_url="$1"
 fi
 
-# Update
-sudo apt-get update && sudo apt-get -f -y upgrade && sudo apt-get -f -y dist-upgrade
-
 # Install base packages
 # -qq implies -y --force-yes
-sudo apt-get install -qq vim build-essential python-software-properties git zip unzip tcl curl git-core ack-grep software-properties-common cachefilesd virtualbox-guest-dkms
-
+sudo apt-get install -qq vim build-essential python-software-properties git zip unzip tcl curl git-core ack-grep software-properties-common cachefilesd virtualbox-guest-dkms openssl pkg-config libssl-dev libsslcommon2-dev
 
 echo ">>> Installing *.xip.io self-signed SSL"
 

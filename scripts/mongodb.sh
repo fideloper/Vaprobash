@@ -49,9 +49,8 @@ if [ $PHP_IS_INSTALLED -eq 0 ]; then
     sudo apt-get -y install php-pear php7.1-dev
 
     # install php extension
-    echo "no" > answers.txt
-    sudo pecl install mongodb < answers.txt
-    rm answers.txt
+	sudo pecl channel-update pecl.php.net
+    sudo pecl install mongodb
 
     # add extension file and restart service
     sudo echo 'extension=mongodb.so' | sudo tee /etc/php/7.1/mods-available/mongo.ini

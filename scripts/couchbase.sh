@@ -35,7 +35,8 @@ if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
     wget --quiet -O- http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
     sudo apt-get update
     sudo apt-get -qq install libcouchbase2-libevent libcouchbase-dev
-
+	
+	sudo pecl channel-update pecl.php.net
     sudo pecl install couchbase-${COUCHBASE_VERSION}
     sudo cat > /etc/php/7.1/mods-available/couchbase.ini << EOF
 ; configuration for php couchbase module

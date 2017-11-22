@@ -9,7 +9,7 @@
 github_url=""
 
 vm_synced_folder_host  = "code"
-vm_synced_folder_guest = "/home/ubuntu"
+vm_synced_folder_guest = "/var/www"
 
 # Because this:https://developer.github.com/changes/2014-12-08-removing-authorizations-token/
 # https://github.com/settings/tokens
@@ -79,11 +79,11 @@ composer_packages     = [        # List any global Composer packages that you wa
 public_folder         = "/home/ubuntu/code"
 
 laravel_server_name   = "laravel-test.localhost"
-laravel_root_folder   = "/home/ubuntu/code/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
+laravel_root_folder   = "/var/www/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
 
 symfony_server_name   = "symfony-test.localhost"
-symfony_root_folder   = "/home/ubuntu/code/symfony-test" # Where to install Symfony.
+symfony_root_folder   = "/var/www/symfony-test" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
