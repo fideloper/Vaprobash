@@ -70,7 +70,7 @@ composer_packages     = [        # List any global Composer packages that you wa
   "phpspec/phpspec:~4.2",
   "squizlabs/php_codesniffer:^3.0",
   "unitgen/unitgen:dev-master",
-  "theseer/phpdox:^0.1"
+  "theseer/phpdox:~0.10.1"
 ]
 
 # Default web server document root

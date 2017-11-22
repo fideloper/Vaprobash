@@ -18,6 +18,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
     echo ">>> Installing latest stable Node LTS - 6.X"
 
+	sudo apt-get update
 	sudo apt-get -qq install python-software-properties
 	
     # Install NVM
