@@ -21,8 +21,8 @@ sudo apt-get -f -y install phpmyadmin;
 echo "Set-up Apache Vhost file (assuming phpMyAdmin has been installed to /usr/share/phpmyadmin.\n"
 if [ -d "/usr/share/phpmyadmin" ]; then
 sudo echo "<VirtualHost *:80>
-	ServerName $ServerName
-	$ServerAlias
+	ServerName phpmyadmin.localhost
+	ServerAlias phpmyadmin.localhost
 	DocumentRoot /usr/share/phpmyadmin
 	<Directory /usr/share/phpmyadmin>
 	Options FollowSymLinks
