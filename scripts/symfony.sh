@@ -12,16 +12,13 @@ composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    In
 [[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Symfony aborted!\n"; exit 0; }
 
 # Check if Symfony root is set. If not set use default
-if [ -z "$2" ]; then
+if [ -z "$3" ]; then
     symfony_root_folder="/var/www/symfony-test"
 else
-    symfony_root_folder="$2"
+    symfony_root_folder="$3"
 fi
 
 symfony_public_folder="$symfony_root_folder/web"
-
-# The host ip is same as guest ip with last octet equal to 1
-host_ip=`echo $1 | sed 's/\.[0-9]*$/.1/'`
 
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
@@ -65,8 +62,8 @@ sudo chmod -R 775 $symfony_root_folder/app/cache
 sudo chmod -R 775 $symfony_root_folder/app/logs
 sudo chmod -R 775 $symfony_root_folder/app/console
 
-sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '$host_ip', 'fe80::1'/" $symfony_public_folder/app_dev.php
-sed -i "s/'127.0.0.1',$/'127.0.0.1', '$host_ip',/" $symfony_public_folder/config.php
+sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '$server_ip', 'fe80::1'/" $symfony_public_folder/app_dev.php
+sed -i "s/'127.0.0.1',$/'127.0.0.1', '$server_ip',/" $symfony_public_folder/config.php
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created

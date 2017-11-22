@@ -19,10 +19,10 @@ composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    In
 [[ -z "$1" ]] && { printf "!!! Server name address not set. Check the Vagrantfile.\n    Installing Laravel aborted!\n"; exit 0; }
 
 # Check if Laravel root is set. If not set use default
-if [[ -z $2 ]]; then
-    laravel_root_folder="/home/ubuntu/code/laravel-test"
+if [[ -z $laravel_root_folder ]]; then
+    laravel_root_folder="/var/www/laravel-test"
 else
-    laravel_root_folder="$2"
+    laravel_root_folder="$laravel_root_folder"
 fi
 
 laravel_public_folder="$laravel_root_folder/public"
@@ -47,14 +47,14 @@ if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
             create-project --prefer-dist laravel/laravel $laravel_root_folder
         else
             hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
-            create-project laravel/laravel:$4 $laravel_root_folder
+            create-project laravel/laravel:$laravel_version $laravel_root_folder
         fi
     else
         # Create Laravel
-        if [[ "$4" == 'latest-stable' ]]; then
+        if [[ "$laravel_version" == 'latest-stable' ]]; then
             composer create-project --prefer-dist laravel/laravel $laravel_root_folder
         else
-            composer create-project laravel/laravel:$4 $laravel_root_folder
+            composer create-project laravel/laravel:$laravel_version $laravel_root_folder
         fi
     fi
 else
@@ -74,7 +74,7 @@ fi
 
 if [[ $NGINX_IS_INSTALLED -eq 0 ]]; then
     # Change default vhost created
-    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/$1
+    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/$laravel_server_name
     sudo service nginx reload
 fi
 
