@@ -62,8 +62,8 @@ sudo chmod -R 775 $symfony_root_folder/app/cache
 sudo chmod -R 775 $symfony_root_folder/app/logs
 sudo chmod -R 775 $symfony_root_folder/app/console
 
-sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '$server_ip', 'fe80::1'/" $symfony_public_folder/app_dev.php
-sed -i "s/'127.0.0.1',$/'127.0.0.1', '$server_ip',/" $symfony_public_folder/config.php
+sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '192.168.22.10', 'fe80::1'/" $symfony_public_folder/app_dev.php
+sed -i "s/'127.0.0.1',$/'127.0.0.1', '192.168.22.10',/" $symfony_public_folder/config.php
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
@@ -73,7 +73,7 @@ fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
 	
-    sudo vhost -s "symfony-test."$server_ip".xip.io" -a "symfony-test.localhost" -d $symfony_public_folder
+    sudo vhost -s "symfony-test.192.168.22.10.xip.io" -a "symfony-test.localhost" -d $symfony_public_folder
 
     sudo service apache2 restart
 fi
