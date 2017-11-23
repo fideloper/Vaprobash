@@ -376,10 +376,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/composer.sh", privileged: false, args: [github_pat, composer_packages.join(" ")]
 
   # Provision Laravel
-  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_server_name, laravel_alias, laravel_root_folder, laravel_version]
+  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_root_folder, laravel_version, server_ip]
 
   # Provision Symfony
-  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_server_name, symfony_alias, symfony_root_folder, server_ip]
+  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_root_folder, server_ip]
 
   # Install Screen
   config.vm.provision "shell", path: "./scripts/screen.sh"

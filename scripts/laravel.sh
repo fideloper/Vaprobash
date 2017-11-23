@@ -74,7 +74,7 @@ fi
 
 if [[ $NGINX_IS_INSTALLED -eq 0 ]]; then
     # Change default vhost created
-    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/$laravel_server_name
+    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/"laravel-test.$server_ip.xip.io"
     sudo service nginx reload
 fi
 
@@ -85,7 +85,7 @@ if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
     chown -R www-data:www-data $laravel_root_folder/storage
     chmod -R 755 $laravel_root_folder/storage
 	
-    sudo vhost -s $laravel_server_name -a $laravel_alias -d $laravel_public_folder
+    sudo vhost -s "laravel-test."$server_ip".xip.io" -a "laravel-test.localhost" -d $laravel_public_folder
 
     sudo service apache2 restart
 fi

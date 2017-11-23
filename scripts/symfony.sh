@@ -73,7 +73,7 @@ fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
 	
-    sudo vhost -s $symfony_server_name -a $symfony_alias -d $symfony_public_folder
+    sudo vhost -s "symfony-test."$server_ip".xip.io" -a "symfony-test.localhost" -d $symfony_public_folder
 
     sudo service apache2 restart
 fi
