@@ -404,16 +404,4 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "./your_script_name.sh"
   config.vm.provision "shell", path: "./scripts/install_phpmyadmin.sh"
 
-  #####
-  # Optional
-  # If you want to set-up your custom projects,
-  # add a bash script file (project_name.sh) in
-  # the 'scripts/projects' directory which
-  # contains the necessary functionality to set it/them up.
-  #
-  # The script below will loop over your project scripts
-  # and execute each one of them (subject to errors occurring etc).
-  ##########
-  config.vm.provision "shell", path: "./scripts/setup_projects.sh"
-
 end
