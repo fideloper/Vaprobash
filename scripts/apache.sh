@@ -71,4 +71,5 @@ else
 fi
 
 sudo a2enmod php7.1
+sudo a2enmod headers
 sudo service apache2 restart
