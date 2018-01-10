@@ -17,15 +17,15 @@ APACHE_IS_INSTALLED=$?
 sudo apt-get install -qq libsqlite3-dev ruby1.9.1-dev
 
 if $(which rvm) -v > /dev/null 2>&1; then
-	echo ">>>>Installing with RVM"
-	$(which rvm) default@mailcatcher --create do gem install --no-rdoc --no-ri mailcatcher
-	$(which rvm) wrapper default@mailcatcher --no-prefix mailcatcher catchmail
+    echo ">>>>Installing with RVM"
+    $(which rvm) default@mailcatcher --create do gem install --no-rdoc --no-ri mailcatcher
+    $(which rvm) wrapper default@mailcatcher --no-prefix mailcatcher catchmail
 else
-	# Gem check
-	if ! gem -v > /dev/null 2>&1; then sudo aptitude install -y libgemplugin-ruby; fi
+    # Gem check
+    if ! gem -v > /dev/null 2>&1; then sudo aptitude install -y libgemplugin-ruby; fi
 
-	# Install
-	gem install --no-rdoc --no-ri mailcatcher
+    # Install
+    gem install --no-rdoc --no-ri mailcatcher
 fi
 
 # Make it start on boot
@@ -44,12 +44,12 @@ EOL
 sudo service mailcatcher start
 
 if [[ $PHP_IS_INSTALLED -eq 0 ]]; then
-	# Make php use it to send mail
+    # Make php use it to send mail
     echo "sendmail_path = /usr/bin/env $(which catchmail)" | sudo tee /etc/php/${PHP_VERSION}/mods-available/mailcatcher.ini
-	sudo phpenmod mailcatcher
-	sudo service php${PHP_VERSION}-fpm restart
+    sudo phpenmod mailcatcher
+    sudo service php${PHP_VERSION}-fpm restart
 fi
 
 if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
-	sudo service apache2 restart
+    sudo service apache2 restart
 fi
