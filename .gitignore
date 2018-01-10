@@ -3,6 +3,7 @@ notes.md
 .vagrant
 play
 *.log
+scripts/projects
 
 # editor backup files
 *~

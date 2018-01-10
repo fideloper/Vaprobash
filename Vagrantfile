@@ -88,9 +88,11 @@ symfony_root_folder   = "/var/www/symfony-test" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
+  "npm",
   "grunt-cli",
   "gulp",
   "bower",
+  "yarn",
   "yo",
   "gulp-concat-css",
   "gulp-minify-css",
@@ -101,10 +103,8 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   "notify-send",
   "sw-precache-webpack-plugin",
   "cross-env",
-  "cross-env",
-  "laravel-mix"
-]
-
+  "laravel-mix",
+  "laravel-elixir"
 # RabbitMQ settings
 rabbitmq_user = "user"
 rabbitmq_password = "password"
@@ -319,10 +319,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/memcached.sh"
 
   # Provision Redis (without journaling and persistence)
-  # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh"
+  config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh"
 
   # Provision Redis (with journaling and persistence)
-  config.vm.provision "shell", path: "./scripts/redis.sh", args: "persistent"
+  # config.vm.provision "shell", path: "./scripts/redis.sh", args: "persistent"
   # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
 
 
