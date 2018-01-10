@@ -105,6 +105,7 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   "cross-env",
   "laravel-mix",
   "laravel-elixir"
+]
 # RabbitMQ settings
 rabbitmq_user = "user"
 rabbitmq_password = "password"
