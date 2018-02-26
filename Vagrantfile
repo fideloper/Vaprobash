@@ -63,13 +63,13 @@ hhvm                  = "false"
 
 # PHP Options
 composer_packages     = [        # List any global Composer packages that you want to install
-  "phpunit/phpunit:~6.4",
-  "phpunit/php-invoker:^1.1",
+  "phpunit/phpunit:~7.0",
+  "phpunit/php-invoker:^2.0",
   "codeception/codeception:~2.3",
-  "phpspec/phpspec:~4.2",
-  "squizlabs/php_codesniffer:^3.0",
+  "phpspec/phpspec:~4.3",
+  "squizlabs/php_codesniffer:^3.2",
   "unitgen/unitgen:dev-master",
-  "theseer/phpdox:~0.10.1"
+  "theseer/phpdox:~0.11"
 ]
 
 # Default web server document root
