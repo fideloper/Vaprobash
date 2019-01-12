@@ -5,7 +5,7 @@ echo ">>> Installing MongoDB"
 # Get key and add to sources
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 
-echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+echo "deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.1 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.1.list
 
 
 # Update
@@ -45,17 +45,21 @@ php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
 
 if [ $PHP_IS_INSTALLED -eq 0 ]; then
+    # get current PHP version
+	
+	PHP_INSTALLED_VERSION=$(php -r "echo PHP_VERSION;" | cut -c 1,2,3)
+	
     # install dependencies
-    sudo apt-get -y install php-pear php7.1-dev
+    sudo apt-get -y install php-pear php${PHP_INSTALLED_VERSION}-dev
 
     # install php extension
     sudo pecl channel-update pecl.php.net
     sudo pecl install mongodb
 
     # add extension file and restart service
-    sudo echo 'extension=mongodb.so' | sudo tee /etc/php/7.1/mods-available/mongo.ini
+    sudo echo 'extension=mongodb.so' | sudo tee /etc/php/${PHP_INSTALLED_VERSION}/mods-available/mongo.ini
 
-    sudo ln -s /etc/php/7.1/mods-available/mongo.ini /etc/php/7.1/fpm/conf.d/mongo.ini
-    sudo ln -s /etc/php/7.1/mods-available/mongo.ini /etc/php/7.1/cli/conf.d/mongo.ini
-    sudo service php7.1-fpm restart
+    sudo ln -s /etc/php/${PHP_INSTALLED_VERSION}/mods-available/mongo.ini /etc/php/${PHP_INSTALLED_VERSION}/fpm/conf.d/mongo.ini
+    sudo ln -s /etc/php/${PHP_INSTALLED_VERSION}/mods-available/mongo.ini /etc/php/${PHP_INSTALLED_VERSION}/cli/conf.d/mongo.ini
+    sudo service php${PHP_INSTALLED_VERSION}-fpm restart
 fi

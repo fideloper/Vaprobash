@@ -9,16 +9,16 @@ else
 fi
 
 # Create directories needed for some .vimrc settings
-mkdir -p /home/ubuntu/.vim/backup
-mkdir -p /home/ubuntu/.vim/swap
+mkdir -p /home/vagrant/.vim/backup
+mkdir -p /home/vagrant/.vim/swap
 
 # Install Vundle and set owner of .vim files
-git clone https://github.com/VundleVim/Vundle.vim.git /home/ubuntu/.vim/bundle/vundle
-sudo chown -R ubuntu:ubuntu /home/ubuntu/.vim
+git clone https://github.com/VundleVim/Vundle.vim.git /home/vagrant/.vim/bundle/vundle
+sudo chown -R vagrant:vagrant /home/vagrant/.vim
 
 # Grab .vimrc and set owner
-curl --silent -L $github_url/helpers/vimrc > /home/ubuntu/.vimrc
-sudo chown ubuntu:ubuntu /home/ubuntu/.vimrc
+curl --silent -L $github_url/helpers/vimrc > /home/vagrant/.vimrc
+sudo chown vagrant:vagrant /home/vagrant/.vimrc
 
 # Install Vundle Bundles
-sudo su - ubuntu -c 'vim +BundleInstall +qall'
+sudo su - vagrant -c 'vim +BundleInstall +qall'

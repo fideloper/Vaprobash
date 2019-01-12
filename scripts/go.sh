@@ -18,7 +18,7 @@ else
     echo "Installing Go version manager"
     sudo apt-get install -qq curl git mercurial make binutils bison build-essential
     bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-    source /home/ubuntu/.gvm/scripts/gvm
+    source /home/vagrant/.gvm/scripts/gvm
 
     if [[ $GO_VERSION -eq "latest" ]]; then
         GO_VERSION=`curl -L 'https://golang.org/' | grep 'Build version' | awk '{print $3}' | awk -F\< '{ print $1 }' | rev | cut -c 2- | rev`

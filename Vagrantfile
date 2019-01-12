@@ -47,7 +47,7 @@ mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
 php_timezone          = "Pacific/Auckland"    # http://php.net/manual/en/timezones.php
-php_version           = "7.1"    # Options: 5.5 | 5.6 | 7.0 | 7.1
+php_version           = "7.2"    # Options: 5.5 | 5.6 | 7.0 | 7.1
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
   "sass",
@@ -63,28 +63,26 @@ hhvm                  = "false"
 
 # PHP Options
 composer_packages     = [        # List any global Composer packages that you want to install
-  "phpunit/phpunit:~7.0",
-  "phpunit/php-invoker:^2.0",
-  "codeception/codeception:~2.3",
-  "phpspec/phpspec:~4.3",
-  "squizlabs/php_codesniffer:^3.2",
+  "phpunit/phpunit:~7.5",
+  "codeception/codeception:~2.5",
+  "phpspec/phpspec:~5.1",
+  "squizlabs/php_codesniffer:^3.4",
   "unitgen/unitgen:dev-master",
-  "theseer/phpdox:~0.11"
 ]
 
 # Default web server document root
 # Symfony's public directory is assumed "web"
 # Laravel's public directory is assumed "public"
-public_folder         = "/home/ubuntu/code"
+public_folder         = "/home/vagrant/code"
 
-laravel_server_name   = "laravel-test.#{server_ip}.xip.io"
-laravel_alias         = "laravel-test.localhost"
-laravel_root_folder   = "/var/www/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
-laravel_version       = "master" # If you need a specific version of Laravel, set it here
+#laravel_server_name   = "laravel-test.#{server_ip}.xip.io"
+#laravel_alias         = "laravel-test.localhost"
+#laravel_root_folder   = "/var/www/laravel-test" # Where to install Laravel. Will `composer install` if a composer.json file exists
+#laravel_version       = "master" # If you need a specific version of Laravel, set it here
 
-symfony_server_name   = "symfony-test.#{server_ip}.xip.io"
-symfony_alias         = "symfony-test.localhost"
-symfony_root_folder   = "/var/www/symfony-test" # Where to install Symfony.
+#symfony_server_name   = "symfony-test.#{server_ip}.xip.io"
+#symfony_alias         = "symfony-test.localhost"
+#symfony_root_folder   = "/var/www/symfony-test" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
@@ -117,7 +115,7 @@ elasticsearch_version = "2.3.1" # 5.0.0-alpha1, 2.3.1, 2.2.2, 2.1.2, 1.7.5
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 16.04
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/bionic64"
 
   config.vm.define "Vaprobash" do |vapro|
   end
@@ -263,10 +261,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/mysql.sh", args: [mysql_root_password, mysql_version, mysql_enable_remote]
 
   # Provision PostgreSQL
-  config.vm.provision "shell", path: "./scripts/pgsql.sh", args: pgsql_root_password
+  # config.vm.provision "shell", path: "./scripts/pgsql.sh", args: pgsql_root_password
 
   # Provision SQLite
-  config.vm.provision "shell", path: "./scripts/sqlite.sh"
+  #config.vm.provision "shell", path: "./scripts/sqlite.sh"
 
   # Provision RethinkDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/rethinkdb.sh", args: pgsql_root_password
@@ -278,7 +276,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/couchdb.sh"
 
   # Provision MongoDB
-  config.vm.provision "shell", path: "./scripts/mongodb.sh", args: [mongo_enable_remote, mongo_version]
+  #config.vm.provision "shell", path: "./scripts/mongodb.sh", args: [mongo_enable_remote, mongo_version]
 
   # Provision MariaDB
   # config.vm.provision "shell", path: "./scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
@@ -377,10 +375,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/composer.sh", privileged: false, args: [github_pat, composer_packages.join(" ")]
 
   # Provision Laravel
-  config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_root_folder, laravel_version, server_ip]
+  #config.vm.provision "shell", path: "./scripts/laravel.sh", privileged: false, args: [laravel_root_folder, laravel_version, server_ip]
 
   # Provision Symfony
-  config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_root_folder, server_ip]
+  #config.vm.provision "shell", path: "./scripts/symfony.sh", privileged: false, args: [symfony_root_folder, server_ip]
 
   # Install Screen
   config.vm.provision "shell", path: "./scripts/screen.sh"

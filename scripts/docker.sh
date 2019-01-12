@@ -13,12 +13,12 @@ sudo apt-get update
 # -qq implies -y --force-yes
 sudo apt-get install -qq lxc-docker
 
-# Make the ubuntu user able to interact with docker without sudo
+# Make the vagrant user able to interact with docker without sudo
 if [ ! -z "$1" ]; then
 	if [ "$1" == "permissions" ]; then
-		echo ">>> Adding ubuntu user to docker group"
+		echo ">>> Adding vagrant user to docker group"
 
-		sudo usermod -a -G docker ubuntu
+		sudo usermod -a -G docker vagrant
 
 	fi # permissions
 fi # arg check

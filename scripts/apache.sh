@@ -3,6 +3,9 @@
 # Test if PHP is installed
 php -v > /dev/null 2>&1
 PHP_IS_INSTALLED=$?
+PHP_INSTALLED_VERSION=$?
+
+[[ $PHP_IS_INSTALLED -eq 0 ]] && { PHP_INSTALLED_VERSION=$(php -r "echo PHP_VERSION;" | cut -c 1,2,3); }
 
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
@@ -16,7 +19,7 @@ echo ">>> Installing Apache Server"
 [[ -z $1 ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
 
 if [[ -z $2 ]]; then
-    public_folder="/home/ubuntu/code"
+    public_folder="/home/vagrant/code"
 else
     public_folder="$2"
 fi
@@ -25,6 +28,12 @@ if [[ -z $4 ]]; then
     github_url="https://raw.githubusercontent.com/rattfieldnz/Vaprobash/master"
 else
     github_url="$4"
+fi
+
+if [[ -z $5 ]]; then
+    php_version="7.2"
+else
+    php_version="$5"
 fi
 
 # Add repo for latest FULL stable Apache
@@ -49,7 +58,7 @@ sudo usermod -a -G www-data ubuntu
 # On separate lines since some may cause an error
 # if not installed
 sudo a2dismod mpm_prefork mpm_worker
-sudo a2dismod  php7.1
+sudo a2dismod php${PHP_INSTALLED_VERSION}
 sudo a2enmod rewrite actions ssl
 curl --silent -L $github_url/helpers/vhost.sh > vhost
 sudo chmod guo+x vhost
@@ -70,6 +79,6 @@ else
     sudo sed -i "s@ProxyPassMatch@#ProxyPassMatch@" /etc/apache2/sites-available/$1.xip.io.conf
 fi
 
-sudo a2enmod php7.1
+sudo a2enmod php${PHP_INSTALLED_VERSION}
 sudo a2enmod headers
 sudo service apache2 restart

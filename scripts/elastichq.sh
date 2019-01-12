@@ -37,9 +37,9 @@ fi
 
 # Set and enable configuration for Nginx
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
-    sudo ngxdis ubuntu
-    sudo sed -i '$ d' /etc/nginx/sites-available/ubuntu
-sudo tee -a /etc/nginx/sites-available/ubuntu > /dev/null <<'EOF'
+    sudo ngxdis vagrant
+    sudo sed -i '$ d' /etc/nginx/sites-available/vagrant
+sudo tee -a /etc/nginx/sites-available/vagrant > /dev/null <<'EOF'
 
     location /elastichq {
        root /usr/share/;
@@ -62,7 +62,7 @@ sudo tee -a /etc/nginx/sites-available/ubuntu > /dev/null <<'EOF'
     }
 }
 EOF
-    sudo ngxen ubuntu
+    sudo ngxen vagrant
 
     # Reload Nginx to load in configuration
     sudo service nginx reload

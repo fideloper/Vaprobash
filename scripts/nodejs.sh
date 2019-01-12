@@ -19,12 +19,12 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     echo ">>> Installing latest stable Node LTS - 6.X"
 
 	sudo apt-get update
-	sudo apt-get -qq install python-software-properties
+	sudo apt-get -y install python-software-properties
 	
     # Install NVM
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 	sudo apt-get update
-	sudo apt-get -qq install nodejs
+	sudo apt-get -y install nodejs npm
 
     # Re-source user profiles
     # if they exist

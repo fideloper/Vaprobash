@@ -44,7 +44,7 @@ if [ ! -f "$symfony_root_folder/composer.json" ]; then
         composer create-project --prefer-dist symfony/framework-standard-edition $symfony_root_folder
     fi
 else
-    # Go to ubuntu folder
+    # Go to Symfony folder
     cd $symfony_root_folder
 
     # Install Symfony
@@ -67,7 +67,7 @@ sed -i "s/'127.0.0.1',$/'127.0.0.1', '192.168.22.10',/" $symfony_public_folder/c
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
-    sudo sed -i "s@root /ubuntu@root $symfony_public_folder@" /etc/nginx/sites-available/ubuntu
+    sudo sed -i "s@root /vagrant@root $symfony_public_folder@" /etc/nginx/sites-available/vagrant
     sudo service nginx reload
 fi
 

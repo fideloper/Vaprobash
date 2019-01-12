@@ -88,9 +88,9 @@ if [[ ! -z $COMPOSER_PACKAGES ]]; then
     if [[ -f $PROFILE ]]; then
         if ! grep -qsc 'COMPOSER_HOME=' $PROFILE; then
             # Ensure COMPOSER_HOME variable is set. This isn't set by Composer automatically
-            printf "\n\nCOMPOSER_HOME=\"/home/ubuntu/.composer\"" >> $PROFILE
+            printf "\n\nCOMPOSER_HOME=\"/home/vagrant/.composer\"" >> $PROFILE
             # Add composer home vendor bin dir to PATH to run globally installed executables
-            printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/ubuntu/bin' >> $PROFILE
+            printf "\n# Add Composer Global Bin to PATH\n%s" 'export PATH=$PATH:$COMPOSER_HOME/vagrant/bin' >> $PROFILE
 
 			source $PROFILE
 			source $BASHRC

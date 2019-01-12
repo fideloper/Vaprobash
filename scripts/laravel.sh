@@ -58,7 +58,7 @@ if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
         fi
     fi
 else
-    # Go to ubuntu folder
+    # Go to Laravel folder
     cd $laravel_root_folder
 
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
@@ -74,7 +74,7 @@ fi
 
 if [[ $NGINX_IS_INSTALLED -eq 0 ]]; then
     # Change default vhost created
-    sudo sed -i "s@root /ubuntu@root $laravel_public_folder@" /etc/nginx/sites-available/"laravel-test.$server_ip.xip.io"
+    sudo sed -i "s@root /vagrant@root $laravel_public_folder@" /etc/nginx/sites-available/"laravel-test.$server_ip.xip.io"
     sudo service nginx reload
 fi
 

@@ -25,7 +25,7 @@ if [ ! -z "$1" ]; then
 
         # add the config to the redis config includes
         if ! cat /etc/redis/redis.conf | grep -q "journaling.conf"; then
-            sudo chown ubuntu:root /etc/redis/redis.conf
+            sudo chown vagrant:root /etc/redis/redis.conf
             sudo echo "include /etc/redis/conf.d/journaling.conf" >> /etc/redis/redis.conf
             sudo chown redis:redis /etc/redis/redis.conf
         fi

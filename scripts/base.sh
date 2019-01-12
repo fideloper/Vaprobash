@@ -29,13 +29,13 @@ DOMAIN="*.xip.io"
 PASSPHRASE="vaprobash"
 
 SUBJ="
-C=NZ
-ST=Otago
+C=US
+ST=California
 O=Vaprobash
-localityName=Dunedin
+localityName=Los Angeles
 commonName=$DOMAIN
-organizationalUnitName=
-emailAddress=
+organizationalUnitName=Vaprobash
+emailAddress=vaprobash@test.com
 "
 
 sudo mkdir -p "$SSL_DIR"
