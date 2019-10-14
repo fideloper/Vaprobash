@@ -49,3 +49,5 @@ if [ $3 == "true" ]; then
 
     service mysql restart
 fi
+
+sudo apt -f -y autoremove --purge

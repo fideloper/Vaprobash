@@ -22,3 +22,5 @@ sudo chown vagrant:vagrant /home/vagrant/.vimrc
 
 # Install Vundle Bundles
 sudo su - vagrant -c 'vim +BundleInstall +qall'
+
+sudo apt -f -y autoremove --purge

@@ -82,3 +82,4 @@ fi
 sudo a2enmod php${PHP_INSTALLED_VERSION}
 sudo a2enmod headers
 sudo service apache2 restart
+sudo apt -f -y autoremove --purge

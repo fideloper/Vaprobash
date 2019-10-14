@@ -25,7 +25,7 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     # Install NVM
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 	sudo apt-get update
-	sudo apt-get -y install nodejs npm
+	sudo apt-get -y install nodejs npm node-gyp
 
     # Re-source user profiles
     # if they exist
@@ -37,8 +37,9 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 fi
 
 # Install (optional) Global Node Packages
-if [[ ! -z $NODE_PACKAGES ]]; then
-    echo ">>> Start installing Global Node Packages"
 
-    npm install -g ${NODE_PACKAGES[@]}
-fi
+echo ">>> Start installing Global Node Packages"
+
+sudo npm install -g npm grunt-cli gulp bower yarn yo gulp-concat-css gulp-minify-css gulp-rename gulp-ruby-sass gulp-sourcemaps gulp-uglify notify-send sw-precache-webpack-plugin cross-env laravel-mix laravel-elixir --force -qq
+
+sudo apt -f -y autoremove --purge

@@ -78,3 +78,5 @@ if [[ $HHVM_IS_INSTALLED -ne 0 && $PHP_IS_INSTALLED -eq 0 ]]; then
 fi
 
 sudo service nginx restart
+
+sudo apt -f -y autoremove --purge

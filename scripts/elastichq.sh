@@ -67,3 +67,5 @@ EOF
     # Reload Nginx to load in configuration
     sudo service nginx reload
 fi
+
+sudo apt -f -y autoremove --purge

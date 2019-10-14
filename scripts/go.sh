@@ -29,3 +29,5 @@ else
     gvm install $GO_VERSION --prefer-binary
     gvm use $GO_VERSION --default
 fi
+
+sudo apt -f -y autoremove --purge

@@ -4,6 +4,7 @@ notes.md
 play
 *.log
 scripts/projects
+code/*
 
 # editor backup files
 *~

@@ -17,6 +17,7 @@ github_pat          = ""
 # Server Configuration
 
 hostname        = "vaprobash.localhost"
+network_bridge  = "Intel(R) Dual Band Wireless-AC 3165"
 
 # Set a local private network IP address.
 # See http://en.wikipedia.org/wiki/Private_network for explanation
@@ -28,7 +29,7 @@ server_ip             = "192.168.22.10"
 server_cpus           = "4"   # Cores
 server_memory         = "4096" # MB
 server_swap           = "8192" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
-disk_space            = "25GB"
+disk_space            = "100GB"
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
@@ -47,7 +48,7 @@ mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
 php_timezone          = "Pacific/Auckland"    # http://php.net/manual/en/timezones.php
-php_version           = "7.2"    # Options: 5.5 | 5.6 | 7.0 | 7.1
+php_version           = "7.3"    # Options: 5.5 | 5.6 | 7.0 | 7.1 | 7.2 | 7.3
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
   "sass",
@@ -63,11 +64,13 @@ hhvm                  = "false"
 
 # PHP Options
 composer_packages     = [        # List any global Composer packages that you want to install
-  "phpunit/phpunit:~7.5",
-  "codeception/codeception:~2.5",
-  "phpspec/phpspec:~5.1",
-  "squizlabs/php_codesniffer:^3.4",
+  "phpunit/phpunit:~8.4",
+  "codeception/codeception:~3.1",
+  "phpspec/phpspec:~6.0",
+  "squizlabs/php_codesniffer:^3.5",
   "unitgen/unitgen:dev-master",
+  "phpunit/php-code-coverage:^7.0",
+  "mihaeu/test-generator:^1.3"
 ]
 
 # Default web server document root
@@ -115,8 +118,8 @@ elasticsearch_version = "2.3.1" # 5.0.0-alpha1, 2.3.1, 2.2.2, 2.1.2, 1.7.5
 Vagrant.configure("2") do |config|
 
   # Set server to Ubuntu 16.04
-  config.vm.box = "ubuntu/bionic64"
-
+  config.vm.box          = "ubuntu/bionic64"
+  config.vm.boot_timeout = 600
   config.vm.define "Vaprobash" do |vapro|
   end
 
@@ -134,10 +137,12 @@ Vagrant.configure("2") do |config|
 
   # Create a static IP
   if Vagrant.has_plugin?("vagrant-auto_network")
-    config.vm.network :private_network, :ip => "0.0.0.0", :auto_network => true
+    config.vm.network :private_network, :ip => "0.0.0.0", :auto_network => true, bridge: network_bridge
   else
-    config.vm.network :private_network, ip: server_ip
+    config.vm.network :private_network, ip: server_ip, bridge: network_bridge
     config.vm.network :forwarded_port, guest: 80, host: 8000
+	config.vm.network :forwarded_port, guest: 3000, host: 3000
+	config.vm.network :forwarded_port, guest: 22, host: 2200, id: 'ssh'
   end
 
   # Enable agent forwarding over SSH connections
@@ -166,6 +171,8 @@ Vagrant.configure("2") do |config|
     # If the clock gets more than 15 minutes out of sync (due to your laptop going
     # to sleep for instance, then some 3rd party services will reject requests.
     vb.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
+	
+	vb.customize ['setextradata', :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate//vagrant", '1'] 
 
     # Prevent VMs running on Ubuntu to lose internet connection
     # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -318,7 +325,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "./scripts/memcached.sh"
 
   # Provision Redis (without journaling and persistence)
-  config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh"
+  config.vm.provision "shell", path: "./scripts/redis.sh"
 
   # Provision Redis (with journaling and persistence)
   # config.vm.provision "shell", path: "./scripts/redis.sh", args: "persistent"

@@ -22,4 +22,6 @@ echo ">>> Installing UnixODBC for MSSQL"
 sudo apt-get install -qq unixodbc unixodbc-dev
 
 # Restart php7.1-fpm
-sudo service php7.1-fpm restart
+sudo service php-fpm restart
+
+sudo apt -f -y autoremove --purge

@@ -22,3 +22,5 @@ if [ ! -z "$1" ]; then
 
 	fi # permissions
 fi # arg check
+
+sudo apt -f -y autoremove --purge

@@ -67,3 +67,5 @@ sudo echo "<VirtualHost *:80>
 sudo a2ensite phpmyadmin.localhost.conf
 sudo service apache2 reload
 fi
+
+sudo apt -f -y autoremove --purge

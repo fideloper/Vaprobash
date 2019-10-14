@@ -11,3 +11,5 @@ sudo apt-get update
 
 # Intall ansible
 sudo apt-get install -y ansible
+
+sudo apt -f -y autoremove --purge

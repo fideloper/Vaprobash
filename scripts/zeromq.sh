@@ -19,3 +19,5 @@ echo "" | sudo pecl install zmq-beta > /dev/null
 sudo echo "extension=zmq.so" >> /etc/php/${PHP_VERSION}/mods-available/zmq.ini
 sudo phpenmod zmq > /dev/null
 sudo service php${PHP_VERSION}-fpm restart > /dev/null
+
+sudo apt -f -y autoremove --purge

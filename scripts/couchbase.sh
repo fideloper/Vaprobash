@@ -4,7 +4,7 @@ echo ">>> Installing Couchbase Server"
 
 # Set some variables
 COUCHBASE_EDITION=community
-COUCHBASE_VERSION=5.0 # Check https://www.couchbase.com/downloads for latest version
+COUCHBASE_VERSION=6.0.3 # Check https://www.couchbase.com/downloads for latest version
 COUCHBASE_ARCH=x86_64
 
 
@@ -28,7 +28,7 @@ if [ ${PHP_IS_INSTALLED} -eq 0 ]; then
     fi
 
     if [ ${PHPDEV_IS_INSTALLED} -eq 1 ]; then
-        sudo apt-get -qq install php7.1-dev
+        sudo apt-get -qq install php-dev
     fi
 
     sudo wget --quiet -O/etc/apt/sources.list.d/couchbase.list http://packages.couchbase.com/ubuntu/couchbase-ubuntu1204.list
@@ -46,3 +46,5 @@ EOF
     sudo php7.1enmod couchbase
     sudo service php7.1-fpm restart
 fi
+
+sudo apt -f -y autoremove --purge

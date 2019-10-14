@@ -14,7 +14,7 @@ APACHE_IS_INSTALLED=$?
 
 # Installing dependency
 # -qq implies -y --force-yes
-sudo apt-get install -qq libsqlite3-dev ruby1.9.1-dev
+sudo apt-get install -qq libsqlite3-dev ruby-dev
 
 if $(which rvm) -v > /dev/null 2>&1; then
     echo ">>>>Installing with RVM"
@@ -53,3 +53,5 @@ fi
 if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
     sudo service apache2 restart
 fi
+
+sudo apt -f -y autoremove --purge

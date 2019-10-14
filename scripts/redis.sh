@@ -39,3 +39,5 @@ if [ ! -z "$1" ]; then
 fi # arg check
 
 sudo service redis-server start
+
+sudo apt -f -y autoremove --purge

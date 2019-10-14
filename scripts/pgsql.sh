@@ -44,3 +44,5 @@ sudo -u postgres psql -c "CREATE ROLE root LOGIN PASSWORD '$1' NOSUPERUSER INHER
 
 # Make sure changes are reflected by restarting
 sudo service postgresql restart
+
+sudo apt -f -y autoremove --purge
