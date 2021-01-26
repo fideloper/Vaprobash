@@ -10,57 +10,53 @@ NODE_ARG=($@)
 # Number of arguments that are given
 NUMBER_OF_ARG=${#NODE_ARG[@]}
 
-# Prepare the variables for installing specific Nodejs version and Global Node Packages
-if [[ $NUMBER_OF_ARG -gt 2 ]]; then
-    # Nodejs version, github url and Global Node Packages are given
-    NODEJS_VERSION=${NODE_ARG[0]}
-    GITHUB_URL=${NODE_ARG[1]}
-    NODE_PACKAGES=${NODE_ARG[@]:2}
-elif [[ $NUMBER_OF_ARG -eq 2 ]]; then
-    # Only Nodejs version and github url are given
-    NODEJS_VERSION=${NODE_ARG[0]}
-    GITHUB_URL=${NODE_ARG[1]}
-else
-    # Default Nodejs version when nothing is given
-    NODEJS_VERSION=latest
-    GITHUB_URL="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
-fi
+PROFILE=~/.profile
+BASHRC=~/.bashrc
 
 # True, if Node is not installed
 if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
-    echo ">>> Installing Node Version Manager"
-
+    echo ">>> Installing latest stable Node LTS - 10.X"
+    
+    sudo apt-get -f -y upgrade;
+    sudo apt-get -f -y dist-upgrade;
+    sudo apt-get -y install python-software-properties
+    
     # Install NVM
-    curl --silent -L $GITHUB_URL/helpers/nvm_install.sh | sh
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    sudo apt-get update
+    sudo apt-get -y install nodejs node-gyp
+    
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+
+    # Install (optional) Global Node Packages
+
+    echo ">>> Start installing Global Node Packages"
+    sudo npm install -g npm --force; 
+    sudo npm install -g grunt-cli --force; 
+    sudo npm install -g gulp --force; 
+    sudo npm install -g bower --force; 
+    sudo npm install -g yarn --force; 
+    sudo npm install -g gulp-concat-css --force; 
+    sudo npm install -g gulp-minify-css --force; 
+    sudo npm install -g gulp-clean-css --force; 
+    sudo npm install -g gulp-rename --force; 
+    sudo npm install -g gulp-ruby-sass --force; 
+    sudo npm install -g gulp-sourcemaps --force; 
+    sudo npm install -g gulp-uglify --force; 
+    sudo npm install -g notify-send --force; 
+    sudo npm install -g sw-precache-webpack-plugin --force; 
+    sudo npm install -g cross-env --force; 
+    sudo npm install -g laravel-mix --force; 
+    sudo npm install -g laravel-elixir --force;
 
     # Re-source user profiles
     # if they exist
-    if [[ -f "/home/vagrant/.profile" ]]; then
-        . /home/vagrant/.profile
-    fi
-
-    echo ">>> Installing Node.js version $NODEJS_VERSION"
-    echo "    This will also be set as the default node version"
-
-    # If set to latest, get the current node version from the home page
-    if [[ $NODEJS_VERSION -eq "latest" ]]; then
-        NODEJS_VERSION="node"
-    fi
-
-    # Install Node
-    nvm install $NODEJS_VERSION
-
-    # Set a default node version and start using it
-    nvm alias default $NODEJS_VERSION
-
-    nvm use default
+    source $PROFILE
+    
+    # Re-source .bashrc if exists
+    source $BASHRC
 
 fi
 
-# Install (optional) Global Node Packages
-if [[ ! -z $NODE_PACKAGES ]]; then
-    echo ">>> Start installing Global Node Packages"
-
-    npm install -g ${NODE_PACKAGES[@]}
-fi
+sudo apt -f -y autoremove --purge

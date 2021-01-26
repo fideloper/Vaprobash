@@ -44,7 +44,7 @@ function create_server_block {
 
 # Nginx Server Block config for PHP (without using SSL)
 read -d '' PHP_NO_SSL <<EOF
-        # pass the PHP scripts to php5-fpm
+        # pass the PHP scripts to php7.1-fpm
         # Note: \.php$ is susceptible to file upload attacks
         # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
         location ~ \.php$ {
@@ -62,7 +62,7 @@ EOF
 
 # Nginx Server Block config for PHP (with SSL)
 read -d '' PHP_WITH_SSL <<EOF
-        # pass the PHP scripts to php5-fpm
+        # pass the PHP scripts to php7.1-fpm
         # Note: \.php$ is susceptible to file upload attacks
         # Consider using: "location ~ ^/(index|app|app_dev|config)\.php(/|$) {"
         location ~ \.php$ {
@@ -83,7 +83,7 @@ EOF
 
 # Nginx Server Block config for HHVM (without using SSL)
 read -d '' PHP_NO_SSL <<EOF
-        # pass the PHP scripts to php5-fpm
+        # pass the PHP scripts to php7.1-fpm
         location ~ \.(hh|php)$ {
             try_files \$uri =404;
             fastcgi_keep_conn on;
@@ -100,7 +100,7 @@ EOF
 
 # Nginx Server Block config for HHVM (with SSL)
 read -d '' PHP_WITH_SSL <<EOF
-        # pass the PHP scripts to php5-fpm
+        # pass the PHP scripts to php7.1-fpm
         location ~ \.(hh|php)$ {
             try_files \$uri =404;
             fastcgi_keep_conn on;

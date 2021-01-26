@@ -5,7 +5,7 @@ echo ">>> Installing PostgreSQL"
 [[ -z "$1" ]] && { echo "!!! PostgreSQL root password not set. Check the Vagrant file."; exit 1; }
 
 # Set some variables
-POSTGRE_VERSION=9.4
+POSTGRE_VERSION=12
 
 # Add PostgreSQL GPG public key
 # to get latest stable
@@ -14,7 +14,7 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 # Add PostgreSQL Apt repository
 # to get latest stable
 sudo touch /etc/apt/sources.list.d/pgdg.list
-sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
 
 # Update Apt repos
 sudo apt-get update
@@ -40,7 +40,9 @@ sudo -u postgres createuser -s vagrant
 
 # Create new user "root" w/ defined password
 # Not a superuser, just tied to new db "vagrant"
-sudo -u postgres psql -c "CREATE ROLE root LOGIN UNENCRYPTED PASSWORD '$1' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
+sudo -u postgres psql -c "CREATE ROLE root LOGIN PASSWORD '$1' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
 
 # Make sure changes are reflected by restarting
 sudo service postgresql restart
+
+sudo apt -f -y autoremove --purge

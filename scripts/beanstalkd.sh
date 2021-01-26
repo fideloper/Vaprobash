@@ -11,3 +11,5 @@ sudo sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
 
 # Start Beanstalkd
 sudo service beanstalkd start
+
+sudo apt -f -y autoremove --purge

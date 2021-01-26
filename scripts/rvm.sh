@@ -10,6 +10,9 @@ RUBY_ARG=($@)
 # Number of arguments that are given
 NUMBER_OF_ARG=${#RUBY_ARG[@]}
 
+PROFILE=~/.profile
+BASHRC=~/.bashrc
+
 # Prepare the variables for installing specific Ruby version and Gems
 if [[ $NUMBER_OF_ARG -gt 1 ]]; then
     # Both Ruby version and Gems are given
@@ -45,16 +48,17 @@ else
     fi
 
     # Re-source RVM
-    . /home/vagrant/.rvm/scripts/rvm
+    source ~/.rvm/scripts/rvm
 
-    # Re-source .profile if exists
-    if [[ -f "/home/vagrant/.profile" ]]; then
-        . /home/vagrant/.profile
-    fi
+    # Re-source .profile
+    source $PROFILE
+	
+	# Re-source .bashrc
+    source $BASHRC
 fi
 
 # Install (optional) Ruby Gems
-if [[ ! -z $RUBY_GEMS ]]; then
+if [ ! -z $RUBY_GEMS ]; then
     echo ">>> Start installing Ruby Gems"
 
     gem install ${RUBY_GEMS[@]}

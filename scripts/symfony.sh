@@ -12,16 +12,13 @@ composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    In
 [[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Symfony aborted!\n"; exit 0; }
 
 # Check if Symfony root is set. If not set use default
-if [ -z "$2" ]; then
-    symfony_root_folder="/vagrant/symfony"
+if [ -z "$3" ]; then
+    symfony_root_folder="/var/www/symfony-test"
 else
-    symfony_root_folder="$2"
+    symfony_root_folder="$3"
 fi
 
 symfony_public_folder="$symfony_root_folder/web"
-
-# The host ip is same as guest ip with last octet equal to 1
-host_ip=`echo $1 | sed 's/\.[0-9]*$/.1/'`
 
 # Test if HHVM is installed
 hhvm --version > /dev/null 2>&1
@@ -47,7 +44,7 @@ if [ ! -f "$symfony_root_folder/composer.json" ]; then
         composer create-project --prefer-dist symfony/framework-standard-edition $symfony_root_folder
     fi
 else
-    # Go to vagrant folder
+    # Go to Symfony folder
     cd $symfony_root_folder
 
     # Install Symfony
@@ -65,8 +62,8 @@ sudo chmod -R 775 $symfony_root_folder/app/cache
 sudo chmod -R 775 $symfony_root_folder/app/logs
 sudo chmod -R 775 $symfony_root_folder/app/console
 
-sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '$host_ip', 'fe80::1'/" $symfony_public_folder/app_dev.php
-sed -i "s/'127.0.0.1',$/'127.0.0.1', '$host_ip',/" $symfony_public_folder/config.php
+sed -i "s/('127.0.0.1', 'fe80::1'/('127.0.0.1', '192.168.22.10', 'fe80::1'/" $symfony_public_folder/app_dev.php
+sed -i "s/'127.0.0.1',$/'127.0.0.1', '192.168.22.10',/" $symfony_public_folder/config.php
 
 if [ $NGINX_IS_INSTALLED -eq 0 ]; then
     # Change default vhost created
@@ -75,11 +72,8 @@ if [ $NGINX_IS_INSTALLED -eq 0 ]; then
 fi
 
 if [ $APACHE_IS_INSTALLED -eq 0 ]; then
-    # Find and replace to find public_folder and replace with laravel_public_folder
-    # Change DocumentRoot
-    # Change ProxyPassMatch fcgi path
-    # Change <Directory ...> path
-    sudo sed -i "s@$3@$symfony_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
+	
+    sudo vhost -s "symfony-test.192.168.22.10.xip.io" -a "symfony-test.localhost" -d $symfony_public_folder
 
-    sudo service apache2 reload
+    sudo service apache2 restart
 fi

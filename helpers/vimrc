@@ -1,33 +1,38 @@
 set nocompatible
 filetype off
 set encoding=utf-8
+syntax enable
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " Bundles Here
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'othree/html5.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'othree/html5.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()
+
+colorscheme solarized
 
 filetype plugin indent on
 "
 "" Brief help
-" :BundleList          - list configured bundles
-" " :BundleInstall(!)    - install (update) bundles
-" " :BundleSearch(!) foo - search (or refresh cache first) for foo
-" " :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
-" "
-" " see :h vundle for more details or wiki for FAQ
-" " NOTE: comments after Bundle commands are not allowed.
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 
 " Settings

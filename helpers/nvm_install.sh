@@ -1,28 +1,19 @@
 #!/usr/bin/env bash
 
-NVM_DIR="/home/vagrant/.nvm"
+PROFILE=~/.profile
+BASHRC=~/.bashrc
 
-if ! hash git 2>/dev/null; then
-  echo >&2 "!!! You need to install git"
-  exit 1
-fi
+NVMSCRIPTURL="https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh"
 
-if [ -d "$NVM_DIR" ]; then
-  echo ">>> NVM is already installed in $NVM_DIR, trying to update"
-  echo -ne "\r=> "
-  cd $NVM_DIR && git pull
-else
-  # Cloning to $NVM_DIR
-  git clone https://github.com/creationix/nvm.git $NVM_DIR
-fi
+# The script clones the nvm repository to ~/.nvm and adds the source line to your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
+curl -sL $NVMSCRIPTURL -o install_nvm.sh
+bash install_nvm.sh
 
-PROFILE="/home/vagrant/.profile"
-SOURCE_STR="\n# This loads NVM\n[[ -s /home/vagrant/.nvm/nvm.sh ]] && . /home/vagrant/.nvm/nvm.sh"
+printf '\n\nexport NVM_DIR=~/.nvm
+[ -s "~/.nvm/nvm.sh" ] && . "~/.nvm/nvm.sh"' >> $PROFILE
 
-# Append NVM script to ~/.profile
-if ! grep -qsc 'nvm.sh' $PROFILE; then
-  echo ">>> Appending source string to $PROFILE"
-  printf "$SOURCE_STR" >> "$PROFILE"
-else
-  echo ">>> Source string already in $PROFILE"
-fi
+printf '\n\nexport NVM_DIR=~/.nvm
+[ -s "~/.nvm/nvm.sh" ] && . "~/.nvm/nvm.sh"' >> $BASHRC
+
+source $PROFILE
+source $BASHRC

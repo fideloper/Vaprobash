@@ -42,7 +42,7 @@ cat <<- _EOF_
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     ServerName $ServerName
-    $ServerAlias
+    ServerAlias $ServerAlias
 
     DocumentRoot $DocumentRoot
 
@@ -174,14 +174,14 @@ if [ -f "$DocumentRoot/$ServerName.conf" ]; then
     echo 'vHost already exists. Aborting'
     show_usage
 else
-    create_vhost > /etc/apache2/sites-available/${ServerName}.conf
+    sudo create_vhost > /etc/apache2/sites-available/${ServerName}.conf
 
     # Add :443 handling
     if [ "$CertPath" != "" ]; then
-        create_ssl_vhost >> /etc/apache2/sites-available/${ServerName}.conf
+        sudo create_ssl_vhost >> /etc/apache2/sites-available/${ServerName}.conf
     fi
 
     # Enable Site
-    cd /etc/apache2/sites-available/ && a2ensite ${ServerName}.conf
-    service apache2 reload
+    sudo a2ensite ${ServerName}.conf
+    sudo service apache2 reload
 fi

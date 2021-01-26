@@ -47,7 +47,7 @@ sudo tee -a /etc/nginx/sites-available/vagrant > /dev/null <<'EOF'
        location ~ ^/elastichq/(.+\.php)$ {
            try_files $uri =404;
            root /usr/share/;
-           fastcgi_pass unix:/var/run/php5-fpm.sock;
+           fastcgi_pass unix:/var/run/php7.1-fpm.sock;
            fastcgi_index index.php;
            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
            include /etc/nginx/fastcgi_params;
@@ -67,3 +67,5 @@ EOF
     # Reload Nginx to load in configuration
     sudo service nginx reload
 fi
+
+sudo apt -f -y autoremove --purge

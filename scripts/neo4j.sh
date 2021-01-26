@@ -21,3 +21,5 @@ apt-get install -qq neo4j
 
 # Start the server
 service neo4j-service restart
+
+sudo apt -f -y autoremove --purge

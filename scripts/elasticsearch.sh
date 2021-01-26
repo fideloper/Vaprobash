@@ -22,3 +22,5 @@ sudo service elasticsearch restart
 
 # Configure to start up Elasticsearch automatically
 sudo update-rc.d elasticsearch defaults 95 10
+
+sudo apt -f -y autoremove --purge

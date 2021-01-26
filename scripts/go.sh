@@ -2,9 +2,9 @@
 
 # check if a go version is set
 if [[ -z $1 ]]; then
-        GO_VERSION="latest"
+    GO_VERSION="latest"
 else
-        GO_VERSION=$1
+    GO_VERSION=$1
 fi
 
 # Check if gvm is installed
@@ -29,3 +29,5 @@ else
     gvm install $GO_VERSION --prefer-binary
     gvm use $GO_VERSION --default
 fi
+
+sudo apt -f -y autoremove --purge

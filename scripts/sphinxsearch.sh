@@ -27,3 +27,5 @@ sudo sed -i 's/sphinxsearch\/searchd.pid/searchd.pid/' /etc/sphinxsearch/sphinx.
 
 # Start searchd
 searchd
+
+sudo apt -f -y autoremove --purge

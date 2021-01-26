@@ -12,7 +12,7 @@ if [[ $HHVM == "true" ]]; then
 
     # Get key and add to sources
     wget --quiet -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
-    echo deb http://dl.hhvm.com/ubuntu trusty main | sudo tee /etc/apt/sources.list.d/hhvm.list
+    echo deb http://dl.hhvm.com/ubuntu xenial main | sudo tee /etc/apt/sources.list.d/hhvm.list
 
     # Update
     sudo apt-get update
@@ -35,12 +35,23 @@ else
 
     sudo apt-key update
     sudo apt-get update
+    
+    git clone https://github.com/rapidwebltd/php-switch-scripts.git
+    cd php-switch-scripts/ 
+    export DEBIAN_FRONTEND=noninteractive 
+    ./setup.sh 2> /dev/null && ./switch-to-php-${PHP_VERSION}.sh
 
     # Install PHP
     # -qq implies -y --force-yes
 
-    sudo apt-get install -qq php${PHP_VERSION}-cli php${PHP_VERSION}-fpm php${PHP_VERSION}-mysql php${PHP_VERSION}-pgsql php${PHP_VERSION}-sqlite php${PHP_VERSION}-curl php${PHP_VERSION}-gd php${PHP_VERSION}-gmp php${PHP_VERSION}-mcrypt php${PHP_VERSION}-memcached php${PHP_VERSION}-imagick php${PHP_VERSION}-intl php${PHP_VERSION}-mbstring php${PHP_VERSION}-xml php-xdebug
+    # Install PHP module for Apache
+    
+    # sudo apt-get install -y libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-{cli,bcmath,bz2,intl,gd,mbstring,mysql,zip,redis,gd,fpm,curl,gmp,memcached,imagick,xml,dom,xdebug,common}
 
+    # sudo phpenmod zip cli fpm mysql pgsql sqlite curl gd gmp memcached imagick intl mbstring bcmath xml redis xdebug dom
+    
+    sudo a2enmod proxy_fcgi setenvif && a2enconf php${PHP_VERSION}-fpm
+    
     # Set PHP FPM to listen on TCP instead of Socket
     sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
@@ -83,3 +94,5 @@ EOF
 
     sudo service php${PHP_VERSION}-fpm restart
 fi
+
+sudo apt -f -y autoremove --purge

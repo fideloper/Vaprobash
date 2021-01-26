@@ -12,7 +12,7 @@ echo ">>> Installing ØMQ"
 
 sudo add-apt-repository -qq pp:chris-lea/zeromq 
 sudo apt-get update -qq
-sudo apt-get install -qq libtool autoconf automake uuid uuid-dev uuid-runtime build-essential php5-dev pkg-config libzmq3-dbg libzmq3-dev libzmq3
+sudo apt-get install -qq libtool autoconf automake uuid uuid-dev uuid-runtime build-essential php7.1-dev pkg-config libzmq3-dbg libzmq3-dev libzmq3
 
 echo "" | sudo pecl install zmq-beta > /dev/null
 
@@ -20,3 +20,4 @@ sudo echo "extension=zmq.so" >> /etc/php/${PHP_VERSION}/mods-available/zmq.ini
 sudo phpenmod zmq > /dev/null
 sudo service php${PHP_VERSION}-fpm restart > /dev/null
 
+sudo apt -f -y autoremove --purge

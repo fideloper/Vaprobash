@@ -11,7 +11,7 @@ MARIADB_VERSION='10.1'
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 
 # Add repo for MariaDB
-sudo add-apt-repository "deb [arch=amd64,i386] http://mirrors.accretive-networks.net/mariadb/repo/$MARIADB_VERSION/ubuntu trusty main"
+sudo add-apt-repository "deb [arch=amd64,i386] http://mirrors.accretive-networks.net/mariadb/repo/$MARIADB_VERSION/ubuntu bionic main"
 
 # Update
 sudo apt-get update
@@ -43,3 +43,5 @@ if [ $2 == "true" ]; then
 
     service mysql restart
 fi
+
+sudo apt -f -y autoremove --purge

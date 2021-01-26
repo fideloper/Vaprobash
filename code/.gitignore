@@ -1,0 +1,31 @@
+vendor/
+node_modules/
+storage/*
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+bootstrap/cache/
+.env.*.php
+.env.php
+.env
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+
+_ide_helper.php
+.phpstorm.meta.php
+_ide_helper_models.php
+/.idea
+
+# PHP CS Fixer
+.php_cs.cache
+
+# Keep views from Laravel packages.
+!/resources/views/vendor/
+
+npm-debug.log
+.yarnclean
+*.log

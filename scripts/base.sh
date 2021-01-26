@@ -1,27 +1,31 @@
 #!/usr/bin/env bash
 
-echo "Setting Timezone & Locale to $3 & en_US.UTF-8"
+echo "Setting Timezone & Locale to $3 & en_NZ.UTF-8"
+
+# Update
+sudo apt-get update && sudo apt-get -f -y upgrade && sudo apt-get -f -y dist-upgrade
 
 sudo ln -sf /usr/share/zoneinfo/$3 /etc/localtime
 sudo apt-get install -qq language-pack-en
-sudo locale-gen en_US
-sudo update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+sudo locale-gen en_NZ
+sudo update-locale LANG=en_NZ.UTF-8 LC_CTYPE=en_NZ.UTF-8
 
 echo ">>> Installing Base Packages"
 
-if [[ -z $1 ]]; then
-    github_url="https://raw.githubusercontent.com/fideloper/Vaprobash/master"
-else
-    github_url="$1"
-fi
-
-# Update
-sudo apt-get update
-
 # Install base packages
 # -qq implies -y --force-yes
-sudo apt-get install -qq curl unzip git-core ack-grep software-properties-common build-essential cachefilesd
+sudo apt-get install -qq vim build-essential python-software-properties git zip unzip tcl curl git-core ack-grep software-properties-common cachefilesd virtualbox-guest-dkms openssl pkg-config libssl-dev libsslcommon2-dev libpng-dev libjpeg-dev libwebp-dev imagemagick libmagickcore-dev libmagickwand-dev resolvconf network-manager
 
+echo ">>> Installing Git Secrets"
+git clone https://github.com/awslabs/git-secrets.git
+cd git-secrets
+make test && sudo make install
+
+echo ">>> Configure networking and nameserver properties"
+sudo echo "nameserver 192.168.1.100 1.1.1.1" > /etc/resolvconf/resolv.conf.d/base
+sudo service resolvconf restart
+sudo service networkd-dispatcher restart
+sudo service network-manager restart
 
 echo ">>> Installing *.xip.io self-signed SSL"
 
@@ -31,12 +35,12 @@ PASSPHRASE="vaprobash"
 
 SUBJ="
 C=US
-ST=Connecticut
+ST=California
 O=Vaprobash
-localityName=New Haven
+localityName=Los Angeles
 commonName=$DOMAIN
-organizationalUnitName=
-emailAddress=
+organizationalUnitName=Vaprobash
+emailAddress=vaprobash@test.com
 "
 
 sudo mkdir -p "$SSL_DIR"

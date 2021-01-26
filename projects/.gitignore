@@ -1,0 +1,6 @@
+*
+*/
+*.sh
+*.log
+projects/*.sh
+!.gitignore

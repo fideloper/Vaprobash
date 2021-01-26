@@ -15,14 +15,14 @@ HHVM_IS_INSTALLED=$?
 # Test if Composer is installed
 composer -v > /dev/null 2>&1 || { printf "!!! Composer is not installed.\n    Installing Laravel aborted!"; exit 0; }
 
-# Test if Server IP is set in Vagrantfile
-[[ -z "$1" ]] && { printf "!!! IP address not set. Check the Vagrantfile.\n    Installing Laravel aborted!\n"; exit 0; }
+# Test if Server Name is set in Vagrantfile
+[[ -z "$1" ]] && { printf "!!! Server name address not set. Check the Vagrantfile.\n    Installing Laravel aborted!\n"; exit 0; }
 
 # Check if Laravel root is set. If not set use default
-if [[ -z $2 ]]; then
-    laravel_root_folder="/vagrant/laravel"
+if [[ -z $laravel_root_folder ]]; then
+    laravel_root_folder="/var/www/laravel-test"
 else
-    laravel_root_folder="$2"
+    laravel_root_folder="$laravel_root_folder"
 fi
 
 laravel_public_folder="$laravel_root_folder/public"
@@ -42,23 +42,23 @@ fi
 if [[ ! -f "$laravel_root_folder/composer.json" ]]; then
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
         # Create Laravel
-        if [[ "$4" == 'latest-stable' ]]; then
+        if [[ "$laravel_version" == 'latest-stable' || "$laravel_version" == '' ]]; then
             hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
             create-project --prefer-dist laravel/laravel $laravel_root_folder
         else
             hhvm -v ResourceLimit.SocketDefaultTimeout=30 -v Http.SlowQueryThreshold=30000 -v Eval.Jit=false /usr/local/bin/composer \
-            create-project laravel/laravel:$4 $laravel_root_folder
+            create-project laravel/laravel:$laravel_version $laravel_root_folder
         fi
     else
         # Create Laravel
-        if [[ "$4" == 'latest-stable' ]]; then
+        if [[ "$laravel_version" == 'latest-stable' || "$laravel_version" == '' ]]; then
             composer create-project --prefer-dist laravel/laravel $laravel_root_folder
         else
-            composer create-project laravel/laravel:$4 $laravel_root_folder
+            composer create-project laravel/laravel:$laravel_version $laravel_root_folder
         fi
     fi
 else
-    # Go to vagrant folder
+    # Go to Laravel folder
     cd $laravel_root_folder
 
     if [[ $HHVM_IS_INSTALLED -eq 0 ]]; then
@@ -74,17 +74,18 @@ fi
 
 if [[ $NGINX_IS_INSTALLED -eq 0 ]]; then
     # Change default vhost created
-    sudo sed -i "s@root /vagrant@root $laravel_public_folder@" /etc/nginx/sites-available/vagrant
+    sudo sed -i "s@root /vagrant@root $laravel_public_folder@" /etc/nginx/sites-available/"laravel-test.$server_ip.xip.io"
     sudo service nginx reload
 fi
 
 if [[ $APACHE_IS_INSTALLED -eq 0 ]]; then
-    # Find and replace to find public_folder and replace with laravel_public_folder
-    # Change DocumentRoot
-    # Change ProxyPassMatch fcgi path
-    # Change <Directory ...> path
-    sudo sed -i "s@$3@$laravel_public_folder@" /etc/apache2/sites-available/$1.xip.io.conf
 
+    # Make Laravel storage folder readable and writeable, 
+    # and accessable by Apache.
+    chown -R www-data:www-data $laravel_root_folder/storage
+    chmod -R 755 $laravel_root_folder/storage
+	
+    sudo vhost -s "laravel-test.192.168.22.10.xip.io" -a "laravel-test.localhost" -d $laravel_public_folder
 
-    sudo service apache2 reload
+    sudo service apache2 restart
 fi
