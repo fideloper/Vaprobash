@@ -16,16 +16,18 @@ BASHRC=~/.bashrc
 # True, if Node is not installed
 if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
 
-    echo ">>> Installing latest stable Node LTS - 6.X"
+    echo ">>> Installing latest stable Node LTS - 10.X"
 	
     sudo apt-get -f -y upgrade;
     sudo apt-get -f -y dist-upgrade;
 	sudo apt-get -y install python-software-properties
 	
     # Install NVM
-	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 	sudo apt-get update
 	sudo apt-get -y install nodejs npm node-gyp
+	
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 
     # Re-source user profiles
     # if they exist
@@ -40,6 +42,21 @@ fi
 
 echo ">>> Start installing Global Node Packages"
 
-sudo npm install -g npm grunt-cli gulp bower yarn yo gulp-concat-css gulp-minify-css gulp-rename gulp-ruby-sass gulp-sourcemaps gulp-uglify notify-send sw-precache-webpack-plugin cross-env laravel-mix laravel-elixir --force -qq
+sudo npm install -g grunt-cli --force; 
+sudo npm install -g gulp --force; 
+sudo npm install -g bower --force; 
+sudo npm install -g yarn --force; 
+sudo npm install -g gulp-concat-css --force; 
+sudo npm install -g gulp-minify-css --force; 
+sudo npm install -g gulp-clean-css --force; 
+sudo npm install -g gulp-rename --force; 
+sudo npm install -g gulp-ruby-sass --force; 
+sudo npm install -g gulp-sourcemaps --force; 
+sudo npm install -g gulp-uglify --force; 
+sudo npm install -g notify-send --force; 
+sudo npm install -g sw-precache-webpack-plugin --force; 
+sudo npm install -g cross-env --force; 
+sudo npm install -g laravel-mix --force; 
+sudo npm install -g laravel-elixir --force;
 
 sudo apt -f -y autoremove --purge

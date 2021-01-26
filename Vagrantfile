@@ -48,7 +48,7 @@ mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
 php_timezone          = "Pacific/Auckland"    # http://php.net/manual/en/timezones.php
-php_version           = "7.3"    # Options: 5.5 | 5.6 | 7.0 | 7.1 | 7.2 | 7.3
+php_version           = "7.4"    # Options: 5.5 | 5.6 | 7.0 | 7.1 | 7.2 | 7.3 | 7.4
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
   "sass",

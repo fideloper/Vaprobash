@@ -40,7 +40,8 @@ else
     # -qq implies -y --force-yes
 
     # Install PHP module for Apache
-    sudo apt-get install -qq libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-zip php${PHP_VERSION}-cli php${PHP_VERSION}-fpm php${PHP_VERSION}-mysql php${PHP_VERSION}-pgsql php${PHP_VERSION}-sqlite php${PHP_VERSION}-curl php${PHP_VERSION}-gd php${PHP_VERSION}-gmp php${PHP_VERSION}-memcached php${PHP_VERSION}-imagick php${PHP_VERSION}-intl php${PHP_VERSION}-mbstring php${PHP_VERSION}-bcmath php${PHP_VERSION}-xml php${PHP_VERSION}-redis php${PHP_VERSION}-xdebug php${PHP_VERSION}-dom
+	
+	sudo apt-get install -y libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-{cli,bcmath,bz2,intl,gd,mbstring,mysql,zip,redis,gd,fpm,curl,gmp,memcached,imagick,xml,dom,xdebug,common}
 
     sudo phpenmod zip cli fpm mysql pgsql sqlite curl gd gmp memcached imagick intl mbstring bcmath xml redis xdebug dom
 	

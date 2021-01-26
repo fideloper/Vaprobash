@@ -1,0 +1,1 @@
+vagrant halt && vagrant box update && vagrant box prune && vagrant plugin update && vagrant up && vagrant ssh

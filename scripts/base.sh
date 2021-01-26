@@ -16,6 +16,12 @@ echo ">>> Installing Base Packages"
 # -qq implies -y --force-yes
 sudo apt-get install -qq vim build-essential python-software-properties git zip unzip tcl curl git-core ack-grep software-properties-common cachefilesd virtualbox-guest-dkms openssl pkg-config libssl-dev libsslcommon2-dev libpng-dev libjpeg-dev libwebp-dev imagemagick libmagickcore-dev libmagickwand-dev resolvconf network-manager
 
+echo ">>> Installing Git Secrets"
+git clone https://github.com/awslabs/git-secrets.git
+cd git-secrets
+make test && sudo make install
+
+echo ">>> Configure networking and nameserver properties"
 sudo echo "nameserver 192.168.1.100 1.1.1.1" > /etc/resolvconf/resolv.conf.d/base
 sudo service resolvconf restart
 sudo service networkd-dispatcher restart
