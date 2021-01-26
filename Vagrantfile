@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "rattfieldnz"
 github_repo     = "Vaprobash"
-github_branch   = "1.4.3"
+github_branch   = "1.4.4"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 vm_synced_folder_host  = "code"
@@ -97,6 +97,7 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   "yo",
   "gulp-concat-css",
   "gulp-minify-css",
+  "gulp-clean-css",
   "gulp-rename",
   "gulp-ruby-sass",
   "gulp-sourcemaps",
