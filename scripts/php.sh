@@ -37,17 +37,18 @@ else
     sudo apt-get update
     
     git clone https://github.com/rapidwebltd/php-switch-scripts.git
-    cd php-switch-scripts/ && ./setup.sh 
-    export DEBIAN_FRONTEND=noninteractive && ./switch-to-php-${PHP_VERSION}.sh
+    cd php-switch-scripts/ 
+	export DEBIAN_FRONTEND=noninteractive 
+	./setup.sh 2> /dev/null && ./switch-to-php-${PHP_VERSION}.sh
 
     # Install PHP
     # -qq implies -y --force-yes
 
     # Install PHP module for Apache
     
-    sudo apt-get install -y libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-{cli,bcmath,bz2,intl,gd,mbstring,mysql,zip,redis,gd,fpm,curl,gmp,memcached,imagick,xml,dom,xdebug,common}
+    # sudo apt-get install -y libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-{cli,bcmath,bz2,intl,gd,mbstring,mysql,zip,redis,gd,fpm,curl,gmp,memcached,imagick,xml,dom,xdebug,common}
 
-    sudo phpenmod zip cli fpm mysql pgsql sqlite curl gd gmp memcached imagick intl mbstring bcmath xml redis xdebug dom
+    # sudo phpenmod zip cli fpm mysql pgsql sqlite curl gd gmp memcached imagick intl mbstring bcmath xml redis xdebug dom
     
     sudo a2enmod proxy_fcgi setenvif && a2enconf php${PHP_VERSION}-fpm
     
