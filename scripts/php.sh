@@ -35,6 +35,10 @@ else
 
     sudo apt-key update
     sudo apt-get update
+	
+	git clone https://github.com/rapidwebltd/php-switch-scripts.git
+	cd php-switch-scripts/
+	./setup.sh && ./switch-to-php-${PHP_VERSION}.sh
 
     # Install PHP
     # -qq implies -y --force-yes
@@ -45,7 +49,7 @@ else
 
     sudo phpenmod zip cli fpm mysql pgsql sqlite curl gd gmp memcached imagick intl mbstring bcmath xml redis xdebug dom
 	
-	sudo a2enmod proxy_fcgi setenvif && a2enconf php7.3-fpm
+	sudo a2enmod proxy_fcgi setenvif && a2enconf php${PHP_VERSION}-fpm
     
     # Set PHP FPM to listen on TCP instead of Socket
     sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
