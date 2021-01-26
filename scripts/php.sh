@@ -35,21 +35,21 @@ else
 
     sudo apt-key update
     sudo apt-get update
-	
-	git clone https://github.com/rapidwebltd/php-switch-scripts.git
-	cd php-switch-scripts/
-	./setup.sh && ./switch-to-php-${PHP_VERSION}.sh
+    
+    git clone https://github.com/rapidwebltd/php-switch-scripts.git
+    cd php-switch-scripts/
+    ./setup.sh && ./switch-to-php-${PHP_VERSION}.sh
 
     # Install PHP
     # -qq implies -y --force-yes
 
     # Install PHP module for Apache
-	
-	sudo apt-get install -y libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-{cli,bcmath,bz2,intl,gd,mbstring,mysql,zip,redis,gd,fpm,curl,gmp,memcached,imagick,xml,dom,xdebug,common}
+    
+    sudo apt-get install -y libapache2-mod-php${PHP_VERSION} php${PHP_VERSION}-{cli,bcmath,bz2,intl,gd,mbstring,mysql,zip,redis,gd,fpm,curl,gmp,memcached,imagick,xml,dom,xdebug,common}
 
     sudo phpenmod zip cli fpm mysql pgsql sqlite curl gd gmp memcached imagick intl mbstring bcmath xml redis xdebug dom
-	
-	sudo a2enmod proxy_fcgi setenvif && a2enconf php${PHP_VERSION}-fpm
+    
+    sudo a2enmod proxy_fcgi setenvif && a2enconf php${PHP_VERSION}-fpm
     
     # Set PHP FPM to listen on TCP instead of Socket
     sudo sed -i "s/listen =.*/listen = 127.0.0.1:9000/" /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
