@@ -38,8 +38,8 @@ else
     
     git clone https://github.com/rapidwebltd/php-switch-scripts.git
     cd php-switch-scripts/ 
-	export DEBIAN_FRONTEND=noninteractive 
-	./setup.sh 2> /dev/null && ./switch-to-php-${PHP_VERSION}.sh
+    export DEBIAN_FRONTEND=noninteractive 
+    ./setup.sh 2> /dev/null && ./switch-to-php-${PHP_VERSION}.sh
 
     # Install PHP
     # -qq implies -y --force-yes
