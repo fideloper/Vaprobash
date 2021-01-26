@@ -37,8 +37,8 @@ else
     sudo apt-get update
     
     git clone https://github.com/rapidwebltd/php-switch-scripts.git
-    cd php-switch-scripts/
-    ./setup.sh && ./switch-to-php-${PHP_VERSION}.sh
+    cd php-switch-scripts/ && ./setup.sh 
+    export DEBIAN_FRONTEND=noninteractive && ./switch-to-php-${PHP_VERSION}.sh
 
     # Install PHP
     # -qq implies -y --force-yes
