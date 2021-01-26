@@ -2,10 +2,7 @@
 # vi: set ft=ruby :
 
 # Config Github Settings
-github_username = "rattfieldnz"
-github_repo     = "Vaprobash"
-github_branch   = "master"
-github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
+github_url      = "https://raw.githubusercontent.com/rattfieldnz/Vaprobash/master"
 
 vm_synced_folder_host  = "code"
 vm_synced_folder_guest = "/var/www"
