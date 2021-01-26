@@ -25,14 +25,14 @@ if [[ $NODE_IS_INSTALLED -ne 0 ]]; then
     # Install NVM
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     sudo apt-get update
-    sudo apt-get -y install nodejs npm node-gyp
+    sudo apt-get -y install nodejs node-gyp
     
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 
     # Install (optional) Global Node Packages
 
     echo ">>> Start installing Global Node Packages"
-
+    sudo npm install -g npm --force; 
     sudo npm install -g grunt-cli --force; 
     sudo npm install -g gulp --force; 
     sudo npm install -g bower --force; 
